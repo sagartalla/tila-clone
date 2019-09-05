@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Router from '../routes';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
 import inactiveMonitor from '../utils/inactiveMonitor';
@@ -21,32 +22,17 @@ class Base extends Component {
   }
 
   componentDidMount() {
-
-  //   this.socket = io();
-  //   this.socket.on('now', (data) => {
-  //     console.log('the socket data ::', data);
-  //   });
-
-  //   this.socket.on('connect', (data) =>{
-  //     console.log("Socket ON Connect Event");
-  //     this.socket.emit('join', 'Hello from client');
-  //  });
-
-  //   this.socket.on('connectionSuccess',  (data) => {
-  //       console.log("socket connection success :", data);
-  //   });
-     
-  //   this.socket.on('pagedataupdate', (data) => {
-  //     console.log('Page Data Update Message');
-  //     console.log(data.data);
-  //   })
+    window.addEventListener("pageshow", function(event) {
+      var historyTraversal = event.persisted || (typeof window.performance !=
+        "undefined" && window.performance.navigation.type === 2);
+      if (historyTraversal) {
+        // Handle page restore.
+        window.location.reload();
+      }
+    });
     inactiveMonitor();
     const history = createHistory();
     configureUrlQuery({ history });
-    // window.elasticApm.setInitialPageLoadName(this.pageName);
-    // if(!cookies.get('sessionId')) {
-    //   this.props.setSessionID(uuidv4())
-    // }
     digitalData.page.pageInfo[ 'pageType' ]= this.pageName;
     digitalData.page.pageInfo.pageName = this.pageName;
     window.appEventData.push({
@@ -58,11 +44,8 @@ class Base extends Component {
       }
     });
     this.fireViewEndCustomEvent();
-
     digitalData.user = this.pageName;
-
     this.fireViewStartCustomEvent();
-
   }
 
   fireViewEndCustomEvent() {

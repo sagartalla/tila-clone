@@ -179,6 +179,8 @@ class OrderItem extends Component {
         return 'Return in progress';
       } else if (orderItem.status === 'EXCHANGE_IN_PROGRESS') {
         return 'Exchange in progress';
+      } else if (orderItem.status === 'REPLACEMENT_IN_PROGRESS') {
+        return 'Replace in progress';
       } return '';
     };
 
@@ -222,6 +224,10 @@ class OrderItem extends Component {
                       {product.order_type === 'EXCHANGE' && product.order_item_type === 'DELIVERY' &&
                         <div className={`${styles.flex} ${styles['justify-center']} ${styles['mt-15']}`}>
                           <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
+                        </div>}
+                        {product.order_type === 'REPLACEMENT' && product.order_item_type === 'DELIVERY' &&
+                        <div className={`${styles.flex} ${styles['justify-center']} ${styles['mt-15']}`}>
+                          <span className={styles['green-label']}>{ORDER_PAGE.REPLACEMENT}</span>
                         </div>}
                     </Col>
                     <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
@@ -311,6 +317,10 @@ class OrderItem extends Component {
                     {ORDER_PAGE.THERE_IS_AN_EXCHANGE_ORDER}
                     {/* To view the parent order please <a>Click here</a> */}
                   </div>}
+                  {product.order_type === 'REPLACEMENT' && product.order_item_type === 'DELIVERY' &&
+                  <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']}`}>
+                    {ORDER_PAGE.THERE_IS_AN_REPLACE_ORDER}
+                  </div>}
                 {product.refunds && product.refunds.length > 0 &&
                   <div className={`${styles['pt-15']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']} ${styles.relative}`}>
                     <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>{ORDER_PAGE.REFUND_STATUS}</div>
@@ -347,7 +357,7 @@ class OrderItem extends Component {
           })}
         </Col>
         <Col md={5} sm={5} className={`${styles['thick-border-left']} ${styles['p-0']}`}>
-          {payments && payments.length > 0 && payments[0].transaction_status === 'FAILED' ?
+          {payments && payments.length > 0 && payments[0] && payments[0].transaction_status && payments[0].transaction_status === 'FAILED' ?
             <div className={`${styles['unsuccessful-mesg']}`}>{ORDER_PAGE.ORDER_UNSUCCESSFUL}</div>
             :
             <React.Fragment>

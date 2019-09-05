@@ -110,7 +110,7 @@ class Help extends Component {
           <div>
             <div className={`${styles['flexCenterContainer']} ${styles['helpHeroContainer']}`}>
               <div className={`${styles['flexColCenterContainer']}`} style={{width: '100%'}}>
-                <h3>Hi, How can we help you today ?</h3>
+                <h3>{HNS.GREETING}</h3>
                 <div className={styles['searchContainer']}>
                   <form className={styles['searchForm']} onSubmit={this.handleSearch}>
                     <input dir="auto" className={styles['searchInput']} name="searchQuery" type='search' value={this.state.searchQuery} onChange={this.handleQueryChange} placeholder={HNS['SEARCH_PLACEHOLDER']} />
