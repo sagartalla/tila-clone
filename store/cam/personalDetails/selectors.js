@@ -76,6 +76,9 @@ const getOtpData = (store) => {
 const resetPasswordStatus =(store) => {
 return store.personalDetailsReducer;
 }
+const getOtpField = (store) => {
+  return store.personalDetailsReducer.showOtpField;
+}
 
 const forgotPasswordStatus = (store) => {
   if(store.personalDetailsReducer.data.Response){
@@ -86,4 +89,4 @@ const forgotPasswordStatus = (store) => {
 }
 
 
-export { getUserInfo, getPasswordResetStatus, getLoadingStatus, getPictureDocumentId, getErrorMessege, getEditPersonalInfoStatus , getImageSource, forgotPasswordStatus, resetPasswordStatus, getOtpData};
+export { getUserInfo, getPasswordResetStatus, getLoadingStatus, getPictureDocumentId, getErrorMessege, getEditPersonalInfoStatus , getOtpField, getImageSource, forgotPasswordStatus, resetPasswordStatus, getOtpData};
