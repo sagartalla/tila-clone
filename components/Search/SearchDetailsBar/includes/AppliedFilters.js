@@ -26,11 +26,6 @@ class AppliedFilters extends Component {
     this.clearAll = this.clearAll.bind(this);
   }
 
-  componentDidMount() {
-    const { facets } = this.props;
-    this.props.getSearchResults(this.props.getFacetfilters(facets));
-  }
-
   removeFilter(e) {
     const { facets } = this.props;
     const target = e.currentTarget;
