@@ -10,6 +10,7 @@ const initialState = {
   error: '',
   otpResponse:{},
   otpData:{},
+  showOtpField: false,
 };
 
 const personalDetailsReducer = typeToReducer({
@@ -153,10 +154,12 @@ const personalDetailsReducer = typeToReducer({
     FULFILLED: (state,action) => Object.assign({}, state, {
       ui: { loading:false },
       otpResponse:action.payload.data,
-      otpData:{Response:'RESET'}
+      otpData:{Response:'RESET'},
+      showOtpField: true
     }),
-    REJECTED: (state, action) => Object.assign({}, state,
-      { error: action.payload.data, ui: {loading: false }
+    REJECTED: (state, action) => 
+      Object.assign({}, state,
+      { error: action.payload.response.data, ui: { loading: false }, showOtpField: false,
     })
   },
 

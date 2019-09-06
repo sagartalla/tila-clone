@@ -193,7 +193,7 @@ const FooterBar = props => (
         <div className={`${styles.flex} ${styles['footer-menu-list']}`}>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']} `}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-50']}`}>
-              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/fashion" />
+              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/fashion" />
               <span className={styles.pointer}>{FOOTER_PAGE.FASHION}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
@@ -210,7 +210,7 @@ const FooterBar = props => (
           </div>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']}  ${styles['mr-35']}`}>
-              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/common-icon/processor-icon" />
+              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/common-icon/processor-icon" />
               <span className={styles.pointer}>{FOOTER_PAGE.ELECTRONICS}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
@@ -227,7 +227,7 @@ const FooterBar = props => (
           </div>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-80']}`}>
-              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/life-style" />
+              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/life-style" />
               <span className={styles.pointer}>{FOOTER_PAGE.LIFESTYLE}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>

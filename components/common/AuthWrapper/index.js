@@ -7,8 +7,8 @@ class AuthWrapper extends Component {
 
   componentDidMount() {
     const { isLoggedIn } = this.props;
-    if(!isLoggedIn) {
-      this.props.showLogin();
+    if (!isLoggedIn) {
+      this.props.showLoginScreen();
     }
   }
 
@@ -23,9 +23,9 @@ class AuthWrapper extends Component {
     // }
   }
 
-  render () {
+  render() {
     const { children, isLoggedIn } = this.props;
-    if(isLoggedIn){
+    if (isLoggedIn) {
       return (
         <Fragment>
           {children ? children : null}
@@ -44,7 +44,7 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      showLogin: actionCreators.showLogin,
+      showLoginScreen: actionCreators.showLoginScreen,
     },
     dispatch,
   );

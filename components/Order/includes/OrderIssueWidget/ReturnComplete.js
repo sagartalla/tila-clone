@@ -33,7 +33,7 @@ class ReturnComplete extends Component {
     {
       RETURN:ORDER_PAGE.REQ_SUCCESS,
       REPLACE: ORDER_PAGE.REQ_SUCCESS,
-      EXCHANGE:ORDER_PAGE.REQ_SUCCESS,
+      EXCHANGE:ORDER_PAGE.REQ_EX_SUCCESS,
       CLAIMWARRANTY: ORDER_PAGE.CLAIM_WARRANTY_MSG,
       DAMAGEWARRANTY:ORDER_PAGE.CLAIM_WARRANTY_MSG,
     }[issueType]
@@ -41,7 +41,7 @@ class ReturnComplete extends Component {
   getExchangeMsgType = (issueType) => (
     {
       RETURN:ORDER_PAGE.RETURN_ORDER_MSG,
-      EXCHANGE:ORDER_PAGE.RETURN_ORDER_MSG,
+      EXCHANGE:ORDER_PAGE.EXCHANGE_ORDER_MSG_NOTE,
     }[issueType]
   )
   render() {
@@ -85,13 +85,6 @@ class ReturnComplete extends Component {
                             orderIssue.issueType === 'RETURN' ?
                             <div>
                               <div>{ORDER_PAGE.RETURN_ORDER_MSG_NOTE}</div>
-                            </div>
-                              : ''
-                          }
-                          {
-                            orderIssue.issueType === 'EXCHANGE' ?
-                            <div>
-                              <div>{ORDER_PAGE.EXCHANGE_ORDER_MSG_NOTE}</div>
                             </div>
                               : ''
                           }

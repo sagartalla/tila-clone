@@ -97,6 +97,10 @@ const getErrorMessege = (store) => {
   return store.singleOrderReducer.error;
 };
 
+const getErrorCode = (store) => {
+  return store.singleOrderReducer.error_code;
+}
+
 const getLoadingStatus = (store) => {
   return store.singleOrderReducer.ui.loading;
 };
@@ -194,6 +198,6 @@ const getExchangeOptions = (store) => {
 const getOrderTracker = store => store.singleOrderReducer.data.orderTracker;
 
 export {
-  getOrderDetails, getOrderIssue, getOrderInfo, getCancelStatus, getErrorMessege,
+  getOrderDetails, getOrderIssue, getOrderInfo, getCancelStatus, getErrorMessege, getErrorCode,
   getLoadingStatus, getSelectedOrder, getReturnStatus, getExchangeOptions, getOrderTracker,
 };

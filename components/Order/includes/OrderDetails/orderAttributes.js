@@ -1,6 +1,6 @@
 const orderStatusAttributes = Object.freeze({
   PLACED: 'Ordered',
-  PROCESSING: 'Packed',
+  PROCESSING: 'Ready to ship',
   SHIPPED: 'Shipped',
   DELIVERED: 'Delivered',
   CANCELLED: 'Cancelled',
