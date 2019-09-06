@@ -36,7 +36,6 @@ class SelectBrand extends Component {
       requiredData: {},
       selectedItems: props.selectedItems,
       submitQuery: null,
-      count: 0,
     };
     this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.onHandleChange = this.onHandleChange.bind(this);
@@ -188,8 +187,7 @@ class SelectBrand extends Component {
       alphabets,
       filterParam,
       requiredData,
-      selectedItems, 
-      count,    
+      selectedItems,
       scrollVal, 
     } = this.state;
     return (
