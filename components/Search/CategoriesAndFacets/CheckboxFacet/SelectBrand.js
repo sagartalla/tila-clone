@@ -88,6 +88,7 @@ class SelectBrand extends Component {
     e.preventDefault();
     this.setState({
       selectedAlphabet: e.target.innerText,
+      scrollVal: document.getElementById('scrollMe').scrollLeft,
     });
   }
 
@@ -158,12 +159,21 @@ class SelectBrand extends Component {
   }
 
   moveLeft = () => () => {
+    const { scrollVal } = this.state;
     let x = document.getElementById('scrollMe').scrollLeft;
-      document.getElementById('scrollMe').scrollLeft = x + 750;
+      document.getElementById('scrollMe').scrollLeft = scrollVal ? scrollVal + 750 : x + 750;
+      this.setState({
+        scrollVal: 0,
+      });
   }
 
   moveRight = () => {
-      document.getElementById('scrollMe').scrollLeft = 750 * this.state.count;
+    const { scrollVal } = this.state;    
+    let x = document.getElementById('scrollMe').scrollLeft;
+      document.getElementById('scrollMe').scrollLeft = scrollVal ? scrollVal - 750 : x - 750;
+      this.setState({
+        scrollVal: 0,
+      });
   }
   
 
@@ -251,9 +261,9 @@ class SelectBrand extends Component {
                       {
                           Object.keys(requiredData).map(val => (
                             <React.Fragment>
-                            <div id={`${val === '#' ? 'A' : val}`} className={selectedAlphabet === val ? `${styles['mt-5']} ${styles['mr-10']} ${styles['select-checkbox-width']} ${styles.fontW800}` : `${styles['mt-5']} ${styles['mr-10']} ${styles['select-checkbox-width']} ${styles['thick-gry-clr']} ${styles.fontW600}` }>{val}</div>
+                            <div id={`${val === '#' ? 'A' : val}`} className={selectedAlphabet === val ? `${styles['mt-5']} ${styles['mr-10']} ${styles['select-checkbox-width']} ${styles.fontW800}` : selectedAlphabet ?  `${styles['mt-5']} ${styles['mr-10']} ${styles['select-checkbox-width']} ${styles['thick-gry-clr']} ${styles.fontW600} ${styles['brands-opacity']}` : `${styles['mt-5']} ${styles['mr-10']} ${styles['select-checkbox-width']} ${styles['thick-gry-clr']} ${styles.fontW600}`}>{val}</div>
                             {requiredData[val].map((newVal, index) => (
-                              <div className={(newVal.name.toLowerCase().startsWith(selectedAlphabet !== '' && selectedAlphabet.toLowerCase())) || (selectedAlphabet === '#' && newVal.name.match(/^\d/)) ? `${styles['mt-5']} ${styles['mr-10']} ${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']}` :selectedAlphabet ? `${styles['mt-5']} ${styles['mr-10']} ${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']} ${styles['brands-opacity']}` : `${styles['mt-5']} ${styles['mr-10']} ${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']}`}>
+                              <div className={(newVal.name.toLowerCase().startsWith(selectedAlphabet !== '' && selectedAlphabet.toLowerCase())) || (selectedAlphabet === '#' && newVal.name.match(/^\d/)) ? `${styles['mt-5']} ${styles['mr-10']} ${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']}` : selectedAlphabet ? `${styles['mt-5']} ${styles['mr-10']} ${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']} ${styles['brands-opacity']}` : `${styles['mt-5']} ${styles['mr-10']} ${styles['checkbox-material']} ${styles['select-check-mate']} ${styles['select-checkbox-width']}`}>
                               <input id={newVal.name} type="checkbox" onChange={this.onChangeCheckbox({ name: newVal.name, param: newVal.param })} checked={selectedItems && selectedItems.length > 0 && selectedItems.indexOf(newVal.name) !== -1} />
                               <label htmlFor={newVal.name} className={`${styles['fs-12']} ${styles['category-label']} ${styles['label-ellipsis']}`} title={newVal.name}>
                                 <span className={`${styles.fontW700} ${styles['category-span']} ${styles['thick-gry-clr']}`}>{newVal.name}
