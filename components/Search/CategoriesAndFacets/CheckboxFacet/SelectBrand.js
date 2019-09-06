@@ -36,6 +36,7 @@ class SelectBrand extends Component {
       requiredData: {},
       selectedItems: props.selectedItems,
       submitQuery: null,
+      count: 0,
     };
     this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.onHandleChange = this.onHandleChange.bind(this);
@@ -106,7 +107,7 @@ class SelectBrand extends Component {
     const { submitQuery } = this.state;
     this.props.onChangeFacets(submitQuery);
     this.submitQuery(submitQuery);
-    this.props.closePopup();    
+    this.props.closePopup();
   }
 
   submitQuery(params) {
@@ -156,9 +157,15 @@ class SelectBrand extends Component {
     });
   }
 
-  moveRight() {
-    this.scrollIntoView(document.getElementById("scrollMe"), 48);
+  moveLeft = () => () => {
+    let x = document.getElementById('scrollMe').scrollLeft;
+      document.getElementById('scrollMe').scrollLeft = x + 750;
   }
+
+  moveRight = () => {
+      document.getElementById('scrollMe').scrollLeft = 750 * this.state.count;
+  }
+  
 
   render() {
     const {
@@ -171,15 +178,21 @@ class SelectBrand extends Component {
       alphabets,
       filterParam,
       requiredData,
-      selectedItems,      
+      selectedItems, 
+      count,    
+      scrollVal, 
     } = this.state;
     return (
       <div className={`${styles.flex} ${styles['align-center']}`}>
         {showPopup &&
         <React.Fragment>
-        <SVGComponent clsName={`${styles['carausal-icon']}`} src="icons/common-icon/caraousal-left" />        
+        {filteredItems.length > 55 &&
+        <div onClick={this.moveRight}>
+        <SVGComponent clsName={`${styles['carausal-icon']}`} src="icons/common-icon/caraousal-left" />
+        </div>
+        }   
           <div className={`${styles.width100}`}>
-            <div className={`${styles['mt-30']}`}>
+            <div className={filteredItems.length > 55 ? `${styles['mt-30']}` : `${styles['m-30']}`}>
               <div>
                   <div className={`${styles['flex-center']} ${styles['justify-between']}`}>
                     <RenderFilterBar
@@ -258,8 +271,8 @@ class SelectBrand extends Component {
                 </div>
             </div>
           </div>
-          <div onClick={this.moveRight}>
-          <SVGComponent clsName={`${styles['carausal-icon']}`} src="icons/common-icon/caraousal-right" />
+          <div onClick={this.moveLeft(this)}>
+          {filteredItems.length > 55 && <SVGComponent clsName={`${styles['carausal-icon']}`} src="icons/common-icon/caraousal-right" />}
           </div>
           </React.Fragment>       
         }
