@@ -8,14 +8,13 @@ phases:
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - REPOSITORY_URI=067138747236.dkr.ecr.ap-south-1.amazonaws.com/web-front-end/storefront
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - docker pull $REPOSITORY_URI:latest
 
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-      - docker build -c=8 -m=15g --build-arg version=$IMAGE_TAG --cache-from $REPOSITORY_URI:latest --tag $REPOSITORY_URI:$IMAGE_TAG --tag $REPOSITORY_URI:latest .
+      
   post_build:
     commands:
       - echo Build completed on `date`
