@@ -67,7 +67,7 @@ const Tab = ({ value, tabType, label,selected, name,onCallback }) => {
             value={value}
             checked={selected}
             className={styles['radio-btn']}
-          />
+          />&nbsp;
         <label>
           {label}
         </label>
@@ -243,9 +243,9 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
             value={filteredData[0].remaining_amount.display_value}
             checked={checkValue}
             onChange={checkTilaCreditValue}
-          />
+          />&nbsp;
         <label>
-          {`Wallet Balance Used (${filteredData[0].amount_to_pay.currency_code} ${filteredData[0].amount_to_pay.display_value})`}
+          {`${filteredData[0].display_name} (${filteredData[0].balance.currency_code} ${filteredData[0].balance.display_value})`}
         </label>
        </div>
      )
@@ -262,7 +262,7 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
               filteredData.map((item,index) => {
                 return (
                   <Tab
-                    label={`${item.type === 'SAVED_CARD' ? 'Credit/Debit Card' : 'COD'}`}
+                    label={item.display_name}
                     value={item.type}
                     name={item.type}
                     tabType={item.type === 'VOUCHER' ? 'checkbox' : 'radioInput'}
