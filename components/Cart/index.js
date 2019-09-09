@@ -172,7 +172,7 @@ class Cart extends Component {
       showBlocker, count, showSlider,
     } = this.state;
     const {
-      cartData, editCartDetails, showCheckOutBtn, isLoading, couponData, getCartResults,
+      cartData, editCartDetails, showCheckOutBtn, isLoading, couponData, getCartResults, wishListCount,
     } = this.props;
     return (
       <LoaderBarContext.Consumer>
@@ -213,6 +213,7 @@ class Cart extends Component {
                           addOrRemoveGift={this.addOrRemoveGift}
                           checkoutBtnHandler={this.checkoutBtnHandler}
                           cartStepperInputHandler={this.cartStepperInputHandler}
+                          wishListCount={wishListCount}
                         />
                       </Grid>
                   </LoadingBar>
