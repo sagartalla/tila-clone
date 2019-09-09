@@ -23,8 +23,8 @@ const country = cookies.get('country') || 'SAU';
 
 const PaymentStatus = props => {
   const message = (props.status == "SUCCESSFUL") ? `${THANK_YOU_PAGE.SUCCESSFUL_ORDER_MESSAGE}` : (props.status == "FAILED") ? `${THANK_YOU_PAGE.FAILURE_ORDER_MESSAGE}` : null;
-  const successMessage = <span>{THANK_YOU_PAGE.ORDER_PLACED_BEING_PROCESSED} {THANK_YOU_PAGE.EMAIL_SHIPPMENT_DETAILS} {THANK_YOU_PAGE.TRACK_YOUR} {THANK_YOU_PAGE.ORDER} <a className={styles['fontW600']} href={`/${language}/customer/orders/${props.orderId}`}>here</a>.</span>;
-  const subMessage = (props.status == "SUCCESSFUL") ? successMessage : (props.status == "FAILED") ? `${THANK_YOU_PAGE.ORDER_FAILURE_MESSAGE} 4 ${THANK_YOU_PAGE.WORKING_DAYS} ${THANK_YOU_PAGE.QUERIES_PLEASE_CONTACT}` : null;
+  const successMessage = <span>{THANK_YOU_PAGE.EMAIL_SHIPPMENT_DETAILS} {THANK_YOU_PAGE.TRACK_YOUR} {THANK_YOU_PAGE.ORDER} <a className={styles['fontW600']} href={`/${language}/customer/orders/${props.orderId}`}>here</a>.</span>;
+  const subMessage = (props.status == "SUCCESSFUL") ? successMessage : (props.status == "FAILED") ? `${THANK_YOU_PAGE.ORDER_FAILURE_MESSAGE} 6-7 ${THANK_YOU_PAGE.WORKING_DAYS} ${THANK_YOU_PAGE.QUERIES_PLEASE_CONTACT}` : null;
 
   return (
     <Grid style={{ marginTop: '-20px' }}>
@@ -36,7 +36,7 @@ const PaymentStatus = props => {
         </Col>
         <Col md={10} xs={9} sm={9}>
           <div className={`${styles['flx-spacebw-alignc']}`}>
-            <h3 className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['fontW600']}`}>{message}</h3>
+            <h3 className={`${styles['mt-0']} ${props.status == "SUCCESSFUL" ? styles['light-gry-clr'] : styles['google-clr']}  ${styles['fontW600']}`}>{message}</h3>
             {
               props.status == "SUCCESSFUL" ?
                 <a href={`/${language}/customer/orders`} className={styles['mb-20']}>

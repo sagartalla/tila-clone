@@ -1,6 +1,6 @@
 const orderStatusAttributes = Object.freeze({
   PLACED: 'Ordered',
-  PROCESSING: 'Packed',
+  PROCESSING: 'Ready to ship',
   SHIPPED: 'Shipped',
   DELIVERED: 'Delivered',
   CANCELLED: 'Cancelled',
@@ -11,6 +11,8 @@ const orderStatusAttributes = Object.freeze({
   EXCHANGE_IN_PROGRESS: 'Exchange In Progress',
   EXCHANGED: 'Exchanged',
   RETURNED: 'Returned',
+  REPLACEMENT_IN_PROGRESS: 'Replace In Progress',
+  REPLACED: 'Replaced',
 });
 
 export default orderStatusAttributes;

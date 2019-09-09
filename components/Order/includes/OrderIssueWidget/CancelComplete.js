@@ -26,7 +26,7 @@ class CancelComplete extends Component {
       reason: selectedReasons.reason,
       comment: selectedReasons.comment,
       subReason: selectedReasons.subReason,
-      refund_mode: orderIssue.cancelRefundMode,
+      refund_mode: orderIssue.cancelRefundMode || undefined,
     });
     this.props.track({
       event: 'CANCEL_ORDER',
@@ -58,7 +58,7 @@ class CancelComplete extends Component {
                     <img src="/static/img/bg-img/cancel-sucessfull.jpg" className={styles['img-responsive']}/>
                   </div>
                   <div className={`${styles['pt-20']} ${styles['t-c']} ${styles['cancel-success-label']}`}>
-                    <span className={styles['fs-12']}>{ORDER_PAGE.YOUR_ORDER}&nbsp;<span className={styles['fontW600']}>{selectedItem.name}</span>&nbsp;{ORDER_PAGE.SUCCESSFULL_CANCEL}</span>
+                    <span className={styles['fs-12']}>{ORDER_PAGE.SUCCESSFULL_CANCEL}</span>
                   </div>
                 </div>
                 {/* <div>
