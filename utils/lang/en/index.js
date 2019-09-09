@@ -426,7 +426,7 @@ export const EN_KEYWORDS = {
     SUGGESTED_TAGS: 'Suggested Tags',
     FULFILLED_BY_TILA: 'Fulfilled by TiLa',
     ALL_DEALS: 'All Deals',
-    APPLIED_FILTERS_TAGS: 'Applied Filters',
+    APPLIED_FILTERS_TAGS: 'Filters',
     CLEAR_ALL: 'CLEAR ALL',
     PRICE_LOW_TO_HIGH: 'Price - Low to High',
     PRICE_HIGH_TO_LOW: 'Price - High to Low',
@@ -444,7 +444,7 @@ export const EN_KEYWORDS = {
     SEARCH_YOUR_FAV_ITEM: 'Find products, brands and more',
     MAXIMUN_TEXT_EXCEEDED: 'Maximum search text exceeded',
     YOUR_ENTERED: 'You entered',
-    AUTO_CORRECTED: 'Auto corrected',
+    AUTO_CORRECTED: 'Corrected',
     APPLY_FILTERS: 'Apply Filters',
   },
   // adding new page content

@@ -19,6 +19,18 @@
   border-radius: 4px;
   background: rgba(0,0,0,.2);
 
+.header-filter
+  background #efeff4 
+  height 42px
+  opacity 0.95
+  box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
+  position fixed
+  width 100%
+  z-index 43
+
+.meta-info
+ border-right 1px solid #dadada
+
 .filter-panel
   // width: 215px;
   border: 1px solid #e5e5e5;
@@ -58,6 +70,8 @@
 .search-results
   // width calc(82% - 20px)
   padding 0 0 0 15px
+  .applied-filters-padding
+    padding 0 !important
   .no-search
     width 300px
     text-align center
@@ -334,12 +348,12 @@
 
   .applied-tags
     .applied-tags-i
-      max-width 70%
+      max-width 90%
     .applied-tags-inn
       background linear-gradient(to left, gray-light, white)
       border-radius: 15px
       margin 5px
-      padding 5px
+      height 24px
       border 0.5px solid rgba(192, 192, 192, 0.3)
       .filter-tooltp
         display none

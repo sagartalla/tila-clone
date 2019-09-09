@@ -55,7 +55,7 @@ class AppliedFilters extends Component {
     return (
       appliedFilters.length !== 0
         ?
-        <div className={`${styles['applied-tags']} ${styles['flex-center']} ${styles['pb-20']}`}>
+        <div className={`${styles['applied-tags']} ${styles['flex-center']}`}>
           <span>{SEARCH_PAGE.APPLIED_FILTERS_TAGS} : </span>
           <div className={`${styles.flex} ${styles['flex-wrp']} ${styles['applied-tags-i']}`}>
             {
