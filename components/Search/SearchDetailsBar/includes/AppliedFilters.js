@@ -5,8 +5,10 @@ import { bindActionCreators } from 'redux';
 import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
 
 import { actionCreators, selectors } from '../../../../store/search';
+import SVGComponent from '../../../common/SVGComponet';
 
 import { languageDefinations } from '../../../../utils/lang';
+import { PanelGroup, Panel } from 'react-bootstrap';
 
 import lang from '../../../../utils/language';
 
@@ -68,6 +70,19 @@ class AppliedFilters extends Component {
               ))
             }
           </div>
+          {appliedFilters.length > 13 &&
+          <PanelGroup accordion id="product-details">
+              <Panel eventKey="1">
+                <Panel.Heading>
+                  <Panel.Title toggle className={styles['key-feature-inn']}>
+                     ffhgfhgf
+                  </Panel.Title>
+                </Panel.Heading>
+                <Panel.Body collapsible>
+                  <p className={`${styles['fs-12']} ${styles.fontW300} ${styles['sub-decryption']}`}>asasasas</p>
+                </Panel.Body>
+              </Panel>
+            </PanelGroup>}
           <a href="#" onClick={this.clearAll} className={`${styles['fs-12']} ${styles['pl-20']}`}>{SEARCH_PAGE.CLEAR_ALL}</a>
         </div>
         :
