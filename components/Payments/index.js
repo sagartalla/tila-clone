@@ -200,6 +200,7 @@ class Payments extends React.Component {
       paymentConfigJson,
       showLogout: false,
     });
+    this.props.getCartResults();
   }
   checkBoxChange(e) {
     let { showError } = this.state;
@@ -499,7 +500,8 @@ const mapDispatchToProps = dispatch =>
       logout: authActionCreators.userLogout,
       getCartResults: cartAction.getCartResults,
       getUserInfoData: authActionCreators.getUserInfoData,
-      getUserProfileInfo: personalActionCreators.getUserProfileInfo,
+      getUserProfileInfo: personalActionCreators.getUserProfileInfo,   
+      
     },
     dispatch,
   );

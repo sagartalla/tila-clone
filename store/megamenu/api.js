@@ -9,4 +9,18 @@ const getMegamenu = () => axios.get(`${constants.CATEGORYTREE_API_URL}/mega-menu
   data: [],
 }));
 
-export default { getMegamenu };
+const track = (params) => {
+    window.appEventData.push({
+      event: params.eventName,
+      product: [
+        {
+          productInfo: {
+            // "pageName":params.titleInfo.title,
+            tree: params,
+          },
+        },
+      ],
+    });
+  };
+
+export default { getMegamenu , track };

@@ -55,6 +55,7 @@ class CartAndPaymentSideBar extends Component {
       items, total_price, total_offer_price, total_gift_charges,
       total_discount, total_shipping, tax, item_cnt, currency, total_tila_care_charges,
     } = data;
+    
     const { iframe_url } = this.state;
     return (
       <div className={`${styles['right-bar']}`}>

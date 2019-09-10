@@ -16,7 +16,7 @@ const getListingCartResults = (store) => {
       newData.total_gift_charges = data.total_gift_charges || {};
       newData.tax = 0;
       newData.item_cnt = data.items.length;
-      newData.currency = data.items[0].listing_info.selling_price_currency;
+      newData.currency = data.items[0].listing_info ? data.items[0].listing_info.selling_price.currency_code : '';
       data.items.forEach((item, index) => {
         newData.items[index] = {
           item_id: item.cart_item_id,

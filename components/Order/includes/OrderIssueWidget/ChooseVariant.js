@@ -84,6 +84,7 @@ class ChooseVariant extends Component {
     })
     if(data.length > 0) {
       return (
+        data[0] && data[0].variant_details && data[0].variant_details.attribute_map && data[0].variant_details.attribute_map.size && data[0].variant_details.attribute_map.size.attribute_values.length > 0 &&
         <span className={`${styles['fontW600']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
           {`Your Orderd Size: ${data[0].variant_details.attribute_map.size.attribute_values[0].value}`}
         </span>

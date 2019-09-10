@@ -43,7 +43,7 @@ class Language extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.language !== this.state.selectedItem) {
       const currentURl = window.location.href;
-      window.location.replace(currentURl.replace(`/${this.state.selectedItem}`, `/${nextProps.language}`));
+      window.location.assign(currentURl.replace(`/${this.state.selectedItem}`, `/${nextProps.language}`));
     }
   }
 

@@ -33,6 +33,7 @@ class OrderTracker extends React.Component {
 
   componentDidMount() {
     const { orderItem, getTrackingDetails } = this.props;
+    console.log('orderItem', orderItem);
     getTrackingDetails(orderItem.trackingId);
   }
 
@@ -85,7 +86,7 @@ class OrderTracker extends React.Component {
                   <p className={`${styles.fontW600} ${styles['fs-16']}`}>{orderItem.currency_code} {orderItem.price.final_price.display_value}</p>
                 </Col>
               </div>
-              <div className={`${styles['p-5']} ${styles['pl-35']} ${styles['border-t']}`}>{ORDERS.TRACKING_ID}: {orderItem.trackingId}</div>
+              <div className={`${styles['p-5']} ${styles['pl-35']} ${styles['border-t']}`}>{ORDERS.TRACKING_ID}: {orderItem.return_tracking ? orderItem.return_tracking : orderItem.trackingId}</div>
             </div>
             <div className={`${styles['border-b']} ${styles['p-20']} ${styles['pl-40']}`}>
               {showMsgAndDate}

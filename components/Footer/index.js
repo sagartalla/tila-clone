@@ -193,7 +193,7 @@ const FooterBar = props => (
         <div className={`${styles.flex} ${styles['footer-menu-list']}`}>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']} `}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-50']}`}>
-              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/fashion" />
+              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/fashion" />
               <span className={styles.pointer}>{FOOTER_PAGE.FASHION}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
@@ -210,7 +210,7 @@ const FooterBar = props => (
           </div>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']}  ${styles['mr-35']}`}>
-              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/common-icon/processor-icon" />
+              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/common-icon/processor-icon" />
               <span className={styles.pointer}>{FOOTER_PAGE.ELECTRONICS}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
@@ -227,7 +227,7 @@ const FooterBar = props => (
           </div>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-80']}`}>
-              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-10']}`} src="icons/footers-icons/life-style" />
+              <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/life-style" />
               <span className={styles.pointer}>{FOOTER_PAGE.LIFESTYLE}</span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
@@ -317,9 +317,9 @@ const FooterBar = props => (
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                 <li><a href={`/${lang}/policy/user-terms`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
                 <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/return-and-exchange-policy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/return-and-refund-policy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/warranty-policy`} target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-exchange-policy#exchangePolicy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-refund-policy#returnPolicy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/warranty-policy#warrantyPolicy`} target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
                 {/* <li><a href="/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
                 <li><a href={`/${lang}/policy/privacy-policy`} target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
               </ul>

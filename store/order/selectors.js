@@ -72,6 +72,7 @@ const getOrderDetails = (store) => {
             Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
           tuinId: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.tuin ?
             i.variant_info.variant_details.attribute_map.tuin.attribute_values[0].value : null,
+          return_tracking: i.return_exchange_orders && i.return_exchange_orders.length > 0 && i.return_exchange_orders[0].exchange_return_order_items[0].order_item_tracking_id,
         })),
       )(order_items),
     };

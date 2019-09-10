@@ -130,7 +130,7 @@ class MyGMap extends React.Component {
     });
   }
 
-  fetchCountryName = data => data.reduce((obj, curr) => {
+  fetchCountryName = data => data && data.reduce((obj, curr) => {
     if (curr.types.includes('country')) {
       obj.country = curr;
     }

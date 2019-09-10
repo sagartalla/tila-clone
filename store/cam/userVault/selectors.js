@@ -8,15 +8,15 @@ const getCardResults = (store) => {
 };
 const getSavedCardDetails = (store) => {
   let cardsList = [];
-  if (store.vaultReducer.data && store.vaultReducer.data.cardDetails) {
+  if(store.vaultReducer.data && store.vaultReducer.data.cardDetails) {
     store.vaultReducer.data.cardDetails.payment_options_available.forEach((item) => {
       if (item.type === 'SAVED_CARD') {
         cardsList = item.cards_list;
       }
     });
   }
-  return cardsList;
-};
+  return { cardsList };
+}
 const getTransactions = (store) => {
   if (store.vaultReducer.data && store.vaultReducer.data.content) {
     return store.vaultReducer.data.content;

@@ -96,6 +96,7 @@ const getCompareInfo = (store) => {
         offer: 0,
         name: product.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
         tuin: tuinId,
+        stock_count: product.variant_preferred_listings !== null && Object.values(product.variant_preferred_listings)[0],
       };
     }),
     productsFeatures: fp.compose(

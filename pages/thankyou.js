@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import NoSSR from 'react-no-ssr';
 import withRedux from 'next-redux-wrapper';
 import { bindActionCreators } from 'redux';
@@ -10,13 +10,13 @@ import Thankyou from '../components/Thankyou';
 
 class ThankyouPage extends Base {
   pageName = 'THANK YOU';
-  render () {
-    const {orderId, status} = this.props.url.query;
-    const urlParams= { orderId, status };
+  render() {
+    const { orderId, status } = this.props.url.query;
+    const urlParams = { orderId, status };
     return (
       <NoSSR>
         <Layout>
-          <Thankyou { ...urlParams} />
+          <Thankyou {...urlParams} />
         </Layout>
       </NoSSR>
     );
@@ -29,6 +29,6 @@ const mapDispatchToProps = dispatch =>
       ...baseActions,
     },
     dispatch,
-  )
+  );
 
 export default withRedux(makeStore, null, mapDispatchToProps)(ThankyouPage);
