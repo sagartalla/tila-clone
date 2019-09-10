@@ -52,7 +52,7 @@ export const EN_KEYWORDS = {
     ITEM_IN_YOUR_WISHLIST: 'item in Wishlist',
     ITEMS_IN_YOUR_WISHLIST: 'items in Wishlist',
     MY_CART: 'My Cart',
-    MY_CART_EMPTY: 'So many products on TiLa and yet, I feel empty!',
+    MY_CART_EMPTY: 'So many products on TiLa and yet, I feel empty :(',
     TILA_CARE_PROTECTION: 'TiLa Care Protection',
     VIEW_T_AND_C: 'View T & C ',
     DURATION: 'Duration',
@@ -875,7 +875,7 @@ export const EN_KEYWORDS = {
   CAM: {
     MY_ORDERS: 'My Orders',
     WISHLIST: 'My Wishlist',
-    SHIPPING_ADDRESS: 'Delivery Address',
+    SHIPPING_ADDRESS: 'Delivery Addresses',
     CREDIT_CARDS_VOUCHERS_REWARD_POINTS: 'Saved Cards & TiLa Credit',
     MY_COUPONS: 'My Coupons',
     PREFERENCES: 'Preferences',

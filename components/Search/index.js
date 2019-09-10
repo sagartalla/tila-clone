@@ -264,7 +264,7 @@ class Search extends Component {
                 <div
                   className={`${styles.absolute} ${styles['bg-white']} ${styles.brandsmodal} `}
                 >
-                  {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.onFilterData} filter={filter} />}
+                {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.onFilterData} filter={filter} />}
                 </div>
               </Modal>
             </div>
