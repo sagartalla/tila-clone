@@ -189,9 +189,9 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
             value={filteredData[0].remaining_amount.display_value}
             checked={checkValue}
             onChange={checkTilaCreditValue}
-          />
-        <label htmlFor="wallet-balance">
-          {`Wallet Balance Used (${filteredData[0].amount_to_pay.currency_code} ${filteredData[0].amount_to_pay.display_value})`}
+          />&nbsp;
+        <label>
+          {`${filteredData[0].display_name} (${filteredData[0].balance.currency_code} ${filteredData[0].balance.display_value})`}
         </label>
        </div>
      )
@@ -211,8 +211,8 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
               filteredData.map((item,index) => {
                 return (
                   <Tab
+                    label={item.display_name}
                     tabClass={`${styles['fs-12']} ${styles['pr-30']}`}
-                    label={`${item.type === 'SAVED_CARD' ? 'Credit/Debit Card' : 'COD'}`}
                     value={item.type}
                     name={item.type}
                     btnStyle={styles['radio-btn']}
