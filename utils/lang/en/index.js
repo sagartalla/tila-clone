@@ -63,6 +63,7 @@ export const EN_KEYWORDS = {
     DAMAGE_PROTECTION: 'Damage Protection',
     DONE: 'Done',
     ADD: 'Add',
+    DONT_WAIT: 'Dont wait no more!',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'Secure Checkout',

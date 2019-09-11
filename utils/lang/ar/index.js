@@ -56,7 +56,8 @@ export const AR_KEYWORDS = {
     "VIEW_T_AND_C": "View T & C ",
     "DURATION": "Duration",
     "EXTENDED_WARRANTY": "Extended Warranty",
-    "DAMAGE_PROTECTION": "Damage Protection"
+    "DAMAGE_PROTECTION": "Damage Protection",
+    'DONT_WAIT': 'Dont wait no more!',
   },
   "PAYMENT_PAGE": {
     "SECURE_CHECKOUT": "عملية خروج آمنة",
