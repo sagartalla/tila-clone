@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import SVGComponent from '../../../common/SVGComponet';
 import StatusWidget from '../StatusWidget';
@@ -157,7 +157,7 @@ class OrderItem extends Component {
       payments = [{}], orderItem, orderId, thankyouPage, isCancelable,
       isReturnable, isExchangable, needHelp, showPriceInfo, isDamageProtectionAvailable,
       isWarrantyAvailable, tilaPolicy, tuinId
-    } = this.props;    
+    } = this.props;
     const { showToolTip } = this.state;
     const btnType = (() => {
       if (['PLACED', 'SHIPPED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
