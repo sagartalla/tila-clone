@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Router from '../routes';
+import { Component } from 'react';
 import { configureUrlQuery } from 'react-url-query';
 import createHistory from 'history/createBrowserHistory';
+
 import inactiveMonitor from '../utils/inactiveMonitor';
 // import Cookies from 'universal-cookie';
 
@@ -14,7 +14,7 @@ import { actionCreators } from '../store/auth';
 //import io from 'socket.io-client';
 
 class Base extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.fireViewEndCustomEvent = this.fireViewEndCustomEvent.bind(this);
