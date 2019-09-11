@@ -445,7 +445,8 @@ class InstantCheckout extends Component {
           iframe_url ?
             {
               true: <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} className="h-200 desktop:h-376 w-full" />,
-              false: <Modal
+              false:
+              <Modal
                 show={this.state.isIframeLoaded}
                 onHide={this.hideIframe}
                 dialogClassName="custom-modal"
@@ -483,7 +484,6 @@ class InstantCheckout extends Component {
                  /> : null
              }
             </div>
-
         }
         <div>
           <Modal
@@ -492,15 +492,14 @@ class InstantCheckout extends Component {
             onHide={this.closeModal}
             dialogClassName="custom-modal"
           >
-          <Modal.Header
-            closeButton
-            className={`${styles['modal-headerStyl']}`}
-          >
-            <Modal.Title>Instant Checkout COD </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {
-                checked
+            <Modal.Header
+              closeButton
+              className={`${styles['modal-headerStyl']}`}
+            >
+              <Modal.Title>Instant Checkout COD </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {checked
                   ?
                   {
                     captcha: <Captcha
@@ -518,8 +517,8 @@ class InstantCheckout extends Component {
                     mobileVerification:
                     <EditPhone
                       afterSuccessOtpVerification={this.afterSuccessOtpVerification}
-                      mobileVerified= {profileInfo.contactInfo.mobile_verified === 'V'}
-                      userData ={profileInfo.contactInfo}
+                      mobileVerified={profileInfo.contactInfo.mobile_verified === 'V'}
+                      userData={profileInfo.contactInfo}
                     />,
                     checkoutBtn:
                     <div>
@@ -528,7 +527,7 @@ class InstantCheckout extends Component {
                         <Button
                           className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles.fontW600} ${styles['instant-btn']} ${styles.width45}`}
                           onClick={this.callInstantCheckout}
-                          btnText={walletSelected ? `${PAYMENT_PAGE.PAY  } ${  totalPrice - newFilteredData.display_value  } ${  currency  } ${  PAYMENT_PAGE.ON_DELIVERY}` : `${PAYMENT_PAGE.PAY  } ${  totalPrice  } ${  currency  } ${  PAYMENT_PAGE.ON_DELIVERY}`}
+                          btnText={walletSelected ? `${PAYMENT_PAGE.PAY} ${totalPrice - newFilteredData.display_value} ${currency} ${PAYMENT_PAGE.ON_DELIVERY}` : `${PAYMENT_PAGE.PAY} ${totalPrice} ${currency} ${PAYMENT_PAGE.ON_DELIVERY}`}
                           disabled={btnLoader}
                           btnLoading={btnLoader}
                         />
@@ -538,8 +537,8 @@ class InstantCheckout extends Component {
                   :
                   null
               }
-          </Modal.Body>
-        </Modal>
+            </Modal.Body>
+          </Modal>
         </div>
       </div>
     );
