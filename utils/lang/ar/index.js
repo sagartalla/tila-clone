@@ -60,6 +60,7 @@ export const AR_KEYWORDS = {
     "DAMAGE_PROTECTION": "Damage Protection",
     "DONE": "Done",
     "ADD": "Add",
+    'DONT_WAIT': "Dont wait no more!",
   },
   "PAYMENT_PAGE": {
     "SECURE_CHECKOUT": "عملية خروج آمنة",
