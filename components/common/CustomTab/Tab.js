@@ -18,7 +18,7 @@ const Tab = ({ value, tabType, label,selected, name,onCallback,...props }) => {
             value={value}
             checked={selected}
             className={props.btnStyle}
-          />
+          />&nbsp;
         <label>
           {label}
         </label>
@@ -30,7 +30,7 @@ const Tab = ({ value, tabType, label,selected, name,onCallback,...props }) => {
         <div
         className={`${props.tabClass} ${ selected === true ? props.activeClass : props.nonActiveClass}`}
         onClick={onInputChange}
-        >
+        >&nbsp;
           {label}
         </div>
       )
