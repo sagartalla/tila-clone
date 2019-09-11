@@ -18,7 +18,7 @@ import styles_ar from './orderIssue_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookies();
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 
 const { ORDER_PAGE } = languageDefinations();
 

@@ -14,7 +14,7 @@ import { languageDefinations } from '../../../utils/lang';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 const cookies = new Cookies();
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 const { CAM, PERSONAL_INFO_MODAL } = languageDefinations();
 

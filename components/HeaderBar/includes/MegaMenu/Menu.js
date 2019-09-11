@@ -137,7 +137,7 @@ const brandImages = {
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 class Menu extends Component {

@@ -18,7 +18,7 @@ const MaxItems = 4;
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 class Leaves extends Component {
