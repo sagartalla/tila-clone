@@ -216,7 +216,7 @@ class Search extends Component {
            null
         }
         <div className={`${styles['header-filter']} ${styles['flex-center']} ${styles['p-10-0']}`}>
-        <div className={`${styles['flex-center']} ${styles['search-val-part']} ${styles['pl-15']}`}>
+        <div className={spellCheckResp ? `${styles['flex-center']} ${styles['search-val-part']} ${styles['pl-15']} ${styles.width25}` : `${styles['flex-center']} ${styles['search-val-part']} ${styles['pl-15']} ${styles.width15}`}>
                   <h4 className={spellCheckResp ? `${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`: `${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`}>
                     {
                       spellCheckResp ?
@@ -239,7 +239,7 @@ class Search extends Component {
                     </h4>
                   }
                 </div>
-        <div className={`${styles['search-results']} ${styles['applied-filters-padding']}`}>
+        <div className={spellCheckResp ? `${styles['search-results']} ${styles['applied-filters-padding']} ${styles.width75} ${styles.relative}` : `${styles['search-results']} ${styles['applied-filters-padding']} ${styles.width85} ${styles.relative}`}>
          <NoSSR>
                 <AppliedFilters />
               </NoSSR>
