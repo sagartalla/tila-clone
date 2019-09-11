@@ -25,7 +25,7 @@ class Home extends Base {
   }) {
     const { country, language } = query;
     // const setCountry = country || 'SAU';
-    const setLanguage = language || 'en';
+    const setLanguage = language || 'ar';
     if (!language) {
       if (res) {
         res.writeHead(302, {

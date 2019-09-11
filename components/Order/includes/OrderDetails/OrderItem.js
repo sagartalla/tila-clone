@@ -33,7 +33,7 @@ const { ORDER_PAGE, CART_PAGE, ORDERS } = languageDefinations();
 
 const cookies = new Cookies();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 const RenderButton = ({ callbackMethod, refundType }) => (
@@ -157,7 +157,7 @@ class OrderItem extends Component {
       payments = [{}], orderItem, orderId, thankyouPage, isCancelable,
       isReturnable, isExchangable, needHelp, showPriceInfo, isDamageProtectionAvailable,
       isWarrantyAvailable, tilaPolicy, tuinId
-    } = this.props;    
+    } = this.props;
     const { showToolTip } = this.state;
     const btnType = (() => {
       if (['PLACED', 'SHIPPED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {

@@ -28,7 +28,7 @@ class LandingPage extends Base {
   }) {
     const { country, language } = query;
     const setCountry = country || 'SAU';
-    const setLanguage = language || 'en';
+    const setLanguage = language || 'ar';
     await store.dispatch(MegamenuActionsCreators.getMegamenu());
     if (!language) {
       if (res) {
