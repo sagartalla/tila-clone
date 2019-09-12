@@ -102,7 +102,6 @@ class PageData extends React.Component {
 	// breadcrums are pending...
 	getContent = () => {
 		const { content, index } = this.props;
-		console.log({ content });
 
 		switch (content.layout_id) {
 			case "CT1a":
