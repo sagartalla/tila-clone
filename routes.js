@@ -25,6 +25,7 @@ routes
   .add({ name: 'category', pattern: '/:language(en|ar)/:category/clp', page: 'category' })
   .add({ name: 'default', pattern: '/:language(en|ar)?', page: 'home' })
   .add({ name: 'items-zone', pattern: '/:language(en|ar)/items-zone/:zone', page: 'itemsZone' })
+  .add({ name: 'test', pattern: '/:language(en|ar)/temp', page: 'temp' })
   .add({ name: 'verifyemail', pattern: '/:language(en|ar)/email/verify', page: 'verifyEmail' })
 ;
 
