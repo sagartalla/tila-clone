@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, PanelGroup, Panel } from 'react-bootstrap';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import Cookie from 'universal-cookie';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';

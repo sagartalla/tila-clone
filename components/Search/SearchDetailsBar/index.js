@@ -64,7 +64,7 @@ class SearchDetailsBar extends Component {
         <div className={styles['search-results-wrap']}>
           <div className={styles['details-inn-wrap']}>
               <div className={`${styles['flx-space-bw']} ${styles['pb-15']} ${styles['items-list-show']} ${styles['ipad-flex-clm']}`}>
-                <div className={`${styles['flex-center']} ${styles['search-val-part']}`}>
+                {/* <div className={`${styles['flex-center']} ${styles['search-val-part']}`}>
                   <h4 className={`${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`}>
                     {
                       spellCheckResp ?
@@ -86,7 +86,7 @@ class SearchDetailsBar extends Component {
                       </a>
                     </h4>
                   }
-                </div>
+                </div> */}
                 <div className={`${styles['flex']} ${styles['deliver-to-main']}`}>
                   <GeoWidget />
                   <SortByWidget />
@@ -104,9 +104,9 @@ class SearchDetailsBar extends Component {
                   </span>
                 </div>
               */}
-              <NoSSR>
+              {/* <NoSSR>
                 <AppliedFilters />
-              </NoSSR>
+              </NoSSR> */}
             </div>
         </div>
       </Waypoint>

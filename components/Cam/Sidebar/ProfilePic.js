@@ -29,8 +29,8 @@ const ProfilePic = (props) => {
         imagePreview = (<div className={styles['edit-icon']}><SVGComponent clsName={`${styles['profile-edit-icon']}`} src="icons/profile-camera" /></div>)
       }
     return (
-        <div className={`${styles['profile-pic']} ${styles['pr-15']}`}>
-            <div className={styles['img-style']} >
+        <div className={`${styles['profile-pic']} ${props.header ? '' : `${styles['pr-15']}`}`}>
+          <div className={`${styles['img-style']} ${props.header ? `${styles['header-after']}` : ''}`} >
                 {imagePreview}
             </div>
         </div>

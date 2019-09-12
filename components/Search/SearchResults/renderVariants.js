@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { languageDefinations } from '../../../utils/lang';
 
 import lang from '../../../utils/language';
@@ -13,14 +14,39 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 const { PDP_PAGE } = languageDefinations();
 
 const RenderVariants = ({
-  variantData, onSelectedVariant, isvisible, OncloseVariant,
+  variantData, onSelectedVariant, isvisible, OncloseVariant,showOnHover
 }) => {
   const selectProductSize = (listingId, index) => (e) => {
     e.stopPropagation();
     e.preventDefault();
     onSelectedVariant(listingId, index);
   };
+  const getVariantData = (variantData) => {
+    return variantData.map((data, index) => (
+      <div
+        key={`productSize_${index}`}
+        onClick={data.productAvailable ? selectProductSize(data.listingId[0], index) : null}
+        className={`${styles['product-sizebutton']} ${styles.pointer} ${styles['fs-12']} ${getActiveClass(data.addedToCart,data.productAvailable)}`}
+      >{data.productSize[0]}
+      </div>
+      ))
+  }
+  const getActiveClass = (addedCart, productAvailable) => {
+    const data = [`${!!addedCart}-${productAvailable}`]
+    return {
+      [`true-true`]:`${styles['active-selected']}`,
+      ['false-false']:`${styles['product-strikebutton']}`,
+      ['false-true']:''
+    }[data]
+  }
 
+  if(showOnHover) {
+    return (
+      <div className={`${styles['productSizeContainer-hover']} ${styles['mt-5']} ${styles['flex']}`}>
+        {getVariantData(variantData)}
+      </div>
+    )
+  }
   return (
     <div className={`${styles['product-sizeDisplay']} ${isvisible ? styles['product-showsizeDisplay'] : ''}`} >
       <div className={`${styles['product-displayHeader']} ${styles['fs-14']} ${styles.flex} ${styles['justify-spacebetween']} ${styles['align-center']}`}>
@@ -28,19 +54,15 @@ const RenderVariants = ({
         <div className={`${styles['fs-22']} ${styles['mr-5']} ${styles.pointer}`} onClick={OncloseVariant}>x</div>
       </div>
       <div className={`${styles['product-sizeContainer']}`}>
-        {
-        variantData.map((data, index) => (
-          <div
-            key={`productSize_${index}`}
-            onClick={data.productAvailable ? selectProductSize(data.listingId[0], index) : null}
-            className={`${styles['product-sizebutton']} ${styles.pointer} ${styles['fs-12']} ${data.productAvailable ? '' : styles['product-strikebutton']}`}
-          >{data.productSize[0]}
-          </div>
-          ))
-      }
+        {getVariantData(variantData)}
       </div>
     </div>
   );
 };
-
+RenderVariants.propTypes = {
+  showOnHover:PropTypes.bool
+}
+RenderVariants.defaultProps = {
+  showOnHover: false
+}
 export default RenderVariants;

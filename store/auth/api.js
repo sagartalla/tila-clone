@@ -2,7 +2,7 @@ import _ from 'lodash';
 import axios from 'axios';
 import constants from '../helper/constants';
 import Cookies from 'universal-cookie';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { toast } from 'react-toastify';
 import ToastContent from '../../components/common/ToastContent';
 import { languageDefinations } from '../../utils/lang/';
