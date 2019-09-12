@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Dropdown, MenuItem } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
 import { languageDefinations } from '../../utils/lang';
 import { actionCreators, selectors } from '../../store/product';
@@ -65,7 +65,7 @@ class ContinueLogin extends Component {
   componentDidMount() {
     const { getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
-    // this.daysInMonth(moment().month());
+    // this.daysInMonth(moment().tz('Asia/Riyadh').month());
     const minYear = 1900;
     const maxYear = new Date().getFullYear() - 18;
     const newYear = [];
@@ -138,7 +138,7 @@ class ContinueLogin extends Component {
   }
 
   handleMobileNumber({ target }) {
-    if (/^[0-9]*$/gm.test(target.value)) {    
+    if (/^[0-9]*$/gm.test(target.value)) {
       this.setState({
         mobile_no: target.value,
       });
@@ -467,4 +467,3 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContinueLogin);
-

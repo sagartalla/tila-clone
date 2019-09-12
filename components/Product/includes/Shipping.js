@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
-import moment from 'moment';
+import moment from 'moment-timezone';
 // import ProductPrice from '../includes/ProductPrice';
 import GeoWidget from '../../common/GeoWidget';
 import { languageDefinations } from '../../../utils/lang';
