@@ -42,7 +42,7 @@ class Brand extends Base {
       country: country || undefined,
       pageSize: 25,
       query: brandValue,
-      language: language || 'en',
+      language: language || 'ar',
       pageNum: 1,
       choosenCategoryName: brandValue,
     };

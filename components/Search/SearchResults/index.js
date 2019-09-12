@@ -29,7 +29,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 const cookies = new Cookie();
 const { SEARCH_PAGE } = languageDefinations();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 const shippingData = cookies.get('shippingInfo');
 const { city: shippingCity, country: shippingCountry } = shippingData || {};
@@ -233,7 +233,7 @@ class SearchResults extends Component {
   render() {
     const { search, isCategoryTree, choosenCategoryName } = this.props;
     let finalQuery = search || choosenCategoryName;
-    finalQuery = finalQuery.split('-').join(' ');
+    finalQuery = finalQuery && finalQuery.split('-').join(' ');
     const {
       results, pagiantionDetails,
     } = this.props;

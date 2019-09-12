@@ -43,7 +43,7 @@ class Category extends Base {
       country: country || undefined,
       pageSize: 25,
       query: categoryValue,
-      language: language || 'en',
+      language: language || 'ar',
       pageNum: 1,
       choosenCategoryName: categoryValue,
       categoryTree

@@ -34,7 +34,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const cookies = new Cookies();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 class Payments extends React.Component {
@@ -482,7 +482,7 @@ const mapStateToprops = store => ({
   signInLoader: authSelectors.getLoginProgressStatus(store),
   selectedAddress: addressSelectors.getSelectedAddress(store),
   isVerified: authSelectors.isVerified(store),
-  userInfoData: authSelectors.getUserInfo(store),  
+  userInfoData: authSelectors.getUserInfo(store),
   // activeEmailId: authSelectors.getActiveEmailId(store),
 });
 
@@ -500,8 +500,8 @@ const mapDispatchToProps = dispatch =>
       logout: authActionCreators.userLogout,
       getCartResults: cartAction.getCartResults,
       getUserInfoData: authActionCreators.getUserInfoData,
-      getUserProfileInfo: personalActionCreators.getUserProfileInfo,   
-      
+      getUserProfileInfo: personalActionCreators.getUserProfileInfo,
+
     },
     dispatch,
   );

@@ -12,7 +12,7 @@ import { cartPlaceHolder } from '../../common/Loader/skeletonPlaceHolder';
 import SVGComponent from '../../common/SVGComponet';
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 import lang from '../../../utils/language';
