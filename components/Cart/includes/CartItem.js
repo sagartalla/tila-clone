@@ -27,7 +27,7 @@ const { PDP_PAGE, CART_PAGE, ORDER_PAGE, DELIVERY_ADDR_PAGE } = languageDefinati
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 // const popover = ({

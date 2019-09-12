@@ -24,7 +24,7 @@ import styles_ar from '../product_ar.styl';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const cookies = new Cookies();
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 // const maxImages = userAgent.isiPad ? 3 : 4;
 

@@ -41,7 +41,7 @@ const { INSTANT_CHECKOUT, PAYMENT_PAGE, CONTACT_INFO_MODAL } = languageDefinatio
 
 const cookies = new Cookies();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 const InstaCheckoutDetails = ({
