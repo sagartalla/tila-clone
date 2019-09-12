@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { Modal } from 'react-router-modal';
 import { Row, Col } from 'react-bootstrap';
 
@@ -122,7 +122,7 @@ class OrderHeader extends Component {
                   <div className={styles['lne-ht2']}>
                     <div className={`${styles['flex-center']} ${styles['fs-14']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ORDER_DATE}</Col>
-                      <Col md={6} sm={6}>{moment(orderDate).format('MMMM DD, YYYY')}</Col>
+                      <Col md={6} sm={6}>{moment(orderDate).tz('Asia/Riyadh').format('MMMM DD, YYYY')}</Col>
                     </div>
                     <div className={`${styles['flex-center']} ${styles['fs-14']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ITEM_TOTAL}</Col>
@@ -256,7 +256,7 @@ class OrderHeader extends Component {
                   :
                   ''
                 }
-              
+
               </Col>
             </Col>}
           {/* </Col > */}

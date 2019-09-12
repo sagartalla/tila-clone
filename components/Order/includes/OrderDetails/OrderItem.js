@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import SVGComponent from '../../../common/SVGComponet';
 import StatusWidget from '../StatusWidget';
@@ -71,7 +71,7 @@ class OrderItem extends Component {
     if (isDamageProtectionAvailable !== 'NA' || isWarrantyAvailable !== 'NA') {
       tilaPolicy.forEach((item) => {
         if (item.policy_type === 'EXTENDED' && item.valid_upto !== null) {
-          warrantyInfo = moment(item.valid_upto).format("MMM Do YY");
+          warrantyInfo = moment(item.valid_upto).tz('Asia/Riyadh').format("MMM Do YY");
         }
       });
     }
@@ -81,7 +81,7 @@ class OrderItem extends Component {
     const { orderItem } = this.props;
     const t = estimates.filter(state => state.status === orderItem.status);
     if (t.length > 0) {
-      return t[0].actual_time ? moment(t[0].actual_time).format('ddd, MMM Do') : '';
+      return t[0].actual_time ? moment(t[0].actual_time).tz('Asia/Riyadh').format('ddd, MMM Do') : '';
     } return '';
   }
   showToolTip = () => {
@@ -189,7 +189,7 @@ class OrderItem extends Component {
         <div>
           <div className={`${styles['fs-14']} ${styles.fontW600}`}>{displayText()}</div>
           <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>
-            {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('ddd, MMM Do') : this.getDate(orderItem.products[0].state_time_estimates)}
+            {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).tz('Asia/Riyadh').format('ddd, MMM Do') : this.getDate(orderItem.products[0].state_time_estimates)}
           </div>
         </div>
       </div>

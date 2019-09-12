@@ -61,6 +61,7 @@ class Product extends Component {
     this.showVariants = this.showVariants.bind(this);
     this.preventDefaultClick = this.preventDefaultClick.bind(this);
     this.renderQuickView = this.renderQuickView.bind(this);
+    this.getSelectedVariants = this.getSelectedVariants.bind(this);
     this.leaveImg = this.leaveImg.bind(this);
   }
   componentWillReceiveProps() {
@@ -82,7 +83,10 @@ class Product extends Component {
     }
     return '';
   }
-
+  getSelectedVariants(variants) {
+    let filteredData = variants.filter((item) => (item.addedToCart && item.productAvailable))
+    return filteredData
+  }
   setImg() {
     this.setState({
       src: '',
@@ -294,6 +298,7 @@ class Product extends Component {
     const discountValue = variants.length > 0 &&
       variants[selectedIndex].discount && Math.floor(variants[selectedIndex].discount[0]);
     const tuinId = variants && variants.length > 0 && variants[selectedIndex].tuin && variants[selectedIndex].tuin[0];
+    const buttonText = (variants.length > 1 && this.getSelectedVariants(variants).length > 0) ? true : false
     const listing_id = variants && variants.length > 0 && variants[selectedIndex] && variants[selectedIndex].listingId && variants[selectedIndex].listingId[0];
     const popover = (
       <Popover id={productId}>
@@ -413,7 +418,7 @@ class Product extends Component {
                           className={`${styles.flex} ${styles['add-to-crt']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
                           onClick={this.showVariants('ADD_TO_CART')}
                           disabled={btnLoading}
-                          btnText={PDP_PAGE.ADD_TO_CART}
+                          btnText={buttonText ? PDP_PAGE.ADD_MORE : PDP_PAGE.ADD_TO_CART}
                           showImage="icons/cart/blue-cart-icon"
                           btnLoading={variants[selectedIndex].listingId && cartButtonLoaders[variants[selectedIndex].listingId[0]]}
                         />
@@ -430,6 +435,16 @@ class Product extends Component {
                       !showNotifyMeMsg && <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
                         <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
                       </a>
+                  }
+                  {
+                    variants.length > 1 &&
+                    <RenderVariants
+                      variantData={variants}
+                      onSelectedVariant={this.selectedVariant}
+                      isvisible={selectedProduct}
+                      OncloseVariant={this.closeVariantTab}
+                      showOnHover={true}
+                    />
                   }
                   <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
                     <span className={styles.flex}>

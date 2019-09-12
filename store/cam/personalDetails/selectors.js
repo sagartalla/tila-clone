@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { languageDefinations } from '../../../utils/lang';
 const { PERSONAL_INFO_MODAL } = languageDefinations();
 
@@ -21,7 +21,7 @@ const getUserInfo = (store) => {
       }
       if (contactInfo.pwd_updated_at) {
         const lastUpdated = contactInfo.pwd_updated_at;
-        const msg = moment(lastUpdated).subtract(new Date().getTimezoneOffset()).fromNow();
+        const msg = moment(lastUpdated).tz('Asia/Riyadh').subtract(new Date().getTimezoneOffset()).fromNow();
         contactInfo.lastUpdated = `${PERSONAL_INFO_MODAL.LAST_UPDATED} ${msg}`;
       }
       else

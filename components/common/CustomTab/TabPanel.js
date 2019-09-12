@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const TabPanel = ({value,index,children, ...props}) => {
   return (
-    <div className={`${ value !== index ?  props.nonactiveTabPanel : props.activeTabPanel}`}>
+    <div id={`simple-tab-panel_${index}`} className={`${ value !== index ?  props.nonactiveTabPanel : props.activeTabPanel}`}>
       {children}
     </div>
   )

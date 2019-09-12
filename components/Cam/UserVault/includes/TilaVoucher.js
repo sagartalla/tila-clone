@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { languageDefinations } from '../../../../utils/lang/';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import lang from '../../../../utils/language';
 import SVGComponent from '../../../common/SVGComponet';
 import styles_en from '../uservault_en.styl';
@@ -52,8 +52,8 @@ const TilaVoucher = (props) => {
                 {transactions.map((transaction, index) => {
                     const { created_date, transaction_description, transaction_type, amount, balance } = transaction;
                     const date_arr = created_date.split('.')[0];
-                    const date = moment(date_arr).format('MMM D, YYYY')
-                    const time = moment(date_arr).format('hh:mm A')
+                    const date = moment(date_arr).tz('Asia/Riyadh').format('MMM D, YYYY')
+                    const time = moment(date_arr).tz('Asia/Riyadh').format('hh:mm A')
                     return (
                         <div className={styles['bodyRow']} key={index}>
                             <Row className={`${styles['m-0']}`}>

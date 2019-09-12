@@ -41,7 +41,7 @@ class ReturnComplete extends Component {
   getExchangeMsgType = (issueType) => (
     {
       RETURN:ORDER_PAGE.RETURN_ORDER_MSG,
-      EXCHANGE:ORDER_PAGE.EXCHANGE_ORDER_MSG_NOTE,
+      EXCHANGE:ORDER_PAGE.RETURN_ORDER_MSG,
     }[issueType]
   )
   render() {
@@ -85,6 +85,13 @@ class ReturnComplete extends Component {
                             orderIssue.issueType === 'RETURN' ?
                             <div>
                               <div>{ORDER_PAGE.RETURN_ORDER_MSG_NOTE}</div>
+                            </div>
+                              : ''
+                          }
+                             {
+                            orderIssue.issueType === 'EXCHANGE' ?
+                            <div>
+                              <div>{ORDER_PAGE.EXCHANGE_ORDER_MSG_NOTE}</div>
                             </div>
                               : ''
                           }
