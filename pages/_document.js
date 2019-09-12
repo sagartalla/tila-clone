@@ -82,10 +82,6 @@ export default class MyDocument extends Document {
 					/>
 					<script
 						type="application/ld+json"
-						src="/static/scripts/responsivelyLazy.min.js"
-					/>
-					<script
-						type="application/ld+json"
 						src="/static/scripts/seoScript.js"
 					/>
 				</body>

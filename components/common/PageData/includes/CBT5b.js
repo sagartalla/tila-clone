@@ -1,5 +1,8 @@
 import React from "react";
 
+import dynamic from "next/dynamic";
+const Image = dynamic(import("react-graceful-image"), { ssr: false });
+
 import lang from "../../../../utils/language";
 import main_en from "../../../../layout/main/main_en.styl";
 import main_ar from "../../../../layout/main/main_ar.styl";
@@ -22,14 +25,15 @@ const CBT5b = ({ content }) => {
 							banners[index].config.width}%`
 					}}
 				>
-					<img
+					<Image
 						src={banners[index].img}
-						// width={banners[index].config.width}
-						// height={banners[index].config.height}
-						// style={{ position: "absolute" }}
-						srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-						// srcset="https://www.jensenleisurefurniture.com/wp-content/themes/jensen-leisure/media/woocommerce/product-placeholder.png"
-						className={`${styles["width100"]} ${styles["img-responsive"]}`}
+						className={`${styles["animating-placeholder"]}  ${
+							styles["width100"]
+						} ${styles["img-responsive"]}`}
+						placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
+						alt={banners[index].display_name}
+						width={banners[index].config.width}
+						height={banners[index].config.height}
 					/>
 				</div>
 			</a>

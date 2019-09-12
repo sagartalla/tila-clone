@@ -3,8 +3,6 @@ import Input from '../commonInput/index';
 import Rectangle from '../commonInput/RectangleShape';
 import Round from '../commonInput/roundShape';
 
-import ContentLoader from "react-content-loader";
-
 import lang from '../../../utils/language';
 
 import main_en from '../../../layout/main/main_en.styl';
@@ -443,39 +441,6 @@ export const camOrdersHolder = (
       </div>
     </div>
   </div>
-);
-
-export const MyLoader = () => (
-  <ContentLoader
-    height={3210}
-    width={1440}
-    speed={4}
-    primaryColor="#f3f3f3"
-    secondaryColor="#ecebeb"
-  >
-    <rect x="0" y="0" rx="4" ry="4" width="1440" height="335" />
-    <rect x="30" y="380" rx="4" ry="4" width="260" height="167" />
-    <rect x="309" y="380" rx="4" ry="4" width="264" height="167" />
-    <rect x="588" y="380" rx="4" ry="4" width="264" height="167" />
-    <rect x="867" y="380" rx="4" ry="4" width="264" height="167" />
-    <rect x="1146" y="380" rx="4" ry="4" width="264" height="167" />
-    <rect x="30" y="567" rx="4" ry="4" width="260" height="167" />
-    <rect x="309" y="567" rx="4" ry="4" width="264" height="167" />
-    <rect x="588" y="567" rx="4" ry="4" width="264" height="167" />
-    <rect x="867" y="567" rx="4" ry="4" width="264" height="167" />
-    <rect x="1146" y="567" rx="4" ry="4" width="264" height="167" />
-    <rect x="35" y="774" rx="4" ry="4" width="445" height="524" />
-    <rect x="495" y="774" rx="4" ry="4" width="445" height="524" />
-    <rect x="955" y="774" rx="4" ry="4" width="445" height="524" />
-    <rect x="35" y="1338" rx="4" ry="4" width="675" height="395" />
-    <rect x="725" y="1338" rx="4" ry="4" width="675" height="395" />
-    <rect x="35" y="1773" rx="4" ry="4" width="215" height="300" />
-    <rect x="265" y="1773" rx="4" ry="4" width="215" height="300" />
-    <rect x="495" y="1773" rx="4" ry="4" width="215" height="300" />
-    <rect x="725" y="1773" rx="4" ry="4" width="215" height="300" />
-    <rect x="955" y="1773" rx="4" ry="4" width="215" height="300" />
-    <rect x="1185" y="1773" rx="4" ry="4" width="215" height="300" />
-  </ContentLoader>
 );
 
 export const homePageHolder = (

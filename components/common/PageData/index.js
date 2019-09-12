@@ -274,13 +274,6 @@ class PageData extends React.Component {
 												rel="noopener noreferrer"
 												target="_blank"
 											>
-												{/* <img
-													src={banner.img}
-													className={`${styles["inside-bnr"]}`}
-													alt={banner.display_name}
-													width={banner.config.width}
-													height={banner.config.height}
-												/> */}
 												<Image
 													src={banner.img}
 													className={`${styles["animating-placeholder"]} ${

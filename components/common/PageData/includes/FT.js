@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { Row } from "react-bootstrap";
 import Slider from "react-slick";
 import dynamic from "next/dynamic";
-const Image = dynamic(import("react-shimmer"), { ssr: false });
+const Image = dynamic(import("react-graceful-image"), { ssr: false });
 
 import { Router, Link } from "../../../../routes";
 import constants from "../../../../constants";
@@ -165,6 +165,8 @@ class FT extends React.Component {
 													height={data[lang]["banners"][index]["config"].height}
 													src={`${constants.mediaDomain}/${listing.image}`}
 													alt={listing.name}
+													className={`${styles["animating-placeholder"]}`}
+													placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 												/>
 											</div>
 											<div
