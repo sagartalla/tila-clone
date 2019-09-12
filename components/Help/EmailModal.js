@@ -28,7 +28,7 @@ import SVGComponent from '../common/SVGComponet';
 
 const cookies = new Cookies();
 
-const language = clCode[cookies.get('language') || 'en'];
+const language = clCode[cookies.get('language') || 'ar'];
 const country = clCode[cookies.get('country') || 'SAU'];
 const userCredentials = cookies.get('userCreds');
 const sort = (a, b) => a - b;

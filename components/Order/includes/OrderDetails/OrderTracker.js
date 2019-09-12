@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Col } from 'react-bootstrap';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import { actionCreators, selectors } from '../../../../store/order';
 import { languageDefinations } from '../../../../utils/lang';

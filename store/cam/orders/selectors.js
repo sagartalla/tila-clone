@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import fp, * as _ from 'lodash/fp';
 import shortid from 'shortid';
 
@@ -75,7 +75,7 @@ const getOrdersData = (store,data) => {
           address: address ? `${address.address_line_1}, ${address.address_line_2}, ${address.city}, ${address.postal_code}` : 'no address info',
           phone: address ? `${address.mobile_country_code} ${address.mobile_no}` : 'No phone number',
         },
-        orderDate: moment(created_at).format('MMMM DD, YYYY'),
+        orderDate: moment(created_at).tz('Asia/Riyadh').format('MMMM DD, YYYY'),
         orderTotal: `${total_amount.currency_code} ${total_amount.display_value}`,
         orderCurrency: `${total_amount.currency_code}`,
         orderAmount: `${total_amount.display_value}`,
