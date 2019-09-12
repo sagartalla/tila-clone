@@ -1,6 +1,6 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col , Modal } from 'react-bootstrap';
 
 // import { Modal } from "react-router-modal";
 import Cookies from 'universal-cookie';
@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { languageDefinations } from '../../../utils/lang/';
 import { actionCreators, selectors } from '../../../store/common/instantCheckout';
-import { selectors as paymentSelector } from '../../../store/payments'
+import { selectors as paymentSelector } from '../../../store/payments';
 import { actionCreators as addressActionCreators, selectors as addressSelectors } from '../../../store/cam/address';
 import { actionCreators as vaultActionCreators, selectors as vaultSelectors } from '../../../store/cam/userVault';
 import { actionCreators as camActionCreators, selectors as camSelectors } from '../../../store/cam/personalDetails';
@@ -17,14 +17,14 @@ import Button from '../CommonButton';
 import dynamic from 'next/dynamic';
 import ShippingAddress from '../../Cam/ShippingAddress';
 import UserVault from '../../Cam/UserVault';
-import { Modal } from 'react-bootstrap';
+
 import Captcha from '../Captcha';
 import CaptchaContent from '../Captcha/CaptchaContent';
-//import EditPhone from '../../Cam/PersonelDetails/UserData/EditPhone';
+// import EditPhone from '../../Cam/PersonelDetails/UserData/EditPhone';
 import AddrCard from './includes/AddrCard';
 import VaultCard from './includes/VaultCard';
 import CodCard from './includes/CodCard';
-import { Tabs, Tab, TabPanel } from '../CustomTab'
+import { Tabs, Tab, TabPanel } from '../CustomTab';
 import lang from '../../../utils/language';
 
 import main_en from '../../../layout/main/main_en.styl';
@@ -34,7 +34,7 @@ import styles_ar from './instant_ar.styl';
 
 const EditPhone = dynamic(import('../../Cam/PersonelDetails/UserData/EditPhone'));
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 
 const { INSTANT_CHECKOUT, PAYMENT_PAGE, CONTACT_INFO_MODAL } = languageDefinations();
@@ -44,190 +44,171 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'en';
 const country = cookies.get('country') || 'SAU';
 
-const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAddress,isPdp,...props }) => {
- const [value,setValue] = useState(details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD');
- const getCheckValue = (data) => {
-   let filteredData = data.payment_options_available.filter((item) => item.type === 'VOUCHER')
-   if(filteredData.length > 0) {
-      return filteredData[0].selected
-   }
+const InstaCheckoutDetails = ({
+  details, selectedAddr, addressResults, showMiniAddress, isPdp, ...props
+}) => {
+  const [value, setValue] = useState(details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD');
+  const getCheckValue = (data) => {
+    const filteredData = data.payment_options_available.filter(item => item.type === 'VOUCHER');
+    if (filteredData.length > 0) {
+      return filteredData[0].selected;
+    }
 
-   return false
+    return false;
+  };
 
- }
+  const [checkValue, setCheckValue] = useState(getCheckValue(details));
 
- const [checkValue,setCheckValue] = useState(getCheckValue(details))
-
- const checkTilaCreditValue = (e) => {
-   props.selectedTilaCredit(e.target.checked);
-   setValue(e.target.checked ? ( details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD' ) : 'SAVED_CARD');
-   return setCheckValue(e.target.checked);
- }
- const getCurrentTabValue = (e,value) => {
-
-   return setValue(value)
- }
- const getTabPanelData = (data) => {
-   let filteredData = data.payment_options_available;
-   let savedCards = data.payment_options_available.filter((item) => {
-     return item.type === 'SAVED_CARD'
-   })[0] || {};
-   savedCards = savedCards.cards_list;
-   if(filteredData.length > 0) {
-     return filteredData.map((item,index) => {
-       return (
-         <TabPanel
-           value={value}
-           index={item.type}
-           activeTabPanel={`${styles['displayBlock']}`}
-           nonactiveTabPanel={`${styles['hideBlock']}`}
+  const checkTilaCreditValue = (e) => {
+    props.selectedTilaCredit(e.target.checked);
+    setValue(e.target.checked ? (details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD') : 'SAVED_CARD');
+    return setCheckValue(e.target.checked);
+  };
+  const getCurrentTabValue = (e, value) => setValue(value);
+  const getTabPanelData = (data) => {
+    let filteredData = data.payment_options_available;
+    let savedCards = data.payment_options_available.filter(item => item.type === 'SAVED_CARD')[0] || {};
+    savedCards = savedCards.cards_list;
+    if (filteredData.length > 0) {
+      return filteredData.map(item => (
+        <TabPanel
+          value={value}
+          index={item.type}
+          activeTabPanel={`${styles['display-block']}`}
+          nonactiveTabPanel={`${styles.hideBlock}`}
+        >
+          <div
+            className={
+              `${styles.border}
+              ${styles['border-radius2']}
+              ${styles['bg-white']}
+              ${styles.relative}
+              ${styles['mt-10']}`}
           >
-           <div
-             className={
-               `${styles['border']}
-                ${styles['border-radius2']}
-                ${styles['bg-white']}
-                ${styles['relative']}
-                ${styles['mt-10']}`}
-              >
-             {
-               selectedAddr && selectedAddr.address_id ?
-                 <Fragment>
-                   <AddrCard
-                     selectedAddr={selectedAddr}
-                     addressResults={addressResults}
-                     toggleMiniAddress={props.toggleMiniAddress}
-                   />
-                   {
-                     showMiniAddress ?
-                       <ShippingAddress
-                         miniAddress
-                         isPdp={isPdp}
-                         // isFromCart={isFromCart}
-                         toggleMiniAddress={props.toggleMiniAddress}
-                       />
-                       : null
-                   }
-                 </Fragment>
-                 : null
-             }
-             {
-               (item.type === 'SAVED_CARD' || item.type === 'VOUCHER') && savedCards && savedCards.length > 0 ?
-                 <Fragment>
-                   <VaultCard
-                     defaultCard={props.getSelectedCard[0]}
-                     updateCVV={props.updateCVV}
-                     vaultResults={savedCards}
-                     toggleMiniVault={props.toggleMiniVault}
-                   />
-                   {
-                     props.showMiniVault ?
-                       <div>
-                         <UserVault
-                           miniVault
-                           toggleMiniVault={props.toggleMiniVault}
-                           isInstantCheckout
-                         />
-                       </div>
-                       : null
-                   }
-                 </Fragment>
-                 : null
-             }
-             {
-               item.type !== 'CASH_ON_DELIVERY' ?
-               <div
-                 className={`${styles['flex']} ${styles['justify-center']}`}
-               >
-                 <Button
-                   className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']}`}
-                   onClick={props.doInstantCheckout}
-                   btnText={INSTANT_CHECKOUT.INSTANT_CHECKOUT}
-                   showImage="icons/common-icon/instant-checkout"
-                 />
-              </div> : null
-             }
-             {
-               item.type === 'CASH_ON_DELIVERY' ?
-                   <div className={styles['p-10']}>
-                     <div className={styles['checkbox-material']}>
-                       <input
-                         id="pay-delivery"
-                         type="checkbox"
-                         onChange={props.handleChange}
-                         checked={props.checked}
-                       />
-                       <label htmlFor="pay-delivery" className={`${styles['fs-12']} ${styles['fw300']} ${styles['pl-10']} ${styles['pr-10']}`}>{INSTANT_CHECKOUT.AGREE_CASH_ON_DELIVERY}</label>
-                     </div>
-                   </div>
-                   : null
-             }
-           </div>
+            {
+              selectedAddr && selectedAddr.address_id ?
+                <Fragment>
+                  <AddrCard
+                    selectedAddr={selectedAddr}
+                    addressResults={addressResults}
+                    toggleMiniAddress={props.toggleMiniAddress}
+                  />
+                  {
+                    showMiniAddress ?
+                      <ShippingAddress
+                        miniAddress
+                        isPdp={isPdp}
+                        // isFromCart={isFromCart}
+                        toggleMiniAddress={props.toggleMiniAddress}
+                      />
+                      : null
+                  }
+                </Fragment>
+                : null
+            }
+            {
+              (item.type === 'SAVED_CARD' || item.type === 'VOUCHER') && savedCards && savedCards.length > 0 ?
+                <Fragment>
+                  <VaultCard
+                    defaultCard={props.getSelectedCard[0]}
+                    updateCVV={props.updateCVV}
+                    vaultResults={savedCards}
+                    toggleMiniVault={props.toggleMiniVault}
+                  />
+                  {
+                    props.showMiniVault ?
+                      <div>
+                        <UserVault
+                          miniVault
+                          toggleMiniVault={props.toggleMiniVault}
+                          isInstantCheckout
+                        />
+                      </div>
+                      : null
+                  }
+                </Fragment>
+                : null
+            }
+            {
+              item.type !== 'CASH_ON_DELIVERY' ?
+                <div
+                  className={`${styles.flex} ${styles['justify-center']}`}
+                >
+                  <Button
+                    className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles.fontW600} ${styles['instant-btn']}`}
+                    onClick={props.doInstantCheckout}
+                    btnText={INSTANT_CHECKOUT.INSTANT_CHECKOUT}
+                    showImage="icons/common-icon/instant-checkout"
+                  />
+                </div> : null
+            }
+            {item.type === 'CASH_ON_DELIVERY' ?
+              <div className={styles['p-10']}>
+                <div className={styles['checkbox-material']}>
+                  <input
+                    id="pay-delivery"
+                    type="checkbox"
+                    onChange={props.handleChange}
+                    checked={props.checked}
+                  />
+                  <label htmlFor="pay-delivery" className={`${styles['fs-12']} ${styles.fw300} ${styles['pl-10']} ${styles['pr-10']}`}>{INSTANT_CHECKOUT.AGREE_CASH_ON_DELIVERY}</label>
+                </div>
+              </div>
+              : null
+            }
+          </div>
+        </TabPanel>
+      ));
+    }
+    return null;
+  };
 
-         </TabPanel>
-       )
-     })
-   } else {
-     return null;
-   }
+  const getTilaCredit = (data) => {
+    const filteredData = data.payment_options_available.filter(item => item.type === 'VOUCHER');
 
- }
-
-
- const getTilaCredit = (data) => {
-   let filteredData = data.payment_options_available.filter((item) => {
-     return item.type === 'VOUCHER'
-   })
-
-   if(filteredData.length > 0) {
-     return (
-       <div className={styles['checkbox-material']}>
-         <input
+    if (filteredData.length > 0) {
+      return (
+        <div className={styles['checkbox-material']}>
+          <input
             id="wallet-balance"
-            type='checkbox'
+            type="checkbox"
             name={filteredData[0].display_name}
             value={filteredData[0].remaining_amount.display_value}
             checked={checkValue}
             onChange={checkTilaCreditValue}
           />&nbsp;
-        <label>
-          {`${filteredData[0].display_name} (${filteredData[0].balance.currency_code} ${filteredData[0].balance.display_value})`}
-        </label>
-       </div>
-     )
-   }
- }
- const getCheckoutInformation = (data) => {
-   let filteredData = data.payment_options_available.filter((item) => {
-     return item.type !== 'VOUCHER'
-   })
-   if(filteredData.length > 0) {
-     return (
-       <Tabs
-         value={value}
-         onCallback={getCurrentTabValue}
-         tabsClass={`${styles['flex']} ${styles['pt-5']} ${styles['pb-5']}`}>
-          {
-              filteredData.map((item,index) => {
-                return (
-                  <Tab
-                    label={item.display_name}
-                    tabClass={`${styles['fs-12']} ${styles['pr-30']}`}
-                    value={item.type}
-                    name={item.type}
-                    btnStyle={styles['radio-btn']}
-                    tabType={item.type === 'VOUCHER' ? 'checkbox' : 'radioInput'}
-                  />
-                )
-              })
-          }
-       </Tabs>
-     )
-   } else {
-     return null
-   }
+          <label>
+            {`${filteredData[0].display_name} (${filteredData[0].balance.currency_code} ${filteredData[0].balance.display_value})`}
+          </label>
+        </div>
+      );
+    }
+  };
+  const getCheckoutInformation = (data) => {
+    let filteredData = data.payment_options_available.filter(item => item.type !== 'VOUCHER');
+    if (filteredData.length > 0) {
+      return (
+        <Tabs
+          value={value}
+          onCallback={getCurrentTabValue}
+          tabsClass={`${styles.flex} ${styles['pt-5']} ${styles['pb-5']}`}
+        >
+          {filteredData.map(item => (
+            <Tab
+              label={item.display_name}
+              tabClass={`${styles['fs-12']} ${styles['pr-30']}`}
+              value={item.type}
+              name={item.type}
+              btnStyle={styles['radio-btn']}
+              tabType={item.type === 'VOUCHER' ? 'checkbox' : 'radioInput'}
+            />
+          ))}
+        </Tabs>
+      );
+    }
+    return null;
+  };
 
- }
   return (
     <div>
       {getTilaCredit(details)}
@@ -236,12 +217,11 @@ const InstaCheckoutDetails = ({ details, selectedAddr,addressResults,showMiniAdd
         {getTabPanelData(details)}
       </div>
     </div>
-  )
-}
+  );
+};
 
 
 class InstantCheckout extends Component {
-
   constructor(props) {
     super(props);
 
@@ -258,8 +238,8 @@ class InstantCheckout extends Component {
       nextStep: 'captcha',
       btnLoader: false,
       iframe_url: '',
-      isIframeLoaded:false,
-    }
+      isIframeLoaded: false,
+    };
 
     this.updateCVV = this.updateCVV.bind(this);
     this.mobilehandler = this.mobilehandler.bind(this);
@@ -269,64 +249,76 @@ class InstantCheckout extends Component {
     this.doInstantCheckout = this.doInstantCheckout.bind(this);
     this.toggleMiniAddress = this.toggleMiniAddress.bind(this);
     this.creditCardClickHandler = this.creditCardClickHandler.bind(this);
-    this.handleChange = this.handleChange.bind(this)
-    this.closeModal = this.closeModal.bind(this)
-    this.onCaptchaSuccess = this.onCaptchaSuccess.bind(this)
-    this.afterSuccessOtpVerification = this.afterSuccessOtpVerification.bind(this)
-    this.callInstantCheckout = this.callInstantCheckout.bind(this)
-    this.selectedTilaCredit = this.selectedTilaCredit.bind(this)
-    this.hideIframe = this.hideIframe.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.onCaptchaSuccess = this.onCaptchaSuccess.bind(this);
+    this.afterSuccessOtpVerification = this.afterSuccessOtpVerification.bind(this);
+    this.callInstantCheckout = this.callInstantCheckout.bind(this);
+    this.selectedTilaCredit = this.selectedTilaCredit.bind(this);
+    this.hideIframe = this.hideIframe.bind(this);
   }
 
   componentDidMount() {
     this.props.getShippingAddressResults();
-    //this.props.getCardResults();
+    // this.props.getCardResults();
     const { currency, moneyValue } = this.props;
-    let params = {
-      amount:{
-        currency_code:currency,
-        money_value:moneyValue
+    const params = {
+      amount: {
+        currency_code: currency,
+        money_value: moneyValue,
       },
-      use_wallet:true
-    }
-    this.props.getCheckoutOptions(params)
+      use_wallet: true,
+    };
+    this.props.getCheckoutOptions(params);
     this.props.getUserProfileInfo();
   }
-  hideIframe() {
-    this.setState({
-      isIframeLoaded:false
-    })
 
-  }
-  selectedTilaCredit(value){
-    const { currency, moneyValue,getCardDetails } = this.props;
-    let params = {
-      amount:{
-        currency_code:currency,
-        money_value:moneyValue
-      },
-      transaction_id:getCardDetails.transaction_id,
-      use_wallet:value
-    }
-    this.props.getCheckoutOptions(params)
-  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.getInstantCheckoutdata && nextProps.getInstantCheckoutdata.redirect_url) {
       location.href = nextProps.getInstantCheckoutdata.redirect_url;
     }
-    if(nextProps.getInstantCheckoutdata && nextProps.getInstantCheckoutdata.iframe_url) {
-      this.setState({ iframe_url:nextProps.getInstantCheckoutdata.iframe_url,isIframeLoaded: true })
+    if (nextProps.getInstantCheckoutdata && nextProps.getInstantCheckoutdata.iframe_url) {
+      this.setState({ iframe_url: nextProps.getInstantCheckoutdata.iframe_url, isIframeLoaded: true });
     }
   }
+
+  getNewFilteredResult = () => {
+    const { getCardDetails } = this.props;
+    const newFilteredData = getCardDetails.payment_options_available.filter(item => item.type === 'VOUCHER');
+    this.setState({
+      newFilteredData: newFilteredData[0].amount_to_pay,
+      walletSelected: newFilteredData[0].selected,
+    });
+  }
+
+  hideIframe() {
+    this.setState({
+      isIframeLoaded: false,
+    });
+  }
+
+  selectedTilaCredit(value) {
+    const { currency, moneyValue, getCardDetails } = this.props;
+    const params = {
+      amount: {
+        currency_code: currency,
+        money_value: moneyValue,
+      },
+      transaction_id: getCardDetails.transaction_id,
+      use_wallet: value,
+    };
+    this.props.getCheckoutOptions(params);
+  }
+
   closeModal() {
     this.setState({
-      checked: false
-    })
+      checked: false,
+    });
   }
   handleChange() {
     this.setState(prevstate => ({
-      checked: !prevstate.checked
-    }))
+      checked: !prevstate.checked,
+    }));
     this.getNewFilteredResult();
   }
   toggleMiniAddress() {
@@ -339,31 +331,24 @@ class InstantCheckout extends Component {
   }
   afterSuccessOtpVerification() {
     this.setState({
-      nextStep: 'checkoutBtn'
-    })
+      nextStep: 'checkoutBtn',
+    });
   }
-
-getNewFilteredResult = () => {
-  const { getCardDetails } = this.props;
-  let newFilteredData = getCardDetails.payment_options_available.filter((item) => item.type === 'VOUCHER');
-  this.setState({
-    newFilteredData: newFilteredData[0].amount_to_pay,
-    walletSelected: newFilteredData[0].selected,
-  })
- }
 
   doInstantCheckout() {
     const {
       creditDebitCard, cntryCode, phoneNumber,
     } = this.state;
-    const { defaultCard, insnt_item_listing_id, doInstantCheckout, getCardDetails, getSelectedCard, details } = this.props;
+    const {
+      defaultCard, insnt_item_listing_id, doInstantCheckout, getCardDetails, getSelectedCard, details,
+    } = this.props;
     const { transaction_id, payment_options_available } = getCardDetails;
 
     const params = {
       listing_ids: insnt_item_listing_id ? [insnt_item_listing_id] : [],
       payment_mode: (payment_options_available.length === 1 && payment_options_available[0].type === 'VOUCHER') ? 'VOUCHER' : (creditDebitCard ? 'SAVED_CARD' : 'CASH_ON_DELIVERY'),
       redirect_url: `${window.location.origin}/${language}`,
-      transaction_id
+      transaction_id,
     };
 
     if (!(payment_options_available.length === 1 && payment_options_available[0].type === 'VOUCHER') && creditDebitCard) {
@@ -407,7 +392,7 @@ getNewFilteredResult = () => {
     });
   }
   callInstantCheckout() {
-    const { doInstantCheckout, insnt_item_listing_id,getCardDetails } = this.props
+    const { doInstantCheckout, insnt_item_listing_id, getCardDetails } = this.props;
     const { transaction_id } = getCardDetails;
     const params = {
       listing_ids: insnt_item_listing_id ? [insnt_item_listing_id] : [],
@@ -417,9 +402,8 @@ getNewFilteredResult = () => {
       transaction_id,
     };
     this.setState({
-      btnLoader: true
-    }, () => doInstantCheckout(params))
-
+      btnLoader: true,
+    }, () => doInstantCheckout(params));
   }
 
   render() {
@@ -460,48 +444,46 @@ getNewFilteredResult = () => {
         {
           iframe_url ?
             {
-              true:<iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>,
-              false:<Modal
+              true: <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} className="h-200 desktop:h-376 w-full" />,
+              false:
+              <Modal
                 show={this.state.isIframeLoaded}
                 onHide={this.hideIframe}
                 dialogClassName="custom-modal"
               >
-              <Modal.Body>
-                <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>
-              </Modal.Body>
-            </Modal>,
+                <Modal.Body>
+                  <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} className="h-200 desktop:h-376 w-full" />
+                </Modal.Body>
+              </Modal>,
             }[isPdp]
           :
-          <div className={`${styles['pr-10']} ${styles['pl-10']}`}>
-             {
+            <div className={`${styles['pr-10']} ${styles['pl-10']}`}>
+              {
                showBlocker ?
-                 <div className={styles['blocker']}>
-
-                 </div>
+                 <div className={styles.blocker} />
                  : ''
              }
-             {
+              {
                Object.keys(getCardDetails).length > 0 ?
-               <InstaCheckoutDetails
-                 details={getCardDetails}
-                 selectedAddr={selectedAddr}
-                 toggleMiniAddress={this.toggleMiniAddress}
-                 showMiniAddress={showMiniAddress}
-                 isPdp={isPdp}
-                 updateCVV={this.updateCVV}
-                 vaultResults={vaultResults}
-                 toggleMiniVault={this.toggleMiniVault}
-                 showMiniVault={showMiniVault}
-                 doInstantCheckout={this.doInstantCheckout}
-                 addressResults={addressResults}
-                 checked={checked}
-                 handleChange={this.handleChange}
-                 selectedTilaCredit={this.selectedTilaCredit}
-                 getSelectedCard={getSelectedCard}
-               /> : null
+                 <InstaCheckoutDetails
+                   details={getCardDetails}
+                   selectedAddr={selectedAddr}
+                   toggleMiniAddress={this.toggleMiniAddress}
+                   showMiniAddress={showMiniAddress}
+                   isPdp={isPdp}
+                   updateCVV={this.updateCVV}
+                   vaultResults={vaultResults}
+                   toggleMiniVault={this.toggleMiniVault}
+                   showMiniVault={showMiniVault}
+                   doInstantCheckout={this.doInstantCheckout}
+                   addressResults={addressResults}
+                   checked={checked}
+                   handleChange={this.handleChange}
+                   selectedTilaCredit={this.selectedTilaCredit}
+                   getSelectedCard={getSelectedCard}
+                 /> : null
              }
-           </div>
-
+            </div>
         }
         <div>
           <Modal
@@ -517,41 +499,40 @@ getNewFilteredResult = () => {
               <Modal.Title>Instant Checkout COD </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              {
-                checked
+              {checked
                   ?
                   {
                     captcha: <Captcha
                       onCaptchaSuccess={this.onCaptchaSuccess}
                       txnId={getCardDetails.transaction_id}
                       render={([items, state, handleClick, handleDrop]) =>
-                        <CaptchaContent
+                        (<CaptchaContent
                           items={items}
                           state={state}
                           handleClick={handleClick}
                           handleDrop={handleDrop}
-                        />
+                        />)
                       }
                     />,
                     mobileVerification:
-                      <EditPhone
-                        afterSuccessOtpVerification={this.afterSuccessOtpVerification}
-                        mobileVerified = {profileInfo.contactInfo.mobile_verified === 'V'}
-                        userData = {profileInfo.contactInfo}
-                      />,
+                    <EditPhone
+                      afterSuccessOtpVerification={this.afterSuccessOtpVerification}
+                      mobileVerified={profileInfo.contactInfo.mobile_verified === 'V'}
+                      userData={profileInfo.contactInfo}
+                    />,
                     checkoutBtn:
                     <div>
-                    <div className={`${styles['success-green']} ${styles['mb-25']}`}>{CONTACT_INFO_MODAL.PLEASE_CONFIRM_YOUR_ORDER}</div>
+                      <div className={`${styles['success-green']} ${styles['mb-25']}`}>{CONTACT_INFO_MODAL.PLEASE_CONFIRM_YOUR_ORDER}</div>
                       <div>
                         <Button
-                          className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles['fontW600']} ${styles['instant-btn']} ${styles.width45}`}
+                          className={`${styles['fp-btn']} ${styles['fp-btn-sucess']} ${styles.fontW600} ${styles['instant-btn']} ${styles.width45}`}
                           onClick={this.callInstantCheckout}
-                          btnText={walletSelected ? PAYMENT_PAGE.PAY + ' ' + (totalPrice - newFilteredData.display_value) + ' ' + currency + ' ' + PAYMENT_PAGE.ON_DELIVERY : PAYMENT_PAGE.PAY + ' ' + totalPrice + ' ' + currency + ' ' + PAYMENT_PAGE.ON_DELIVERY}
+                          btnText={walletSelected ? `${PAYMENT_PAGE.PAY} ${totalPrice - newFilteredData.display_value} ${currency} ${PAYMENT_PAGE.ON_DELIVERY}` : `${PAYMENT_PAGE.PAY} ${totalPrice} ${currency} ${PAYMENT_PAGE.ON_DELIVERY}`}
                           disabled={btnLoader}
                           btnLoading={btnLoader}
                         />
                       </div>
-                      </div>
+                    </div>,
                   }[this.state.nextStep]
                   :
                   null
@@ -560,11 +541,11 @@ getNewFilteredResult = () => {
           </Modal>
         </div>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   addressResults: addressSelectors.getShippingAddressResults(store),
   defaultAddr: addressSelectors.getDefaultAddress(store),
   selectedAddr: addressSelectors.getSelectedAddress(store),
@@ -576,10 +557,10 @@ const mapStateToProps = (store) => ({
   profileInfo: camSelectors.getUserInfo(store),
   showLoading: selectors.showLoading(store),
   getCardDetails: vaultSelectors.getCardDetails(store),
-  getSelectedCard:vaultSelectors.getSelectedCard(store),
+  getSelectedCard: vaultSelectors.getSelectedCard(store),
 });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       doInstantCheckout: actionCreators.doInstantCheckout,
@@ -589,7 +570,7 @@ const mapDispatchToProps = (dispatch) =>
       getCardResults: vaultActionCreators.getCardResults,
       addCard: vaultActionCreators.addCard,
       deleteCard: vaultActionCreators.deleteCard,
-      getCheckoutOptions:vaultActionCreators.getCheckoutOptions,
+      getCheckoutOptions: vaultActionCreators.getCheckoutOptions,
       makeCardDefault: vaultActionCreators.makeCardDefault,
       getUserProfileInfo: camActionCreators.getUserProfileInfo,
       changeState: addressActionCreators.changeState,
@@ -602,7 +583,7 @@ InstantCheckout.propTypes = {
 };
 
 InstantCheckout.defaultProps = {
-  isPdp:false
+  isPdp: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InstantCheckout);

@@ -116,7 +116,7 @@ class Orders extends Component {
                 <TabPanel
                   value={activeTab}
                   index={item.tabType}
-                  activeTabPanel={`${styles['displayBlock']}`}
+                  activeTabPanel={`${styles['display-block']}`}
                   nonactiveTabPanel={`${styles['hideBlock']}`}
                  >
                   <div className={styles['orders-container']}>
