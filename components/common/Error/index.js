@@ -9,18 +9,28 @@ import styles_ar from './error_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
-const getMessage = (statusCode) => {
+const getErrComp = (statusCode) => {
   switch (statusCode) {
     case 404:
-      return 'PAGE NOT FOUND';
+      return <FourNotFour />;
       break;
     default:
-      return 'SOMETHING WENT WRONG';
+      return (
+        <div className={`${styles['errors-main']}`}>
+          <div className={`${styles['errors-main-inn']}`}>
+            <div className={`${styles['erros-inn-img']}`}>
+              <img className={styles['']} src={"/static/img/errors-img/404tila.png"} />
+            </div>
+            <span className={styles['label-not']}>SOMETHING WENT WRONG</span>
+          </div>
+        </div>
+      );
   }
 }
-
 const Error = ({ statusCode, messege }) => {
-  return <FourNotFour />;
+  messege = messege || 'Something went wrong';
+  return getErrComp(statusCode)
+
 }
 
 export default Error;
