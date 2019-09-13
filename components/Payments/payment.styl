@@ -89,6 +89,12 @@
 .saved-card-item
   padding 15px
   border 1px solid #aaa
+  overflow hidden
+  .hover-show
+    display none
+  &:hover
+    .hover-show
+      display initial
 
 .card-label
   width: 95%;
@@ -247,6 +253,8 @@
 .new-card-btn
   min-width 55%
   padding 7px 15px
+  background: #fff
+  color #000
   // padding 10px 30px
   // background-color navy-blue
 
@@ -467,7 +475,7 @@
   box-shadow 0 2px 4px 0 rgba(0, 0, 0, 0.08)
 
 .border-radius
-     border-bottom-right-radius 25px;
+     border-bottom-left-radius 25px;
 
 .sidebar-payment
    position sticky !important
