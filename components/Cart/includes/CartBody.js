@@ -77,7 +77,7 @@ const CartBody = ({
                   OR
                 </div>
                 <div>
-                  <a href={`/${language}/customer/wishlist`} className={`${styles['fp-btn']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} ${styles['add-from-wishlist']}`}>Add from Wishlist</a>
+                  <a href={`/${language}/customer/wishlist`} className={`${styles['fp-btn']} ${styles['add-from-wishlist']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} `}>Add from Wishlist</a>
                 </div>
                 </React.Fragment>
                 }
