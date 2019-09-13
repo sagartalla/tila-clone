@@ -307,7 +307,9 @@ class Product extends Component {
       </Popover>
     );
     let title = displayName.replace(brand, '');
-    title = title.substring(0, title.substring(0, 55).lastIndexOf(' '));
+    if(title.length > 75) {
+      title = title.substring(0, title.substring(0, 75).lastIndexOf(' ')) + '...';
+    }
     const getPriceAndOffer = () => (
       <span>
         <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>&nbsp;

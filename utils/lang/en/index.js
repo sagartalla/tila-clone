@@ -135,6 +135,9 @@ export const EN_KEYWORDS = {
     CHANGE: 'Change',
     SIGN_IN_AS_DIFF_USER: 'Logout & sign in as a different user',
     CONTINUE_TO_CHECKOUT: 'Continue To Checkout',
+    DEFAULT_CARD: 'Default Card',
+    "CREDIT_CARD": 'Credit Card',
+    "DEBIT_CARD": 'Debit Card'
   },
   DELIVERY_ADDR_PAGE: {
     DELIVERY_ADDR: 'Delivery Address',
@@ -283,7 +286,7 @@ export const EN_KEYWORDS = {
   VAULT_PAGE: {
     MANAGE_VAULT_HDR: 'Manage Saved Cards & TiLa Credit',
     SUB_TAG: 'Select a default card or add new card.',
-    SAVED_CARDS: 'Saved Cards',          
+    SAVED_CARDS: 'Saved Cards',
     VOUCHER_HISTORY: 'Your gift voucher transaction history',
     TILA_GIFT: 'TiLa Credit',
     VOUCHER: 'Vouchers',
