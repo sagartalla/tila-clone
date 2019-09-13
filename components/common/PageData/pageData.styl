@@ -405,3 +405,32 @@
   position relative
   margin auto
   margin-bottom 2%
+
+.responsively-lazy:not(img)
+  position relative
+  height 0
+
+.responsively-lazy:not(img)>img
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
+
+img.responsively-lazy
+  width 100%
+
+keyframe-name = gracefulimage
+.animating-placeholder
+  background-size 2250px 2250px !important
+  background-repeat no-repeat !important
+  background-position 0 0 !important
+  animation keyframe-name 1.5s ease-in-out infinite
+  @keyframes keyframe-name {
+    0% {
+      background-position: top right;
+    }
+    100% {
+      background-position: top left;
+    }
+  }
