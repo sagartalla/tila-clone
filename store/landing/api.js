@@ -6,7 +6,7 @@ import constants from '../helper/constants';
 const cookies = new Cookies();
 
 // const getPage = ({page, id}) => axios.get(`${constants.PCM_URL}/cms/${page}`);
-const getPage = ({ page, id, published = true }) => axios.get(`${constants.PCM_URL}/cms/${page}?id_attribute=${id}&published=${published}`);
+const getPage = ({ page, id, published = true, merchandise = true }) => axios.get(`${constants.PCM_URL}/cms/${page}?display_merchandising=${merchandise}&&id_attribute=${id}&published=${published}`);
 
 const getListings = (params, index) => {
   // const shippingData = cookies.get('shippingInfo');
