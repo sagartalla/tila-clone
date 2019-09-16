@@ -278,7 +278,7 @@ const getVariantsAndSimilarProducts = variantId => (store) => {
           values: [],
         };
       }
-      display[attKey].values = porder === 1 ? _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]) : [];
+      display[attKey].values = _.uniq([...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
       if (!map[key][attKey]) {
         map[key][attKey] = [];
       }
@@ -293,6 +293,7 @@ const getVariantsAndSimilarProducts = variantId => (store) => {
       map,
     };
   }, { display: {}, map: [], order: [] }) : { display: {}, map: [], order: [] };
+  console.log('similarProducts', similarProducts);
   if (similar_products.length && similarProducts.order[0]) {
     const primaryValues = attribute_map[similarProducts.order[0]].attribute_values.map(av => av.value);
     const shortList = _.reduce(similarProducts.map, (acc, attrs, pid) => {
@@ -301,6 +302,7 @@ const getVariantsAndSimilarProducts = variantId => (store) => {
       }
       return acc;
     }, {});
+
     _.forEach(shortList, (productValue, productId) => {
       const key = productId;
       const product = _.find([product_details, ...similar_products], (p) => {
@@ -315,7 +317,6 @@ const getVariantsAndSimilarProducts = variantId => (store) => {
         if (attVal.attribute_group_name !== 'IDENTITY' || !attVal.searchable || !attVal.groupable || porder === 1) {
           return;
         }
-        // console.log('attribute_map', attribute_map[attKey].attribute_values.map((i) => i.value))
         display[attKey].values = _.uniq([...attribute_map[attKey].attribute_values.map(i => i.value), ...display[attKey].values, ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))]);
         if (!map[key][attKey]) {
           map[key][attKey] = [];
