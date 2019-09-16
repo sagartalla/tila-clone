@@ -18,7 +18,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 class CartBottomPopup extends Component {

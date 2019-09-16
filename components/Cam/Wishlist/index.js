@@ -24,7 +24,7 @@ import styles_ar from './wishlist_ar.styl';
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
@@ -118,9 +118,9 @@ class Wishlist extends Component {
               items={results}
               addToCart={this.addToCart}
               wishListCount={wishListCount}
-              moveToWishlist={this.moveToWishlist} 
+              moveToWishlist={this.moveToWishlist}
               deleteItem={this.deleteItem}
-              notifyMe={this.notify}                                                     
+              notifyMe={this.notify}
             /> :
           cartMiniWishList ?
             <Fragment>

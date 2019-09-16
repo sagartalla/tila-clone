@@ -1,6 +1,16 @@
 import _ from 'lodash';
+import lang from '../../utils/language';
 
-const getPage = store => store.landingReducer.data;
+const getPage = store => {
+  const { page_content, merchandising_data } = store.landingReducer.data
+  page_content && page_content.forEach((item) => {
+    if (item.id_attribute) {
+      let merchandiseData = merchandising_data.filter(merchandise => merchandise.page_id.includes(item.id_attribute))
+      item.data[lang].banners = [...merchandiseData];
+    }
+  })
+  return store.landingReducer.data;
+};
 
 const getCartStatus = (store, listingId) => {
   const selectedCartItem = _.find(store.cartReducer.data.items, ({ listing_id }) => listingId === listing_id);

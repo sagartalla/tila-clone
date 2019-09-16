@@ -12,7 +12,7 @@ import { cartPlaceHolder } from '../../common/Loader/skeletonPlaceHolder';
 import SVGComponent from '../../common/SVGComponet';
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 import lang from '../../../utils/language';
@@ -77,7 +77,7 @@ const CartBody = ({
                   OR
                 </div>
                 <div>
-                  <a href={`/${language}/customer/wishlist`} className={`${styles['fp-btn']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} ${styles['add-from-wishlist']}`}>Add from Wishlist</a>
+                  <a href={`/${language}/customer/wishlist`} className={`${styles['fp-btn']} ${styles['add-from-wishlist']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} `}>Add from Wishlist</a>
                 </div>
                 </React.Fragment>
                 }

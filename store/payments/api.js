@@ -5,7 +5,7 @@ import constants from '../helper/constants';
 
 const cookies = new Cookies();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 //Create Order Third step.

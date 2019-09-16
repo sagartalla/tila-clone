@@ -3,7 +3,6 @@ import Input from '../commonInput/index';
 import Rectangle from '../commonInput/RectangleShape';
 import Round from '../commonInput/roundShape';
 
-
 import lang from '../../../utils/language';
 
 import main_en from '../../../layout/main/main_en.styl';

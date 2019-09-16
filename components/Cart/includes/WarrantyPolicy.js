@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, PanelGroup, Panel } from 'react-bootstrap';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import Cookie from 'universal-cookie';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
@@ -21,7 +21,7 @@ const {
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 const warrantyKeys = { extended_warranty: CART_PAGE.EXTENDED_WARRANTY, damage_protection: CART_PAGE.DAMAGE_PROTECTION };

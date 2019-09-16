@@ -45,6 +45,8 @@ const getPaymentModesData = (store) => {
           ...val,
           total_amount: store.paymentsReducer.data.data.amount,
         };
+      } else if(val.type === 'SAVED_CARD') {
+        acc.savedCardsData = val;
       } else {
         acc.paymentModes[val.type] = val;
       }
