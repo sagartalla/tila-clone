@@ -19,8 +19,8 @@ const getUserInfo = (store) => {
         phoneNum= phoneNum.substring(0,2)+ (phoneNum.substring(2, phoneNum.length-2)).replace(/./g, "x")+ phoneNum.slice(-2);
         contactInfo.phoneNum=phoneNum;
       }
-      if (contactInfo.pwd_updated_at) {
-        const lastUpdated = contactInfo.pwd_updated_at;
+      if (contactInfo.password_updated_on) {
+        const lastUpdated = contactInfo.password_updated_on;
         const msg = moment(lastUpdated).tz('Asia/Riyadh').subtract(new Date().getTimezoneOffset()).fromNow();
         contactInfo.lastUpdated = `${PERSONAL_INFO_MODAL.LAST_UPDATED} ${msg}`;
       }
