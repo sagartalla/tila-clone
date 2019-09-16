@@ -31,11 +31,11 @@ class GeoWidget extends Component {
       ...props.geoShippingData,
       ...shippingInfo,
     };
-    this.deriveCity = this.deriveCity.bind(this);
     this.onChangeCity = this.onChangeCity.bind(this);
+    this.deleteCity = this.deleteCity.bind(this);    
     this.selectCityFromSuggesstions = this.selectCityFromSuggesstions.bind(this);
-    this.deleteCity = this.deleteCity.bind(this);
-    // this.locateMe = this.locateMe.bind(this);
+    this.deriveCityFromLatLng = this.deriveCityFromLatLng.bind(this);
+    this.locateMe = this.locateMe.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
@@ -43,6 +43,7 @@ class GeoWidget extends Component {
     const { getGeoShippingData, getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
     getGeoShippingData();
+    this.locateMe();
     document.addEventListener('click', this.handleOutsideClick, false);
   }
 
@@ -84,20 +85,62 @@ class GeoWidget extends Component {
       displayCity: searchValue,
     });
   }
-  // locateMe() {
-  //   const shippingInfo = cookies.get('shippingInfo');
-  //   if (navigator.geolocation && !shippingInfo) {
-  //     navigator.geolocation.getCurrentPosition(this.deriveCity);
-  //   }
-  // }
+  locateMe() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        debugger;
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        this.setState({
+          center: {
+            lat, lng,
+          },
+        });
+        this.deriveCityFromLatLng(lng, lat);
+      }, (error) => {
+        console.log(error);
+      });
+    } else {
+      alert('Browser does not support');
+    }
+  }
 
-  deriveCity(position) {
-    const { longitude, latitude } = position.coords;
-    this.props.deriveCity({
-      longitude,
-      latitude,
+  deriveCityFromLatLng = (lng, lat) => {
+    debugger;
+    const { deriveCity, getDataFromMap } = this.props;
+    deriveCity({
+      longitude: lng,
+      latitude: lat,
       api: '/geocode/json',
+    }).then((res) => {
+      if (res.value) {
+        const cityCountryObj = this.fetchCountryName(res.value.address_components);
+
+        cityCountryObj.address = res.value.formatted_address;
+
+        getDataFromMap({
+          lat, lng, cityCountryObj,
+        });
+        this.setState({
+          markers: [{
+            position: {
+              lat,
+              lng,
+            },
+          }],
+        });
+      }
     });
+  }
+
+  getDataFromMap(json) {
+    debugger;
+    const {
+      lat, lng, cityCountryObj: {
+        country, address, postal_code, city,
+      },
+    } = json;
+    const { getCitiesByCountryCode, getAllCities } = this.props;
   }
 
   selectCityFromSuggesstions(e) {
@@ -161,12 +204,21 @@ class GeoWidget extends Component {
               />
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
-              {showCitiesData && getAllCities.map((value, index) => (
+              {showCitiesData && getAllCities.length > 0 ? getAllCities.map((value, index) => (
                 <MenuItem data-id={value.city_name} data-code={value.city_code} onClick={this.selectCityFromSuggesstions} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
                   <a className={`${styles['black-color']}`}>
                       <span>{value.city_name}</span>
                     </a>
-                </MenuItem>))
+                </MenuItem>)) :
+                showCitiesData &&
+                <div className={`${styles['margin-5']}`}>
+                <div className={`${styles['thick-red-clr']} ${styles['flex']} ${styles['justify-center']}`}>No matching Saudi city</div>
+                <div className={`${styles['border-b']} ${styles['margin-5']}`}></div>
+                <span className={`${styles.flex} ${styles['justify-center']}`}>
+                <SVGCompoent clsName={`${styles['location-icon']}`} src="icons/common-icon/icon-locate-me" />
+                <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>Detect Location</div>
+                </span>
+                </div>            
               }
             </Dropdown.Menu>
           </Dropdown>
