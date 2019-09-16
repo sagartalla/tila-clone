@@ -17,7 +17,13 @@ const CBT6c = ({ content }) => {
 	const returnBanner = (index, banners) => {
 		return (
 			<a href={banners[index].link}>
-				<div className={`${styles["width100"]}`}>
+				<div
+					className={`${styles["responsively-lazy"]} ${styles["width100"]}`}
+					style={{
+						paddingBottom: `${(100 * banners[index].config.height) /
+							banners[index].config.width}%`
+					}}
+				>
 					<Image
 						src={banners[index].img}
 						className={`${styles["animating-placeholder"]} ${
@@ -28,7 +34,6 @@ const CBT6c = ({ content }) => {
 						width={banners[index].config.width}
 						height={banners[index].config.height}
 					/>
-					<img src={banners[index].img} className={`${styles["width100"]}`} />
 				</div>
 			</a>
 		);
