@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+import dynamic from "next/dynamic";
+const Image = dynamic(import("react-graceful-image"), { ssr: false });
+
 import lang from "../../../../utils/language";
 import PageData from "../index";
 
