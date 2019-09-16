@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import { Row } from "react-bootstrap";
 import dynamic from "next/dynamic";
 const Image = dynamic(import("react-graceful-image"), { ssr: false });
+import ViewportTrackerHOC from "../ViewPortTracker/ViewportTrackerHOC";
 
 import DT from "./includes/DT";
 import FT from "./includes/FT";
@@ -96,12 +97,11 @@ let sliderTBS = "";
 class PageData extends React.Component {
 	constructor() {
 		super();
-		this.state = {};
 	}
-
 	// breadcrums are pending...
 	getContent = () => {
-		const { content, index } = this.props;
+		const { content, index, pageType } = this.props;
+		console.log({ content });
 
 		switch (content.layout_id) {
 			case "CT1a":
@@ -255,37 +255,45 @@ class PageData extends React.Component {
 						<div className={`${styles["banner-prt-main"]}`}>
 							{banners.length > 0 &&
 								banners.map(banner => (
-									<div
-										className={styles["banner-inn-prt"]}
-										style={{ width: `${100 / banners.length}%` }}
-									>
+									<ViewportTrackerHOC>
 										<div
-											className={`${styles["responsively-lazy"]} ${
-												styles["sub-banr-img"]
-											}`}
-											style={{
-												paddingBottom: `${(100 * banner.config.height) /
-													banner.config.width}%`
-											}}
+											data-page-type={pageType}
+											data-tracker-id={`tracker-${Math.round(
+												new Date().getTime() / 1000
+											) + Math.random()}`}
+											data-mechandise-id={`33566544`}
+											data-user-id={`u765432563856856`}
+											className={`${styles["banner-inn-prt"]}`}
+											style={{ width: `${100 / banners.length}%` }}
 										>
-											<a
-												href={banner.link}
-												rel="noopener noreferrer"
-												target="_blank"
+											<div
+												className={`${styles["responsively-lazy"]} ${
+													styles["sub-banr-img"]
+												}`}
+												style={{
+													paddingBottom: `${(100 * banner.config.height) /
+														banner.config.width}%`
+												}}
 											>
-												<Image
-													src={banner.img}
-													className={`${styles["animating-placeholder"]} ${
-														styles["inside-bnr"]
-													}`}
-													placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
-													alt={banner.display_name}
-													width={banner.config.width}
-													height={banner.config.height}
-												/>
-											</a>
+												<a
+													href={banner.link}
+													rel="noopener noreferrer"
+													target="_blank"
+												>
+													<Image
+														src={banner.img}
+														className={`${styles["animating-placeholder"]} ${
+															styles["inside-bnr"]
+														}`}
+														placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
+														alt={banner.display_name}
+														width={banner.config.width}
+														height={banner.config.height}
+													/>
+												</a>
+											</div>
 										</div>
-									</div>
+									</ViewportTrackerHOC>
 								))}
 						</div>
 					</div>
