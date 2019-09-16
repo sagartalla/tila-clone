@@ -261,7 +261,7 @@ class PageData extends React.Component {
 											data-tracker-id={`tracker-${Math.round(
 												new Date().getTime() / 1000
 											) + Math.random()}`}
-											data-mechandise-id={`33566544`}
+											data-merchandise-id={`33566544`}
 											data-user-id={`u765432563856856`}
 											className={`${styles["banner-inn-prt"]}`}
 											style={{ width: `${100 / banners.length}%` }}

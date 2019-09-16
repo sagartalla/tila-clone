@@ -17,7 +17,7 @@ class ViewportTrackerHOC extends Component {
 				newrelic.addPageAction("impression-test", {
 					pageType: event.target.getAttribute("data-page-type"),
 					trackerId: event.target.getAttribute("data-tracker-id"),
-					mechandiseId: event.target.getAttribute("data-mechandise-id"),
+					merchandiseId: event.target.getAttribute("data-merchandise-id"),
 					userId: event.target.getAttribute("data-user-id")
 				});
 				// this.setState({ tracked: "ad--tracked" });
@@ -26,10 +26,27 @@ class ViewportTrackerHOC extends Component {
 		}
 		clearTimeout(this.recordedTimeout);
 	};
+	handleClick = event => {
+		console.log({
+			trackerId: event.currentTarget.getAttribute("data-tracker-id")
+		});
+		newrelic.addPageAction("click-test", {
+			pageType: event.currentTarget.getAttribute("data-page-type"),
+			trackerId: event.currentTarget.getAttribute("data-tracker-id"),
+			merchandiseId: event.currentTarget.getAttribute("data-merchandise-id"),
+			userId: event.currentTarget.getAttribute("data-user-id")
+		});
+	};
 	render() {
 		return (
-			<Observer onChange={this.handleChange} threshold={1}>
-				{this.props.children}
+			<Observer
+				onChange={this.handleChange}
+				onClick={this.handleClick}
+				threshold={1}
+			>
+				{React.cloneElement(this.props.children, {
+					onClick: this.handleClick
+				})}
 			</Observer>
 		);
 	}
