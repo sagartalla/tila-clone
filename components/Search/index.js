@@ -204,7 +204,7 @@ class Search extends Component {
       sideBarPositionClass, containerStyle, showModal, filteredItems, selectedItems, filter,
     } = this.state;
     const { loadComponent, pathname } = loaderProps;
-    const finalQuery = query || categoryQuery;    
+    const finalQuery = query || categoryQuery;
     return (
       <div>
         <HeaderBar />
@@ -270,12 +270,12 @@ class Search extends Component {
             </div>
             <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
               <SearchDetailsBar optionalParams={optionalParams} />
-              <SearchResults search={query.q} />
+              <SearchResults search={query} />
             </Col>
           </Grid>
           <CompareWidget />
           <FooterBar />
-        </LoadingBar>        
+        </LoadingBar>
       </div>
     );
   }
@@ -286,10 +286,10 @@ const mapStateToProps = store => ({
   optionalParams: selectors.optionParams(store),
   getFacetfilters: selectors.getFacetfilters(store),
   spellCheckResp:selectors.getSpellCheckResponse(store),
-  categoryQuery:selectors.getCategorySearchQuery(store),  
+  categoryQuery:selectors.getCategorySearchQuery(store),
   query: selectors.getQuery(store),
-  results: selectors.getSearchResutls(store), 
-  appliedFilters: selectors.getAppliedFitlers(store),   
+  results: selectors.getSearchResutls(store),
+  appliedFilters: selectors.getAppliedFitlers(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -301,4 +301,3 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
-
