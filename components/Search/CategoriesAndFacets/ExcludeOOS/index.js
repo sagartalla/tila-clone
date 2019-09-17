@@ -29,9 +29,9 @@ class ExcludeOOS extends Component {
   handleClick(e) {
     const query = e.target.checked
       ?
-        (window.location.search.indexOf('isListed') !== -1 ? window.location.search.replace('isListed=false', 'isListed=true') : `${window.location.search}&isListed=true`)
+        (window.location.search.indexOf('isListed') !== -1 ? window.location.search.replace('isListed=true', 'isListed=false') : `${window.location.search}&isListed=true`)
       :
-        window.location.search.replace('isListed=true', 'isListed=false')
+        window.location.search.replace('isListed=false', 'isListed=true')
     Router.pushRoute(`${window.location.pathname}${query}`);
   }
 
@@ -41,8 +41,8 @@ class ExcludeOOS extends Component {
     return (
       <Panel>
         <div className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['flx-spacebw-alignc']}`}>
-          <span>{PDP_PAGE.HIDE_OUT_OF_STOCK}</span>
-          <ToggleBtn handleClick={this.handleClick} checked={excludeOOS === 'true'}/>
+          <span>{PDP_PAGE.SHOW_OUT_OF_STOCK}</span>
+          <ToggleBtn handleClick={this.handleClick} checked={excludeOOS === 'false'}/>
         </div>
       </Panel>
     )
