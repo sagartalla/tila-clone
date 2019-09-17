@@ -28,7 +28,7 @@ class ResetPasswordPage extends Base {
     const { token } = this.state;
     return (
       <Layout>
-        <HeaderBar />
+        <HeaderBar hideLogin={true}/>
         <ResetPassword token={token} />
         <FooterBar />
       </Layout>
