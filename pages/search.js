@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import Cookies from 'universal-cookie';
@@ -17,12 +17,16 @@ const cookies = new Cookies();
 const { SEO_CONTENT } = languageDefinations();
 
 class SearchPage extends Base {
-  static async getInitialProps({ store, isServer, query, req }) {
-    const { country, language, q, facets, category, subCategory, isListed, disableSpellCheck, sid } = query;
-    const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
+  static async getInitialProps({
+    store, isServer, query, req,
+  }) {
+    const {
+      country, language, q, facets, category, subCategory, isListed, disableSpellCheck, sid,
+    } = query;
+    const categoryTree = query.categoryTree === 'true'; // TODO need better way to identify category tree
     const categoryFacet = query.categoryFacet === 'true';
-    //TODO SF-37 better handling of country
-    const state = store.getState();
+    // TODO SF-37 better handling of country
+    // const state = store.getState();
     // const country = authSelectors.getCountry(state);
     // const country = req ? req.universalCookies.get('country') : cookies.get('country');
     // let [categoryId, ...categoryName] = category ? category.split('-').reverse() : [null, null];
@@ -61,7 +65,7 @@ class SearchPage extends Base {
     }
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
-      store.dispatch(megamenuActionsCreators.getMegamenu())
+      store.dispatch(megamenuActionsCreators.getMegamenu()),
     ]);
     return { isServer };
   }
@@ -74,12 +78,12 @@ class SearchPage extends Base {
   pageName = 'SEARCH';
 
   render() {
-    const {url, loaderProps} = this.props;
+    const { url, loaderProps } = this.props;
     return (
       <div>
         <SearchContext.Provider value="search">
           <Layout>
-            <Search query={url.query} loaderProps={loaderProps}/>
+            <Search query={url.query} loaderProps={loaderProps} />
           </Layout>
         </SearchContext.Provider>
       </div>
