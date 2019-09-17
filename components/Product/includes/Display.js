@@ -52,7 +52,7 @@ class Display extends Component {
     e.preventDefault();
     const {
       product_id, catalogObj, addToWishlistAndFetch,
-      offerPricing, wishlistId, deleteWishlist, loader, isLoggedIn,
+      offerPricing, wishlistId, deleteWishlist, loader, isLoggedIn, newVariantId,
     } = this.props;
     if (!loader) {
       if (!isLoggedIn) {
@@ -62,7 +62,7 @@ class Display extends Component {
       } else {
         addToWishlistAndFetch({
           catalog_id: catalogObj.catalog_id,
-          variant_id: catalogObj.variant_id,
+          variant_id: catalogObj.variant_id || newVariantId,
           product_id,
           wishlisted_price: offerPricing.showPrise ? offerPricing.showPrise.display_value : null,
           wishlisted_currency: offerPricing.showPrise ? offerPricing.showPrise.currency_code : offerPricing.currency,
