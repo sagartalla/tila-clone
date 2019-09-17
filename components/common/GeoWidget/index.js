@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Dropdown, MenuItem } from 'react-bootstrap';
+import { Dropdown, MenuItem, Modal } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { Router } from '../../../routes';
 import _ from 'lodash';
@@ -30,6 +30,7 @@ class GeoWidget extends Component {
       showCitiesData: false,
       ...props.geoShippingData,
       ...shippingInfo,
+      showModal: false,
     };
     this.onChangeCity = this.onChangeCity.bind(this);
     this.deleteCity = this.deleteCity.bind(this);    
@@ -43,7 +44,6 @@ class GeoWidget extends Component {
     const { getGeoShippingData, getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
     getGeoShippingData();
-    this.locateMe();
     document.addEventListener('click', this.handleOutsideClick, false);
   }
 
@@ -134,13 +134,26 @@ class GeoWidget extends Component {
   }
 
   getDataFromMap(json) {
-    debugger;
     const {
       lat, lng, cityCountryObj: {
         country, address, postal_code, city,
       },
     } = json;
     const { getCitiesByCountryCode, getAllCities } = this.props;
+    for (let i = 0; i <= getAllCities.length; i == 1) {
+      if(cityVal.city_name === city) {
+        this.setState({
+          displayCity: cityVal.city_name,
+        }, () => {
+          this.setCity(city, country, this.state.displayCity);
+       });
+        break;
+      } else {
+        this.setState({
+          showModal: true,
+        })
+      }
+    }
   }
 
   selectCityFromSuggesstions(e) {
@@ -170,11 +183,28 @@ class GeoWidget extends Component {
     });
   }
 
+  closeModal = () => {
+    // for (let i = 0; i <= getAllCities.length; i += 1) {
+    //   if(cityVal.city_name === 'Riyadh') {
+    //     const city = cityVal.city_code;
+    //     const country = cookies.get('country');
+    //     this.setState({
+    //       displayCity: cityVal.city_name,
+    //     }, () => {
+    //        this.setCity(city, country, this.state.displayCity);
+    //     });
+    //   } break;
+    // }
+    this.setState({
+      showModal: false,
+    });
+  }
+
   render() {
     const {
       geoShippingData, hideLabel, getAllCities, isPdp,
     } = this.props;
-    const { showCitiesData } = this.state;
+    const { showCitiesData, showModal } = this.state;
     return (
       <div className={`${styles['flex-center']} ${styles['delovery-inn']} ${styles['pr-5']}`}>
         {
@@ -204,6 +234,16 @@ class GeoWidget extends Component {
               />
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
+            {showCitiesData && this.state.displayCity === '' &&
+            <div className={`${styles['margin-5']}`}>
+            <span className={`${styles.flex} ${styles['justify-center']}`}>
+                <SVGCompoent clsName={`${styles['location-icon']}`} src="icons/common-icon/icon-locate-me" />
+                <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>Detect Location</div>
+                </span>
+                <div className={`${styles['border-b']} ${styles['margin-5']}`}></div>
+                <div className={`${styles.flex} ${styles['justify-center']}`}>Or select city below</div>
+                </div>
+                }
               {showCitiesData && getAllCities.length > 0 ? getAllCities.map((value, index) => (
                 <MenuItem data-id={value.city_name} data-code={value.city_code} onClick={this.selectCityFromSuggesstions} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
                   <a className={`${styles['black-color']}`}>
@@ -218,7 +258,7 @@ class GeoWidget extends Component {
                 <SVGCompoent clsName={`${styles['location-icon']}`} src="icons/common-icon/icon-locate-me" />
                 <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>Detect Location</div>
                 </span>
-                </div>            
+                </div>           
               }
             </Dropdown.Menu>
           </Dropdown>
@@ -229,6 +269,20 @@ class GeoWidget extends Component {
                   <img className={styles['img-responsive']} src={"/static/img/bg-img/delivery-remove-icon.png"} />
                 </div>
           }
+           <Modal
+            show={showModal}
+            onHide={this.closeModal}
+            className={styles.modalClassName}
+          >
+            <Modal.Body>
+              hkjhjkh
+            </Modal.Body>
+            <div className={`${styles['justify-end']} ${styles['p-30']} ${styles.flex}`}>
+              <button className="btn btn-primary" style={{ backgroundColor: '#101820', width: '15%' }} onClick={this.closeModal}>
+                Okay
+              </button>
+            </div>
+          </Modal>
         </div>
       </div>
     );
