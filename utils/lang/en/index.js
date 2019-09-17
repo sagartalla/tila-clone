@@ -445,6 +445,7 @@ export const EN_KEYWORDS = {
     YOUR_ENTERED: 'You entered',
     AUTO_CORRECTED: 'Corrected',
     APPLY_FILTERS: 'Apply Filters',
+    WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK: 'We will email you once this is in stock.',
   },
   // adding new page content
   FOOTER_PAGE: {
