@@ -370,7 +370,7 @@ class Product extends Component {
                         autoplay
                         arrows={false}
                         dots
-                        autoplaySpeed={750}
+                        autoplaySpeed={1000}
                         pauseOnHover={false}
                       >
                         {media && media.slice(0, 5).map((image, index) => (

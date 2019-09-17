@@ -49,8 +49,6 @@ class BT6a extends Component {
 										}`}
 										placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 										alt={banners[0].display_name}
-										width={banners[0].config.width}
-										height={banners[0].config.height}
 									/>
 								</div>
 							</a>
@@ -76,8 +74,6 @@ class BT6a extends Component {
 										}`}
 										placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 										alt={banners[1].display_name}
-										width={banners[1].config.width}
-										height={banners[1].config.height}
 									/>
 								</div>
 							</a>
@@ -121,8 +117,6 @@ class BT6a extends Component {
 										}`}
 										placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 										alt={banners[2].display_name}
-										width={banners[2].config.width}
-										height={banners[2].config.height}
 									/>
 								</div>
 							</a>
@@ -150,8 +144,6 @@ class BT6a extends Component {
 										}`}
 										placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 										alt={banners[3].display_name}
-										width={banners[3].config.width}
-										height={banners[3].config.height}
 									/>
 								</div>
 							</a>
@@ -177,8 +169,6 @@ class BT6a extends Component {
 										}`}
 										placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 										alt={banners[4].display_name}
-										width={banners[4].config.width}
-										height={banners[4].config.height}
 									/>
 								</div>
 							</a>

@@ -124,7 +124,7 @@ class CheckboxFacet extends Component {
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
         <div className={`${styles['category-list']}`}>
           <Panel.Heading className={styles['category-list-head']}>
-            <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['flx-spacebw-alignc']}`}>
+            <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles.fontW600} ${styles['flx-spacebw-alignc']}`}>
               <span className={styles['flt-lbl']}>{filter.name}</span>
               <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
             </Panel.Title>

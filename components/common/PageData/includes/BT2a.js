@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import dynamic from "next/dynamic";
-const Image = dynamic(import("react-graceful-image"), { ssr: false });
 
 import lang from "../../../../utils/language";
 import PageData from "../index";
@@ -10,6 +9,8 @@ import main_en from "../../../../layout/main/main_en.styl";
 import main_ar from "../../../../layout/main/main_ar.styl";
 import styles_en from "../pageData_en.styl";
 import styles_ar from "../pageData_ar.styl";
+
+const Image = dynamic(import("react-graceful-image"), { ssr: false });
 
 const styles =
 	lang === "en" ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
@@ -79,8 +80,6 @@ class BT2a extends Component {
 									}`}
 									placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 									alt={banners[0].display_name}
-									width={banners[0].config.width}
-									height={banners[0].config.height}
 								/>
 							</div>
 						</a>
@@ -118,8 +117,6 @@ class BT2a extends Component {
 									}`}
 									placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 									alt={banners[1].display_name}
-									width={banners[1].config.width}
-									height={banners[1].config.height}
 								/>
 							</div>
 						</a>
