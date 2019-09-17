@@ -3,7 +3,7 @@ import lang from '../../utils/language';
 
 const getPage = store => {
   const { page_content, merchandising_data } = store.landingReducer.data
-  page_content.forEach((item) => {
+  page_content && page_content.forEach((item) => {
     if (item.id_attribute) {
       let merchandiseData = merchandising_data.filter(merchandise => merchandise.page_id.includes(item.id_attribute))
       item.data[lang].banners = [...merchandiseData];

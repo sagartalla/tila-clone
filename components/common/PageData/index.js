@@ -37,61 +37,61 @@ let sliderTBS = "";
 // const tie = [{
 //   img: '/static/img/landing-home/Mobiles.png',
 //   title: 'Mobiles',
-//   link: `/${lang}/srp/mobiles?categoryTree=true&isListed=false&sid=848,849`,
+//   link: `/${lang}/srp/mobiles?categoryTree=true&isListed=true&sid=848,849`,
 // }, {
 //   img: '/static/img/landing-home/Laptops.png',
 //   title: 'Laptops',
-//   link: `/${lang}/srp/laptops?categoryTree=true&isListed=false&sid=848,864`,
+//   link: `/${lang}/srp/laptops?categoryTree=true&isListed=true&sid=848,864`,
 // }, {
 //   img: '/static/img/landing-home/storage-devices.png',
 //   title: 'Storage Devices',
-//   link: `/${lang}/search?q=Storage&&isListed=false`,
+//   link: `/${lang}/search?q=Storage&&isListed=true`,
 // }, {
 //   img: '/static/img/landing-home/cameras.png',
 //   title: 'Cameras',
-//   link: `/${lang}/srp/camera?categoryTree=true&isListed=false&sid=848,882`,
+//   link: `/${lang}/srp/camera?categoryTree=true&isListed=true&sid=848,882`,
 // }, {
 //   img: '/static/img/landing-home/television.png',
 //   title: 'Televisions',
-//   link: `/${lang}/srp/televisions?categoryTree=true&isListed=false&sid=848,878`,
+//   link: `/${lang}/srp/televisions?categoryTree=true&isListed=true&sid=848,878`,
 // }, {
 //   img: '/static/img/landing-home/home-appliances.png',
 //   title: 'Home Appliances',
-//   link: `/${lang}/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935`,
+//   link: `/${lang}/srp/home-applaince?categoryTree=true&isListed=true&sid=932,935`,
 // }, {
 //   img: '/static/img/landing-home/storage-devices.png',
 //   title: 'Storage Devices',
-//   link: `/${lang}/search?q=Storage&&isListed=false`,
+//   link: `/${lang}/search?q=Storage&&isListed=true`,
 // }];
 
 // const hal = [{
 //   img: '/static/img/landing-home/womens-clothing.png',
 //   title: 'Womens Clothing',
-//   link: `/${lang}/srp/clothing?categoryTree=true&isListed=false&sid=892,910`,
+//   link: `/${lang}/srp/clothing?categoryTree=true&isListed=true&sid=892,910`,
 // }, {
 //   img: '/static/img/landing-home/mens-clothing.png',
 //   title: 'Mens Clothing',
-//   link: `/${lang}/srp/clothing?categoryTree=true&isListed=false&sid=892,899`,
+//   link: `/${lang}/srp/clothing?categoryTree=true&isListed=true&sid=892,899`,
 // }, {
 //   img: '/static/img/landing-home/jewellery.png',
 //   title: 'Jewellery',
-//   link: `/${lang}/search?q=Jewellery&&isListed=false`,
+//   link: `/${lang}/search?q=Jewellery&&isListed=true`,
 // }, {
 //   img: '/static/img/landing-home/fashion-acessories.png',
 //   title: 'Fashion Accessories',
-//   link: `/${lang}/srp/fashion-accessories?categoryTree=true&isListed=false&sid=892,923`,
+//   link: `/${lang}/srp/fashion-accessories?categoryTree=true&isListed=true&sid=892,923`,
 // }, {
 //   img: '/static/img/landing-home/watches.png',
 //   title: 'Watches',
-//   link: `/${lang}/srp/watch?categoryTree=true&isListed=false&sid=892,929`,
+//   link: `/${lang}/srp/watch?categoryTree=true&isListed=true&sid=892,929`,
 // }, {
 //   img: '/static/img/landing-home/perfumes.png',
 //   title: 'Perfumes',
-//   link: `/${lang}/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964`,
+//   link: `/${lang}/srp/fragrance?categoryTree=true&isListed=true&sid=932,958,964`,
 // }, {
 //   img: '/static/img/landing-home/jewellery.png',
 //   title: 'Jewellery',
-//   link: `/${lang}/search?q=Jewellery&&isListed=false`,
+//   link: `/${lang}/search?q=Jewellery&&isListed=true`,
 // }];
 
 class PageData extends React.Component {
@@ -101,7 +101,7 @@ class PageData extends React.Component {
 	// breadcrums are pending...
 	getContent = () => {
 		const { content, index, pageType } = this.props;
-		console.log({ content });
+		// console.log({ content });
 
 		switch (content.layout_id) {
 			case "CT1a":

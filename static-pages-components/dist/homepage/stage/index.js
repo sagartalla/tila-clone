@@ -162,15 +162,15 @@ const twoCols = [{
 
 const threeCols = [{
   img: '/static/img/landing-home/shoes.jpg',
-  link: '/en/search?q=footwear&isListed=false',
+  link: '/en/search?q=footwear&isListed=true',
   title: 'Shoes'
 }, {
   img: '/static/img/landing-home/ls2.jpg',
-  link: '/en/search?q=LS2&isListed=false',
+  link: '/en/search?q=LS2&isListed=true',
   title: 'LS2'
 }, {
   img: '/static/img/landing-home/furniture.jpg',
-  link: '/en/search?q=Furniture&isListed=false',
+  link: '/en/search?q=Furniture&isListed=true',
   title: 'Furniture'
 }];
 
@@ -178,27 +178,27 @@ const b_y_l = [{
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
   title: 'Levis',
-  links: '/en/search?q=Levis&isListed=false'
+  links: '/en/search?q=Levis&isListed=true'
 }, {
   img: '/static/img/landing-home/guess-m.jpg',
   brandImg: '/static/img/landing-home/guess.jpg',
   title: 'Guess',
-  links: '/en/search?q=Guess&isListed=false'
+  links: '/en/search?q=Guess&isListed=true'
 }, {
   img: '/static/img/landing-home/max-m.jpg',
   brandImg: '/static/img/landing-home/max.jpg',
   title: 'Max',
-  links: '/en/search?q=Max&isListed=false'
+  links: '/en/search?q=Max&isListed=true'
 }, {
   img: '/static/img/landing-home/gucci-m.jpg',
   brandImg: '/static/img/landing-home/gucci.jpg',
   title: 'Gucci',
-  links: '/en/search?q=Gucci&isListed=false'
+  links: '/en/search?q=Gucci&isListed=true'
 }, {
   img: '/static/img/landing-home/levis-m.jpg',
   brandImg: '/static/img/landing-home/levis.jpg',
   title: 'Levis',
-  links: '/en/search?q=Levis&isListed=false'
+  links: '/en/search?q=Levis&isListed=true'
 }];
 
 function SamplePrevArrow(props) {
@@ -226,46 +226,46 @@ function SampleNextArrow(props) {
 }
 
 const b_d_b = {
-  Mobiles: '/en/srp/mobiles?categoryTree=true&isListed=false&sid=848,849',
-  Clothing: '/en/search?q=Clothing&isListed=false',
-  'Clothing Accessories': '/en/search?q=Clothing&isListed=false',
-  Laptops: '/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
-  'Storage Devices': '/en/search?q=Storage&&isListed=false',
-  Cameras: '/en/srp/camera?categoryTree=true&isListed=false&sid=848,882',
-  Televisions: '/en/srp/televisions?categoryTree=true&isListed=false&sid=848,878',
-  'Home Appliances': '/en/srp/home-applaince?categoryTree=true&isListed=false&sid=932,935',
-  'Womens Clothing': '/en/srp/clothing?categoryTree=true&isListed=false&sid=892,910',
-  'Mens Clothing': '/en/srp/clothing?categoryTree=true&isListed=false&sid=892,899',
-  'Fashion Accessories': '/en/srp/fashion-accessories?categoryTree=true&isListed=false&sid=892,923',
-  Watches: '/en/srp/watch?categoryTree=true&isListed=false&sid=892,929',
-  'Kitchen Appliances': '/en/srp/kitchen-appliances?categoryTree=true&isListed=false&sid=932,945',
-  Speakers: '/en/search?q=Speakers&&isListed=false',
-  'Microwave Ovens': '/en/search?q=Microwave%20Ovens&&isListed=false',
-  'Smart Watch': '/en/srp/smart-watches?categoryTree=true&isListed=false&sid=848,860,861',
-  'Mobile Accessories': '/en/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850',
-  "Kid's Fashion": '/en/srp/kid%27s?categoryTree=true&isListed=false&sid=892,893',
-  Footwear: '/en/search?q=Footwear&&isListed=false',
-  "Men's Footwear": '/en/srp/footwear?categoryTree=true&isListed=false&sid=892,907',
-  'Women Footwear': '/en/srp/footwear?categoryTree=true&isListed=false&sid=892,921',
-  Bags: '/en/srp/backpack?categoryTree=true&isListed=false&sid=892,926',
-  Eyewear: '/en/search?q=Eyewear&&isListed=false',
-  Jewellery: '/en/search?q=Jewellery&&isListed=false',
-  GUESS: '/en//search/womens-clothing-1056/?q=guess&isListed=false',
-  FENDI: 'https://storefront-stage.tila.com/en/search/watches-1128/?q=FENDI&isListed=false',
-  'MORPHY RICHARDS': '/en/search?q=MORPHY%20RICHARDS%20&disableSpellCheck=true&isListed=false',
-  SHIRTS: '/en/search?q=SHIRTS&isListed=false',
-  Perfumes: '/en/srp/fragrance?categoryTree=true&isListed=false&sid=932,958,964',
-  Shoes: '/en/search?q=Shoes&&isListed=false',
-  Lights: '/en/srp/light?categoryTree=true&isListed=false&sid=932,937,940',
-  lamps: '/en/srp/lamp?categoryTree=true&isListed=false&sid=932,937,939',
-  bedding: '/en/srp/bedding-set?categoryTree=true&isListed=false&sid=932,941,942',
-  furniture: '/en/srp/home-furnishing?categoryTree=true&isListed=false&sid=932,941',
-  'HOME DECOR': '/en/search?q=HOME%20DECOR&isListed=false',
-  LAPTOPS: '/en/srp/laptops?categoryTree=true&isListed=false&sid=848,864',
-  'MENS CLOTHING': '/en/srp/clothing?categoryTree=true&isListed=false&sid=892,899',
-  'MOBILE ACCESSORIES': '/en/srp/mobile-accessories?categoryTree=true&isListed=false&sid=848,850',
-  'PERFUMES FOR WOMEN': '/en/search?q=perfumes&categoryTree=true&isListed=false',
-  WATCHES: '/en/srp/watch?categoryTree=true&isListed=false&sid=892,929'
+  Mobiles: '/en/srp/mobiles?categoryTree=true&isListed=true&sid=848,849',
+  Clothing: '/en/search?q=Clothing&isListed=true',
+  'Clothing Accessories': '/en/search?q=Clothing&isListed=true',
+  Laptops: '/en/srp/laptops?categoryTree=true&isListed=true&sid=848,864',
+  'Storage Devices': '/en/search?q=Storage&&isListed=true',
+  Cameras: '/en/srp/camera?categoryTree=true&isListed=true&sid=848,882',
+  Televisions: '/en/srp/televisions?categoryTree=true&isListed=true&sid=848,878',
+  'Home Appliances': '/en/srp/home-applaince?categoryTree=true&isListed=true&sid=932,935',
+  'Womens Clothing': '/en/srp/clothing?categoryTree=true&isListed=true&sid=892,910',
+  'Mens Clothing': '/en/srp/clothing?categoryTree=true&isListed=true&sid=892,899',
+  'Fashion Accessories': '/en/srp/fashion-accessories?categoryTree=true&isListed=true&sid=892,923',
+  Watches: '/en/srp/watch?categoryTree=true&isListed=true&sid=892,929',
+  'Kitchen Appliances': '/en/srp/kitchen-appliances?categoryTree=true&isListed=true&sid=932,945',
+  Speakers: '/en/search?q=Speakers&&isListed=true',
+  'Microwave Ovens': '/en/search?q=Microwave%20Ovens&&isListed=true',
+  'Smart Watch': '/en/srp/smart-watches?categoryTree=true&isListed=true&sid=848,860,861',
+  'Mobile Accessories': '/en/srp/mobile-accessories?categoryTree=true&isListed=true&sid=848,850',
+  "Kid's Fashion": '/en/srp/kid%27s?categoryTree=true&isListed=true&sid=892,893',
+  Footwear: '/en/search?q=Footwear&&isListed=true',
+  "Men's Footwear": '/en/srp/footwear?categoryTree=true&isListed=true&sid=892,907',
+  'Women Footwear': '/en/srp/footwear?categoryTree=true&isListed=true&sid=892,921',
+  Bags: '/en/srp/backpack?categoryTree=true&isListed=true&sid=892,926',
+  Eyewear: '/en/search?q=Eyewear&&isListed=true',
+  Jewellery: '/en/search?q=Jewellery&&isListed=true',
+  GUESS: '/en//search/womens-clothing-1056/?q=guess&isListed=true',
+  FENDI: 'https://storefront-stage.tila.com/en/search/watches-1128/?q=FENDI&isListed=true',
+  'MORPHY RICHARDS': '/en/search?q=MORPHY%20RICHARDS%20&disableSpellCheck=true&isListed=true',
+  SHIRTS: '/en/search?q=SHIRTS&isListed=true',
+  Perfumes: '/en/srp/fragrance?categoryTree=true&isListed=true&sid=932,958,964',
+  Shoes: '/en/search?q=Shoes&&isListed=true',
+  Lights: '/en/srp/light?categoryTree=true&isListed=true&sid=932,937,940',
+  lamps: '/en/srp/lamp?categoryTree=true&isListed=true&sid=932,937,939',
+  bedding: '/en/srp/bedding-set?categoryTree=true&isListed=true&sid=932,941,942',
+  furniture: '/en/srp/home-furnishing?categoryTree=true&isListed=true&sid=932,941',
+  'HOME DECOR': '/en/search?q=HOME%20DECOR&isListed=true',
+  LAPTOPS: '/en/srp/laptops?categoryTree=true&isListed=true&sid=848,864',
+  'MENS CLOTHING': '/en/srp/clothing?categoryTree=true&isListed=true&sid=892,899',
+  'MOBILE ACCESSORIES': '/en/srp/mobile-accessories?categoryTree=true&isListed=true&sid=848,850',
+  'PERFUMES FOR WOMEN': '/en/search?q=perfumes&categoryTree=true&isListed=true',
+  WATCHES: '/en/srp/watch?categoryTree=true&isListed=true&sid=892,929'
 };
 
 const HomePage = () => React.createElement(

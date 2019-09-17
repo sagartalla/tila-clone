@@ -55,13 +55,12 @@ const snMetaObj = {
 class ActionBar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      hideLogin: props.hideLogin,
+    }
     this.logoutClick = this.logoutClick.bind(this);
     this.loginClick = this.loginClick.bind(this);
     this.onBackdropClick = this.onBackdropClick.bind(this);
-  }
-
-  state = {
-    show: '',
   }
 
   componentDidMount() {
@@ -177,9 +176,11 @@ class ActionBar extends Component {
   loginClick(e) {
     digitalData.page.pageInfo.pageType = 'Login Page';
     digitalData.page.pageInfo.pageName = 'Login Page';
-
-    this.props.showLoginScreen();
-
+    this.setState({
+      hideLogin: false,
+    }, () => {
+      this.props.showLoginScreen();
+    })
     if (!window.sessionStorage.getItem('TILuservisitcount')) {
       window.sessionStorage.setItem('TILuservisitcount', 1);
     }
@@ -204,8 +205,9 @@ class ActionBar extends Component {
 
   render() {
     const {
-      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin, showLoginPage,
+      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, showLoginPage,
     } = this.props;
+    const { hideLogin } = this.state;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
