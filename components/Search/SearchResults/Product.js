@@ -43,7 +43,7 @@ class Product extends Component {
     super(props);
     this.state = {
       showNotify: false,
-      src: `${constants.mediaDomain}/${props.media[0]}` || '',
+      src: `${constants.mediaDomain}/${props && props.media && props.media[0]}` || '',
       selectedIndex: 0,
       showLoader: false,
       btnType: '',

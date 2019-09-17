@@ -42,38 +42,38 @@ const brandImages = {
     ],
     '#EF6079': [
       {
+        value: 'JustKidding',
+        link: `/${lang}/brand/just%20kidding`,
+      },
+      {
+        value: 'chicco',
+        link: `/${lang}/brand/chicco`,
+      },
+      {
+        value: 'Lego',
+        link: `/${lang}/brand/lego`,
+      },
+      {
         value: 'Pampers',
-        link: `/${lang}/brand/Pampers`,
-      },
-      {
-        value: 'Gucci',
-        link: `/${lang}/brand/Gucci`,
-      },
-      {
-        value: 'Diesel',
-        link: `/${lang}/brand/diesel`,
-      },
-      {
-        value: 'CalkinKlien',
-        link: `/${lang}/brand/Calvin Klien`,
+        link: `/${lang}/brand/pampers`,
       },
     ],
     '#888B8D': [
       {
-        value: 'Armani-exchange',
-        link: `/${lang}/brand/Armani-exchange`,
+        value: 'Casio',
+        link: `/${lang}/brand/casio`,
       },
       {
-        value: 'Nike',
-        link: `/${lang}/brand/nike`,
+        value: 'Rayban',
+        link: `/${lang}/brand/ray-ban`,
       },
       {
-        value: 'Levis',
-        link: `/${lang}/brand/levis`,
+        value: 'Hugo-Boss-Logo',
+        link: `/${lang}/brand/hugoboss`,
       },
       {
-        value: 'Fossil',
-        link: `/${lang}/brand/fossil`,
+        value: 'michael-kors',
+        link: `/${lang}/brand/michael-kors`,
       },
     ],
   },
@@ -98,38 +98,38 @@ const brandImages = {
     ],
     '#EF6079': [
       {
-        value: 'Bvlgari-img',
-        link: `/${lang}/brand/bvlgari`,
+        value: 'DowntoScience',
+        link: `/${lang}/brand/Down%20to%20Science`,
       },
       {
-        value: 'DavidOff',
-        link: `/${lang}/brand/davidoff`,
+        value: 'Naturehike',
+        link: `/${lang}/brand/naturehike`,
       },
       {
-        value: 'Prada',
-        link: `/${lang}/brand/prada`,
+        value: 'bando',
+        link: `/${lang}/brand/ban-do`,
       },
       {
-        value: 'NYX',
-        link: `/${lang}/brand/nyx`,
+        value: 'TedBaker',
+        link: `/${lang}/brand/ted%20baker`,
       },
     ],
     '#888B8D': [
       {
-        value: 'RayBan',
-        link: `/${lang}/brand/ray-ban`,
+        value: 'Adidas',
+        link: `/${lang}/brand/adidas`,
       },
       {
         value: 'Reebok',
-        link: `/${lang}/brand/Reebok`,
+        link: `/${lang}/brand/reebok`,
       },
       {
-        value: 'Tomford',
-        link: `/${lang}/brand/Tomford`,
+        value: 'JackJones',
+        link: `/${lang}/brand/Jack%20&%20Jones`,
       },
       {
-        value: 'Roberto Bianci',
-        link: `/${lang}/brand/roberto bianci`,
+        value: 'Skechers',
+        link: `/${lang}/brand/sketchers`,
       },
     ],
   },
