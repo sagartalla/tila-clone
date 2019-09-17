@@ -48,7 +48,7 @@ class SubMenu extends Component {
               {
                 subMenuItems.map((subMenuItem) => (
                   <li key={subMenuItem.id} data-id={subMenuItem.id} onMouseOver={this.onHover} className={`${styles['float-l']} ${styles['ml-5']} ${styles['mr-5']} ${styles['p-10']}`}>
-                    <Link route={`/${language}/search/${subMenuItem.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${parentID},${subMenuItem.id}`}>
+                    <Link route={`/${language}/search/${subMenuItem.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=true&sid=${parentID},${subMenuItem.id}`}>
                       <a className={`${styles['level-sub-item']} ${styles['white-color']}`}>{subMenuItem.displayName}</a>
                     </Link>
                   </li>
