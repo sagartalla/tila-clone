@@ -145,7 +145,7 @@ const removeCompareData = (id) => {
 
 const getBrands = () => {
   const options = {
-    isListed: false,
+    isListed: true,
     itemType: getItem().itemtype,
     language: 'en',
     limit: -1,
@@ -170,7 +170,7 @@ const getProducts = (brand = '') => {
     pageNum: 1,
     pageSize: 100,
     query: product.itemtype,
-    isListed: false,
+    isListed: true,
     requestContext: 'CUSTOMER_BROWSE',
     categoryFilter: {
       id: product.categoryId,

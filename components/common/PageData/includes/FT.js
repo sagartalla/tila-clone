@@ -161,8 +161,8 @@ class FT extends React.Component {
 													alt={listing.name}
 												/> */}
 												<Image
-													width={data[lang]["banners"][index]["config"].width}
-													height={data[lang]["banners"][index]["config"].height}
+													width={data[lang] && data[lang]["banners"] && data[lang]["banners"][index] && data[lang]["banners"][index]["config"] && data[lang]["banners"][index]["config"].width}
+													height={data[lang] && data[lang]["banners"] && data[lang]["banners"][index] && data[lang]["banners"][index]["config"] && data[lang]["banners"][index]["config"].height}
 													src={`${constants.mediaDomain}/${listing.image}`}
 													alt={listing.name}
 													className={`${styles["animating-placeholder"]}`}
