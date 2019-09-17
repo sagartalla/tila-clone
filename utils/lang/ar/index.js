@@ -207,6 +207,7 @@ export const AR_KEYWORDS = {
     "DAYS": "الأيام",
     "PRODUCT_DETAILS": "تفاصيل منتجك",
     "ADD_TO_CART": "ضيفها ل عربة التسوق",
+    "ADD_MORE": 'ADD MORE',   
     "BUY_NOW": "اشتري اللحين",
     "NOTIFY_ME": "نبهني",
     "BUY_FOR": "أشتري ل...",
@@ -437,7 +438,8 @@ export const AR_KEYWORDS = {
     "MAXIMUN_TEXT_EXCEEDED": "لقد تخطيت الحد الأقصى للنص المسموح به للبحث",
     "YOUR_ENTERED": "تم تسجيل دخولك",
     "AUTO_CORRECTED": "تصحيح تلقائي",
-    "APPLY_FILTERS": "Apply Filters"
+    "APPLY_FILTERS": "Apply Filters",
+    "WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK": 'We will email you once this is in stock.',    
   },
   "FOOTER_PAGE": {
     "GOT_QUESTION": "عندك أي سؤال؟",
