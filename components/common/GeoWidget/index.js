@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Router } from '../../../routes';
 import _ from 'lodash';
 import Cookie from 'universal-cookie';
+import Button from '../../common/CommonButton';
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
 import { actionCreators, selectors } from '../../../store/auth';
 import SVGCompoent from '../SVGComponet';
@@ -238,10 +239,10 @@ class GeoWidget extends Component {
             <div className={`${styles['margin-5']}`}>
             <span className={`${styles.flex} ${styles['justify-center']}`}>
                 <SVGCompoent clsName={`${styles['location-icon']}`} src="icons/common-icon/icon-locate-me" />
-                <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>Detect Location</div>
+                <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>{SEARCH_PAGE.DETECT_LOCATION}</div>
                 </span>
                 <div className={`${styles['border-b']} ${styles['margin-5']}`}></div>
-                <div className={`${styles.flex} ${styles['justify-center']}`}>Or select city below</div>
+                <div className={`${styles.flex} ${styles['justify-center']}`}>{SEARCH_PAGE.SELECT_CITY_BELOW}</div>
                 </div>
                 }
               {showCitiesData && getAllCities.length > 0 ? getAllCities.map((value, index) => (
@@ -252,11 +253,11 @@ class GeoWidget extends Component {
                 </MenuItem>)) :
                 showCitiesData &&
                 <div className={`${styles['margin-5']}`}>
-                <div className={`${styles['thick-red-clr']} ${styles['flex']} ${styles['justify-center']}`}>No matching Saudi city</div>
+                <div className={`${styles['thick-red-clr']} ${styles['flex']} ${styles['justify-center']}`}>{SEARCH_PAGE.NO_MATCHING_SAUDI_CITY}</div>
                 <div className={`${styles['border-b']} ${styles['margin-5']}`}></div>
                 <span className={`${styles.flex} ${styles['justify-center']}`}>
                 <SVGCompoent clsName={`${styles['location-icon']}`} src="icons/common-icon/icon-locate-me" />
-                <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>Detect Location</div>
+                <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>{SEARCH_PAGE.DETECT_LOCATION}</div>                
                 </span>
                 </div>           
               }
@@ -274,13 +275,17 @@ class GeoWidget extends Component {
             onHide={this.closeModal}
             className={styles.modalClassName}
           >
+          <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']}`}>
             <Modal.Body>
-              hkjhjkh
+             <div className={`${styles['fs-20']} ${styles['fontW800']}`}>{SEARCH_PAGE.PLEASE_SELECT_LOCATION_WITHIN_SAUDI}</div>
             </Modal.Body>
-            <div className={`${styles['justify-end']} ${styles['p-30']} ${styles.flex}`}>
-              <button className="btn btn-primary" style={{ backgroundColor: '#101820', width: '15%' }} onClick={this.closeModal}>
-                Okay
-              </button>
+            <div >
+            <Button
+             className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['m-10']} ${styles['left-radius']}`}
+             btnText={SEARCH_PAGE.OKAY}
+             onClick={this.closeModal}
+            />
+            </div>
             </div>
           </Modal>
         </div>

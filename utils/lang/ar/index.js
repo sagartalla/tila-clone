@@ -437,7 +437,12 @@ export const AR_KEYWORDS = {
     "MAXIMUN_TEXT_EXCEEDED": "لقد تخطيت الحد الأقصى للنص المسموح به للبحث",
     "YOUR_ENTERED": "تم تسجيل دخولك",
     "AUTO_CORRECTED": "تصحيح تلقائي",
-    "APPLY_FILTERS": "Apply Filters"
+    "APPLY_FILTERS": "Apply Filters",
+    "PLEASE_SELECT_LOCATION_WITHIN_SAUDI": 'Please select any location within Saudi',
+    "DETECT_LOCATION": 'Detect Location',
+    "SELECT_CITY_BELOW": 'Or select city below',
+    "NO_MATCHING_SAUDI_CITY": 'No matching Saudi city',
+    "OKAY": 'OKAY',
   },
   "FOOTER_PAGE": {
     "GOT_QUESTION": "عندك أي سؤال؟",

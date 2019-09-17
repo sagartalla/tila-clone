@@ -445,6 +445,11 @@ export const EN_KEYWORDS = {
     YOUR_ENTERED: 'You entered',
     AUTO_CORRECTED: 'Corrected',
     APPLY_FILTERS: 'Apply Filters',
+    PLEASE_SELECT_LOCATION_WITHIN_SAUDI: 'Please select any location within Saudi',
+    DETECT_LOCATION: 'Detect Location',
+    SELECT_CITY_BELOW: 'Or select city below',
+    NO_MATCHING_SAUDI_CITY: 'No matching Saudi city',
+    OKAY: 'OKAY',
   },
   // adding new page content
   FOOTER_PAGE: {
