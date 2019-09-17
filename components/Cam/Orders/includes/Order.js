@@ -39,7 +39,7 @@ const Order = ({ order, getInvoice }) => {
     </Popover>
   );
   const pricePopover = (
-    <Popover id="popover-positioned-left" className={styles['popover-post-lft']}>
+    <Popover id="popover-positioned-right" className={styles['popover-post-lft']}>
       <div className={`${styles['price-tooltip']}`}>
         <ul>
           <li className={`${styles['flx-space-bw']}`}>

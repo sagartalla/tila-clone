@@ -71,7 +71,7 @@ const deleteWishlistApi = (wishlist_id, toastObj = {}, currentPage) => axios.pos
 });
 
 const notifyMe = params => axios.post(`${constants.WISHLIST_API_URL}/api/v1/alert/stock/srp`, params).then((res) => {
-  toast(<ToastContent
+  params.hideNotifyMeToast ? '' : toast(<ToastContent
     msg={API_TEXT.WILL_BE_NOTIFIED_SOON}
     msgType="success"
   />);

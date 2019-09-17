@@ -27,6 +27,10 @@ class CancelComplete extends Component {
       comment: selectedReasons.comment,
       subReason: selectedReasons.subReason,
       refund_mode: orderIssue.cancelRefundMode || undefined,
+    }).then(res => {
+      if (res.value.status === 200) {
+        this.props.getOrderDetails({ orderId: orderIssue.orderId });
+      }
     });
     this.props.track({
       event: 'CANCEL_ORDER',
@@ -101,6 +105,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       track: actionCreators.track,
       submitCancelRequest: actionCreators.submitCancelRequest,
+      getOrderDetails: actionCreators.getOrderDetails,
     },
     dispatch,
   );
