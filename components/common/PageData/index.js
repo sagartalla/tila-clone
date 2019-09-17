@@ -102,6 +102,7 @@ class PageData extends React.Component {
 	// breadcrums are pending...
 	getContent = () => {
 		const { content, index } = this.props;
+		console.log({ content });
 
 		switch (content.layout_id) {
 			case "CT1a":
@@ -280,8 +281,6 @@ class PageData extends React.Component {
 													}`}
 													placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 													alt={banner.display_name}
-													width={banner.config.width}
-													height={banner.config.height}
 												/>
 											</a>
 										</div>
