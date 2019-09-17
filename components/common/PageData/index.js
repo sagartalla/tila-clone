@@ -256,7 +256,7 @@ class PageData extends React.Component {
 							{banners.length > 0 &&
 								banners.map(banner => (
 									<ViewportTrackerHOC
-										clickEvent={`${pageType}-BANNER`}
+										clickEvent={`BANNER-CLICK`}
 										disableViewportTracking={false}
 									>
 										<div
