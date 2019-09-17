@@ -11,7 +11,7 @@ const Electronics = () => React.createElement(
       { className: "main-banner" },
       React.createElement(
         "a",
-        { href: "/en/search?q=electronics&isListed=false" },
+        { href: "/en/search?q=electronics&isListed=true" },
         React.createElement("img", { src: `/static/img/landing-page-tech-img/${lang === 'en' ? 'appliances' : 'appliances-ar'}.jpg`, className: "img-responsive" })
       )
     ),

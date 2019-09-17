@@ -4,7 +4,7 @@ const Electronics = () => (
   <div className="electronics-main-part">
     <Grid>
       <div className="main-banner">
-        <a href={`/${lang}/search?q=electronics&isListed=false`}>
+        <a href={`/${lang}/search?q=electronics&isListed=true`}>
           <img src={`/static/img/landing-page-tech-img/${lang === 'en' ? 'appliances' : 'appliances-ar'}.jpg`} className="img-responsive" />
         </a>
       </div>
@@ -202,7 +202,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/search?q=Refrigerators&isListed=false`}>
+              <a href={`/${lang}/search?q=Refrigerators&isListed=true`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -226,7 +226,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/search?q=washing%20Machines&isListed=false`}>
+              <a href={`/${lang}/search?q=washing%20Machines&isListed=true`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen3.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -238,7 +238,7 @@ const Electronics = () => (
           </Col>
           <Col md={2} className={styles['pl-0']}>
             <div className={`${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}`}>
-              <a href={`/${lang}/search?q=Vaccum%20Cleaners&isListed=false`}>
+              <a href={`/${lang}/search?q=Vaccum%20Cleaners&isListed=true`}>
                 <img src="/static/img/landing-page-tech-img/home-kitchen4.jpg" className="img-responsive" />
               </a>
               <div className={`${styles['absolute']} home-price-details ${styles['white-color']} ${styles['flex']} ${styles['flex-colum']}`}>
@@ -267,7 +267,7 @@ const Electronics = () => (
           <div className={styles['mt-25']}>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/${lang}/search?q=apple&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=apple&language=en&isListed=true`}>
                   <img src="/static/img/landing-page-tech-img/brands5.jpg" className="brand-apple" />
                 </a>
               </div>
@@ -281,7 +281,7 @@ const Electronics = () => (
             </Col>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/${lang}/search?q=samsung&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=samsung&language=en&isListed=true`}>
                   <img src="/static/img/landing-page-tech-img/brands.jpg" className="brand-samsung" />
                 </a>
               </div>
@@ -295,7 +295,7 @@ const Electronics = () => (
             </Col>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/${lang}/search?q=sony&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=sony&language=en&isListed=true`}>
                   <img src="/static/img/landing-page-tech-img/brands1.jpg" className="brand-samsung" />
                 </a>
               </div>
@@ -310,7 +310,7 @@ const Electronics = () => (
             </Col>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/${lang}/search?q=LG&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=LG&language=en&isListed=true`}>
                   <img src="/static/img/landing-page-tech-img/brands2.jpg" className="brand-lg" />
                 </a>
               </div>
@@ -325,7 +325,7 @@ const Electronics = () => (
             </Col>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/${lang}/search?q=dell&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=dell&language=en&isListed=true`}>
                   <img src="/static/img/landing-page-tech-img/brands3.jpg" className="brand-dell" />
                 </a>
               </div>
@@ -336,7 +336,7 @@ const Electronics = () => (
             </Col>
             <Col md={2} className={styles['pl-0']}>
               <div className={`brands-inn ${styles['flex-center']} ${styles['justify-center']} ${styles['bg-white']}`}>
-                <a href={`/${lang}/search?q=mi&language=en&isListed=false`}>
+                <a href={`/${lang}/search?q=mi&language=en&isListed=true`}>
                   <img src="/static/img/landing-page-tech-img/brands4.jpg" className="brand-mi" />
                 </a>
               </div>
