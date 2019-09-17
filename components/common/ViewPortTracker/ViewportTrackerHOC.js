@@ -10,7 +10,7 @@ class ViewportTrackerHOC extends Component {
 		// }
 
 		if (event.isIntersecting && event.intersectionRatio >= 1) {
-			console.log({
+			console.log("impression-test", {
 				trackerId: event.target.getAttribute("data-tracker-id")
 			});
 			this.recordedTimeout = setTimeout(() => {
@@ -18,7 +18,8 @@ class ViewportTrackerHOC extends Component {
 					pageType: event.target.getAttribute("data-page-type"),
 					trackerId: event.target.getAttribute("data-tracker-id"),
 					merchandiseId: event.target.getAttribute("data-merchandise-id"),
-					userId: event.target.getAttribute("data-user-id")
+					userId:
+						event.target.getAttribute("data-user-id") || "NOT_A_LOGGED_IN_USER"
 				});
 				// this.setState({ tracked: "ad--tracked" });
 			}, 1000);
@@ -27,14 +28,16 @@ class ViewportTrackerHOC extends Component {
 		clearTimeout(this.recordedTimeout);
 	};
 	handleClick = event => {
-		console.log({
+		console.log(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
 			trackerId: event.currentTarget.getAttribute("data-tracker-id")
 		});
-		newrelic.addPageAction("click-test", {
+		newrelic.addPageAction(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
 			pageType: event.currentTarget.getAttribute("data-page-type"),
 			trackerId: event.currentTarget.getAttribute("data-tracker-id"),
 			merchandiseId: event.currentTarget.getAttribute("data-merchandise-id"),
-			userId: event.currentTarget.getAttribute("data-user-id")
+			userId:
+				event.currentTarget.getAttribute("data-user-id") ||
+				"NOT_A_LOGGED_IN_USER"
 		});
 	};
 	render() {
@@ -43,6 +46,7 @@ class ViewportTrackerHOC extends Component {
 				onChange={this.handleChange}
 				onClick={this.handleClick}
 				threshold={1}
+				disabled={this.props.disableViewportTracking || false}
 			>
 				{React.cloneElement(this.props.children, {
 					onClick: this.handleClick

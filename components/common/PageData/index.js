@@ -255,7 +255,10 @@ class PageData extends React.Component {
 						<div className={`${styles["banner-prt-main"]}`}>
 							{banners.length > 0 &&
 								banners.map(banner => (
-									<ViewportTrackerHOC>
+									<ViewportTrackerHOC
+										clickEvent={`${pageType}-BANNER`}
+										disableViewportTracking={false}
+									>
 										<div
 											data-page-type={pageType}
 											data-tracker-id={`tracker-${Math.round(
