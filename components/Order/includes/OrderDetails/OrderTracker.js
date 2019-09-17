@@ -33,8 +33,7 @@ class OrderTracker extends React.Component {
 
   componentDidMount() {
     const { orderItem, getTrackingDetails } = this.props;
-    console.log('orderItem', orderItem);
-    getTrackingDetails(orderItem.trackingId);
+    getTrackingDetails(orderItem.return_tracking ? orderItem.return_tracking : orderItem.trackingId);
   }
 
   openSlider = () => {
@@ -53,9 +52,27 @@ class OrderTracker extends React.Component {
 
   render() {
     const { orderItem, showMsgAndDate, orderTracker } = this.props;
+
+    const status = () => {
+      switch (orderItem.status) {
+        case 'DELIVERED': return ORDER_PAGE.YOUR_ITEM_IS_DELIVERED;
+        case 'RETURN_REQUESTED': return ORDER_PAGE.YOUR_ITEM_RETURN_REQUESTED;
+        case 'RETURNED':
+        case 'PICKED': return ORDER_PAGE.YOUR_ITEM_PICKED;
+        case 'RETURN_QC_APPROVED': return ORDER_PAGE.YOUR_ITEM_RETURN_QC_APPROVED;
+        case 'RETURN_QC_REJECTED': return ORDER_PAGE.YOUR_ITEM_RETURN_QC_REJECTED;
+        case 'RETURN_IN_PROGRESS': return ORDER_PAGE.YOUR_ITEM_RETURN_IN_PROGRESS;
+        case 'EXCHANGE_IN_PROGRESS': return ORDER_PAGE.YOUR_ITEM_EXCHANGE_IN_PROGRESS;
+        case 'REPLACEMENT_IN_PROGRESS': return ORDER_PAGE.YOUR_ITEM_REPLACEMENT_IN_PROGRESS;
+        case 'EXCHANGED': return ORDER_PAGE.YOUR_ITEM_EXCHANGED;
+        case 'REPLACED': return ORDER_PAGE.YOUR_ITEM_REPLACED;
+        default: return ORDER_PAGE.YOUR_ITEM_IS_OUT_FOR_DELIVERY;
+      }
+    };
+
     return (
       <div className={`${styles['p-10']} ${styles['bg-light-gray']} ${styles['flex-center']} ${styles.relative} ${styles.pointer}`}>
-        <div>{orderItem.status === 'DELIVERED' ? ORDER_PAGE.YOUR_ITEM_IS_DELIVERED : ORDER_PAGE.YOUR_ITEM_IS_OUT_FOR_DELIVERY}</div>
+        <div>{status()}</div>
         <a className={`${styles.fontW600} ${styles['ml-10']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{CART_PAGE.VIEW_MORE}</a>
         {this.state.slider &&
         <Slider label="Order Tracking" isOpen={this.state.slider} closeSlider={this.closeSlider}>

@@ -28,8 +28,6 @@ const CBT8a = ({ content }) => {
 					className={`${styles["animating-placeholder"]} ${styles["width100"]}`}
 					placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 					alt={banners[index].display_name}
-					width={banners[index].config.width}
-					height={banners[index].config.height}
 				/>
 			</div>
 		</a>
