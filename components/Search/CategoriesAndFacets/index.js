@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookie from 'universal-cookie';
 import _ from 'lodash';
-import { Router } from '../../../routes';
 import { decode, encode, addUrlProps, replaceInUrlQuery } from 'react-url-query';
 import { PanelGroup, Panel } from 'react-bootstrap';
+
 import { actionCreators, selectors } from '../../../store/search';
 import CheckboxFacet from './CheckboxFacet';
 import ExcludeOOS from './ExcludeOOS';
@@ -47,10 +47,11 @@ class CategoriesAndFacets extends Component {
       if (e.target.checked) {
         params[facetName].push(value.name);
       } else {
-        params[facetName] = params[facetName].filter((item) => item !== value.name)
+        params[facetName] = params[facetName].filter(item => item !== value.name);
         if (!params[facetName].length) { delete params[facetName]; }
       }
       // }
+      console.log('ndiu', params);
       this.props.onChangeFacets(params);
       this.submitQuery(params);
     };
@@ -116,14 +117,14 @@ const mapDispatchToProps = dispatch =>
 
 function mapUrlToProps(url) {
   return {
-    facets: decode((d) => JSON.parse(d || '{}'), url.facets),
+    facets: decode(d => JSON.parse(d || '{}'), url.facets),
   };
 }
 
 const mapUrlChangeHandlersToProps = () => ({
-  onChangeFacets: (value) => replaceInUrlQuery('facets', encode((e) => {
-    return JSON.stringify(e || {})
-  }, value))
+  onChangeFacets: (value) => {
+    replaceInUrlQuery('facets', encode(e => JSON.stringify(e || {}), value));
+  },
 });
 
 export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(connect(mapStateToProps, mapDispatchToProps)(CategoriesAndFacets));

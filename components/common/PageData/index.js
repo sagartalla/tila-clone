@@ -290,8 +290,6 @@ class PageData extends React.Component {
 														}`}
 														placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 														alt={banner.display_name}
-														width={banner.config.width}
-														height={banner.config.height}
 													/>
 												</a>
 											</div>
