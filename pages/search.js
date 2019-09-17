@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
-import { configureUrlQuery } from 'react-url-query';
 import Cookies from 'universal-cookie';
-import createHistory from 'history/createBrowserHistory';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
 import { languageDefinations } from '../utils/lang';
 import { actionCreators, selectors } from '../store/search';
-import { actionCreators as authActionsCreators, selectors as authSelectors } from '../store/auth';
 import { actionCreators as megamenuActionsCreators } from '../store/megamenu';
 import Layout from '../layout/main';
 import Search from '../components/Search';
