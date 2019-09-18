@@ -450,6 +450,11 @@ const getAllCities = (store) => {
     : allCities;
 };
 
+const getAllDefaultCities = (store) => {
+  const allCities = store.productReducer.allCitiesData;  
+  return allCities;
+};
+
 const getAllCountries = (store) => {
   const countries = store.productReducer.countriesData;
   const searchKey = store.productReducer.searchCountryKeyWord;
@@ -461,5 +466,5 @@ const getAllCountries = (store) => {
 export {
   getProduct, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
-  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId, getTilaPolicy,
+  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId, getTilaPolicy, getAllDefaultCities,
 };

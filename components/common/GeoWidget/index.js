@@ -32,6 +32,7 @@ class GeoWidget extends Component {
       ...props.geoShippingData,
       ...shippingInfo,
       showModal: false,
+      showServingLocations: false,
     };
     this.onChangeCity = this.onChangeCity.bind(this);
     this.deleteCity = this.deleteCity.bind(this);    
@@ -39,12 +40,14 @@ class GeoWidget extends Component {
     this.deriveCityFromLatLng = this.deriveCityFromLatLng.bind(this);
     this.locateMe = this.locateMe.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
+    this.getDataFromMap = this.getDataFromMap.bind(this);    
   }
 
   componentDidMount() {
     const { getGeoShippingData, getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
     getGeoShippingData();
+    // this.locateMe();
     document.addEventListener('click', this.handleOutsideClick, false);
   }
 
@@ -87,6 +90,7 @@ class GeoWidget extends Component {
     });
   }
   locateMe() {
+    debugger;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         debugger;
@@ -100,15 +104,29 @@ class GeoWidget extends Component {
         this.deriveCityFromLatLng(lng, lat);
       }, (error) => {
         console.log(error);
+        this.openModal();
       });
     } else {
       alert('Browser does not support');
     }
   }
 
+  fetchCountryName = data => data && data.reduce((obj, curr) => {
+    if (curr.types.includes('country')) {
+      obj.country = curr;
+    }
+    if (curr.types.includes('locality')) {
+      obj.city = curr.long_name;
+    }
+    if (curr.types.includes('postal_code')) {
+      obj.postal_code = curr.long_name;
+    }
+    return obj;
+  }, {});
+
   deriveCityFromLatLng = (lng, lat) => {
+    const { deriveCity } = this.props;
     debugger;
-    const { deriveCity, getDataFromMap } = this.props;
     deriveCity({
       longitude: lng,
       latitude: lat,
@@ -119,7 +137,7 @@ class GeoWidget extends Component {
 
         cityCountryObj.address = res.value.formatted_address;
 
-        getDataFromMap({
+        this.getDataFromMap({
           lat, lng, cityCountryObj,
         });
         this.setState({
@@ -140,11 +158,12 @@ class GeoWidget extends Component {
         country, address, postal_code, city,
       },
     } = json;
-    const { getCitiesByCountryCode, getAllCities } = this.props;
-    for (let i = 0; i <= getAllCities.length; i == 1) {
-      if(cityVal.city_name === city) {
+    const { getCitiesByCountryCode, getAllDefaultCities } = this.props;
+    for (let i = 0; i < getAllDefaultCities.length; i += 1) {
+      if(getAllDefaultCities[i].city_name === city) {
+        const city = getAllDefaultCities[i].city_code;  
         this.setState({
-          displayCity: cityVal.city_name,
+          displayCity: getAllDefaultCities[i].city_name,
         }, () => {
           this.setCity(city, country, this.state.displayCity);
        });
@@ -155,6 +174,13 @@ class GeoWidget extends Component {
         })
       }
     }
+  }
+
+  openModal = () => {
+    this.setState({
+      showModal: true,
+      showServingLocations: true,
+    })
   }
 
   selectCityFromSuggesstions(e) {
@@ -185,17 +211,19 @@ class GeoWidget extends Component {
   }
 
   closeModal = () => {
-    // for (let i = 0; i <= getAllCities.length; i += 1) {
-    //   if(cityVal.city_name === 'Riyadh') {
-    //     const city = cityVal.city_code;
-    //     const country = cookies.get('country');
-    //     this.setState({
-    //       displayCity: cityVal.city_name,
-    //     }, () => {
-    //        this.setCity(city, country, this.state.displayCity);
-    //     });
-    //   } break;
-    // }
+    debugger;
+    const { getAllDefaultCities } = this.props;
+    for (let i = 0; i < getAllDefaultCities.length; i += 1) {
+      if(getAllDefaultCities[i].city_name === 'Riyadh') {
+        const city = getAllDefaultCities[i].city_code;
+        const country = cookies.get('country');
+        this.setState({
+          displayCity: getAllDefaultCities[i].city_name,
+        }, () => {
+           this.setCity(city, country, this.state.displayCity);
+        });
+      } break;
+    }
     this.setState({
       showModal: false,
     });
@@ -205,7 +233,7 @@ class GeoWidget extends Component {
     const {
       geoShippingData, hideLabel, getAllCities, isPdp,
     } = this.props;
-    const { showCitiesData, showModal } = this.state;
+    const { showCitiesData, showModal, showServingLocations } = this.state;
     return (
       <div className={`${styles['flex-center']} ${styles['delovery-inn']} ${styles['pr-5']}`}>
         {
@@ -236,13 +264,13 @@ class GeoWidget extends Component {
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
             {showCitiesData && this.state.displayCity === '' &&
-            <div className={`${styles['margin-5']}`}>
-            <span className={`${styles.flex} ${styles['justify-center']}`}>
+            <div className={`${styles['detect-location']} ${styles['margin-5']}`}>
+            <span className={`${styles.flex}`}>
                 <SVGCompoent clsName={`${styles['location-icon']}`} src="icons/common-icon/icon-locate-me" />
-                <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>{SEARCH_PAGE.DETECT_LOCATION}</div>
+                <div className={`${styles['flex']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>{SEARCH_PAGE.DETECT_LOCATION}</div>
                 </span>
                 <div className={`${styles['border-b']} ${styles['margin-5']}`}></div>
-                <div className={`${styles.flex} ${styles['justify-center']}`}>{SEARCH_PAGE.SELECT_CITY_BELOW}</div>
+                <div className={`${styles.flex} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>{SEARCH_PAGE.SELECT_CITY_BELOW}</div>
                 </div>
                 }
               {showCitiesData && getAllCities.length > 0 ? getAllCities.map((value, index) => (
@@ -277,9 +305,10 @@ class GeoWidget extends Component {
           >
           <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']}`}>
             <Modal.Body>
-             <div className={`${styles['fs-20']} ${styles['fontW800']}`}>{SEARCH_PAGE.PLEASE_SELECT_LOCATION_WITHIN_SAUDI}</div>
+             {!showServingLocations && <div className={`${styles['fs-20']} ${styles['fontW800']}`}>{SEARCH_PAGE.PLEASE_SELECT_LOCATION_WITHIN_SAUDI}</div>}
+             {showServingLocations && <div className={`${styles['fs-20']} ${styles['fontW800']}`}>We are only serving locations within Saudi</div>}
             </Modal.Body>
-            <div >
+            <div className={`${styles['mt-20']} `}>
             <Button
              className={`${styles.buttonStyle} ${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['m-10']} ${styles['left-radius']}`}
              btnText={SEARCH_PAGE.OKAY}
@@ -297,6 +326,7 @@ class GeoWidget extends Component {
 const mapStateToProps = store => ({
   geoShippingData: selectors.getDeliveryCity(store),
   getAllCities: productSelectors.getAllCities(store),
+  getAllDefaultCities: productSelectors.getAllDefaultCities(store),
 });
 
 const mapDispatchToProps = dispatch =>
