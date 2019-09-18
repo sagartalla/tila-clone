@@ -13,28 +13,43 @@ let sliderTBS = '';
 
 const CT1 = ({content}) => {
     return (
-        <div className={`${styles['mb-20']} top-banner-slider slider-dots-part`}>
-          {content.data[lang].title && <h3 className={styles['mt-0']}>{content.data[lang].title}</h3>}
-          <Slider
-            dots
-            autoplay
-            asNavFor={sliderTBS}
-            ref={(slider) => { sliderTBS = slider; }}
-            lazyLoad={false}
-            className={`${styles['main-slider-part']} ${styles.flex} ${styles['flex-colum']}`}
-            customPaging={i => <span className={`${styles['fs-10']}`}>{content.data[lang].banners[i].display_name}</span>}
-          >
-            {content.data[lang].banners.map(i => (
-              <div key={i.display_name}>
-                <a href={i.link}>
-                  <div className={`${styles.item} ${styles['slick-itm']}`} key={i.display_name}>
-                    <img src={i.img} alt={i.display_name} />
-                  </div>
-                </a>
+      <div
+      className={`${styles["mb-20"]} top-banner-slider slider-dots-part`}
+    >
+      {content.data[lang].title && (
+        <h3 className={styles["mt-0"]}>{content.data[lang].title}</h3>
+      )}
+      <Slider
+        dots
+        autoplay
+        asNavFor={sliderTBS}
+        ref={slider => {
+          sliderTBS = slider;
+        }}
+        lazyLoad={false}
+        className={`${styles["main-slider-part"]} ${styles.flex} ${
+          styles["flex-colum"]
+        }`}
+        customPaging={i => (
+          <span className={`${styles["fs-10"]}`}>
+            {content.data[lang].banners[i].display_name}
+          </span>
+        )}
+      >
+        {content.data[lang].banners.map(i => (
+          <div key={i.display_name}>
+            <a href={i.link}>
+              <div
+                className={`${styles.item} ${styles["slick-itm"]}`}
+                key={i.display_name}
+              >
+                <img src={i.img} alt={i.display_name} />
               </div>
-            ))}
-          </Slider>
-        </div>
+            </a>
+          </div>
+        ))}
+      </Slider>
+    </div>
       );
 }
 

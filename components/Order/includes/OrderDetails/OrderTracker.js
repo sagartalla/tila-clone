@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Col } from 'react-bootstrap';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import { actionCreators, selectors } from '../../../../store/order';
 import { languageDefinations } from '../../../../utils/lang';
@@ -33,7 +33,7 @@ class OrderTracker extends React.Component {
 
   componentDidMount() {
     const { orderItem, getTrackingDetails } = this.props;
-    getTrackingDetails(orderItem.trackingId);
+    getTrackingDetails(orderItem.return_tracking ? orderItem.return_tracking : orderItem.trackingId);
   }
 
   openSlider = () => {
@@ -52,9 +52,27 @@ class OrderTracker extends React.Component {
 
   render() {
     const { orderItem, showMsgAndDate, orderTracker } = this.props;
+
+    const status = () => {
+      switch (orderItem.status) {
+        case 'DELIVERED': return ORDER_PAGE.YOUR_ITEM_IS_DELIVERED;
+        case 'RETURN_REQUESTED': return ORDER_PAGE.YOUR_ITEM_RETURN_REQUESTED;
+        case 'RETURNED':
+        case 'PICKED': return ORDER_PAGE.YOUR_ITEM_PICKED;
+        case 'RETURN_QC_APPROVED': return ORDER_PAGE.YOUR_ITEM_RETURN_QC_APPROVED;
+        case 'RETURN_QC_REJECTED': return ORDER_PAGE.YOUR_ITEM_RETURN_QC_REJECTED;
+        case 'RETURN_IN_PROGRESS': return ORDER_PAGE.YOUR_ITEM_RETURN_IN_PROGRESS;
+        case 'EXCHANGE_IN_PROGRESS': return ORDER_PAGE.YOUR_ITEM_EXCHANGE_IN_PROGRESS;
+        case 'REPLACEMENT_IN_PROGRESS': return ORDER_PAGE.YOUR_ITEM_REPLACEMENT_IN_PROGRESS;
+        case 'EXCHANGED': return ORDER_PAGE.YOUR_ITEM_EXCHANGED;
+        case 'REPLACED': return ORDER_PAGE.YOUR_ITEM_REPLACED;
+        default: return ORDER_PAGE.YOUR_ITEM_IS_OUT_FOR_DELIVERY;
+      }
+    };
+
     return (
       <div className={`${styles['p-10']} ${styles['bg-light-gray']} ${styles['flex-center']} ${styles.relative} ${styles.pointer}`}>
-        <div>{orderItem.status === 'DELIVERED' ? ORDER_PAGE.YOUR_ITEM_IS_DELIVERED : ORDER_PAGE.YOUR_ITEM_IS_OUT_FOR_DELIVERY}</div>
+        <div>{status()}</div>
         <a className={`${styles.fontW600} ${styles['ml-10']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{CART_PAGE.VIEW_MORE}</a>
         {this.state.slider &&
         <Slider label="Order Tracking" isOpen={this.state.slider} closeSlider={this.closeSlider}>
@@ -85,7 +103,7 @@ class OrderTracker extends React.Component {
                   <p className={`${styles.fontW600} ${styles['fs-16']}`}>{orderItem.currency_code} {orderItem.price.final_price.display_value}</p>
                 </Col>
               </div>
-              <div className={`${styles['p-5']} ${styles['pl-35']} ${styles['border-t']}`}>{ORDERS.TRACKING_ID}: {orderItem.trackingId}</div>
+              <div className={`${styles['p-5']} ${styles['pl-35']} ${styles['border-t']}`}>{ORDERS.TRACKING_ID}: {orderItem.return_tracking ? orderItem.return_tracking : orderItem.trackingId}</div>
             </div>
             <div className={`${styles['border-b']} ${styles['p-20']} ${styles['pl-40']}`}>
               {showMsgAndDate}

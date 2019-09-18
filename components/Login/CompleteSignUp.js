@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Dropdown, MenuItem } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
 import { languageDefinations } from '../../utils/lang';
 import { actionCreators, selectors } from '../../store/product';
@@ -65,7 +65,7 @@ class ContinueLogin extends Component {
   componentDidMount() {
     const { getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
-    // this.daysInMonth(moment().month());
+    // this.daysInMonth(moment().tz('Asia/Riyadh').month());
     const minYear = 1900;
     const maxYear = new Date().getFullYear() - 18;
     const newYear = [];
@@ -138,7 +138,7 @@ class ContinueLogin extends Component {
   }
 
   handleMobileNumber({ target }) {
-    if (/^[0-9]*$/gm.test(target.value)) {    
+    if (/^[0-9]*$/gm.test(target.value)) {
       this.setState({
         mobile_no: target.value,
       });
@@ -434,7 +434,7 @@ class ContinueLogin extends Component {
           onClick={this.submit}
         />
         <a className={`${styles['t-c']} ${styles['fs-14']}`} onClick={this.skipAndContinue}>{LOGIN_PAGE.SKIP_AND_CONTINUE}</a>
-        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/user-terms-and-conditions" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/privacy-policy" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/cookie-policy" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span> {LOGIN_PAGE.NAME_TILA}</span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/user-terms" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/privacy-policy" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/cookie-policy" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span> {LOGIN_PAGE.NAME_TILA}</span>
       </div>
     );
   }
@@ -467,4 +467,3 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContinueLogin);
-

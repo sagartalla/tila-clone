@@ -45,10 +45,17 @@ class SavedCards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      card_token: _.find(props.data.cards_list, { default: true }).card_token
+      card_token: _.find(props.data.cards_list, { default: true }).card_token,
+      process: false
     };
     this.selectCard = this.selectCard.bind(this);
     this.proceedToPayment = this.proceedToPayment.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      process: false
+    });
   }
 
   selectCard(card_token) {
@@ -60,7 +67,7 @@ class SavedCards extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.processData && nextProps.processData.iframe_url) {
+    if (nextProps.processData && nextProps.processData.iframe_url && this.state.process) {
       this.setState({
         iframe_url: nextProps.processData.iframe_url
       });
@@ -69,11 +76,16 @@ class SavedCards extends Component {
 
   proceedToPayment() {
     const { data, makeProcessRequest } = this.props;
-    makeProcessRequest({
-      payment_details: [{
-        payment_mode: data.type,
-        card_token: this.state.card_token
-      }]
+    this.setState({
+      process: true
+    }, () => {
+      this.props.disableNewCard();
+      makeProcessRequest({
+        payment_details: [{
+          payment_mode: data.type,
+          card_token: this.state.card_token
+        }]
+      });
     });
   }
 
@@ -89,15 +101,14 @@ class SavedCards extends Component {
   }
 
   render() {
-    const { data, voucherData, showLoading } = this.props;
+    const { data, showLoading } = this.props;
     const { iframe_url } = this.state;
     return (
-      <div className={`${styles['saved-cards']} ${styles['pb-40']}`}>
-        <Voucher voucherData={voucherData} />
+      <div className={`${styles['saved-cards']}`}>
         <h4 className={`${styles['lgt-blue']} ${styles['fontW300']} ${styles['fs-20']} ${styles['pt-25']}`}>{PAYMENT_PAGE.YOUR_SAVED_CREDIT_AND_DEBIT_CARDS}</h4>
         <ul className={`${styles['saved-cards-part']} ${styles['pl-0']}`}>
           {
-            data.cards_list.map((card, index) => {
+            data && data.cards_list && data.cards_list.map((card, index) => {
               return (
                 <li className={`${this.state.card_token === card.card_token ? styles['card-active'] : ''} ${styles['saved-card-item']} ${styles['mt-20']} ${styles['mb-20']}`}>
                   <input
@@ -117,9 +128,22 @@ class SavedCards extends Component {
                       }
                       <span className={`${styles['card-no']}`}>{card.masked_number}</span>
                     </span>
-                    <span className={`${styles['flex']} ${styles['fontW300']} ${styles['thick-gry-clr']}`}>{card.holder_name}</span>
-                    <span className={`${styles['flex']} ${styles['fontW300']} ${styles['thick-gry-clr']}`}>{`${card.expiry_month}/${card.expiry_year}`}</span>
+                    <div>
+                      <span className={`${styles['flex']} ${styles['fontW300']} ${styles['thick-gry-clr']}`}>{card.holder_name}</span>
+                      <span className={`${styles['flex']} ${styles['fontW300']} ${styles['thick-gry-clr']} ${styles['hover-show']}`}>{card.default ? PAYMENT_PAGE.DEFAULT_CARD : ''}</span>
+                    </div>
+                    <div>
+                      <span className={`${styles['flex']} ${styles['fontW300']} ${styles['thick-gry-clr']}`}>{`${card.expiry_month}/${card.expiry_year}`}</span>
+                      <span className={`${styles['flex']} ${styles['fontW300']} ${styles['thick-gry-clr']} ${styles['hover-show']}`}>{card.card_type === 'CREDIT' ? PAYMENT_PAGE.CREDIT_CARD : PAYMENT_PAGE.DEBIT_CARD }</span>
+                    </div>
                   </label>
+                  <Button
+                    className={`${styles['fs-16']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']} ${styles.width33} ${styles['ht-40']} ${styles['float-r']} ${styles['hover-show']} ${styles['mt-20']}`}
+                    onClick={this.proceedToPayment}
+                    btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.currency_code + ' ' + data.amount_to_pay.display_value}
+                    hoverClassName="hoverBlueBackground"
+                    btnLoading={showLoading}
+                  />
                 </li>
               );
             })
@@ -130,13 +154,7 @@ class SavedCards extends Component {
             ?
             <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} class="h-200 desktop:h-376 w-full"></iframe>
             :
-            <Button
-              className={`${styles['fs-16']} ${styles['text-uppercase']} ${styles['pay-btn']} ${styles['border-radius']} ${styles.width33} ${styles['ht-40']} ${styles['new-card-btn']}`}
-              onClick={this.proceedToPayment}
-              btnText={PAYMENT_PAGE.PAY + ' ' + data.amount_to_pay.currency_code + ' ' + data.amount_to_pay.display_value}
-              hoverClassName="hoverBlueBackground"
-              btnLoading={showLoading}
-            />
+            null
         }
       </div>
     );

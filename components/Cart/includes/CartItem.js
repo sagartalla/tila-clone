@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, PanelGroup, Panel } from 'react-bootstrap';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import Cookie from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -27,7 +27,7 @@ const { PDP_PAGE, CART_PAGE, ORDER_PAGE, DELIVERY_ADDR_PAGE } = languageDefinati
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 // const popover = ({
@@ -101,9 +101,7 @@ class CartItem extends React.Component {
       checked: gift_info ? true : false,
       showWarrantyDetails: false,
       selectedPolicy: '',
-      policies_selected: {
-
-      },
+      policies_selected: {},
     };
     this.warrantyChange = this.warrantyChange.bind(this);
   }
@@ -156,7 +154,7 @@ class CartItem extends React.Component {
   }
   selectPolicy = (e) => {
     const { item } = this.props;
-    const { selectedPolicy, policies_selected } = this.state;
+    const { selectedPolicy, policies_selected, warrantyName } = this.state;
     let policyId1  = [];
     Object.keys(item.policies_applied).length > 0 && Object.keys(item.policies_applied).map(newPolicy => {
       Object.keys(policies_selected).map(selected => {
@@ -170,6 +168,8 @@ class CartItem extends React.Component {
     this.props.addToCartAndFetch({
       listing_id: item.listing_id,
       policies_applied: policyId1,
+      changeAddWarranty: true,
+      warrantyName,
     });
     document.getElementById('cart-container').scrollIntoView({ behavior: 'smooth' });
   }
@@ -181,18 +181,29 @@ class CartItem extends React.Component {
     const { selectedPolicy, policies_selected } = this.state;
     policies_selected[warrantyName] = policyId;
     let policyId1  = [];
+    let isMakeApi = false;
     Object.keys(item.policies_applied).length > 0 && Object.keys(item.policies_applied).map(newPolicy => {
-        policies_selected[newPolicy] !== item.policies_applied[newPolicy].policy_id &&
-          policyId1.push(item.policies_applied[newPolicy].policy_id);
+      if (policies_selected[newPolicy] === undefined && policies_selected[newPolicy] !== item.policies_applied[newPolicy].policy_id) {
+        isMakeApi = false;
+      }
+      if (Object.keys(item.policies_applied).length === 1 && policies_selected[newPolicy] === item.policies_applied[newPolicy].policy_id) {
+          policyId1 = [];
+          isMakeApi = true;
+      } else if (Object.keys(item.policies_applied).length > 1 && policies_selected[newPolicy] !== item.policies_applied[newPolicy].policy_id) {
+        policyId1.push(item.policies_applied[newPolicy].policy_id);
+        isMakeApi = true;
+      }
     })
+    isMakeApi && this.props.addToCartAndFetch({
+      listing_id: item.listing_id,
+      policies_applied: policyId1,
+      changeRemoveWarranty: true,
+      warrantyName,
+    });
     this.setState({
       policies_selected,
       selectedPolicy: '',
     });
-      this.props.addToCartAndFetch({
-        listing_id: item.listing_id,
-        policies_applied: policyId1,
-      });
       document.getElementById('cart-container').scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -284,7 +295,7 @@ class CartItem extends React.Component {
                         shipping !== null && (shipping.shippable && (
                           <p className={`${styles['mb-0']}`}>
                             <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{CART_PAGE.SHIPPING} :</span>
-                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping && shipping.shipping_fees && shipping.shipping_fees.display_value && shipping.shipping_fees.display_value ? `(${cur} ${shipping.shipping_fees.display_value})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().add(shipping.shipping_days, 'days').format('LL')}</span>
+                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping && shipping.shipping_fees && shipping.shipping_fees.display_value && shipping.shipping_fees.display_value ? `(${shipping.shipping_fees.currency_code} ${shipping.shipping_fees.display_value})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().tz('Asia/Riyadh').add(shipping.shipping_days, 'days').format('LL')}</span>
                             </span>
                           </p>
                         ))
@@ -380,7 +391,7 @@ class CartItem extends React.Component {
                                 </div>
                                 <div className={`${styles['t-rt']} ${styles.flex}`}>
                                   {shipping.shipping_fees ?
-                                    `${cur} ${shipping.shipping_fees.display_value}`
+                                    `${shipping.shipping_fees.currency_code} ${shipping.shipping_fees.display_value}`
                                     : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} />}
                                 </div>
                               </div>

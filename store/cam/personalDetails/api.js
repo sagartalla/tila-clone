@@ -25,10 +25,10 @@ const downloadPic = (imageId) => {
   })
 }
 
-const uploadProfilePic = (body) => {
+const uploadProfilePic = (body, cid) => {
   return axios.request({
     method: 'POST',
-    url: `${constants.TRANSFORMER_API_URL}/fpts/document-service/upload`,
+    url: `${constants.TRANSFORMER_API_URL}/fpts/document-service/upload?directory=${cid}`,
     data: body,
     headers: {
       'tenant': 'profile-service',
@@ -69,15 +69,8 @@ const forgotPassword = (body) => {
   });
 }
 
-const otpUserUpdate = async(params) => {
-  try {
-    const update = await axios.put(`${constants.CMS_API_URL}/api/v1/user/update`,params)
-    const otpResponse = await sendOtpToMobile()
-
-    return update
-  }catch(error) {
-    return error.response.data
-  }
+const otpUserUpdate = (params) => {
+  return axios.put(`${constants.CMS_API_URL}/api/v1/user/update`,params)
 }
 const sendOtpToMobile = async() => {
   const response =  await axios.post(`${constants.CMS_API_URL}/api/v1/verification/mobile`)

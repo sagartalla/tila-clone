@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { configureUrlQuery } from 'react-url-query';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
+
 import inactiveMonitor from '../utils/inactiveMonitor';
 // import Cookies from 'universal-cookie';
 
 // import { uuidv4 } from '../store/helper/util';
 import { actionCreators } from '../store/auth';
 // import makeStore from '../store';
+// const createHistory = require('history').createBrowserHistory;
 
 // const cookies = new Cookies();
 
-//import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
 class Base extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.fireViewEndCustomEvent = this.fireViewEndCustomEvent.bind(this);
@@ -21,59 +23,42 @@ class Base extends Component {
   }
 
   componentDidMount() {
-
-  //   this.socket = io();
-  //   this.socket.on('now', (data) => {
-  //     console.log('the socket data ::', data);
-  //   });
-
-  //   this.socket.on('connect', (data) =>{
-  //     console.log("Socket ON Connect Event");
-  //     this.socket.emit('join', 'Hello from client');
-  //  });
-
-  //   this.socket.on('connectionSuccess',  (data) => {
-  //       console.log("socket connection success :", data);
-  //   });
-     
-  //   this.socket.on('pagedataupdate', (data) => {
-  //     console.log('Page Data Update Message');
-  //     console.log(data.data);
-  //   })
-    inactiveMonitor();
-    const history = createHistory();
-    configureUrlQuery({ history });
-    // window.elasticApm.setInitialPageLoadName(this.pageName);
-    // if(!cookies.get('sessionId')) {
-    //   this.props.setSessionID(uuidv4())
-    // }
-    digitalData.page.pageInfo[ 'pageType' ]= this.pageName;
-    digitalData.page.pageInfo.pageName = this.pageName;
-    window.appEventData.push({
-      "event": "Page Loaded",
-      "page": {
-        "pageType": this.pageName,
-        "pageName": this.pageName,
-        "pageCategory": ""
+    window.addEventListener('pageshow', function(event) {
+      var historyTraversal = event.persisted || (typeof window.performance !=
+        'undefined' && window.performance.navigation.type === 2);
+      if (historyTraversal) {
+        // Handle page restore.
+        window.location.reload();
       }
     });
+    inactiveMonitor();
+    // const history = createHistory();
+    configureUrlQuery({ history: createBrowserHistory() });
+
+    digitalData.page.pageInfo.pageType = this.pageName;
+    digitalData.page.pageInfo.pageName = this.pageName;
+    window.appEventData.push({
+      event: 'Page Loaded',
+      page: {
+        pageType: this.pageName,
+        pageName: this.pageName,
+        pageCategory: '',
+      },
+    });
     this.fireViewEndCustomEvent();
-
     digitalData.user = this.pageName;
-
     this.fireViewStartCustomEvent();
-
   }
 
   fireViewEndCustomEvent() {
     var event = new CustomEvent('event-view-end', {
-      data: 'testing'
+      data: 'testing',
     });
     document.dispatchEvent(event);
   }
   fireViewStartCustomEvent() {
     var event = new CustomEvent('event-view-start', {
-      data: 'testing view start'
+      data: 'testing view start',
     });
     document.dispatchEvent(event);
   }

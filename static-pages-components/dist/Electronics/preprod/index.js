@@ -11,7 +11,7 @@ const Electronics = () => React.createElement(
       { className: "main-banner" },
       React.createElement(
         "a",
-        { href: `/${lang}/search?q=electronics&isListed=false` },
+        { href: `/${lang}/search?q=electronics&isListed=true` },
         React.createElement("img", { src: `/static/img/landing-page-tech-img/${lang === 'en' ? 'appliances' : 'appliances-ar'}.jpg`, className: "img-responsive" })
       )
     ),
@@ -42,7 +42,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/${lang}/clp/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}` },
+                { href: `/${lang}/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}/clp` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat.png", className: "img-responsive" })
               )
             ),
@@ -64,7 +64,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/${lang}/clp/${lang === 'en' ? 'televisions' : 'التلفزيونات'}` },
+                { href: `/${lang}/${lang === 'en' ? 'televisions' : 'التلفزيونات'}/clp` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat1.png", className: "img-responsive" })
               )
             ),
@@ -87,7 +87,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/${lang}/clp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}` },
+                { href: `/${lang}/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}/clp` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat2.png", className: "img-responsive" })
               )
             ),
@@ -109,7 +109,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/${lang}/clp/${lang === 'en' ? 'Tablets' : 'اجهزة تابلت وايباد'}` },
+                { href: `/${lang}/${lang === 'en' ? 'Tablets' : 'اجهزة تابلت وايباد'}/clp` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat3.png", className: "img-responsive" })
               )
             ),
@@ -131,7 +131,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/${lang}/clp/${lang === 'en' ? 'camera' : 'الة-تصوير'}` },
+                { href: `/${lang}/${lang === 'en' ? 'camera' : 'الة-تصوير'}/clp` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat4.png", className: "img-responsive" })
               )
             ),
@@ -153,7 +153,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/${lang}/clp/${lang === 'en' ? 'gaming' : 'الة-تصوير'}` },
+                { href: `/${lang}/${lang === 'en' ? 'gaming' : 'الة-تصوير'}/clp` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat5.png", className: "img-responsive" })
               )
             ),
@@ -175,7 +175,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/${lang}/clp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}` },
+                { href: `/${lang}/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}/clp` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat6.png", className: "img-responsive" })
               )
             ),
@@ -197,7 +197,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/${lang}/clp/${lang === 'en' ? 'health-care' : 'ملحقات-الهاتف-المحمول'}` },
+                { href: `/${lang}/${lang === 'en' ? 'health-care' : 'ملحقات-الهاتف-المحمول'}/clp` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat7.png", className: "img-responsive" })
               )
             ),
@@ -219,7 +219,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/${lang}/clp/${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}` },
+                { href: `/${lang}/${lang === 'en' ? 'Home Appliances' : 'أجهزة المنزل'}/clp` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat8.png", className: "img-responsive" })
               )
             ),
@@ -241,7 +241,7 @@ const Electronics = () => React.createElement(
               { className: "popular-cat-inn-img" },
               React.createElement(
                 "a",
-                { href: `/${lang}/clp/${lang === 'en' ? 'Home Entertainment' : 'أجهزة ترفيهية'}` },
+                { href: `/${lang}/${lang === 'en' ? 'Home Entertainment' : 'أجهزة ترفيهية'}/clp` },
                 React.createElement("img", { src: "/static/img/landing-page-tech-img/popular-cat9.png", className: "img-responsive" })
               )
             ),
@@ -277,7 +277,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} brand-part-inn` },
             React.createElement(
               "a",
-              { href: `/${lang}/clp/Samsung%20Curve%20TV` },
+              { href: `/${lang}/Samsung%20Curve%20TV/clp` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/samsung.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -323,7 +323,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} brand-part-inn` },
             React.createElement(
               "a",
-              { href: `/${lang}/clp/MI%20A1` },
+              { href: `/${lang}/MI%20A1/clp` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/mi-brand-img.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -419,7 +419,7 @@ const Electronics = () => React.createElement(
             null,
             React.createElement(
               "a",
-              { href: `/${lang}/clp/Gaming%20Console` },
+              { href: `/${lang}/Gaming%20Console/clp` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/gaming-img.jpg", className: "img-responsive" })
             )
           )
@@ -442,7 +442,7 @@ const Electronics = () => React.createElement(
             null,
             React.createElement(
               "a",
-              { href: `/${lang}/clp/Remote%20Control%20Toys` },
+              { href: `/${lang}/Remote%20Control%20Toys/clp` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/gaming-img1.jpg", className: "img-responsive" })
             )
           )
@@ -469,7 +469,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/${lang}/clp/Iron%20box` },
+              { href: `/${lang}/Iron%20box/clp` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen1.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -501,7 +501,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/${lang}/search?q=Refrigerators&language=en&isListed=false` },
+              { href: `/${lang}/search?q=Refrigerators&isListed=true` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -533,7 +533,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/${lang}/clp/Mixer%20and%20Juicer` },
+              { href: `/${lang}/Mixer%20and%20Juicer/clp` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen2.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -565,7 +565,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/${lang}/search?q=washing%20Machines&language=en&isListed=false` },
+              { href: `/${lang}/search?q=washing%20Machines&isListed=true` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen3.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -597,7 +597,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/${lang}/search?q=Vaccum%20Cleaners&language=en&isListed=false` },
+              { href: `/${lang}/search?q=Vaccum%20Cleaners&isListed=true` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen4.jpg", className: "img-responsive" })
             ),
             React.createElement(
@@ -629,7 +629,7 @@ const Electronics = () => React.createElement(
             { className: `${styles['mt-20']} ${styles['relative']} ${styles['home-kitchan-inn']}` },
             React.createElement(
               "a",
-              { href: `/${lang}/clp/Iron%20box` },
+              { href: `/${lang}/Iron%20box/clp` },
               React.createElement("img", { src: "/static/img/landing-page-tech-img/home-kitchen1.jpg", className: "img-responsive" })
             ),
             React.createElement(

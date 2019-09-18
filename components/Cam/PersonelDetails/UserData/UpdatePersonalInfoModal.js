@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'react-bootstrap';
 import DatePicker from 'rc-calendar/lib/Picker';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { toast } from 'react-toastify';
 import { languageDefinations } from '../../../../utils/lang';
 import Btn from '../../../common/Button';

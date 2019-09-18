@@ -28,7 +28,7 @@ const { COMPARE, PDP_PAGE } = languageDefinations();
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 
@@ -180,13 +180,13 @@ class Compare extends Component {
                         </span>
                       </Link>
                       <div>
-                        <span className={styles.fontW600}>{product && product.price && product.price.currency_code} {product && product.price && product.price.display_value}</span>
+                        {product.stock_count && product.stock_count[0] && product.stock_count[0].inventory_list && product.stock_count[0].inventory_list[0].stock_count !== 0 && <span className={styles.fontW600}>{product && product.price && product.price.currency_code} {product && product.price && product.price.display_value}</span>}
                         {/* <span className={`${styles['fs-12']} ${styles['google-clr']}`}>{product.offer}</span> */}
                       </div>
                     </div>
                     <div className={`${styles.flex} ${styles['justify-center']}`}>
                       {
-                        product.listing_id
+                        (product.stock_count && product.stock_count[0] && product.stock_count[0].inventory_list && product.stock_count[0].inventory_list[0].stock_count !== 0)
                           ?
                           <Button
                             className={product.addedToCart ? `${styles['p-10']} ${styles['flex-center']} ${styles['added-btn']}` : `${styles['p-10']} ${styles['flex-center']} ${styles['cart-btn']}`}

@@ -18,7 +18,7 @@ import styles_ar from './orderIssue_ar.styl';
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const cookies = new Cookies();
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 
 const { ORDER_PAGE } = languageDefinations();
 
@@ -76,16 +76,28 @@ class ChooseVariant extends Component {
   }
   selectedSize(variantId,exchangeVariants) {
     const data = exchangeVariants.filter((el,index) => {
-      return el.listing.variant_id === variantId
+      if(el.listing) {
+        return el.listing.variant_id === variantId
+      }
+      return false
+
     })
-    return  data[0].variant_details.attribute_map.size.attribute_values[0].value
+    if(data.length > 0) {
+      return (
+        data[0] && data[0].variant_details && data[0].variant_details.attribute_map && data[0].variant_details.attribute_map.size && data[0].variant_details.attribute_map.size.attribute_values.length > 0 &&
+        <span className={`${styles['fontW600']} ${styles['pt-15']} ${styles['pb-15']} ${styles['flex']}`}>
+          {`Your Orderd Size: ${data[0].variant_details.attribute_map.size.attribute_values[0].value}`}
+        </span>
+     )
+   }
+    return null
   }
   renderExchangeVariants(variants, orderIssue) {
     const { activeListing } = this.state
     const data = variants.map((el,index) => {
         return <li key={'variant_'+index}
           className={`${el.listing !== null && el.listing.total_inventory_count > 0 ? styles['productSize-Button'] : styles['product-StrikeButton']} ${activeListing === (el.listing !== null && el.listing.listing_id) ? styles['active-variant']: ''}`}
-          onClick={(el.listing !== null && el.listing.total_inventory_count > 0) ? this.choosedVariant(el.listing, orderIssue) : this.sizeNotAvailable(false)}
+          onClick={(el.listing !== null && el.listing.total_inventory_count > 0) ? this.choosedVariant(el.listing) : this.sizeNotAvailable(false)}
           >
           {el.variant_details.attribute_map && el.variant_details.attribute_map.size && el.variant_details.attribute_map.size.attribute_values[0].value}
         </li>
@@ -99,7 +111,10 @@ class ChooseVariant extends Component {
     const { message } = this.state;
     return (
       <div className={styles['exchange-items']}>
-
+        {
+          Object.keys(exchangeVariants[0].variant_details.attribute_map).length > 0 ?
+          this.selectedSize(variantId,exchangeVariants) : null
+        }
         <div className={styles['pb-10']}>
           <h5 className={`${styles['fontW600']} ${styles['m-0']}`}>{ORDER_PAGE.SIZE_TO_EXCHANGE} :</h5>
           <span className={`${styles['fs-12']} ${styles['textColor']}`}>
@@ -114,9 +129,9 @@ class ChooseVariant extends Component {
         }
         <div>
           {{
-            errorMsg: <p className={`${styles['error-msg']} ${styles['fs-12']}`}>{ORDER_PAGE.SELECTED_SIZE_NOT_AVAILABLE}
+            errorMsg: <p className={`${styles['error-msg']} ${styles['selected-size']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-center']}`}>{ORDER_PAGE.SELECTED_SIZE_NOT_AVAILABLE}
           </p>,
-          successMsg : <p className={`${styles['success-msg']} ${styles['fs-12']}`}>
+          successMsg : <p className={`${styles['success-msg']} ${styles['fs-12']} ${styles['selected-size']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-center']}`}>
             {ORDER_PAGE.SELECTED_SIZE_AVAILABLE_FOR_EXCHANGE}
           </p>,
           emptyMsg: '',

@@ -29,7 +29,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 const { CART_PAGE } = languageDefinations();
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 class Cart extends Component {
@@ -172,7 +172,7 @@ class Cart extends Component {
       showBlocker, count, showSlider,
     } = this.state;
     const {
-      cartData, editCartDetails, showCheckOutBtn, isLoading, couponData, getCartResults,
+      cartData, editCartDetails, showCheckOutBtn, isLoading, couponData, getCartResults, wishListCount,
     } = this.props;
     return (
       <LoaderBarContext.Consumer>
@@ -213,6 +213,7 @@ class Cart extends Component {
                           addOrRemoveGift={this.addOrRemoveGift}
                           checkoutBtnHandler={this.checkoutBtnHandler}
                           cartStepperInputHandler={this.cartStepperInputHandler}
+                          wishListCount={wishListCount}
                         />
                       </Grid>
                   </LoadingBar>

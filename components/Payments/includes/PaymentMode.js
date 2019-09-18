@@ -38,7 +38,6 @@ const paymentPageIcons = {
   const paymentPageConfig = {
     "PAY_ONLINE": PayOnline,
     "CASH_ON_DELIVERY": CashOnDelivery,
-    'SAVED_CARD': SavedCards,
   }
 
 class PaymentMode extends Component {
@@ -121,6 +120,7 @@ class PaymentMode extends Component {
                                   key={key}
                                   saveCard={props.saveCard}
                                   voucherData={props.paymentModesData.voucherData}
+                                  savedCardsData={props.paymentModesData.savedCardsData}
                                   data={props.paymentModesData.paymentModes[key]}
                                   disableAllOthers={this.disableAllOthers}
                                   transactionId={props.paymentModesData.transaction_id}

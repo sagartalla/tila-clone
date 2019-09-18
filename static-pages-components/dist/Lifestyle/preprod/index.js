@@ -10,7 +10,7 @@ const Lifestyle = () => React.createElement(
       { className: `${styles['flex']} life-banner-inn ${styles['relative']}` },
       React.createElement(
         'a',
-        { href: `/${lang}/clp/Home%20Furnishing` },
+        { href: `/${lang}/Home%20Furnishing/clp` },
         React.createElement('img', { src: `/static/img/landing-page-lifestyle/${lang === 'en' ? 'furnitures' : 'furnitures-ar'}.jpg`, className: 'img-responsive' })
       )
     ),
@@ -36,7 +36,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/clp/Home%20Furnishing` },
+          { href: `/${lang}/Home%20Furnishing/clp` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/sub-banner1.jpg', className: 'img-responsive' })
         )
       ),
@@ -59,7 +59,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/clp/Book%20shelves` },
+          { href: `/${lang}/Book%20shelves/clp` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/sub-banner2.jpg', className: 'img-responsive' })
         )
       )
@@ -86,7 +86,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/clp/travel and leisure` },
+          { href: `/${lang}/travel and leisure/clp` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/essental.jpg', className: 'img-responsive' })
         )
       ),
@@ -109,7 +109,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/clp/fitness` },
+          { href: `/${lang}/fitness/clp` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/essential1.jpg', className: 'img-responsive' })
         )
       )
@@ -138,7 +138,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/clp/cutlery` },
+              { href: `/${lang}/cutlery/clp` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess.jpg', className: 'img-responsive' })
             )
           ),
@@ -165,7 +165,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/clp/Tools%20and%20Hardware` },
+              { href: `/${lang}/Tools%20and%20Hardware/clp` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess1.jpg', className: 'img-responsive' })
             )
           ),
@@ -192,7 +192,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/clp/Healthcare` },
+              { href: `/${lang}/Healthcare/clp` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess2.jpg', className: 'img-responsive' })
             )
           ),
@@ -219,7 +219,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=Gardening%20Tools&language=en&isListed=false` },
+              { href: `/${lang}/search?q=Gardening%20Tools&isListed=true` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess3.jpg', className: 'img-responsive' })
             )
           ),
@@ -246,7 +246,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/clp/Men%27s%20Grooming` },
+              { href: `/${lang}/Men%27s%20Grooming/clp` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess4.jpg', className: 'img-responsive' })
             )
           ),
@@ -273,7 +273,7 @@ const Lifestyle = () => React.createElement(
             { className: `top-selling-img ${styles['flex']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/clp/Home%20Cleaninig` },
+              { href: `/${lang}/Home%20Cleaninig/clp` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/home-ess5.jpg', className: 'img-responsive' })
             )
           ),
@@ -321,7 +321,7 @@ const Lifestyle = () => React.createElement(
               { className: 'hobby-part-img-inn' },
               React.createElement(
                 'a',
-                { href: `/${lang}/search?q=coins&language=en&isListed=false` },
+                { href: `/${lang}/search?q=coins&isListed=true` },
                 React.createElement('img', { src: '/static/img/landing-page-lifestyle/hobby5.jpg', className: 'img-responsive' })
               )
             ),
@@ -347,7 +347,7 @@ const Lifestyle = () => React.createElement(
               { className: 'hobby-part-img-inn' },
               React.createElement(
                 'a',
-                { href: `/${lang}/clp/Art%20and%20Crafts` },
+                { href: `/${lang}/Art%20and%20Crafts/clp` },
                 React.createElement('img', { src: '/static/img/landing-page-lifestyle/hobby1.jpg', className: 'img-responsive' })
               )
             ),
@@ -373,7 +373,7 @@ const Lifestyle = () => React.createElement(
               { className: 'hobby-part-img-inn' },
               React.createElement(
                 'a',
-                { href: `/${lang}/search?q=Sewing&language=en&isListed=false` },
+                { href: `/${lang}/search?q=Sewing&isListed=true` },
                 React.createElement('img', { src: '/static/img/landing-page-lifestyle/hobby2.jpg', className: 'img-responsive' })
               )
             ),
@@ -399,7 +399,7 @@ const Lifestyle = () => React.createElement(
               { className: 'hobby-part-img-inn' },
               React.createElement(
                 'a',
-                { href: `/${lang}/search?q=Antiques&language=en&isListed=false` },
+                { href: `/${lang}/search?q=Antiques&isListed=true` },
                 React.createElement('img', { src: '/static/img/landing-page-lifestyle/hobby3.jpg', className: 'img-responsive' })
               )
             ),
@@ -425,7 +425,7 @@ const Lifestyle = () => React.createElement(
               { className: 'hobby-part-img-inn' },
               React.createElement(
                 'a',
-                { href: `/${lang}/search?q=Toys&language=en&isListed=false` },
+                { href: `/${lang}/search?q=Toys&isListed=true` },
                 React.createElement('img', { src: '/static/img/landing-page-lifestyle/hobby4.jpg', className: 'img-responsive' })
               )
             ),
@@ -451,7 +451,7 @@ const Lifestyle = () => React.createElement(
               { className: 'hobby-part-img-inn' },
               React.createElement(
                 'a',
-                { href: `/${lang}/search?q=Photography&language=en&isListed=false` },
+                { href: `/${lang}/search?q=Photography&isListed=true` },
                 React.createElement('img', { src: '/static/img/landing-page-lifestyle/hobby5.jpg', className: 'img-responsive' })
               )
             ),
@@ -513,7 +513,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/clp/Men%27s%20grooming` },
+          { href: `/${lang}/Men%27s%20grooming/clp` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/health-but1.jpg', className: 'img-responsive' })
         )
       ),
@@ -536,7 +536,7 @@ const Lifestyle = () => React.createElement(
         ),
         React.createElement(
           'a',
-          { href: `/${lang}/clp/kids%20care` },
+          { href: `/${lang}/kids%20care/clp` },
           React.createElement('img', { src: '/static/img/landing-page-lifestyle/health-but2.jpg', className: 'img-responsive' })
         )
       )
@@ -565,7 +565,7 @@ const Lifestyle = () => React.createElement(
             { className: `hobby-part-img ${styles['relative']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=shoe%20mart&language=en&isListed=false` },
+              { href: `/${lang}/search?q=shoe%20mart&isListed=true` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/popular5.jpg', className: 'img-responsive' })
             )
           )
@@ -578,7 +578,7 @@ const Lifestyle = () => React.createElement(
             { className: `hobby-part-img ${styles['relative']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=babyshop&language=en&isListed=false` },
+              { href: `/${lang}/search?q=babyshop&isListed=true` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/popular1.jpg', className: 'img-responsive' })
             )
           )
@@ -591,7 +591,7 @@ const Lifestyle = () => React.createElement(
             { className: `hobby-part-img ${styles['relative']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=max&language=en&isListed=false` },
+              { href: `/${lang}/search?q=max&isListed=true` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/popular2.jpg', className: 'img-responsive' })
             )
           )
@@ -604,7 +604,7 @@ const Lifestyle = () => React.createElement(
             { className: `hobby-part-img ${styles['relative']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=splash&language=en&isListed=false` },
+              { href: `/${lang}/search?q=splash&isListed=true` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/popular3.jpg', className: 'img-responsive' })
             )
           )
@@ -617,7 +617,7 @@ const Lifestyle = () => React.createElement(
             { className: `hobby-part-img ${styles['relative']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=centrepoint&language=en&isListed=false` },
+              { href: `/${lang}/search?q=centrepoint&isListed=true` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/popular4.jpg', className: 'img-responsive' })
             )
           )
@@ -630,7 +630,7 @@ const Lifestyle = () => React.createElement(
             { className: `hobby-part-img ${styles['relative']}` },
             React.createElement(
               'a',
-              { href: `/${lang}/search?q=shoe%20mart&language=en&isListed=false` },
+              { href: `/${lang}/search?q=shoe%20mart&isListed=true` },
               React.createElement('img', { src: '/static/img/landing-page-lifestyle/popular5.jpg', className: 'img-responsive' })
             )
           )

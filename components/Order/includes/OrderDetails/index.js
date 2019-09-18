@@ -18,7 +18,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 const cookies = new Cookies();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 const { ORDER_PAGE } = languageDefinations();
 
@@ -76,6 +76,7 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
                   listingId={item.listingId}
                   tilaPolicy={item.tilaPolicy}
                   tuinId={item.tuinId}
+                  isOrderDetailsPage={true}
                 />
               ))}
             </div>

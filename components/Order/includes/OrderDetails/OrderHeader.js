@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { Modal } from 'react-router-modal';
 import { Row, Col } from 'react-bootstrap';
 
@@ -111,7 +111,7 @@ class OrderHeader extends Component {
                 <div className={`${styles['ff-sb']} ${styles['mb-5']} ${styles['text-capitalize']}`}>{name}</div>
                 <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{address}</div>
               </Col>
-              {order_type !== 'EXCHANGE' ?
+              {order_type !== 'EXCHANGE' && order_type !== 'REPLACEMENT' ?
                 <Col md={5} xs={6} sm={5} className={`${styles['ipad-p-0']} ${styles['thick-border-left']} ${styles['pb-20']} ${styles['pt-20']} ${styles['thin-border-right']}`}>
                   <div>
                     <div className={`${styles['mt-0']} ${styles['flex-center']} ${styles['light-gry-clr']}  ${styles['mb-15']}`}>
@@ -122,7 +122,7 @@ class OrderHeader extends Component {
                   <div className={styles['lne-ht2']}>
                     <div className={`${styles['flex-center']} ${styles['fs-14']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ORDER_DATE}</Col>
-                      <Col md={6} sm={6}>{moment(orderDate).format('MMMM DD, YYYY')}</Col>
+                      <Col md={6} sm={6}>{moment(orderDate).tz('Asia/Riyadh').format('MMMM DD, YYYY')}</Col>
                     </div>
                     <div className={`${styles['flex-center']} ${styles['fs-14']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ITEM_TOTAL}</Col>
@@ -138,15 +138,15 @@ class OrderHeader extends Component {
                 <Col md={4} xs={6} sm={4} className={`${styles['ipad-p-0']} ${styles['pb-20']} ${styles['pt-20']} ${styles['thick-border-left']} ${styles['thin-border-right']}`}>
                   <div className={`${styles['pl-15']} ${styles['pr-15']}`}>
                     <div className={styles.flex}>
-                      <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
+                      <span className={styles['green-label']}>{order_type === 'EXCHANGE' ? ORDER_PAGE.EXCHANGE : ORDER_PAGE.REPLACEMENT}</span>
                     </div>
                     <p className={`${styles['thick-gry-clr']} ${styles['mt-15']} ${styles['mr-50']}`}>
-                      {ORDER_PAGE.THERE_IS_AN_EXCHANGE_ORDER} {ORDER_PAGE.TO_VIEW_PARENT_ORDER}
+                      {order_type === 'EXCHANGE' ? ORDER_PAGE.THERE_IS_AN_EXCHANGE_ORDER : ORDER_PAGE.THERE_IS_AN_REPLACE_ORDER} {ORDER_PAGE.TO_VIEW_PARENT_ORDER}
                       <a> {ORDER_PAGE.CLICK_HERE}</a>
                     </p>
                   </div>
                 </Col>}
-              {order_type !== 'EXCHANGE' &&
+              {order_type !== 'EXCHANGE' && order_type !== 'REPLACEMENT' &&
               <Col md={4} xs={6} sm={4} className={`${styles['pb-20']} ${styles['pt-20']}`}>
                 {/* <Col md={12} xs={6} sm={12}> */}
                 <div className={`${styles['mt-0']} ${styles['light-gry-clr']} ${styles['flex-center']}  ${styles['mb-20']}`}>
@@ -205,7 +205,7 @@ class OrderHeader extends Component {
         </Col> */}
             </div>
           </Col>
-          {order_type !== 'EXCHANGE' &&
+          {order_type !== 'EXCHANGE' && order_type !== 'REPLACEMENT' &&
             <Col md={12} xs={12} sm={12} className={styles['p-15']}>
               <Col md={3} xs={6} sm={3}>
                 {/* <a>{ORDER_PAGE.CHANGE_ADDRESS}</a> */}
@@ -247,10 +247,16 @@ class OrderHeader extends Component {
                 </Col>}
               </Col>
               <Col md={4} xs={6} sm={4}>
-                {/* <span className={`${styles['flex-center']} ${styles['share-cont']}`}>
-                  <SVGComponent clsName={`${styles['share-icon']}`} src="icons/share-icon/share-icon" />
-                  <span className={`${styles['pl-10']}`}><a>{ payments[0].transaction_status == "FAILED" ? ORDER_PAGE.PAYMENT_FAILED:  ORDER_PAGE.SOCIALIZE }</a></span>
-                </span> */}
+                {
+                  payments[0] && payments[0].transaction_status && payments[0].transaction_status === 'FAILED' ?
+                    <span className={`${styles['flex-center']} ${styles['share-cont']}`}>
+                      <SVGComponent clsName={`${styles['share-icon']}`} src="icons/common-icon/erroralert" />
+                      <span className={`${styles['pl-5']} ${styles['google-clr']}`}>{ORDER_PAGE.PAYMENT_FAILED }</span>
+                    </span>
+                  :
+                  ''
+                }
+
               </Col>
             </Col>}
           {/* </Col > */}

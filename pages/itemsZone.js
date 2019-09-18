@@ -7,7 +7,6 @@ import makeStore from '../store';
 import Layout from '../layout/main';
 import Zones from '../components/Zones';
 import Base, { baseActions } from './base';
-import { actionCreators as landingactionCreators } from '../store/landing';
 
 class ItemsZone extends Base {
   pageName = 'ITEMS_ZONE';

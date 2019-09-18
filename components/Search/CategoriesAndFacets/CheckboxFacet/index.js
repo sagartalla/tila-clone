@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox, Panel, Heading, Body, Title } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import SVGCompoent from '../../../common/SVGComponet';
 
-import {languageDefinations} from '../../../../utils/lang';
+import { languageDefinations } from '../../../../utils/lang';
 import RenderFilterBar from './searchInput';
-
-const {SEARCH_PAGE} = languageDefinations();
-const MaxItems = 6;
 
 import lang from '../../../../utils/language';
 
@@ -16,7 +13,10 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../search_en.styl';
 import styles_ar from '../../search_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const { SEARCH_PAGE } = languageDefinations();
+const MaxItems = 6;
+
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 
 class CheckboxFacet extends Component {
@@ -28,66 +28,12 @@ class CheckboxFacet extends Component {
       maxRows: MaxItems,
       isMoreButtonRequired: filter.children.length > MaxItems,
       filterItems: props.selectedFilters.length > 0 ?
-      this.sortSelectedItems(props.selectedFilters): filter.children
+        this.sortSelectedItems(props.selectedFilters): filter.children,
     };
 
     this.onChangeItem = this.onChangeItem.bind(this);
     this.toggleMore = this.toggleMore.bind(this);
     this.onFilterData = this.onFilterData.bind(this);
-  }
-  sortSelectedItems(selectedItems) {
-    const { filter } = this.props
-    let selectedChildren = []
-    let unSelectedChildren = []
-
-    filter.children.forEach((item,index) => {
-      if(selectedItems.indexOf(item.name) !== -1) {
-          selectedChildren.push(item)          
-      } else {
-        unSelectedChildren.push(item)
-      }
-    })
-    return selectedChildren.concat(unSelectedChildren)
-  }
-  onFilterData(value) {
-    const { filter } = this.props;
-    let items = filter.children.filter((item) => {
-      return item.name.toLowerCase().indexOf(value) > -1;
-    });
-    this.setState({
-      filterItems: items,
-    });
-  }
-
-  onChangeItem(value) {
-    return (e) => {
-      const newSelectedItem = [...this.state.selectedItems];
-      if (e.target.checked) {
-        newSelectedItem.push(value.name);
-      } else {
-        newSelectedItem.splice(newSelectedItem.indexOf(value.name), 1);
-      }
-      this.setState({
-        selectedItems: newSelectedItem,
-      }, () => {
-        this.props.selectedCheckbox(this.state.selectedItems)();
-      });
-      this.props.onChangeHandle(value, e);
-    };
-  }
-
-  toggleMore(e) {
-    const { filter } = this.props;
-    const { selectedFilters } = this.props;
-    const { attributeName } = this.state;
-    this.setState({
-      maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length,
-      filterItems: this.sortSelectedItems(this.state.selectedItems),
-    }, () => {
-      this.state.filterItems.length > 20 &&
-      this.props.showBrandsModal(filter, this.state.filterItems, selectedFilters, attributeName)();
-    });
-    this.props.selectedCheckbox(this.state.selectedFilters)();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -102,15 +48,83 @@ class CheckboxFacet extends Component {
     });
   }
 
+  onChangeItem(value) {
+    return (e) => {
+      const newSelectedItem = [...this.state.selectedItems];
+      if (e.target.checked) {
+        newSelectedItem.push(value.name);
+        window.appEventData.push({
+          event: 'LEFTNAV_FILTERS',
+          filters: {
+            attributes: {
+              attributeName: this.props.attributeName,
+            },
+            search: {
+              keyword: this.props.search.category != null ? this.props.search.category : this.props.search.q,
+            },
+            item: newSelectedItem.join(),
+          },
+        });
+      } else {
+        newSelectedItem.splice(newSelectedItem.indexOf(value.name), 1);
+      }
+      this.setState({
+        selectedItems: newSelectedItem,
+      }, () => {
+        this.props.selectedCheckbox(this.state.selectedItems)();
+      });
+      this.props.onChangeHandle(value, e);
+    };
+  }
+
+  onFilterData(value) {
+    const { filter } = this.props;
+    const items = filter.children.filter((item) => {
+      return item.name.toLowerCase().indexOf(value) > -1;
+    });
+    this.setState({
+      filterItems: items,
+    });
+  }
+
+  sortSelectedItems(selectedItems) {
+    const { filter } = this.props;
+    const selectedChildren = [];
+    const unSelectedChildren = [];
+
+    filter.children.forEach((item) => {
+      if (selectedItems.indexOf(item.name) !== -1) {
+        selectedChildren.push(item);
+      } else {
+        unSelectedChildren.push(item);
+      }
+    });
+    return selectedChildren.concat(unSelectedChildren);
+  }
+
+  toggleMore() {
+    const { filter } = this.props;
+    const { selectedFilters } = this.props;
+    const { attributeName } = this.state;
+    this.setState({
+      maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length,
+      filterItems: this.sortSelectedItems(this.state.selectedItems),
+    }, () => {
+      this.state.filterItems.length > 20 &&
+      this.props.showBrandsModal(filter, this.state.filterItems, selectedFilters, attributeName)();
+    });
+    this.props.selectedCheckbox(this.state.selectedFilters)();
+  }
+
   render() {
-    const { filter, index, facets, showPopup } = this.props;
+    const { filter, index } = this.props;
     const { selectedItems, maxRows, filterItems } = this.state;
     return (
       <React.Fragment>
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
         <div className={`${styles['category-list']}`}>
           <Panel.Heading className={styles['category-list-head']}>
-            <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles['fontW600']} ${styles['flx-spacebw-alignc']}`}>
+            <Panel.Title toggle className={`${styles['category-list-title']} ${styles['black-color']} ${styles.fontW600} ${styles['flx-spacebw-alignc']}`}>
               <span className={styles['flt-lbl']}>{filter.name}</span>
               <SVGCompoent clsName={`${styles['expand-icon']}`} src="icons/common-icon/down-arrow-circle" />
             </Panel.Title>
@@ -120,7 +134,7 @@ class CheckboxFacet extends Component {
               <RenderFilterBar
                 onFilterData={this.onFilterData}
                 placeName={`Search ${filter.name}`}
-                className={`${styles['ml-20']}`}               
+                className={`${styles['ml-20']}`}
               /> :
               null
             }

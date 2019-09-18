@@ -28,7 +28,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 
@@ -114,7 +114,7 @@ class Body extends Component {
         break;
       }
       case STEPS.REASONS: {
-        nextStep = issueType === ORDER_ISSUE_TYPES.CANCEL ? STEPS.CHOOSE_PAYMENT_MODE : STEPS.CHOOSE_ADDRESS;
+        nextStep = issueType === ORDER_ISSUE_TYPES.CANCEL ? STEPS.CHOOSE_PAYMENT_MODE : orderIssue.refundOptions.refund_eligible === false ? STEPS.CANCEL_COMPLETE : STEPS.CHOOSE_ADDRESS;
         break;
       }
       case STEPS.CHOOSE_PAYMENT_MODE: {

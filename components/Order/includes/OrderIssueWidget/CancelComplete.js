@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { selectors, actionCreators } from '../../../../store/order';
-import {languageDefinations} from '../../../../utils/lang'
-const {ORDER_PAGE} = languageDefinations()
+import { languageDefinations } from '../../../../utils/lang';
 
 import lang from '../../../../utils/language';
 
@@ -14,10 +13,11 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './orderIssue_en.styl';
 import styles_ar from './orderIssue_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const { ORDER_PAGE } = languageDefinations();
+
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 class CancelComplete extends Component {
-
   componentDidMount() {
     const { orderIssue, submitCancelRequest } = this.props;
     const { selectedItem, selectedReasons } = orderIssue;
@@ -26,7 +26,15 @@ class CancelComplete extends Component {
       reason: selectedReasons.reason,
       comment: selectedReasons.comment,
       subReason: selectedReasons.subReason,
-      refund_mode:orderIssue.cancelRefundMode
+      refund_mode: orderIssue.cancelRefundMode || undefined,
+    }).then(res => {
+      if (res.value.status === 200) {
+        this.props.getOrderDetails({ orderId: orderIssue.orderId });
+      }
+    });
+    this.props.track({
+      event: 'CANCEL_ORDER',
+      orderData: this.props,
     });
   }
 
@@ -54,7 +62,7 @@ class CancelComplete extends Component {
                     <img src="/static/img/bg-img/cancel-sucessfull.jpg" className={styles['img-responsive']}/>
                   </div>
                   <div className={`${styles['pt-20']} ${styles['t-c']} ${styles['cancel-success-label']}`}>
-                    <span className={styles['fs-12']}>{ORDER_PAGE.YOUR_ORDER}&nbsp;<span className={styles['fontW600']}>{selectedItem.name}</span>&nbsp;{ORDER_PAGE.SUCCESSFULL_CANCEL}</span>
+                    <span className={styles['fs-12']}>{ORDER_PAGE.SUCCESSFULL_CANCEL}</span>
                   </div>
                 </div>
                 {/* <div>
@@ -74,7 +82,6 @@ class CancelComplete extends Component {
       </div>
     );
   }
-
 }
 
 CancelComplete.propTypes = {
@@ -82,7 +89,7 @@ CancelComplete.propTypes = {
   loadingStatus: PropTypes.bool.isRequired,
   errorMessege: PropTypes.string.isRequired,
   goToNextStep: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = (store) => {
   return ({
@@ -90,16 +97,18 @@ const mapStateToProps = (store) => {
     errorMessege: selectors.getErrorMessege(store),
     loadingStatus: selectors.getLoadingStatus(store),
     orderIssue: selectors.getOrderIssue(store),
-  })
+  });
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      submitCancelRequest: actionCreators.submitCancelRequest
+      track: actionCreators.track,
+      submitCancelRequest: actionCreators.submitCancelRequest,
+      getOrderDetails: actionCreators.getOrderDetails,
     },
     dispatch,
   );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CancelComplete);

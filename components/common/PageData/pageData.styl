@@ -365,17 +365,19 @@
   .fBanners2
     display flex
     justify-content center
-    width 71.08%
+    width 73.03%
     margin auto
-    margin-top -10%
+    margin-top -90px
     .fb2
       padding 0 5px
+      width 27.6%
       &:nth-child(1) img
         border-top-left-radius 25px
       &:last-child img
         border-top-right-radius 25px
     .fb1
       padding 0 5px
+      width 44.7%
 .bannerSpacing
   margin 30px 0
   .fHeading
@@ -394,7 +396,7 @@
     .fHeading
       font-size 48px
       font-weight 600
-      line-height 0.46
+      margin-bottom 0
     span
       color #666666
       font-size 16px
@@ -411,4 +413,32 @@
   width calc(100% - 10px)
   position relative
   margin auto
-  margin-bottom 2%
+
+.responsively-lazy:not(img)
+  position relative
+  height 0
+
+.responsively-lazy:not(img)>img
+  position absolute
+  top 0
+  left 0
+  width 100%
+  // height 100%
+
+img.responsively-lazy
+  width 100%
+
+keyframe-name = gracefulimage
+.animating-placeholder
+  background-size 2250px 2250px !important
+  background-repeat no-repeat !important
+  background-position 0 0 !important
+  animation keyframe-name 1.5s ease-in-out infinite
+  @keyframes keyframe-name {
+    0% {
+      background-position: top right;
+    }
+    100% {
+      background-position: top left;
+    }
+  }

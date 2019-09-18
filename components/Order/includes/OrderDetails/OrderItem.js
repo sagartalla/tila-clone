@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import SVGComponent from '../../../common/SVGComponet';
 import StatusWidget from '../StatusWidget';
@@ -33,7 +33,7 @@ const { ORDER_PAGE, CART_PAGE, ORDERS } = languageDefinations();
 
 const cookies = new Cookies();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 const RenderButton = ({ callbackMethod, refundType }) => (
@@ -56,11 +56,8 @@ class OrderItem extends Component {
     };
     this.getCurrencyValue = this.getCurrencyValue.bind(this);
   }
-  getCurrencyValue(finalPrice,offerPrice) {
+  getCurrencyValue(finalPrice) {
     const {isDamageProtectionAvailable,isWarrantyAvailable } = this.props
-    if(isDamageProtectionAvailable !== 'NA' || isWarrantyAvailable !== 'NA') {
-    return <span><span className={`${styles['fs-12']}`}>&nbsp;{offerPrice.currency_code}</span>&nbsp;<span>{offerPrice.display_value}</span></span>
-    }
     return <span><span className={`${styles['fs-12']}`}>&nbsp;{finalPrice.currency_code}</span>&nbsp;<span>{finalPrice.display_value}</span></span>
   }
   getWarrantyDuration = (product) => {
@@ -74,7 +71,7 @@ class OrderItem extends Component {
     if (isDamageProtectionAvailable !== 'NA' || isWarrantyAvailable !== 'NA') {
       tilaPolicy.forEach((item) => {
         if (item.policy_type === 'EXTENDED' && item.valid_upto !== null) {
-          warrantyInfo = moment(item.valid_upto).format("MMM Do YY");
+          warrantyInfo = moment(item.valid_upto).tz('Asia/Riyadh').format("MMM Do YY");
         }
       });
     }
@@ -84,7 +81,7 @@ class OrderItem extends Component {
     const { orderItem } = this.props;
     const t = estimates.filter(state => state.status === orderItem.status);
     if (t.length > 0) {
-      return t[0].actual_time ? moment(t[0].actual_time).format('ddd, MMM Do') : '';
+      return t[0].actual_time ? moment(t[0].actual_time).tz('Asia/Riyadh').format('ddd, MMM Do') : '';
     } return '';
   }
   showToolTip = () => {
@@ -96,21 +93,38 @@ class OrderItem extends Component {
   }
   fetchpolicyDetails = (policyData) => {
     const data = [];
-    policyData.forEach((item) => {
-      if (item.policy_type !== 'NORMAL') {
-        data.push(
-          <div className={`${styles['warranty-block']}   ${styles['m-10']}`}>
-            <div className={`${styles['flex']} ${styles['align-end']}`}>
-              <div className={`${styles['warranty-sub-block']}`}>{`${item.policy_type == 'EXTENDED' ? 'Extended Warranty' : 'Damage Protection' }` }</div>
-              <div className={`${styles['width22']} ${styles['font-weight600']}`}>
-              <span className={`${styles['fs-12']}`}>{item.cost.currency_code}</span>&nbsp;
-              {item.cost.display_value}
+    const { isOrderDetailsPage } = this.props;
+    if(isOrderDetailsPage) {
+      policyData.forEach((item) => {
+        if (item.policy_type !== 'NORMAL') {
+          data.push(
+            <div className={`${styles['warranty-block']}   ${styles['m-10']}`}>
+              <div className={`${styles['flex']} ${styles['align-end']}`}>
+                <div className={`${styles['warranty-sub-block']}`}>{`${item.policy_type == 'EXTENDED' ? 'Extended Warranty' : 'Damage Protection' }` }</div>
+                <div className={`${styles['width22']} ${styles['font-weight600']}`}>
+                <span className={`${styles['fs-12']}`}>{item.cost.currency_code}</span>&nbsp;
+                {item.cost.display_value}
+                </div>
               </div>
+              <div className={`${styles['fs-12']} ${styles['ml-10']} ${styles['lgt-black']}`}>{`Duration: ${item.duration}`}</div>
+            </div>);
+        }
+      });
+    } else {
+      policyData.forEach((item) => {
+        if(item.policy_type !== 'NORMAL') {
+          data.push(
+            <div className={`${styles['warranty-block']} ${styles['m-10']} ${styles['inline-flex']} ${styles['p-3']}`}>
+              <span className={`${styles['fs-12']} ${styles['font-weight600']}`}>{item.duration} ,</span>
+              <span className={`${styles['fs-12']} ${styles['lgt-black']} ${styles['pl-4']}`}>
+                {`${item.policy_type == 'EXTENDED' ? 'Extended Warranty' : 'Damage Protection' }` }
+              </span>
             </div>
-            <div className={`${styles['fs-12']} ${styles['ml-10']} ${styles['lgt-black']}`}>{`Duration: ${item.duration}`}</div>
-          </div>);
-      }
-    });
+          )
+        }
+      })
+    }
+
     return data;
   }
   cancelOrder = () => {
@@ -165,6 +179,8 @@ class OrderItem extends Component {
         return 'Return in progress';
       } else if (orderItem.status === 'EXCHANGE_IN_PROGRESS') {
         return 'Exchange in progress';
+      } else if (orderItem.status === 'REPLACEMENT_IN_PROGRESS') {
+        return 'Replace in progress';
       } return '';
     };
 
@@ -173,7 +189,7 @@ class OrderItem extends Component {
         <div>
           <div className={`${styles['fs-14']} ${styles.fontW600}`}>{displayText()}</div>
           <div className={`${styles['ff-t']} ${styles['fs-24']} ${styles['ipad-fs-20']}`}>
-            {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).format('ddd, MMM Do') : this.getDate(orderItem.products[0].state_time_estimates)}
+            {btnType === 'cancel' ? moment(orderItem.products[0].promisedDeliveryDate).tz('Asia/Riyadh').format('ddd, MMM Do') : this.getDate(orderItem.products[0].state_time_estimates)}
           </div>
         </div>
       </div>
@@ -209,6 +225,10 @@ class OrderItem extends Component {
                         <div className={`${styles.flex} ${styles['justify-center']} ${styles['mt-15']}`}>
                           <span className={styles['green-label']}>{ORDER_PAGE.EXCHANGE}</span>
                         </div>}
+                        {product.order_type === 'REPLACEMENT' && product.order_item_type === 'DELIVERY' &&
+                        <div className={`${styles.flex} ${styles['justify-center']} ${styles['mt-15']}`}>
+                          <span className={styles['green-label']}>{ORDER_PAGE.REPLACEMENT}</span>
+                        </div>}
                     </Col>
                     <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
@@ -242,7 +262,7 @@ class OrderItem extends Component {
                             <Col md={5} sm={5} className={`${styles['ipad-pr-0']}`}>
                               {product.price &&
                               <span className={`${styles['direction-ir']} ${styles['justify-end']} ${styles['flex-center']} ${styles['fs-16']} ${styles.fontW600}`}>
-                                {product.orderIds.length} x {this.getCurrencyValue(final_price, offer_price)}
+                                {product.orderIds.length} x {this.getCurrencyValue(final_price)}
                                 <span onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip} className={`${styles.relative} ${styles['tool-tip-parent']} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                                   <span className={`${lang === 'en' ? '' : styles['flip-questionmark']}`}>?</span>
                                   {showToolTip &&
@@ -258,8 +278,13 @@ class OrderItem extends Component {
                                       <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.currency_code} {offer_price.display_value}</span></li>}
                                       {product.gift_info && gift_charge &&
                                         <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{gift_charge.display_value ? `(+) ${gift_charge.currency_code} ${gift_charge.display_value}` : 'FREE'}</span></li>}
-                                      {/* {final_price &&
-                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}> {final_price.currency_code} {final_price.display_value}</span></li>} */}
+                                      <li className={styles['flx-space-bw']}>
+                                        <span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.fontW600}> {shipping_fees.display_value ? `(+) ${shipping_fees.currency_code} ${shipping_fees.display_value}` :
+                                        <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}</span>
+                                      </li>
+                                      {final_price &&
+                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}> {final_price.currency_code} {final_price.display_value}</span></li>}
+
                                     </ul>
                                   </div>}
                                 </span>
@@ -292,12 +317,22 @@ class OrderItem extends Component {
                     {ORDER_PAGE.THERE_IS_AN_EXCHANGE_ORDER}
                     {/* To view the parent order please <a>Click here</a> */}
                   </div>}
+                  {product.order_type === 'REPLACEMENT' && product.order_item_type === 'DELIVERY' &&
+                  <div className={`${styles['pt-5']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']}`}>
+                    {ORDER_PAGE.THERE_IS_AN_REPLACE_ORDER}
+                  </div>}
                 {product.refunds && product.refunds.length > 0 &&
                   <div className={`${styles['pt-15']} ${styles['pb-5']} ${styles['pl-15']} ${styles['border-t']} ${styles.relative}`}>
                     <div className={`${styles['bg-white']} ${styles['fs-12']} ${styles.absolute} ${styles['p-5']} ${styles['border-lg']} ${styles['refund-label']}`}>{ORDER_PAGE.REFUND_STATUS}</div>
                     {product.refunds.map(refund => (
                       <div className={`${styles['flex-center']} ${styles['fs-12']}`}>
-                        <span className={styles['thick-gry-clr']}>{ORDER_PAGE.REFUND_TO}:<span className={`${styles['black-color']} ${styles['ml-10']}`}>{refund.refund_mode === 'WALLET' ? 'Tila Wallet' : 'Card'}</span></span>
+                        <span className={`${styles['thick-gry-clr']} ${styles.flex}`}>{ORDER_PAGE.REFUND_TO}:
+                        <span className={`${styles['black-color']} ${styles['ml-10']} ${styles['ml-10']}`}>
+                        {refund && refund.refund_payment_info && refund.refund_payment_info.length > 0 && refund.refund_payment_info.map(refundVal => (
+                          <div>{refundVal.payment_mode_display_name}</div>
+                        ))}
+                        </span>
+                        </span>
                         {refundStatus(refund)}
                         <span>{refund.amount.display_value} {refund.amount.currency_code}</span>
                       </div>
@@ -310,32 +345,6 @@ class OrderItem extends Component {
                       {ORDER_PAGE.THIS_ORDER_CONTAINS_A_GIFT}
                     </span>
                   </div>}
-                {shipping_fees &&
-                  <div>
-                    <Col md={2}></Col>
-                    <Col md={10}>
-                      <div className=
-                        {`
-                          ${styles['warranty-block']}
-                          ${styles.flex}
-                          ${styles['align-end']}
-                          ${styles['padding-all']}
-                          ${styles[`mb-0`]}
-                          ${styles[`mt-10`]}
-                          ${styles[`mr-10`]}
-                          ${styles[`ml-10`]}
-                          `
-                        }
-                      >
-                        <div className={`${styles.width78} ${styles['font-weight600']}`}>{ORDER_PAGE.SHIPPING}</div>
-                        <div className={`${styles.width22} ${styles['font-weight600']}`}>
-                          {shipping_fees.display_value ? `(+) ${shipping_fees.currency_code} ${shipping_fees.display_value}` :
-                          <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}
-                        </div>
-                      </div>
-                    </Col>
-                  </div>
-                  }
                 {(product.isDamageProtectionAvailable !== 'NA' || product.isWarrantyAvailable !== 'NA') &&
                   <div>
                     <Col md={2}></Col>
@@ -343,37 +352,13 @@ class OrderItem extends Component {
                       <div>{this.fetchpolicyDetails(product.tilaPolicy)}</div>
                     </Col>
                   </div>}
-                {<div>
-                    <Col md={2}></Col>
-                    <Col md={10}>
-                      <div
-                        className={`
-                          ${styles['warranty-block']}
-                          ${styles.flex}
-                          ${styles['align-end']}
-                          ${styles['padding-all']}
-                          ${styles[`mt-0`]}
-                          ${styles[`mb-10`]}
-                          ${styles[`mr-10`]}
-                          ${styles[`ml-10`]}
-                          `}
-                      >
-                        <div className={`${styles.width78} ${styles['font-weight600']}`}>Total:</div>
-                        <div className={`${styles['width22']} ${styles['font-weight600']}`}>
-                           <span>{final_price.currency_code}</span>&nbsp;
-                           <span>{final_price.display_value}</span>
-                        </div>
-                      </div>
-                    </Col>
-                  </div>
-                  }
               </React.Fragment>
             );
           })}
         </Col>
         <Col md={5} sm={5} className={`${styles['thick-border-left']} ${styles['p-0']}`}>
-          {payments && payments.length > 0 && payments[0].transaction_status === 'FAILED' ?
-            <div>{ORDER_PAGE.ORDER_UNSUCCESSFUL}</div>
+          {payments && payments.length > 0 && payments[0] && payments[0].transaction_status && payments[0].transaction_status === 'FAILED' ?
+            <div className={`${styles['unsuccessful-mesg']}`}>{ORDER_PAGE.ORDER_UNSUCCESSFUL}</div>
             :
             <React.Fragment>
               <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>
@@ -449,3 +434,56 @@ export default connect(null, mapDispatchToProps)(OrderItem);
 //   </div>
 //   :
 //   null
+
+
+// {shipping_fees &&
+//   <div>
+//     <Col md={2}></Col>
+//     <Col md={10}>
+//       <div className=
+//         {`
+//           ${styles['warranty-block']}
+//           ${styles.flex}
+//           ${styles['align-end']}
+//           ${styles['padding-all']}
+//           ${styles[`mb-0`]}
+//           ${styles[`mt-10`]}
+//           ${styles[`mr-10`]}
+//           ${styles[`ml-10`]}
+//           `
+//         }
+//       >
+//         <div className={`${styles.width78} ${styles['font-weight600']}`}>{ORDER_PAGE.SHIPPING}</div>
+//         <div className={`${styles.width22} ${styles['font-weight600']}`}>
+//           {shipping_fees.display_value ? `(+) ${shipping_fees.currency_code} ${shipping_fees.display_value}` :
+//           <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}
+//         </div>
+//       </div>
+//     </Col>
+//   </div>
+//   }
+
+// {<div>
+//     <Col md={2}></Col>
+//     <Col md={10}>
+//       <div
+//         className={`
+//           ${styles['warranty-block']}
+//           ${styles.flex}
+//           ${styles['align-end']}
+//           ${styles['padding-all']}
+//           ${styles[`mt-0`]}
+//           ${styles[`mb-10`]}
+//           ${styles[`mr-10`]}
+//           ${styles[`ml-10`]}
+//           `}
+//       >
+//         <div className={`${styles.width78} ${styles['font-weight600']}`}>Total:</div>
+//         <div className={`${styles['width22']} ${styles['font-weight600']}`}>
+//            <span>{final_price.currency_code}</span>&nbsp;
+//            <span>{final_price.display_value}</span>
+//         </div>
+//       </div>
+//     </Col>
+//   </div>
+//   }

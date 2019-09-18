@@ -3,7 +3,7 @@ const Fashion = () => (
   <div className="fashion-main-part">
     <Grid fluid={true} className={styles['p-0']}>
       <div className={`${styles['flex']} fashion-banner-main ${styles['relative']}`}>
-        <a href="/en/search?q=dress&isListed=false">
+        <a href="/en/search?q=dress&isListed=true">
           <img src={`/static/img/landing-page-fashion/${lang === 'en' ? 'womens-clothing' : 'womens-clothing-ar'}.jpg`} className="img-responsive" />
         </a>
         {/* <div className={`${styles['absolute']} ${styles['flex']} ${styles['flex-colum']} banner-label`}>
@@ -40,9 +40,9 @@ const Fashion = () => (
             </Col>
             <Col md={6} className={styles['p-0']}>
               <div className={`${styles['flex']} ${styles['flex-colum']}`}>
-              <span className={`${styles['fs-20']} ${styles['black-color']}`}>Women’s Dress</span>
-              <span className={`${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}`}>When in doubt, wear red.</span>
-              <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}`}>Buy NOW</a></span>
+                <span className={`${styles['fs-20']} ${styles['black-color']}`}>Women’s Dress</span>
+                <span className={`${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}`}>When in doubt, wear red.</span>
+                <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}`}>Buy NOW</a></span>
               </div>
             </Col>
           </div>
@@ -56,9 +56,9 @@ const Fashion = () => (
             </Col>
             <Col md={6} className={styles['p-0']}>
               <div className={`${styles['flex']} ${styles['flex-colum']}`}>
-              <span className={`${styles['fs-20']} ${styles['black-color']}`}>Fitness & Sports</span>
-              <span className={`${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}`}>Take care of your body.</span>
-              <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}`}>Buy NOW</a></span>
+                <span className={`${styles['fs-20']} ${styles['black-color']}`}>Fitness & Sports</span>
+                <span className={`${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}`}>Take care of your body.</span>
+                <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}`}>Buy NOW</a></span>
               </div>
             </Col>
           </div>
@@ -72,9 +72,9 @@ const Fashion = () => (
             </Col>
             <Col md={6} className={styles['p-0']}>
               <div className={`${styles['flex']} ${styles['flex-colum']}`}>
-              <span className={`${styles['fs-20']} ${styles['black-color']}`}>Upto 50% Off on Watches</span>
-              <span className={`${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}`}>They lift you physically & emotionally.</span>
-              <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}`}>Buy NOW</a></span>
+                <span className={`${styles['fs-20']} ${styles['black-color']}`}>Upto 50% Off on Watches</span>
+                <span className={`${styles['fs-12']} ${styles['black-color']} ${styles.fontW300}`}>They lift you physically & emotionally.</span>
+                <span className={`${styles['pt-25']} shop-now-btn`}><a className={`${styles['fs-12']} ${styles.fontW600} ${styles['border-bt-left-radius']}`}>Buy NOW</a></span>
               </div>
             </Col>
           </div>

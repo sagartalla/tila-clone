@@ -30,10 +30,10 @@ const actionCreators = {
     dispatch(actionCreators.getUserProfileInfo());
   }),
 
-  uploadProfilePic: (body) => {
+  uploadProfilePic: (body, cid) => {
     return ({
       type: actions.UPLOAD_PROFILE_PIC,
-      payload: apis.uploadProfilePic(body),
+      payload: apis.uploadProfilePic(body, cid),
     });
   },
   downloadPic: (imageId) => {

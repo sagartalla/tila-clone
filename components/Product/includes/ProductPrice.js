@@ -35,6 +35,7 @@ const ProductPrice = ({
   const {
     strickedPrice: mrp, sellingPrice: sp, offerDiscounts, showPrise: total, totalDiscountMRP: discountMrp, currency,
   } = offerPricing;
+  
   const [showToolTip, toggleTooltip] = useState(false);
   return(
   <div className={`${styles['product-price-bg']} ${styles['border-radius4']}`}>
@@ -109,7 +110,7 @@ const ProductPrice = ({
                         </div>
                       </div>
                       <div>
-                        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {discountMrp && discountMrp.display_value && `${currency} ${discountMrp.display_value}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
+                        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {(discountMrp && discountMrp.display_value) && `${discountMrp.currency_code} ${discountMrp.display_value}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
                       </div>
                     </div>
                         : null

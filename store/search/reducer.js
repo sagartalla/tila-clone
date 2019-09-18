@@ -8,12 +8,12 @@ const initialState = {
   },
   data: {
     searchDetails: {
-      facetFilters: {}
+      facetFilters: {},
     },
     paginationDetails: {},
     productResponse: {
-      products: []
-    }
+      products: [],
+    },
   },
   error: {},
 };
@@ -26,8 +26,8 @@ const searchReducer = typeToReducer({
       let { productResponse } = action.payload.data;
       productResponse = {
         ...productResponse,
-        products: state.data.productResponse.products.concat(productResponse.products)
-      }
+        products: state.data.productResponse.products.concat(productResponse.products),
+      };
       const newState = {
         ...state,
         data: {
@@ -36,13 +36,13 @@ const searchReducer = typeToReducer({
           productResponse,
         },
         ui: {
-          loading: false
-        }
-      }
+          loading: false,
+        },
+      };
       return newState;
     },
     REJECTED: (state, action) => {
-      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } })
+      return Object.assign({}, state, { error: action.payload.message, ui: { loading: false } });
     },
   },
   // [actions.FETCH_IMAGESEARCHDATA]:{
@@ -65,7 +65,7 @@ const searchReducer = typeToReducer({
           ...action.payload.data,
           suggestions: null,
         },
-        ui: { loading: false } })
+        ui: { loading: false } });
     },
     REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
   },
@@ -75,8 +75,8 @@ const searchReducer = typeToReducer({
       ui: {
         ...state.ui,
         showFilters: action.payload.show,
-      }
-    }
+      },
+    };
   },
   [actions.REMOVE_FILTERS]: (state, action) => {
     const params = action.payload;
@@ -92,9 +92,9 @@ const searchReducer = typeToReducer({
           facetFilters: {
             ...state.data.searchDetails.facetFilters,
             [params.parentKey]: fArray,
-          }
-        }
-      }
+          },
+        },
+      },
     };
   },
   [actions.FETCH_SUGGESTIONS]: {
@@ -104,9 +104,9 @@ const searchReducer = typeToReducer({
         ...state,
         data: {
           ...state.data,
-          suggestions: action.payload.data
+          suggestions: action.payload.data,
         },
-        ui: { loading: false } })
+        ui: { loading: false } });
     },
     REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
   },
@@ -120,12 +120,12 @@ const searchReducer = typeToReducer({
           searchDetails: {
             ...state.data.searchDetails,
             ...action.payload.data,
-          }
+          },
         },
-        ui: { loading: false } })
+        ui: { loading: false } });
     },
     REJECTED: (state, action) => Object.assign({}, state, { error: action.payload.message, ui: { loading: false } }),
-  }
+  },
 }, initialState);
 
 export default searchReducer;

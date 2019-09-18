@@ -31,11 +31,11 @@ import styles_ar from '../search_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const { PDP_PAGE } = languageDefinations();
+const { PDP_PAGE, SEARCH_PAGE } = languageDefinations();
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 class Product extends Component {
@@ -43,7 +43,7 @@ class Product extends Component {
     super(props);
     this.state = {
       showNotify: false,
-      src: `${constants.mediaDomain}/${props.media[0]}` || '',
+      src: `${constants.mediaDomain}/${props && props.media && props.media[0]}` || '',
       selectedIndex: 0,
       showLoader: false,
       btnType: '',
@@ -61,6 +61,7 @@ class Product extends Component {
     this.showVariants = this.showVariants.bind(this);
     this.preventDefaultClick = this.preventDefaultClick.bind(this);
     this.renderQuickView = this.renderQuickView.bind(this);
+    this.getSelectedVariants = this.getSelectedVariants.bind(this);
     this.leaveImg = this.leaveImg.bind(this);
   }
   componentWillReceiveProps() {
@@ -82,7 +83,10 @@ class Product extends Component {
     }
     return '';
   }
-
+  getSelectedVariants(variants) {
+    let filteredData = variants.filter((item) => (item.addedToCart && item.productAvailable))
+    return filteredData
+  }
   setImg() {
     this.setState({
       src: '',
@@ -137,6 +141,7 @@ class Product extends Component {
         product_id: productId,
         variant_id: variantId,
         email: userDetails.userCreds && userDetails.userCreds.username,
+        hideNotifyMeToast: true,
       });
       this.showNotifyMeMsg();
     } else {
@@ -294,6 +299,7 @@ class Product extends Component {
     const discountValue = variants.length > 0 &&
       variants[selectedIndex].discount && Math.floor(variants[selectedIndex].discount[0]);
     const tuinId = variants && variants.length > 0 && variants[selectedIndex].tuin && variants[selectedIndex].tuin[0];
+    const buttonText = (variants.length > 1 && this.getSelectedVariants(variants).length > 0) ? true : false
     const listing_id = variants && variants.length > 0 && variants[selectedIndex] && variants[selectedIndex].listingId && variants[selectedIndex].listingId[0];
     const popover = (
       <Popover id={productId}>
@@ -302,7 +308,9 @@ class Product extends Component {
       </Popover>
     );
     let title = displayName.replace(brand, '');
-    title = title.substring(0, title.substring(0, 55).lastIndexOf(' '));
+    if(title.length > 75) {
+      title = title.substring(0, title.substring(0, 75).lastIndexOf(' ')) + '...';
+    }
     const getPriceAndOffer = () => (
       <span>
         <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>&nbsp;
@@ -362,7 +370,7 @@ class Product extends Component {
                         autoplay
                         arrows={false}
                         dots
-                        autoplaySpeed={750}
+                        autoplaySpeed={1000}
                         pauseOnHover={false}
                       >
                         {media && media.slice(0, 5).map((image, index) => (
@@ -393,7 +401,7 @@ class Product extends Component {
                       OncloseVariant={this.closeVariantTab}
                     />
                   }
-                  {showNotifyMeMsg && <div className={`${styles['notifyme-msg']} ${styles['flex-center']} ${styles['justify-center']}`}>We will notify you once this is in stock.</div>}
+                  {showNotifyMeMsg && <div className={`${styles['notifyme-msg']} ${styles['flex-center']} ${styles['justify-center']}`}>{SEARCH_PAGE.WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK}</div>}
                 </div>
                 <div className={styles['desc-cont']}>
                   <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles.flex} ${styles['flex-colum']}`}>
@@ -413,7 +421,7 @@ class Product extends Component {
                           className={`${styles.flex} ${styles['add-to-crt']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
                           onClick={this.showVariants('ADD_TO_CART')}
                           disabled={btnLoading}
-                          btnText={PDP_PAGE.ADD_TO_CART}
+                          btnText={buttonText ? PDP_PAGE.ADD_MORE : PDP_PAGE.ADD_TO_CART}
                           showImage="icons/cart/blue-cart-icon"
                           btnLoading={variants[selectedIndex].listingId && cartButtonLoaders[variants[selectedIndex].listingId[0]]}
                         />
@@ -430,6 +438,16 @@ class Product extends Component {
                       !showNotifyMeMsg && <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
                         <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
                       </a>
+                  }
+                  {
+                    variants.length > 1 &&
+                    <RenderVariants
+                      variantData={variants}
+                      onSelectedVariant={this.selectedVariant}
+                      isvisible={selectedProduct}
+                      OncloseVariant={this.closeVariantTab}
+                      showOnHover={true}
+                    />
                   }
                   <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
                     <span className={styles.flex}>
@@ -469,7 +487,7 @@ class Product extends Component {
         </div>
         <Modal show={showNotify} onHide={this.closeNotify}>
           <Modal.Header closeButton>
-            <Modal.Title>Notify Me</Modal.Title>
+            <Modal.Title>{PDP_PAGE.NOTIFY_ME}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <NotifyMe

@@ -12,7 +12,7 @@ import { cartPlaceHolder } from '../../common/Loader/skeletonPlaceHolder';
 import SVGComponent from '../../common/SVGComponet';
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 import lang from '../../../utils/language';
@@ -38,6 +38,7 @@ const CartBody = ({
   count,
   isLoading,
   openSlider,
+  wishListCount,
 }) => {
   const { items } = data;
   const flag = data && items && items.length;
@@ -64,9 +65,22 @@ const CartBody = ({
             <div className={`${styles.box} ${styles['mb-15']} ${styles['mr-5']}`}>
               <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles['p-40']}`}>
                 <span className={`${styles['flex']} ${styles['no-cart-icon-svg']}`}><SVGComponent clsName={`${styles['no-cart-img']}`} src="icons/cart/no-cart-icon" /></span>
-                <h4 className={`${styles['mb-5']} ${styles['fs-26']}`}>{CART_PAGE.MY_CART_EMPTY}:(</h4>
-                <div className={styles['flex']}>
-                  <a href={`/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} ${styles['mt-40']}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
+                <h4 className={`${styles['mb-5']} ${styles['fs-26']}`}>{CART_PAGE.MY_CART_EMPTY}</h4>
+                <span className={styles['text-gry']}>{CART_PAGE.DONT_WAIT}</span>
+                <div className={`${styles['flex-center']} ${styles['mt-20']}`}>
+                <div>
+                  <a href={`/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
+                </div>
+                {wishListCount > 0 &&
+                <React.Fragment>
+                <div className={`${styles['or-value']} ${styles['flex-center']} ${styles['justify-center']}`}>
+                  OR
+                </div>
+                <div>
+                  <a href={`/${language}/customer/wishlist`} className={`${styles['fp-btn']} ${styles['add-from-wishlist']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} `}>Add from Wishlist</a>
+                </div>
+                </React.Fragment>
+                }
                 </div>
               </div>
             </div>

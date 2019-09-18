@@ -34,7 +34,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const cookies = new Cookies();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 class Payments extends React.Component {
@@ -200,6 +200,7 @@ class Payments extends React.Component {
       paymentConfigJson,
       showLogout: false,
     });
+    this.props.getCartResults();
   }
   checkBoxChange(e) {
     let { showError } = this.state;
@@ -481,7 +482,7 @@ const mapStateToprops = store => ({
   signInLoader: authSelectors.getLoginProgressStatus(store),
   selectedAddress: addressSelectors.getSelectedAddress(store),
   isVerified: authSelectors.isVerified(store),
-  userInfoData: authSelectors.getUserInfo(store),  
+  userInfoData: authSelectors.getUserInfo(store),
   // activeEmailId: authSelectors.getActiveEmailId(store),
 });
 
@@ -500,6 +501,7 @@ const mapDispatchToProps = dispatch =>
       getCartResults: cartAction.getCartResults,
       getUserInfoData: authActionCreators.getUserInfoData,
       getUserProfileInfo: personalActionCreators.getUserProfileInfo,
+
     },
     dispatch,
   );

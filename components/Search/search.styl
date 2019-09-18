@@ -1,12 +1,12 @@
 @import '../../layout/main/executables.styl';
 
 .filter-panel::-webkit-scrollbar,
-.filter-panel::-webkit-scrollbar-thumb 
+.filter-panel::-webkit-scrollbar-thumb
   overflow:visible;
   border-radius: 4px;
 
-.filter-panel::-webkit-scrollbar-thumb 
-  background: rgba(0,0,0,.2); 
+.filter-panel::-webkit-scrollbar-thumb
+  background: rgba(0,0,0,.2);
 
 .filter-panel:hover .cover-bar {
    opacity: 0;
@@ -14,10 +14,45 @@
 }
 
 .brands-list::-webkit-scrollbar,
-.brands-list::-webkit-scrollbar-thumb 
+.brands-list::-webkit-scrollbar-thumb
   overflow:visible;
   border-radius: 4px;
   background: rgba(0,0,0,.2);
+
+.header-filter
+  background #efeff4 
+  height 42px
+  box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
+  position fixed
+  width 100%
+  z-index 43
+
+.header-second-filter
+  background #efeff4 
+  calc(100vh - 380px);
+  box-shadow 0 3px 4px 0 rgba(0, 0, 0, 0.09)
+  position fixed
+  width 100%
+  z-index 43
+  left 0
+  margin-top 22px
+
+.filter-up-arrow
+ width 12px
+ height 12px
+ display block
+ position absolute
+ right 25px
+ top 12px
+
+.filter-down-arrow
+ width 12px
+ height 12px
+ display block
+
+
+.meta-info
+ border-right 1px solid #dadada
 
 .filter-panel
   // width: 215px;
@@ -27,6 +62,7 @@
   max-height calc(100vh - 150px)
   position: sticky !important;
   top 120px
+  padding 0 !important
 
 
   .filter-sub-panel
@@ -49,7 +85,7 @@
   margin-right 0
 }
 
-.search-container-wrap 
+.search-container-wrap
   margin 0 auto
   min-width 978px
   max-width 1680px
@@ -58,6 +94,8 @@
 .search-results
   // width calc(82% - 20px)
   padding 0 0 0 15px
+  .applied-filters-padding
+    padding 0 !important
   .no-search
     width 300px
     text-align center
@@ -78,7 +116,7 @@
       position relative
       float left
       width 100%
-      outline none      
+      outline none
     .loader-div
        width 20px
        height 20px
@@ -113,12 +151,12 @@
     &.active-product
       .product-showsizeDisplay
         visibility visible
-        margin-bottom 0
+        margin-bottom -180px
       .desc-cont
         display none
 
     .product-sizeDisplay
-        z-index 3
+        z-index 9999
         width 100%
         max-width 100%
         position absolute
@@ -134,29 +172,29 @@
           color #535766
           padding-left 10px
         .product-sizeContainer
-          padding 8px 10px 10px
+          padding 5px 10px 5px
           overflow-y auto
           max-height 118px
           box-sizing border-box
           .product-sizebutton
-            border-radius 20px
+            border-radius 12px
             margin 5px
-            min-width 34px
-            min-height 34px
+            min-width 29px
+            min-height 29px
             background-color #ffffff
             border 1px solid #BFC0C6
-            padding 8px
+            padding 5px
             display inline-block
             outline none
             text-align center
           .product-strikebutton
-            border-radius 20px
+            border-radius 12px
             margin 5px
-            min-width 34px
-            min-height 34px
+            min-width 29px
+            min-height 29px
             background-color #ffffff
             border 1px solid #BFC0C6
-            padding 8px
+            padding 5px
             display inline-block
             text-align center
             outline none
@@ -167,10 +205,10 @@
               content ''
               display block
               border-top 1px solid #000
-              width 100%
+              width 112%
               height 100%
               position absolute
-              left 2%
+              left -7%
               top 50%
               transform rotateZ(-45deg)
               transform-origin top
@@ -269,13 +307,14 @@
   .items-list-show
     // .search-val-part
     //   width 45%
+    position relative
     .deliver-to-main
       // width 55%
       // justify-content flex-end
       // align-items center
       .sort-part-inn
         display flex
-        
+
         .sort-arrow
           width 12px
           height 12px
@@ -292,6 +331,7 @@
             // opacity 0
             right 0
             border 0
+            z-index 23
             &:before
               content: ""
               width 0
@@ -334,12 +374,12 @@
 
   .applied-tags
     .applied-tags-i
-      max-width 70%
+      max-width 90%
     .applied-tags-inn
       background linear-gradient(to left, gray-light, white)
       border-radius: 15px
       margin 5px
-      padding 5px
+      height 24px
       border 0.5px solid rgba(192, 192, 192, 0.3)
       .filter-tooltp
         display none
@@ -724,18 +764,16 @@
 .border-left
   border-bottom-left-radius 16px
 
-.main-popup
-  width 760px
 
 .brands-list
   overflow-x auto
   white-space nowrap
   border-radius 2px
-  height 350px
+  height 350px !important
   display flex
   flex-wrap wrap
   flex-direction column
-  margin 10px 0
+  margin 10px 10px
 
 .active
   color black !important
@@ -743,7 +781,7 @@
   border-bottom 2px solid
 
 .select-checkbox-width
-  width 200px
+  width 180px
 
 .notifyme-msg
   background black
@@ -760,5 +798,58 @@
   text-overflow ellipsis
   overflow hidden
   white-space nowrap
-  max-width 150px
+  max-width 190px
 
+.apply-filter
+  height 30px
+  padding 0
+
+.carausal-icon
+ width 25px
+ height 50px
+ display block
+
+.brands-opacity
+ opacity 0.2
+
+
+.productSizeContainer-hover
+  flex-wrap wrap
+ .product-sizebutton
+   border-radius 12px
+   margin 3px
+   min-width 29px
+   min-height 29px
+   background-color #fff
+   border 1px solid #bfc0c6
+   padding 5px
+   display inline-block
+   outline none
+   text-align center
+ .product-strikebutton
+   border-radius 12px
+   margin 3px
+   min-width 29px
+   min-height 29px
+   background-color #ffffff
+   border 1px solid #BFC0C6
+   padding 5px
+   display inline-block
+   text-align center
+   outline none
+   background-color #f7f6f6
+   pointer-events none
+   position relative
+   &::after
+     content ''
+     display block
+     border-top 1px solid #000
+     width 114%
+     height 100%
+     position absolute
+     left -6%
+     top 50%
+     transform rotateZ(-45deg)
+     transform-origin top
+.active-selected
+ background-color #BFC0C6!important

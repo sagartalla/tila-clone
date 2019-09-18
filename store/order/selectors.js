@@ -31,48 +31,60 @@ const getOrderDetails = (store) => {
             isCancelable: val.isCancelable,
             isReturnable: val.isReturnable,
             isExchangable: val.isExchangable,
-            isDamageProtectionAvailable:val.isDamageProtectionAvailable,
-            isWarrantyAvailable:val.isWarrantyAvailable,
-            listingId:val.listingId,
+            isDamageProtectionAvailable: val.isDamageProtectionAvailable,
+            isWarrantyAvailable: val.isWarrantyAvailable,
+            listingId: val.listingId,
             tilaPolicy: val.tilaPolicy,
             tuinId: val.tuinId,
           });
         }, []),
-        _.map(i => ({
-          id: i.order_item_ids[0],
-          listingId:i.listing_id,
-          img: i.variant_info.image_url,
-          name: i.variant_info.title,
-          itemType: i.variant_info.item_type,
-          productId: i.variant_info.product_id,
-          catalogId: i.variant_info.catalog_id,
-          status: i.external_status,
-          state_time_estimates: i.state_time_estimates,
-          price: i.price,
-          currency_code,
-          orderIds: i.order_item_ids,
-          offers: i.offers || [],
-          variantId: i.variant_id,
-          promisedDeliveryDate: i.promised_delivery_date,
-          isDamageProtectionAvailable:i.is_damage_protection_available,
-          isWarrantyAvailable:i.is_warranty_available,
-          isCancelable: i.cancelable,
-          isReturnable: i.returnable,
-          isExchangable: i.exchangeable,
-          order_type: i.order_type,
-          order_item_type: i.order_item_type,
-          order_status: i.status,
-          tilaPolicy:i.tila_care_policies || [],
-          refunds: i.refunds,
-          trackingId: i.item_tracking_id || null,
-          warranty_duration: i.warranty_policy && i.warranty_policy.preferred_policy ?
-            i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
-          gift_info: i.gift_info,
-          variantAttributes: i && i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
-            Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
-          tuinId: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.tuin ?
-            i.variant_info.variant_details.attribute_map.tuin.attribute_values[0].value : null,
-        })),
+        _.map((i) => {
+          let return_tracking = '';
+          if (i.return_exchange_orders && i.return_exchange_orders.length > 0 &&
+              i.return_exchange_orders[0].exchange_return_order_items) {
+            i.return_exchange_orders[0].exchange_return_order_items.forEach((item) => {
+              if (item.order_item_type === 'PICKUP') {
+                return_tracking = item.order_item_tracking_id;
+              }
+            });
+          }
+          return {
+            id: i.order_item_ids[0],
+            listingId: i.listing_id,
+            img: i.variant_info.image_url,
+            name: i.variant_info.title,
+            itemType: i.variant_info.item_type,
+            productId: i.variant_info.product_id,
+            catalogId: i.variant_info.catalog_id,
+            status: i.external_status,
+            state_time_estimates: i.state_time_estimates,
+            price: i.price,
+            currency_code,
+            orderIds: i.order_item_ids,
+            offers: i.offers || [],
+            variantId: i.variant_id,
+            promisedDeliveryDate: i.promised_delivery_date,
+            isDamageProtectionAvailable: i.is_damage_protection_available,
+            isWarrantyAvailable: i.is_warranty_available,
+            isCancelable: i.cancelable,
+            isReturnable: i.returnable,
+            isExchangable: i.exchangeable,
+            order_type: i.order_type,
+            order_item_type: i.order_item_type,
+            order_status: i.status,
+            tilaPolicy: i.tila_care_policies || [],
+            refunds: i.refunds,
+            trackingId: i.item_tracking_id || null,
+            warranty_duration: i.warranty_policy && i.warranty_policy.preferred_policy ?
+              i.warranty_policy.policies[i.warranty_policy.preferred_policy] : {},
+            gift_info: i.gift_info,
+            variantAttributes: i && i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map ?
+              Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
+            tuinId: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.tuin ?
+              i.variant_info.variant_details.attribute_map.tuin.attribute_values[0].value : null,
+            return_tracking,
+          };
+        }),
       )(order_items),
     };
   }
@@ -95,6 +107,10 @@ const getCancelStatus = (store) => {
 const getErrorMessege = (store) => {
   return store.singleOrderReducer.error;
 };
+
+const getErrorCode = (store) => {
+  return store.singleOrderReducer.error_code;
+}
 
 const getLoadingStatus = (store) => {
   return store.singleOrderReducer.ui.loading;
@@ -193,6 +209,6 @@ const getExchangeOptions = (store) => {
 const getOrderTracker = store => store.singleOrderReducer.data.orderTracker;
 
 export {
-  getOrderDetails, getOrderIssue, getOrderInfo, getCancelStatus, getErrorMessege,
+  getOrderDetails, getOrderIssue, getOrderInfo, getCancelStatus, getErrorMessege, getErrorCode,
   getLoadingStatus, getSelectedOrder, getReturnStatus, getExchangeOptions, getOrderTracker,
 };

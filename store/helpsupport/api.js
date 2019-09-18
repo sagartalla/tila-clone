@@ -4,7 +4,7 @@ import constants from '../helper/constants';
 
 const cookies = new Cookies();
 
-const lang = cookies.get('language') || 'en';
+const lang = cookies.get('language') || 'ar';
 
 const getAnswerByKeywordApi = (keyword, params) => axios.post(`${constants.HNS_URL}/answer/search-answers`, [keyword], { params: { ...params, lang } });
 

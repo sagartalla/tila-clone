@@ -42,6 +42,7 @@ class NotifyMe extends React.Component {
     let params = {
       product_id: pId,
       variant_id: variantId,
+      hideNotifyMeToast: true,
     };
     if (email) {
       if (emailRegex.test(email)) {

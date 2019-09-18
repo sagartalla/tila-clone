@@ -33,7 +33,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 const { HEADER_PAGE, PDP_PAGE } = languageDefinations();
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 const auth = cookies.get('auth');
 
@@ -55,13 +55,12 @@ const snMetaObj = {
 class ActionBar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      hideLogin: props.hideLogin,
+    }
     this.logoutClick = this.logoutClick.bind(this);
     this.loginClick = this.loginClick.bind(this);
     this.onBackdropClick = this.onBackdropClick.bind(this);
-  }
-
-  state = {
-    show: '',
   }
 
   componentDidMount() {
@@ -101,10 +100,10 @@ class ActionBar extends Component {
       loginClicked: false,
     });
 
-    if ((nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) || nextProps.showEmailVerifySuccess) {
+    if ((nextProps && nextProps.activeObj && nextProps.activeObj.nextPage === null) || (nextProps.showEmailVerifySuccess && (this.props.showEmailVerifySuccess !== nextProps.showEmailVerifySuccess))) {
       setTimeout(() => {
         closeThankYouScreen();
-        Router.pushRoute(`${window.location.origin}/${cookies.get('language')}`);
+        nextProps.showEmailVerifySuccess && Router.pushRoute(`${window.location.origin}/${cookies.get('language')}`);
       }, 2000);
     }
 
@@ -177,9 +176,11 @@ class ActionBar extends Component {
   loginClick(e) {
     digitalData.page.pageInfo.pageType = 'Login Page';
     digitalData.page.pageInfo.pageName = 'Login Page';
-
-    this.props.showLoginScreen();
-
+    this.setState({
+      hideLogin: false,
+    }, () => {
+      this.props.showLoginScreen();
+    })
     if (!window.sessionStorage.getItem('TILuservisitcount')) {
       window.sessionStorage.setItem('TILuservisitcount', 1);
     }
@@ -204,8 +205,9 @@ class ActionBar extends Component {
 
   render() {
     const {
-      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, hideLogin, showLoginPage,
+      isLoggedIn, cartResults, userInfo, wishListCount, getEditDetails, hideCountry, showLoginPage,
     } = this.props;
+    const { hideLogin } = this.state;
     return (
       <div className={styles['actionbar-wrapper']}>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['justify-center']} ${styles['country-code']}`}>
@@ -264,10 +266,36 @@ class ActionBar extends Component {
           </Dropdown>
         </div>
         <div className={`${styles['action-item']} ${styles['flex-center']} ${styles['account-inn']} ${styles['pt-10']} ${styles['pb-10']} ${styles['justify-center']} ${styles.relative}`}>
-          <Dropdown id="profile-login" className={`${styles['round-shape']} ${styles['flex-center']} ${styles['justify-center']} ${styles.pointer}`}>
+          <Dropdown id="profile-login" className={`${isLoggedIn ? null : `${styles['round-shape']}`} ${styles['flex-center']} ${styles['justify-center']} ${styles.pointer}`}>
             <Dropdown.Toggle style={{ display: 'none' }} />
             <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['profile-icon-main']}`}>
+              { isLoggedIn ?
+              <div className={`${styles['flex-center']} ${styles['flex-colum']}`}>
+                {this.props.imgSource ?
+                  <ProfilePic loader={false} userInfo={userInfo} imgUrl={this.props.imgSource} header/>
+                :
+                  <span className={`${styles['after-login-pf']}`}><SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/account-icon" /></span>
+                }
+                {userInfo.personalInfo ?
+                  <span className={`${styles['fs-10']} ${styles['text-uppercase']}`}>
+                    {userInfo.personalInfo.first_name ?
+                      <span>{userInfo.personalInfo.first_name.charAt(0)}</span>
+                      :
+                      null
+                    }
+                    {userInfo.personalInfo.last_name ?
+                      <span>{userInfo.personalInfo.last_name.charAt(0)}</span>
+                      :
+                      null
+                    }
+                  </span>
+                  :
+                  null
+                }
+              </div>
+            :
               <SVGComponent clsName={`${styles['profile-icon']}`} src="icons/profile-icons/account-icon" />
+            }
             </span>
             { isLoggedIn ?
               <Dropdown.Menu className={`${styles['account-item']}`}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { languageDefinations } from '../../../../utils/lang/';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import lang from '../../../../utils/language';
 import SVGComponent from '../../../common/SVGComponet';
 import styles_en from '../uservault_en.styl';
@@ -52,8 +52,8 @@ const TilaVoucher = (props) => {
                 {transactions.map((transaction, index) => {
                     const { created_date, transaction_description, transaction_type, amount, balance } = transaction;
                     const date_arr = created_date.split('.')[0];
-                    const date = moment(date_arr).format('MMM D, YYYY')
-                    const time = moment(date_arr).format('hh:mm A')
+                    const date = moment(date_arr).tz('Asia/Riyadh').format('MMM D, YYYY')
+                    const time = moment(date_arr).tz('Asia/Riyadh').format('hh:mm A')
                     return (
                         <div className={styles['bodyRow']} key={index}>
                             <Row className={`${styles['m-0']}`}>
@@ -64,20 +64,20 @@ const TilaVoucher = (props) => {
                                     {transaction_description}
                                 </Col>
                                 <Col md={2}>
-                                    {transaction_type === 'CREDIT' ? amount : ''}
+                                    {transaction_type === 'CREDIT' ? amount.display_value : ''}
                                 </Col>
                                 <Col md={2}>
-                                    {transaction_type === 'DEBIT' ? amount : ''}
+                                    {transaction_type === 'DEBIT' ? amount.display_value : ''}
                                 </Col>
                                 <Col md={2}>
-                                    {balance}
+                                    {balance.display_value}
                                 </Col>
                             </Row>
                         </div>
                     );
                 }) }
-            </div> 
-            : 
+            </div>
+            :
             // <div className={`${styles['vault-card-body']} ${styles['p-20-40']}`}>
             //     <h4 className={`${styles['pb-5']} ${styles['fontW300']} ${styles['lgt-blue']}`}>No voucher history</h4>
             // </div>

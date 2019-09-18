@@ -14,7 +14,7 @@ import { languageDefinations } from '../../../utils/lang';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 const cookies = new Cookies();
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 const { CAM, PERSONAL_INFO_MODAL } = languageDefinations();
 
@@ -32,7 +32,7 @@ class UserProfile extends React.Component {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append('file', file);
-    this.props.uploadProfilePic(formData);
+    this.props.uploadProfilePic(formData, this.props.userInfo.contactInfo.user_account_id);
   }
 
   handleMouseOver = () => {

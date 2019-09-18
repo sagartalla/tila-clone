@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, PanelGroup, Panel } from 'react-bootstrap';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import Cookie from 'universal-cookie';
 import SVGComponent from '../../common/SVGComponet';
 import { languageDefinations } from '../../../utils/lang/';
@@ -21,24 +21,22 @@ const {
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
-const warrantyKeys = { extended_warranty: 'Extended Warranty', damage_protection: 'Damage Protection' };
+const warrantyKeys = { extended_warranty: CART_PAGE.EXTENDED_WARRANTY, damage_protection: CART_PAGE.DAMAGE_PROTECTION };
 const warrantyImages = { extended_warranty: <SVGComponent src="icons/common-icon/extended-protection" />, damage_protection: <SVGComponent src="icons/common-icon/damage-protection" /> };
 
 
 class WarrantyPolicy extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   render() {
     const {
-      tila_care_policy, policies_applied, selectedPolicy, warrantyIndex, removeWarranty,
+      tila_care_policy, policies_applied, selectedPolicy, warrantyIndex, removeWarranty, hideRadio,
       addNewWarranty, warrantyChange, deleteWarranty, editWarranty, showWarrantyDetails, warrantyName, selectPolicy,
     } = this.props;
     let isWarrantyExists = false;
@@ -84,11 +82,11 @@ class WarrantyPolicy extends React.Component {
                               </div>}
                               {
                                 warrantyName !== newVal && Object.keys(policies_applied).length === 0 ?
-                                  <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={addNewWarranty}> + Add </button>
-                                  : (warrantyName !== newVal && (((policies_applied[newVal]) === undefined ? true : policies_applied[newVal].policy_type.toLowerCase() !== newVal))) && <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={addNewWarranty}>Add</button>
+                                  <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={addNewWarranty}> + {CART_PAGE.ADD} </button>
+                                  : (warrantyName !== newVal && (((policies_applied[newVal]) === undefined ? true : policies_applied[newVal].policy_type.toLowerCase() !== newVal))) && <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={addNewWarranty}> + {CART_PAGE.ADD}</button>
                               }
                               {selectedPolicy && warrantyName === newVal &&
-                              <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={selectPolicy}> Done </button>}
+                              <button className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['left-radius']} ${styles['add-warranty-btn']}`} data-name={newVal} onClick={selectPolicy}> {CART_PAGE.DONE} </button>}
                             </div>
                             <div>
                               {policies_applied[newVal] && policies_applied[newVal].policy_type.toLowerCase() === newVal && <div className={`${styles['ml-60']} ${styles['mb-10']}`}>{CART_PAGE.DURATION}: {policies_applied[newVal].policy_name}</div>}
@@ -110,8 +108,8 @@ class WarrantyPolicy extends React.Component {
                                     data_policy_id={policyVal.policy_id}
                                     className={`${styles['radio-btn']}`}
                                     onChange={warrantyChange}
-                                    defaultChecked={
-                                     policies_applied[newVal] && policies_applied[newVal].policy_id === policyVal.policy_id}
+                                    checked={
+                                      (selectedPolicy !== '' && warrantyName === newVal && warrantyIndex === index) || (warrantyName !== newVal && policies_applied[newVal] && policies_applied[newVal].policy_id === policyVal.policy_id)}
                                   />
                                   <div style={{ width: '150px' }}>
                                     <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles['mb-0']} ${styles['pr-10']}`}>{policyVal.policy_name}</label>
@@ -119,9 +117,9 @@ class WarrantyPolicy extends React.Component {
                                     <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles.fontW600} ${styles['mb-0']}`}>{policyVal.cost.currency_code} {policyVal.cost.display_value}</label>
                                   </div>
                                   <div className={`${styles['ml-20']}`}>
-                                  {((selectedPolicy !== '' && warrantyName === newVal && warrantyIndex === index) || (Object.keys(policies_applied).length > 0 && policies_applied[newVal] && policies_applied[newVal].policy_id === policyVal.policy_id)) ?
+                                  {((selectedPolicy !== '' && warrantyName === newVal && warrantyIndex === index) || (warrantyName !== newVal && Object.keys(policies_applied).length > 0 && policies_applied[newVal] && policies_applied[newVal].policy_id === policyVal.policy_id)) ?
                                   <div data-name={newVal} data_policy_id={policyVal.policy_id} onClick={removeWarranty}>
-                                  <SVGComponent clsName={`${styles['cross-icon']}`} src="icons/common-icon/cross-icon" /></div> : ''}</div>
+                                  <SVGComponent clsName={`${styles['cross-icon']} ${styles.pointer}`} src="icons/common-icon/cross-icon" /></div> : ''}</div>
                                 </div>
 
                              ))}

@@ -42,38 +42,38 @@ const brandImages = {
     ],
     '#EF6079': [
       {
+        value: 'JustKidding',
+        link: `/${lang}/brand/just%20kidding`,
+      },
+      {
+        value: 'chicco',
+        link: `/${lang}/brand/chicco`,
+      },
+      {
+        value: 'Lego',
+        link: `/${lang}/brand/lego`,
+      },
+      {
         value: 'Pampers',
-        link: `/${lang}/brand/Pampers`,
-      },
-      {
-        value: 'Gucci',
-        link: `/${lang}/brand/Gucci`,
-      },
-      {
-        value: 'Diesel',
-        link: `/${lang}/brand/diesel`,
-      },
-      {
-        value: 'CalkinKlien',
-        link: `/${lang}/brand/Calvin Klien`,
+        link: `/${lang}/brand/pampers`,
       },
     ],
     '#888B8D': [
       {
-        value: 'Armani-exchange',
-        link: `/${lang}/brand/Armani-exchange`,
+        value: 'Casio',
+        link: `/${lang}/brand/casio`,
       },
       {
-        value: 'Nike',
-        link: `/${lang}/brand/nike`,
+        value: 'Rayban',
+        link: `/${lang}/brand/ray-ban`,
       },
       {
-        value: 'Levis',
-        link: `/${lang}/brand/levis`,
+        value: 'Hugo-Boss-Logo',
+        link: `/${lang}/brand/hugoboss`,
       },
       {
-        value: 'Fossil',
-        link: `/${lang}/brand/fossil`,
+        value: 'michael-kors',
+        link: `/${lang}/brand/michael-kors`,
       },
     ],
   },
@@ -98,38 +98,38 @@ const brandImages = {
     ],
     '#EF6079': [
       {
-        value: 'Bvlgari-img',
-        link: `/${lang}/brand/bvlgari`,
+        value: 'DowntoScience',
+        link: `/${lang}/brand/Down%20to%20Science`,
       },
       {
-        value: 'DavidOff',
-        link: `/${lang}/brand/davidoff`,
+        value: 'Naturehike',
+        link: `/${lang}/brand/naturehike`,
       },
       {
-        value: 'Prada',
-        link: `/${lang}/brand/prada`,
+        value: 'bando',
+        link: `/${lang}/brand/ban-do`,
       },
       {
-        value: 'NYX',
-        link: `/${lang}/brand/nyx`,
+        value: 'TedBaker',
+        link: `/${lang}/brand/ted%20baker`,
       },
     ],
     '#888B8D': [
       {
-        value: 'RayBan',
-        link: `/${lang}/brand/ray-ban`,
+        value: 'Adidas',
+        link: `/${lang}/brand/adidas`,
       },
       {
         value: 'Reebok',
-        link: `/${lang}/brand/Reebok`,
+        link: `/${lang}/brand/reebok`,
       },
       {
-        value: 'Tomford',
-        link: `/${lang}/brand/Tomford`,
+        value: 'JackJones',
+        link: `/${lang}/brand/Jack%20&%20Jones`,
       },
       {
-        value: 'Roberto Bianci',
-        link: `/${lang}/brand/roberto bianci`,
+        value: 'Skechers',
+        link: `/${lang}/brand/sketchers`,
       },
     ],
   },
@@ -137,7 +137,7 @@ const brandImages = {
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 class Menu extends Component {
@@ -161,26 +161,26 @@ class Menu extends Component {
     }
     return _.map(childCategory ? childCategory.childCategories : {}, childItem => (
       <li className={`${styles['megamenu-sub-list']} ${depth === 2 ? styles['pl-20'] : null}`} key={childItem.id} onClick={this.props.onLinkClick}>
-          <span className={`${styles.flex}`}>
-            {
-              isFirst
-              ?
-                <SVGComponent clsName={`${styles.flex} ${styles['megamenu-icon']}`} src="icons/messages" />
-              :
-              null
-            }
-            <Link route={`/${language}/clp/${childItem.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}?categoryTree=true&isListed=false&sid=${this.props.parentID},${childItem.id}`}>
-              <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`} style={{color: `${itemColor}`}}>{childItem.displayName}</a>
-            </Link>
-          </span>
+        <span className={`${styles.flex}`}>
           {
-            childItem.childCategories
+            isFirst
             ?
-              <Leaves items={childItem.childCategories} parent={childItem} parentID={`${this.props.parentID},${childItem.id}`} />
+              <SVGComponent clsName={`${styles.flex} ${styles['megamenu-icon']}`} src="icons/messages" />
             :
             null
           }
-        </li>
+          <Link route={`/${language}/${childItem.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/clp?categoryTree=true&isListed=true&sid=${this.props.parentID},${childItem.id}`}>
+            <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`} style={{color: `${itemColor}`}}>{childItem.displayName}</a>
+          </Link>
+        </span>
+        {
+          childItem.childCategories
+          ?
+            <Leaves items={childItem.childCategories} parent={childItem} parentID={`${this.props.parentID},${childItem.id}`} />
+          :
+          null
+        }
+      </li>
     ));
   }
 

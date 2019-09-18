@@ -215,11 +215,11 @@ const getQuery = store => store.searchReducer.data.searchDetails.query;
 const getCategorySearchQuery = store => store.searchReducer.data.searchDetails.choosenCategoryName;
 const optionParams = (store) => {
   let isListed = store.searchReducer.data;
-  isListed = isListed ? isListed.hardCodedValues : false;
-  isListed = isListed ? isListed.isListed : false;
-  isListed = isListed || false;
+  isListed = isListed ? isListed.hardCodedValues : true;
+  isListed = isListed ? isListed.isListed : true;
+  isListed = isListed || true;
   return {
-    language: store.searchReducer.data.geoDetails ? store.searchReducer.data.geoDetails.language : 'en',
+    // language: store.searchReducer.data.geoDetails ? store.searchReducer.data.geoDetails.language : 'en',
     isListed,
   };
 };

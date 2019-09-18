@@ -1,9 +1,9 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import fp, * as _ from 'lodash/fp';
 import shortid from 'shortid';
 
-const getOrdersData = (store) => {
-  const { orders } = store.ordersReducer.data;
+const getOrdersData = (store,data) => {
+  const { orders } = store.ordersReducer[data];
 
   if (orders && orders.length) {
     return orders.map((order) => {
@@ -13,6 +13,8 @@ const getOrdersData = (store) => {
         address,
         created_at,
         total_amount,
+        total_shipping,
+        price,
         currency_code,
         order_items,
         order_type,
@@ -73,10 +75,12 @@ const getOrdersData = (store) => {
           address: address ? `${address.address_line_1}, ${address.address_line_2}, ${address.city}, ${address.postal_code}` : 'no address info',
           phone: address ? `${address.mobile_country_code} ${address.mobile_no}` : 'No phone number',
         },
-        orderDate: moment(created_at).format('MMMM DD, YYYY'),
+        orderDate: moment(created_at).tz('Asia/Riyadh').format('MMMM DD, YYYY'),
         orderTotal: `${total_amount.currency_code} ${total_amount.display_value}`,
         orderCurrency: `${total_amount.currency_code}`,
-        orderAmount: `${total_amount.display_value}`,       
+        orderAmount: `${total_amount.display_value}`,
+        totalOrderPrice:price,
+        shippingCharges:   `${total_shipping.currency_code} ${total_shipping.display_value}`,
         orderItems,
         order_type,
         invoice_id: order_items.find(x => x.invoice_id !== '').invoice_id,
@@ -94,9 +98,16 @@ const getPageDetails = (store) => {
     page,
   };
 };
-
+const getWarrantyPageDetails = (store) => {
+  const { total_pages = 0, total_size = 0, page = 0 } = store.ordersReducer.warrantyData;
+  return {
+    total_pages,
+    total_size,
+    page,
+  };
+}
 const getOrderLoadingState = (store) => {
   return store.ordersReducer.ui.loading;
 };
 
-export { getOrdersData, getPageDetails, getOrderLoadingState };
+export { getOrdersData, getPageDetails, getOrderLoadingState, getWarrantyPageDetails };

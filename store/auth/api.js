@@ -2,7 +2,7 @@ import _ from 'lodash';
 import axios from 'axios';
 import constants from '../helper/constants';
 import Cookies from 'universal-cookie';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { toast } from 'react-toastify';
 import ToastContent from '../../components/common/ToastContent';
 import { languageDefinations } from '../../utils/lang/';
@@ -13,18 +13,31 @@ const cookies = new Cookies();
 
 const getUserInfo = ({ initiateEmailVerification }) => axios.post(`${constants.CMS_API_URL}/api/v1/user/info?initiateEmailVerification=${initiateEmailVerification || false}`);
 
-const track = (event, status) => {
-  window.appEventData.push({
-    event,
-    login:
-      {
-        loginInfo: {
-          pageName: 'login',
-          pageType: 'login',
-          error: status,
+const track = (params) => {
+  switch (params.event) {
+    case 'LOGIN_TYPE':
+      window.appEventData.push({
+        event: params.event,
+        login: {
+          loginInfo: {
+            loginType: params.loginType,
+          },
         },
-      },
-  });
+      });
+      break;
+    case 'CUSTOMER_ID':
+      window.appEventData.push({
+        event: params.event,
+        login:
+          {
+            loginInfo: {
+              accountId: params.loginType,
+            },
+          },
+      });
+      break;
+    default: break;
+  }
 };
 
 const userLogin = params =>
@@ -38,10 +51,16 @@ const userLogin = params =>
     if (status === 200 || status === 202) {
       const { username } = params.metadata;
       if (params.channel === 'BASIC_REGISTER') {
-        track('SignUp', 'Success');
+        track({
+          loginType: 'SignUp',
+          event: 'LOGIN_TYPE',
+        });
         window.dataLayer.push({ event: 'SignUp' });
       } else {
-        track('SignIn', 'Success');
+        track({
+          loginType: 'SignIn',
+          event: 'LOGIN_TYPE',
+        });
       }
       const PTA_PARAMS = {
         p_userid: username,

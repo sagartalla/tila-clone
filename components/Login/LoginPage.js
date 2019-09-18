@@ -8,7 +8,7 @@ import SocialLogin from './SocialLogin';
 import { selectors, actionCreators } from '../../store/auth';
 import SVGComponent from '../common/SVGComponet';
 import Button from '../common/CommonButton';
-import FormValidator from '../common/FormValidator';
+// import FormValidator from '../common/FormValidator';
 import lang from '../../utils/language';
 import { languageDefinations } from '../../utils/lang';
 
@@ -23,24 +23,8 @@ const { LOGIN_PAGE, ORDER_PAGE } = languageDefinations();
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-    this.validations = new FormValidator([
-      {
-        field: 'email',
-        method: this.emptyEmail,
-        message: 'Please enter email ID',
-        validWhen: false,
-      },
-      {
-        field: 'email',
-        method: this.checkValidation,
-        args: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        validWhen: true,
-        message: 'Please enter valid email ID',
-      },
-    ]);
     this.state = {
       email: props.activeEmailId || '',
-      validation: this.validations.valid(),
     };
   }
 
@@ -50,37 +34,16 @@ class LoginPage extends React.Component {
     });
   }
 
-
-  emptyEmail = (fieldValue) => {
-    if (fieldValue === '') {
-      return true;
-    }
-    return false;
-  }
-
-  checkValidation = (fieldValue, state, args) => args.test(fieldValue)
-  
-  handleValidation = () => {
-    const { email } = this.state;
-    const validation = this.validations.validateOnBlur({ email });
-
-    this.setState({ validation });
-  }
-
   submit = (e) => {
     e.preventDefault();
     const { email } = this.state;
-    const validation = this.validations.validate(this.state);
     const { userLogin } = this.props;
-    if (validation.isValid) {
       userLogin(email);
-    }
-    this.setState({ validation });
   }
 
   render() {
     const { loadingStatus, activeEmailId } = this.props;
-    const { email, validation } = this.state;
+    const { email } = this.state;
     return (
       <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
         <div>
@@ -129,18 +92,17 @@ class LoginPage extends React.Component {
                     autoComplete="off"
                     className={styles['m-fs-16']}
                     onChange={this.onChangeField}
-                    onBlur={this.handleValidation}
                     required
                   />
                   <span className={styles.highlight} />
                   <span className={styles.bar} />
                   <label>{LOGIN_PAGE.LOGIN_INPUT_EMAIL_ENTER}</label>
-                  {
+                  {/* {
                     validation.email && validation.email.isInValid ?
                       <div>
                         <span className={`${styles['error-msg']}`}>{validation.email.message}</span>
                       </div> : null
-                  }
+                  } */}
                 </div>
                 <Button
                   className={`${styles['flex-center']} ${styles['sign-in-btn']} ${styles.fontW700} ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']}`}
@@ -152,7 +114,7 @@ class LoginPage extends React.Component {
             </Col>
           </Row>
         </div>
-        <span className={`${styles['m-20']} ${styles['mt-0']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_IN_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/user-terms-and-conditions" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/privacy-policy" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/cookie-policy" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span> {LOGIN_PAGE.NAME_TILA}</span>
+        <span className={`${styles['m-20']} ${styles['mt-0']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_IN_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/user-terms" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/privacy-policy" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/cookie-policy" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span> {LOGIN_PAGE.NAME_TILA}</span>
       </div>
     );
   }

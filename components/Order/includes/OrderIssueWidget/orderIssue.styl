@@ -121,7 +121,12 @@
 
   .retun-btn-part
     width 100%
-    border-bottom-right-radius 20px
+    border-bottom-left-radius 20px
+    &:disabled
+     color white
+     background-color suggest-label-gray
+     border suggest-label-gray 
+     
 
   .comment-cont
     textarea
@@ -143,3 +148,12 @@
   .active-variant
     background-color tila-blk
     color white
+
+.selected-size
+  border 1px solid #ececec
+  border-radius 4px
+  height 40px
+
+.things-to-note
+  background-color light-gray-color
+  line-height 20px

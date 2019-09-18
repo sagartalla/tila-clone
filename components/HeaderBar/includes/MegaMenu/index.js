@@ -23,7 +23,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const cookies = new Cookie();
 
-const language = cookies.get('language') || 'en';
+const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 const {HEADER_PAGE} = languageDefinations()
@@ -68,7 +68,16 @@ class MegaMenu extends Component {
     this.expandedHover = true;
   }
 
-  onLinkClick() {
+  onLinkClick(e) {
+    // console.log(e.currentTarget.getAttribute('displayName'));
+    // console.log(e, this.state, this.props, 'gsfs');
+    console.log(this.props);
+    console.log(this.props.colorScheme);
+
+    this.props.track({
+      eventName: 'MEGA_MENU',
+      tree: e.currentTarget.getAttribute('displayName')+"|"+this.props.colorScheme,
+    }),
     this.setState({
       selectedCategory: null,
       viewAllMenu: false,
@@ -142,7 +151,7 @@ class MegaMenu extends Component {
                     style={ (itemColor && hoverItem === item.id) ? { borderBottom: `4px solid ${itemColor}` } : {} }
                     >
                     <div>
-                      {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=false`}> */}
+                      {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
                       <Link route={`/${language}/${this.getLandingPageLink(item.sid)}`}>
                         <a>{item.displayName}</a>
                       </Link>
@@ -197,6 +206,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getMegamenu: actionCreators.getMegamenu,
+      track: actionCreators.track,
     },
     dispatch,
   );

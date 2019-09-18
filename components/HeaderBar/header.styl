@@ -8,6 +8,7 @@
   z-index: 99;
   background: #fff;
   width 100%
+  
   .header-container-inn
     background-color white
     width 100%
@@ -184,7 +185,7 @@
       box-shadow: 0 0 7px 1px rgba(0,0,0,0.07);
       border: 0;
       width: 340px;
-      top: 38px;
+      top: 47px;
       margin: 0;
       &:before
         content ''
@@ -204,12 +205,23 @@
       display block
 
   .account-inn
+    .after-login-pf
+      border 1px solid border-gray
+      width 28px
+      height 28px
+      border-radius 50%
+      display flex
+      align-items center
+      justify-content center
+      .profile-icon
+        width 12px
+        height 14px
     .account-item
       padding: 0;
       box-shadow: 0 0 7px 1px rgba(0,0,0,0.07);
       border: 0;
       width: 230px;
-      top: 39px;
+      top: 48px;
       margin: 0;
       &:before
         content ''
@@ -237,7 +249,7 @@
       box-shadow: 0 0 7px 1px rgba(0,0,0,0.07);
       border: 0;
       width: 340px;
-      top: 38px;
+      top: 46px;
       margin: 0;     
       &:before
         content ''
@@ -275,8 +287,8 @@
 .round-shape
     border-radius: 50%;
     border: 1px solid #dddddd;
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 38px;
   
   .profile-icon-main
     .profile-icon
@@ -316,8 +328,9 @@
   padding 10px
   background-color login-bg-gray
 
-.megamenu-wrapper ul li a:hover
+.megamenu-wrapper ul li a:hover, .megamenu-wrapper ul li a:focus
   color white
+  text-decoration none
 
 .megamenu-wrapper
   overflow hidden
@@ -484,7 +497,7 @@ nav
 
 .overlap {
     position: absolute;
-    padding: 9px 21px;
+    padding: 9px 20px;
     font-size: 16px;
     color: light-gray-clr;
     opacity: 0.6;

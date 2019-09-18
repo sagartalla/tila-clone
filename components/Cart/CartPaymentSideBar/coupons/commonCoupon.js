@@ -1,5 +1,5 @@
 
-import moment from 'moment';
+import moment from 'moment-timezone';
 import lang from '../../../../utils/language';
 import SVGComponent from '../../../common/SVGComponet';
 
@@ -29,7 +29,7 @@ const coupons = props => (
             </div>
             <div className={`${styles.wordBreak} ${styles['p-10']}`}>{data.description}</div>
             {props.showExpiredCoupons ?
-            <div className={`${styles['thick-red-clr']} ${styles['p-10']}`}>{COUPON_OFFERS.EXPIRED_ON} &nbsp;{moment(data.ends_on).format('MM/DD/YYYY')}</div>
+            <div className={`${styles['thick-red-clr']} ${styles['p-10']}`}>{COUPON_OFFERS.EXPIRED_ON} &nbsp;{moment(data.ends_on).tz('Asia/Riyadh').format('MM/DD/YYYY')}</div>
             :
             <div className={`${styles['p-10']} ${styles['flex-center']} ${styles['justify-between']} ${styles.flex}`}>
               <div className={`${styles['lgt-blue']} ${styles.pointer} ${styles.flex}`} data-coupon={JSON.stringify(data)} data-title="terms" onClick={props.showPopup}>{COUPON_OFFERS.VIEW_TERMS}
@@ -67,4 +67,3 @@ const coupons = props => (
      );
 
 export default coupons;
-
