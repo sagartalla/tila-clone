@@ -33,6 +33,8 @@ class GeoWidget extends Component {
       ...shippingInfo,
       showModal: false,
       showServingLocations: false,
+      showLocationBlockMsg: false,
+
     };
     this.onChangeCity = this.onChangeCity.bind(this);
     this.deleteCity = this.deleteCity.bind(this);    
@@ -40,14 +42,19 @@ class GeoWidget extends Component {
     this.deriveCityFromLatLng = this.deriveCityFromLatLng.bind(this);
     this.locateMe = this.locateMe.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
-    this.getDataFromMap = this.getDataFromMap.bind(this);    
+    this.getDataFromMap = this.getDataFromMap.bind(this);
   }
 
   componentDidMount() {
     const { getGeoShippingData, getCitiesByCountryCode } = this.props;
     getCitiesByCountryCode(cookies.get('country'));
     getGeoShippingData();
-    // this.locateMe();
+    if (Number(window.sessionStorage.getItem('TiLaLocation')) !== 1) {
+      this.locateMe(); 
+    }
+    if (!window.sessionStorage.getItem('TiLaLocation')) {
+      window.sessionStorage.setItem('TiLaLocation', 1);
+    }
     document.addEventListener('click', this.handleOutsideClick, false);
   }
 
@@ -69,6 +76,7 @@ class GeoWidget extends Component {
     this.setState({
       displayCity,
       showCitiesData: true,
+      showLocationBlockMsg: false,
     });
     autoCompleteCity(e.target.value);
   }
@@ -89,8 +97,12 @@ class GeoWidget extends Component {
       displayCity: searchValue,
     });
   }
-  locateMe() {
+  locateMe(e) {
     debugger;
+    const param = e !== undefined  && e.target && e.target.getAttribute('data-val');
+    this.setState({
+      detectLocationVal: param,
+    });
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         debugger;
@@ -104,7 +116,7 @@ class GeoWidget extends Component {
         this.deriveCityFromLatLng(lng, lat);
       }, (error) => {
         console.log(error);
-        this.openModal();
+        param ? this.openToast() : this.openModal();
       });
     } else {
       alert('Browser does not support');
@@ -126,7 +138,6 @@ class GeoWidget extends Component {
 
   deriveCityFromLatLng = (lng, lat) => {
     const { deriveCity } = this.props;
-    debugger;
     deriveCity({
       longitude: lng,
       latitude: lat,
@@ -136,6 +147,7 @@ class GeoWidget extends Component {
         const cityCountryObj = this.fetchCountryName(res.value.address_components);
 
         cityCountryObj.address = res.value.formatted_address;
+        localStorage.setItem('allowedLocation', true); 
 
         this.getDataFromMap({
           lat, lng, cityCountryObj,
@@ -183,6 +195,12 @@ class GeoWidget extends Component {
     })
   }
 
+  openToast = () => {
+    this.setState({
+      showLocationBlockMsg: true,
+    });
+  }
+
   selectCityFromSuggesstions(e) {
     const city = e.currentTarget.getAttribute('data-code');
     const displayCity = e.currentTarget.getAttribute('data-id');
@@ -211,7 +229,7 @@ class GeoWidget extends Component {
   }
 
   closeModal = () => {
-    debugger;
+    const { detectLocationVal } = this.state;
     const { getAllDefaultCities } = this.props;
     for (let i = 0; i < getAllDefaultCities.length; i += 1) {
       if(getAllDefaultCities[i].city_name === 'Riyadh') {
@@ -233,7 +251,7 @@ class GeoWidget extends Component {
     const {
       geoShippingData, hideLabel, getAllCities, isPdp,
     } = this.props;
-    const { showCitiesData, showModal, showServingLocations } = this.state;
+    const { showCitiesData, showModal, showServingLocations, showLocationBlockMsg } = this.state;
     return (
       <div className={`${styles['flex-center']} ${styles['delovery-inn']} ${styles['pr-5']}`}>
         {
@@ -263,30 +281,32 @@ class GeoWidget extends Component {
               />
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
-            {showCitiesData && this.state.displayCity === '' &&
+            {showLocationBlockMsg ? <div className={`${styles['block-location-msg']} ${styles['thick-red-clr']} ${styles['p-10']}`}>You have blocked TiLa from tracking your Location. To use this, change your location settings in browser</div> : ''}
+            {!localStorage.getItem('allowedLocation') && !showLocationBlockMsg && showCitiesData && this.state.displayCity === '' &&
             <div className={`${styles['detect-location']} ${styles['margin-5']}`}>
             <span className={`${styles.flex}`}>
                 <SVGCompoent clsName={`${styles['location-icon']}`} src="icons/common-icon/icon-locate-me" />
-                <div className={`${styles['flex']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>{SEARCH_PAGE.DETECT_LOCATION}</div>
+                <div className={`${styles['flex']} ${styles['pl-5']} ${styles.pointer}`} data-val="detect" onClick={this.locateMe}>{SEARCH_PAGE.DETECT_LOCATION}</div>
                 </span>
                 <div className={`${styles['border-b']} ${styles['margin-5']}`}></div>
                 <div className={`${styles.flex} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>{SEARCH_PAGE.SELECT_CITY_BELOW}</div>
                 </div>
                 }
-              {showCitiesData && getAllCities.length > 0 ? getAllCities.map((value, index) => (
+              {!showLocationBlockMsg && showCitiesData && getAllCities.length > 0 ? getAllCities.map((value, index) => (
                 <MenuItem data-id={value.city_name} data-code={value.city_code} onClick={this.selectCityFromSuggesstions} onFocus={this.mouseOver} eventKey={index + 1} key={value.city_name}>
                   <a className={`${styles['black-color']}`}>
                       <span>{value.city_name}</span>
                     </a>
                 </MenuItem>)) :
-                showCitiesData &&
+                showCitiesData && !showLocationBlockMsg &&
                 <div className={`${styles['margin-5']}`}>
                 <div className={`${styles['thick-red-clr']} ${styles['flex']} ${styles['justify-center']}`}>{SEARCH_PAGE.NO_MATCHING_SAUDI_CITY}</div>
-                <div className={`${styles['border-b']} ${styles['margin-5']}`}></div>
+                {!localStorage.getItem('allowedLocation') && <div className={`${styles['border-b']} ${styles['margin-5']}`}></div>}
+                {!localStorage.getItem('allowedLocation') &&
                 <span className={`${styles.flex} ${styles['justify-center']}`}>
                 <SVGCompoent clsName={`${styles['location-icon']}`} src="icons/common-icon/icon-locate-me" />
-                <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pl-5']} ${styles.pointer}`} onClick={this.locateMe}>{SEARCH_PAGE.DETECT_LOCATION}</div>                
-                </span>
+                <div className={`${styles['flex']} ${styles['justify-center']} ${styles['pl-5']} ${styles.pointer}`} data-val="detect" onClick={this.locateMe}>{SEARCH_PAGE.DETECT_LOCATION}</div>                
+                </span>}
                 </div>           
               }
             </Dropdown.Menu>
