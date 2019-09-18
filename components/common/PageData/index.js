@@ -1,9 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
 import { Row } from "react-bootstrap";
-import dynamic from "next/dynamic";
-const Image = dynamic(import("react-graceful-image"), { ssr: false });
-
 import DT from "./includes/DT";
 import FT from "./includes/FT";
 import BT2a from "./includes/BT2a";
@@ -25,7 +22,7 @@ import CBT3a from "./includes/CBT3a";
 import CBT8a from "./includes/CBT8a";
 import ST1a from "./includes/ST1a";
 import CBT5b from "./includes/CBT5b";
-import BT_23467 from './includes/BT23467';
+import BT from './includes/BT';
 import CT1 from './includes/CT1';
 import CT1a from './includes/CT1a';
 import BT6a from './includes/BT6a'
@@ -164,13 +161,7 @@ class PageData extends React.Component {
       //       </div>
       //     </div>
       //   );
-      case 'BT2':
-      case 'BT3':
-      case 'BT4':
-      case 'BT6':
-      case 'BT7': {
-        return <BT_23467 content = {content}/>
-      }
+ 
       case 'CBT6a': {
         
         return (
@@ -239,59 +230,13 @@ class PageData extends React.Component {
 			//       </div>
 			//     </div>
 			//   );
+			case "BT1":
 			case "BT2":
 			case "BT3":
 			case "BT4":
 			case "BT6":
 			case "BT7": {
-				const { banners } = content.data[lang];
-				return (
-					<div className={`${styles["display-banner-i"]} `}>
-						{content.data[lang].title && (
-							<h3
-								className={`${styles["thick-gry-clr"]} ${styles["fs-20"]} ${
-									styles["mt-0"]
-								} ${styles["pl-10"]} ${styles["pr-10"]}`}
-							>
-								{content.data[lang].title}
-							</h3>
-						)}
-						<div className={`${styles["banner-prt-main"]}`}>
-							{banners.length > 0 &&
-								banners.map(banner => (
-									<div
-										className={styles["banner-inn-prt"]}
-										style={{ width: `${100 / banners.length}%` }}
-									>
-										<div
-											className={`${styles["responsively-lazy"]} ${
-												styles["sub-banr-img"]
-											}`}
-											style={{
-												paddingBottom: `${(100 * banner.config.height) /
-													banner.config.width}%`
-											}}
-										>
-											<a
-												href={banner.link}
-												rel="noopener noreferrer"
-												target="_blank"
-											>
-												<Image
-													src={banner.img}
-													className={`${styles["animating-placeholder"]} ${
-														styles["inside-bnr"]
-													}`}
-													placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
-													alt={banner.display_name}
-												/>
-											</a>
-										</div>
-									</div>
-								))}
-						</div>
-					</div>
-				);
+				return <BT content = {content}/>
 			}
 			case "CBT6a": {
 				return (
