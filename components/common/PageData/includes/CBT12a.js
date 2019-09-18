@@ -49,8 +49,6 @@ class CBT12a extends Component {
 										} ${styles["img-responsive"]}`}
 										placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 										alt={banners[0].display_name}
-										width={banners[0].config.width}
-										height={banners[0].config.height}
 									/>
 								</div>
 							</a>
@@ -77,8 +75,6 @@ class CBT12a extends Component {
 										} ${styles["img-responsive"]}`}
 										placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 										alt={banners[1].display_name}
-										width={banners[1].config.width}
-										height={banners[1].config.height}
 									/>
 								</div>
 							</a>
@@ -107,8 +103,6 @@ class CBT12a extends Component {
 										} ${styles["img-responsive"]}`}
 										placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 										alt={banners[2].display_name}
-										width={banners[2].config.width}
-										height={banners[2].config.height}
 									/>
 								</div>
 							</a>
@@ -138,8 +132,6 @@ class CBT12a extends Component {
 											} ${styles["img-responsive"]}`}
 											placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 											alt={banners[3].display_name}
-											width={banners[3].config.width}
-											height={banners[3].config.height}
 										/>
 									</div>
 								</a>
@@ -168,8 +160,6 @@ class CBT12a extends Component {
 											} ${styles["img-responsive"]}`}
 											placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 											alt={banners[4].display_name}
-											width={banners[4].config.width}
-											height={banners[4].config.height}
 										/>
 									</div>
 								</a>
@@ -201,8 +191,6 @@ class CBT12a extends Component {
 										} ${styles["img-responsive"]}`}
 										placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 										alt={banners[5].display_name}
-										width={banners[5].config.width}
-										height={banners[5].config.height}
 									/>
 								</div>
 							</a>
@@ -229,8 +217,6 @@ class CBT12a extends Component {
 										} ${styles["img-responsive"]}`}
 										placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 										alt={banners[6].display_name}
-										width={banners[6].config.width}
-										height={banners[6].config.height}
 									/>
 								</div>
 							</a>
@@ -261,8 +247,6 @@ class CBT12a extends Component {
 											} ${styles["img-responsive"]}`}
 											placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 											alt={banners[7].display_name}
-											width={banners[7].config.width}
-											height={banners[7].config.height}
 										/>
 									</div>
 								</a>
@@ -291,8 +275,6 @@ class CBT12a extends Component {
 											} ${styles["img-responsive"]}`}
 											placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 											alt={banners[8].display_name}
-											width={banners[8].config.width}
-											height={banners[8].config.height}
 										/>
 									</div>
 								</a>
@@ -320,8 +302,6 @@ class CBT12a extends Component {
 										} ${styles["img-responsive"]}`}
 										placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 										alt={banners[9].display_name}
-										width={banners[9].config.width}
-										height={banners[9].config.height}
 									/>
 								</div>
 							</a>

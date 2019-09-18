@@ -68,7 +68,7 @@ const InstaCheckoutDetails = ({
   const getTabPanelData = (data) => {
     let filteredData = data.payment_options_available;
     let savedCards = data.payment_options_available.filter(item => item.type === 'SAVED_CARD')[0] || {};
-    savedCards = savedCards.cards_list;
+    savedCards = savedCards && savedCards.cards_list;
     if (filteredData.length > 0) {
       return filteredData.map(item => (
         <TabPanel

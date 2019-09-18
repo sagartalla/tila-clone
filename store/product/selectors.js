@@ -142,6 +142,7 @@ const getProduct = (store, variantId) => {
     isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_details.product_id) !== -1,
     wishlistId,
     tuin: catalogAttributeMap.tuin ? catalogAttributeMap.tuin.attribute_values[0].value : '',
+    newVariantId: product_details && product_details.product_details_vo && product_details.product_details_vo.cached_variant && Object.keys(product_details.product_details_vo.cached_variant)[0],
   };
 };
 const getTilaPolicy = (store) => {

@@ -247,7 +247,7 @@ class Search extends Component {
               </div>
         <LoadingBar loadComponent={loadComponent} pathname={pathname} >
           <Grid id="search-container" className={`${styles['pt-60']} ${styles.relative} ${styles['search-container-wrap']}`}>
-            <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
+            <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
               <NoSSR>
                 <CategoriesAndFacets search={query} showPopup={showModal} showBrandsModal={this.showBrandsModal} selectedCheckbox={this.selectedCheckbox} clearSelectedItem={this.clearSelectedItem} />
               </NoSSR>

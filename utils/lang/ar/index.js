@@ -207,6 +207,7 @@ export const AR_KEYWORDS = {
     "DAYS": "الأيام",
     "PRODUCT_DETAILS": "تفاصيل منتجك",
     "ADD_TO_CART": "ضيفها ل عربة التسوق",
+    "ADD_MORE": 'ADD MORE',   
     "BUY_NOW": "اشتري اللحين",
     "NOTIFY_ME": "نبهني",
     "BUY_FOR": "أشتري ل...",
@@ -443,6 +444,7 @@ export const AR_KEYWORDS = {
     "SELECT_CITY_BELOW": 'Or select city below',
     "NO_MATCHING_SAUDI_CITY": 'No matching Saudi city',
     "OKAY": 'OKAY',
+    "WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK": 'We will email you once this is in stock.',    
   },
   "FOOTER_PAGE": {
     "GOT_QUESTION": "عندك أي سؤال؟",
@@ -755,6 +757,15 @@ export const AR_KEYWORDS = {
     "CLICK_HERE": "Click here",
     "YOUR_ITEM_IS_OUT_FOR_DELIVERY": "البند الخاص بك هو خارج للتسليم",
     "YOUR_ITEM_IS_DELIVERED": "يتم تسليم البند الخاص بك",
+    YOUR_ITEM_RETURN_REQUESTED: 'Your return request is intiated',
+    YOUR_ITEM_PICKED: 'Your item is picked up successfully',
+    YOUR_ITEM_RETURN_QC_APPROVED: 'Your item was QC approved, the amount will be refunded soon',
+    YOUR_ITEM_RETURN_QC_REJECTED: 'Your item was QC rejected. Your item will be returned to you soon',
+    YOUR_ITEM_RETURN_IN_PROGRESS: 'You have initiated a return request, your item will be picked up soon',
+    YOUR_ITEM_EXCHANGE_IN_PROGRESS: 'You have initiated an exchange request, your item will be picked up soon',
+    YOUR_ITEM_REPLACEMENT_IN_PROGRESS: 'You have initiated a replacement request, your item will be picked up soon',
+    YOUR_ITEM_EXCHANGED: 'Your item is exchanged successfully',
+    YOUR_ITEM_REPLACED: 'Your item is replaced successfully',
     "REPLACE": "Replace",
     "REFUND_TO": "Refund to",
     "COMPLETED": "Completed",
@@ -990,5 +1001,9 @@ export const AR_KEYWORDS = {
   },
   "WARRANTY_PAGE": {
     "WARRANTY_LABEL": "*Tila Care cost will be added to you cart"
-  }
+  },
+  ITEMS_ZONE: {
+    NO_RECENTLY_VIEWED: 'There are no recently viewed items here.',
+    BEGIN_SHOPPING: 'Let\'s begin your TiLa shopping journey now',
+  },
 };
