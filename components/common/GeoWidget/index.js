@@ -98,14 +98,12 @@ class GeoWidget extends Component {
     });
   }
   locateMe(e) {
-    debugger;
     const param = e !== undefined  && e.target && e.target.getAttribute('data-val');
     this.setState({
       detectLocationVal: param,
     });
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        debugger;
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
         this.setState({
