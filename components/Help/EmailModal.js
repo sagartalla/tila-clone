@@ -109,7 +109,7 @@ class EmailModal extends Component {
         validWhen: false,
       },
       {
-        field: 'issue',
+        field: 'issueSearchQuery',
         method: this.emptyValue,
         message: 'Please select issue',
         validWhen: false,
@@ -233,6 +233,7 @@ class EmailModal extends Component {
   handleIssueSearch = (e) => {
     this.setState({
       issueSearchQuery: e.target.value,
+      [e.target.name]: e.target.value,
       ...(!!!e.target.value || (this.state.selectedIssue && this.state.selectedIssue.q.trim() !== e.target.value) && {selectedIssue: '', showDropDown: true, dropDownType: 'issue'}),
     })
   }
@@ -416,7 +417,7 @@ class EmailModal extends Component {
                       value={this.state.issueSearchQuery} 
                       onChange={this.handleIssueSearch}
                       onFocus={this.focusIssueSearch}
-                      onBlur={this.handleIssueSelectSearch(searchIssues)} 
+                      // onBlur={this.handleIssueSelectSearch(searchIssues)}
                       onKeyUp={this.handleIssueSelectSearch(searchIssues)}
                       onBlur={this.handleValidation}
                     />
@@ -429,9 +430,9 @@ class EmailModal extends Component {
                   </div>
                 </div>
                 {
-                  validation && validation.issue && validation.issue.isInValid ?
+                  validation && validation.issueSearchQuery && validation.issueSearchQuery.isInValid ?
                     <div>
-                      <span className={`${styles['error-msg']}`}>{validation.issue.message}</span>
+                      <span className={`${styles['error-msg']}`}>{validation.issueSearchQuery.message}</span>
                     </div> : null
                 }
               </div>
