@@ -22,9 +22,10 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
-const Order = ({ order, getInvoice }) => {
+const Order = ({ order, getInvoice, userInfo }) => {
   const { totalOrderPrice } = order;
   const [showToolTip, toggleToolTip] = useState(false);
+  console.log('order.orderItems', order.orderItems);
 
   const renderToolTip = () => {
     return toggleToolTip(!showToolTip);
@@ -142,6 +143,9 @@ const Order = ({ order, getInvoice }) => {
               tilaPolicy={orderItem.tilaPolicy}
               tuinId={orderItem.tuinId}
               isOrderDetailsPage={false}
+              reviewsData={orderItem.reviewsData}
+              userInfo={userInfo}
+              catalogObj={orderItem.catalogObj}
             />
           ))}
         </Col>

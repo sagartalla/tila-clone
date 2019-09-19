@@ -10,10 +10,13 @@ import SVGComponent from '../../../common/SVGComponet';
 import StatusWidget from '../StatusWidget';
 import { Link, Router } from '../../../../routes';
 import constants from '../../../../constants';
+import { actionCreators as productActionCreators } from '../../../../store/product';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 import { actionCreators } from '../../../../store/order';
 import Warranty from '../../../../components/Product/includes/Warranty';
 import OrderTracker from './OrderTracker';
+import ReviewThankYou from '../../../Product/includes/ReviewThankYou';
+import ReviewFeedBackModal from '../../../Product/includes/reviewFeedbackModal';
 
 // import  styles from '../order.styl';
 
@@ -53,6 +56,8 @@ class OrderItem extends Component {
     super();
     this.state = {
       showToolTip: false,
+      openModal: false,
+      showReviews: false,
     };
     this.getCurrencyValue = this.getCurrencyValue.bind(this);
   }
@@ -152,13 +157,41 @@ class OrderItem extends Component {
     // });
   };
 
+  toggleReviewModal = () => {
+    const { openModal } = this.state;
+    const { isLoggedIn, userInfoData, v2CurrentFlow, userInfo } = this.props;
+      this.setState(prevState => ({
+        openModal: !prevState.openModal,
+        showReviews: true,
+      }), () => {
+        if (!openModal) {
+          document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+        } else {
+          document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+        }
+      });
+  }
+
+  submituserreview = (reviewObj) => {
+    const { userInfo } = this.props;
+    this.props.submitUserReview({
+      ...reviewObj,
+      reviewer_name: userInfo.personalInfo.user_name,
+    }).then(() => {
+      this.setState({
+        showReviews: false,
+      });
+    });
+  }
+
   render() {
     const {
       payments = [{}], orderItem, orderId, thankyouPage, isCancelable,
       isReturnable, isExchangable, needHelp, showPriceInfo, isDamageProtectionAvailable,
-      isWarrantyAvailable, tilaPolicy, tuinId
+      isWarrantyAvailable, tilaPolicy, tuinId, reviewsData, catalogObj,
     } = this.props;
-    const { showToolTip } = this.state;
+    console.log('reviewData', reviewsData, catalogObj);
+    const { showToolTip, openModal, showReviews } = this.state;
     const btnType = (() => {
       if (['PLACED', 'SHIPPED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
         return 'cancel';
@@ -403,10 +436,43 @@ class OrderItem extends Component {
                   <StatusWidget currentStatus={orderItem.products} />
                 }
               </div>
+              {(orderItem.status === 'DELIVERED' || orderItem.status === 'EXCHANGE_IN_PROGRESS' ||  orderItem.status === 'RETURN_IN_PROGRESS' || orderItem.status === 'REPLACEMENT_IN_PROGRESS') &&
+              <div className={`${styles['flex-center']} ${styles['justify-end']}`}>
+              <SVGComponent clsName={`${styles['rate-product-icon']}`} src="icons/common-icon/rate-product" />
+              <div onClick={this.toggleReviewModal}>RATE PRODUCT</div>
+              </div>}
             </React.Fragment>
           }
           {orderItem.products[0].trackingId && <OrderTracker orderItem={orderItem.products[0]} showMsgAndDate={showMsgAndDate()} />}
         </Col>
+        <div>
+                {openModal ?
+                  <React.Fragment>
+                    <div onClick={this.closeSlider} className={openModal ? `${styles.modalContainer} ${styles.showDiv}` : `${styles.modalContainer} ${styles.hideDiv}`}>
+                      <div className={`${styles.disabled}`} />
+                    </div>
+                    <div className={`${styles['overflow-y-auto']} ${styles['p-30']} ${openModal ? `${styles.openModal}` : `${styles.closeModal}`}`}>
+                      <div className={styles['p-40']}>
+                        <h4 className={`${styles.flex} ${styles['justify-flex-end']} ${styles['m-0']} ${styles['mb-20']}`}>
+                          <a onClick={this.toggleReviewModal} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
+                        </h4>
+                        <div>
+                          {showReviews ?
+                            <ReviewFeedBackModal
+                              catalogObj={catalogObj}
+                              titleInfo={reviewsData}
+                              feedbackSubmit={this.submituserreview}
+                            />
+                            :
+                            <ReviewThankYou toggleReviewModal={this.toggleReviewModal} />
+                          }
+                        </div>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                  : null
+                }
+              </div>
       </div>
     );
   }
@@ -415,6 +481,7 @@ class OrderItem extends Component {
 const mapDispatchToProps = dispatch => bindActionCreators({
   raiseOrderIssue: actionCreators.raiseOrderIssue,
   getOrderDetails: actionCreators.getOrderDetails,
+  submitUserReview: productActionCreators.submitUserReview,  
 }, dispatch);
 
 OrderItem.propTypes = {

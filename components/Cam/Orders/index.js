@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 import Order from './includes/Order';
 import OrderIssueWidget from '../../Order/includes/OrderIssueWidget';
 import { selectors, actionCreators } from '../../../store/cam/orders';
+import { selectors as personalDetailsSelectors } from '../../../store/cam/personalDetails';
 import { actionCreators as singleOrderActionCreators } from '../../../store/order';
 import Pagination from '../../common/Pagination';
 
@@ -86,7 +87,7 @@ class Orders extends Component {
   }
 
   render() {
-    const {pageDetails, getInvoice, orderLoadingStatus, warrantyPageDetails} = this.props;
+    const {pageDetails, getInvoice, orderLoadingStatus, warrantyPageDetails, userInfo } = this.props;
     const { activeTab } = this.state;
     return (
       <div>
@@ -123,7 +124,7 @@ class Orders extends Component {
                     {
                     this.props[item.tabData].length > 0
                     ?
-                    this.props[item.tabData].map(order => <Order key={order.id} getInvoice={getInvoice} order={order} />)
+                    this.props[item.tabData].map(order => <Order key={order.id} getInvoice={getInvoice} order={order} userInfo={userInfo}/>)
                     :
                     orderLoadingStatus ?
                     <div className={`${styles['order-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100}`}>
@@ -171,7 +172,8 @@ const mapStateToProps = store => ({
   pageDetails: selectors.getPageDetails(store),
   warrantyData:selectors.getOrdersData(store,'warrantyData'),
   orderLoadingStatus: selectors.getOrderLoadingState(store),
-  warrantyPageDetails: selectors.getWarrantyPageDetails(store)
+  warrantyPageDetails: selectors.getWarrantyPageDetails(store),
+  userInfo: personalDetailsSelectors.getUserInfo(store),  
 });
 
 const mapDispatchToProps = dispatch =>

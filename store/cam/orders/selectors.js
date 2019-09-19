@@ -20,6 +20,7 @@ const getOrdersData = (store,data) => {
         order_type,
         invoice_id,
       } = order;
+      debugger;
       const orderItems = _.compose(
         _.reduce.convert({ cap: false })((acc, val, key) => acc.concat({
           id: val.id,
@@ -34,6 +35,16 @@ const getOrdersData = (store,data) => {
           listingId:val.listingId,
           tilaPolicy:val.tilaPolicy,
           tuinId: val.tuinId,
+          reviewsData: {
+            media: val.img,
+            title: val.name,
+          },
+          catalogObj: {
+            catalog_id: val.catalogId,
+            variant_id: val.variantId,
+            product_id: val.productId,
+            item_type: val.itemType,
+          }
         }), []),
         _.map(i => ({
           id: i.order_item_ids[0],
