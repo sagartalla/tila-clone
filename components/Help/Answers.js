@@ -198,7 +198,9 @@ class Answers extends Component {
                     </div>
                 }
               </div>
-            : <div>{this.state.loading ? languageLabel['HNS']['LOADING'] : languageLabel['HNS']['NO_Q_AVAILABLE']}</div>
+            : <div>{this.state.loading ? <div className={`${styles['loader-div']}`} >
+            <SVGComponent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
+          </div> : languageLabel['HNS']['NO_Q_AVAILABLE']}</div>
             :
               <div className={styles['ht-100P']}>
                 <Orders fetchPaginatedRes={this.props.fetchPaginatedRes} query={this.props.query} isLoggedIn={this.props.isLoggedIn} renderContactCard={this.props.renderContactCard} handleContactClick={this.props.handleContactClick}/>
