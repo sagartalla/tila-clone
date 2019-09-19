@@ -8,7 +8,7 @@ import SocialLogin from './SocialLogin';
 import { selectors, actionCreators } from '../../store/auth';
 import SVGComponent from '../common/SVGComponet';
 import Button from '../common/CommonButton';
-// import FormValidator from '../common/FormValidator';
+import FormValidator from '../common/FormValidator';
 import lang from '../../utils/language';
 import { languageDefinations } from '../../utils/lang';
 
@@ -23,6 +23,20 @@ const { LOGIN_PAGE, ORDER_PAGE } = languageDefinations();
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
+    this.validations = new FormValidator([
+      {
+        field: 'email',
+        method: this.emptyValue,
+        message: 'Please enter email Id',
+        validWhen: false,
+      },
+      {
+        field: 'email',
+        method: this.checkEmailValidation,
+        validWhen: false,
+        message: 'Password enter valid email id',
+      },
+    ]);
     this.state = {
       email: props.activeEmailId || '',
     };
@@ -34,16 +48,34 @@ class LoginPage extends React.Component {
     });
   }
 
+  handleValidation = ({ target }) => {
+    const validation = this.validations.validateOnBlur({ [target.name]: target.value });
+    this.setState({ validation });
+  }
+  
+  emptyValue = fieldValue => fieldValue === '';
+
+
+  checkEmailValidation = (fieldValue) => {
+    const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailReg.test(fieldValue)) return false;
+    return true;
+  }
+
   submit = (e) => {
+    const validation = this.validations.validate(this.state);    
     e.preventDefault();
     const { email } = this.state;
     const { userLogin } = this.props;
+    if (validation.isValid) {
       userLogin(email);
+    }
+    this.setState({ validation });
   }
 
   render() {
     const { loadingStatus, activeEmailId } = this.props;
-    const { email } = this.state;
+    const { email, validation } = this.state;
     return (
       <div className={`${styles['login-form']} ${styles['flx-space-bw']} ${styles['flex-colum']}`}>
         <div>
@@ -88,21 +120,23 @@ class LoginPage extends React.Component {
                 <div className={`${styles['fp-input']} ${styles['pb-10']}`}>
                   <input
                     type="text"
+                    name="email"
                     value={email}
                     autoComplete="off"
                     className={styles['m-fs-16']}
                     onChange={this.onChangeField}
+                    onBlur={this.handleValidation}
                     required
                   />
                   <span className={styles.highlight} />
                   <span className={styles.bar} />
                   <label>{LOGIN_PAGE.LOGIN_INPUT_EMAIL_ENTER}</label>
-                  {/* {
-                    validation.email && validation.email.isInValid ?
+                  {
+                    validation && validation.email && validation.email.isInValid ?
                       <div>
                         <span className={`${styles['error-msg']}`}>{validation.email.message}</span>
                       </div> : null
-                  } */}
+                  }
                 </div>
                 <Button
                   className={`${styles['flex-center']} ${styles['sign-in-btn']} ${styles.fontW700} ${styles.width100} ${styles['fs-14']} ${styles['text-uppercase']}`}

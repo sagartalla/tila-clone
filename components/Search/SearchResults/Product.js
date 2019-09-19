@@ -289,7 +289,8 @@ class Product extends Component {
       itemNum,
       media,
       isQuickView,
-    } = this.props;
+      isNotifyMe,
+    } = this.props;    
     const { src, showNotifyMeMsg } = this.state;
     const product_id = productId;
     const variant_id = variantId || '';
@@ -415,7 +416,7 @@ class Product extends Component {
                 </div>
                 <div className={`${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}` : ''} ${styles['hover-show-date']} ${styles['pb-10']} ${styles.relative}`}>
                   {
-                    variants.length > 0 ?
+                      variants.length > 0 ?
                       <div className={`${styles.flex} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                         <Button
                           className={`${styles.flex} ${styles['add-to-crt']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
@@ -435,7 +436,7 @@ class Product extends Component {
                         />
                       </div>
                       :
-                      !showNotifyMeMsg && <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
+                      (!showNotifyMeMsg && isNotifyMe) && <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
                         <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
                       </a>
                   }
