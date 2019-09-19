@@ -33,9 +33,6 @@ class Thankyou extends Component {
     const {
       orderId, getOrderDetails, status, track
     } = this.props;
-    window.dataLayer.push({
-      event: 'purchase',
-    });
     this.setState({ status });
     getOrderDetails({ orderId }).then((res) => {
       const { data } = res.value;
@@ -45,6 +42,8 @@ class Thankyou extends Component {
           orderData: data,
         });
       }
+    }).catch(() => {
+      Router.pushRoute(`/${lang}/customer/orders`)
     });
   }
 
