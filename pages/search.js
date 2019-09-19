@@ -58,7 +58,7 @@ class SearchPage extends Base {
     if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (shippingCountry || global.APP_COUNTRY).toUpperCase(),
+        shippingCountry: (shippingCountry || global.APP_COUNTRY) && (shippingCountry || global.APP_COUNTRY).toUpperCase(),
       };
     } else {
       searchOptions.shippingDetails = undefined;
