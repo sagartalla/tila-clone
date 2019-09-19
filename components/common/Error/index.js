@@ -1,6 +1,8 @@
 import React from 'react';
 import lang from '../../../utils/language';
 import FourNotFour from './includes/404';
+import Layout from '../../../layout/main';
+import HeaderBar from '../../HeaderBar/index';
 
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
@@ -12,7 +14,12 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 const getErrComp = (statusCode) => {
   switch (statusCode) {
     case 404:
-      return <FourNotFour />;
+      return (
+        <Layout>
+          <HeaderBar />
+          <FourNotFour />
+        </Layout>
+      );
       break;
     default:
       return (
