@@ -42,20 +42,20 @@ const brandImages = {
     ],
     '#EF6079': [
       {
-        value: 'JustKidding',
-        link: `/${lang}/brand/just%20kidding`,
+        value: 'Lego',
+        link: `/${lang}/brand/lego`,
       },
       {
         value: 'chicco',
         link: `/${lang}/brand/chicco`,
       },
       {
-        value: 'Lego',
-        link: `/${lang}/brand/lego`,
-      },
-      {
         value: 'Pampers',
         link: `/${lang}/brand/pampers`,
+      },
+      {
+        value: 'JustKidding',
+        link: `/${lang}/brand/just%20kidding`,
       },
     ],
     '#888B8D': [
