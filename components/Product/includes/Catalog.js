@@ -24,7 +24,14 @@ const Catalog = ({ catalog }) => {
                 return (
                   <Row key={attributes.display_string}>
                     <Col xs={4} md={4} className={`${!attributes.translation ? styles['direction-ir'] : ''}`}>{attributes.display_string}</Col>
-                    <Col xs={8} md={8} className={`${styles['pl-0']} ${!attributes.translation ? styles['direction-ir'] : ''}`}>{attributes.attribute_values.map((av) => av.value + " " +(av.qualifier_unit ? av.qualifier_unit : "")).join(', ')}</Col>
+                    {
+                      attributes.tag === 'HTML'
+                        ?
+                        <Col xs={8} md={8} className={`${styles['pl-0']} ${!attributes.translation ? styles['direction-ir'] : ''}`} dangerouslySetInnerHTML={{ __html: attributes.attribute_values[0].value }}></Col>
+                        :
+                        <Col xs={8} md={8} className={`${styles['pl-0']} ${!attributes.translation ? styles['direction-ir'] : ''}`}>{attributes.attribute_values.map((av) => av.value + " " +(av.qualifier_unit ? av.qualifier_unit : "")).join(', ')}</Col>
+                    }
+
                   </Row>
                 )
               })
