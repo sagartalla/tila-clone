@@ -101,7 +101,7 @@ class PageData extends React.Component {
 	// breadcrums are pending...
 	getContent = () => {
 		const { content, index, pageType } = this.props;
-		// console.log({ content });
+		console.log({ content });
 
 		switch (content.layout_id) {
 			case "CT1a":
@@ -261,9 +261,9 @@ class PageData extends React.Component {
 									>
 										<div
 											data-page-type={pageType}
-											data-tracker-id={`tracker-${Math.round(
-												new Date().getTime() / 1000
-											) + Math.random()}`}
+											data-tracker-id={
+												banner.placementId + "__" + banner.display_name
+											}
 											data-merchandise-id={`33566544`}
 											data-user-id={`u765432563856856`}
 											className={`${styles["banner-inn-prt"]}`}
