@@ -152,7 +152,11 @@ class EmailModal extends Component {
       })
     }
   }
-
+  stripHtml = (html) => {
+   var tmp = document.createElement("DIV");
+   tmp.innerHTML = html;
+   return tmp.textContent || tmp.innerText || "";
+  }
   handleDropDown = (type) => (e) => {
     this.setState({
       showDropDown: !this.state.showDropDown,
@@ -170,12 +174,13 @@ class EmailModal extends Component {
     })
   }
   handleIssueSelect = (issue) => (e) => {
+    const q = this.stripHtml(issue.q);
     this.setState({
-      selectedIssue: issue,
+      selectedIssue: {...issue, q},
       showDropDown: false,
       dropDownType: '',
       selectedOrder: issue.orderRelated ? this.state.selectedOrder : '',
-      issueSearchQuery: issue.q
+      issueSearchQuery: q
     }, () => {
       if (issue.orderRelated && !this.state.orders.length) {
         this.props.isLoggedIn && this.getOrders();
