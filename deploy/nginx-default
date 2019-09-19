@@ -42,7 +42,7 @@ server {
     proxy_read_timeout          600s;
     send_timeout                600s;
   }
-  
+
 	location /apple-app-site-association {
 		root /var/www/ios;
 		index apple-app-site-association;
