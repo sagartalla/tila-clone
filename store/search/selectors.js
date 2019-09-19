@@ -177,6 +177,7 @@ const getSearchResutls = (store) => {
 
       return {
         id: product.id,
+        notifyMe:product.attributes.notifyMe || false,
         media: product.attributes.media_unrestricted_images,
         productId: product.attributes.productId,
         catalogId: product.attributes.catalogId,
