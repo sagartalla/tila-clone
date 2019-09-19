@@ -33,9 +33,8 @@ const BT = ({ content, pageType }) => {
 						>
 							<div
 								data-page-type={pageType}
-								data-tracker-id={
-									banner.placementId + "__" + banner.display_name
-								}
+								data-tracker-id={banner.placementId}
+								data-display-name={banner.display_name}
 								data-merchandise-id={banner.merchandiseId}
 								data-user-id={`u765432563856856`}
 								className={styles["banner-inn-prt"]}

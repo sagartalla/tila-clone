@@ -7,8 +7,11 @@ import Observer from "@researchgate/react-intersection-observer";
  * and Click events where `clickEvent` in `props` is required
  * to send the `actionName` for click event
  *
- * In Child component it optionally expects `data-page-type`, `data-tracker-id`[null for productListings],
- * `data-merchandise-id`[null for banners] and `data-user-id` as `props`
+ * In Child component it optionally expects `data-page-type`,
+ * `data-tracker-id`[null for productListings],
+ * `data-display-name` [null for productListings],
+ * `data-merchandise-id`[null for banners] and
+ * `data-user-id` as `props`
  *
  * All this tracking data will be sent to newrelic[ENV] app respectively.
  * To visit insights: https://insights.newrelic.com/accounts/2239519/dashboards/986543
@@ -33,6 +36,7 @@ class ViewportTrackerHOC extends Component {
 				newrelic.addPageAction("impression-test", {
 					pageType: event.target.getAttribute("data-page-type"),
 					trackerId: event.target.getAttribute("data-tracker-id"),
+					displayName: event.target.getAttribute("data-display-name"),
 					merchandiseId: event.target.getAttribute("data-merchandise-id"),
 					userId:
 						event.target.getAttribute("data-user-id") || "NOT_A_LOGGED_IN_USER"
@@ -50,6 +54,7 @@ class ViewportTrackerHOC extends Component {
 		newrelic.addPageAction(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
 			pageType: event.currentTarget.getAttribute("data-page-type"),
 			trackerId: event.currentTarget.getAttribute("data-tracker-id"),
+			displayName: event.target.getAttribute("data-display-name"),
 			merchandiseId: event.currentTarget.getAttribute("data-merchandise-id"),
 			userId:
 				event.currentTarget.getAttribute("data-user-id") ||
