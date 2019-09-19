@@ -439,6 +439,11 @@ export const AR_KEYWORDS = {
     "YOUR_ENTERED": "تم تسجيل دخولك",
     "AUTO_CORRECTED": "تصحيح تلقائي",
     "APPLY_FILTERS": "Apply Filters",
+    "PLEASE_SELECT_LOCATION_WITHIN_SAUDI": 'Please select any location within Saudi',
+    "DETECT_LOCATION": 'Detect Location',
+    "SELECT_CITY_BELOW": 'Or select city below',
+    "NO_MATCHING_SAUDI_CITY": 'No matching Saudi city',
+    "OKAY": 'OKAY',
     "WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK": 'We will email you once this is in stock.',    
   },
   "FOOTER_PAGE": {

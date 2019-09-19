@@ -64,17 +64,17 @@ class CBT12a extends Component {
 										styles["width100"]
 									}`}
 									style={{
-										paddingBottom: `${(100 * banners[1].config.height) /
-											banners[1].config.width}%`
+										paddingBottom: `${(100 * banners[2].config.height) /
+											banners[2].config.width}%`
 									}}
 								>
 									<Image
-										src={banners[1].img}
+										src={banners[2].img}
 										className={`${styles["animating-placeholder"]} ${
 											styles["width100"]
 										} ${styles["img-responsive"]}`}
 										placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
-										alt={banners[1].display_name}
+										alt={banners[2].display_name}
 									/>
 								</div>
 							</a>
@@ -92,17 +92,17 @@ class CBT12a extends Component {
 										styles["width100"]
 									}`}
 									style={{
-										paddingBottom: `${(100 * banners[2].config.height) /
-											banners[2].config.width}%`
+										paddingBottom: `${(100 * banners[1].config.height) /
+											banners[1].config.width}%`
 									}}
 								>
 									<Image
-										src={banners[2].img}
+										src={banners[1].img}
 										className={`${styles["animating-placeholder"]} ${
 											styles["width100"]
 										} ${styles["img-responsive"]}`}
 										placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
-										alt={banners[2].display_name}
+										alt={banners[1].display_name}
 									/>
 								</div>
 							</a>
