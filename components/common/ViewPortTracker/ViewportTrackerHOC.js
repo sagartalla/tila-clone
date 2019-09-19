@@ -54,7 +54,7 @@ class ViewportTrackerHOC extends Component {
 		newrelic.addPageAction(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
 			pageType: event.currentTarget.getAttribute("data-page-type"),
 			trackerId: event.currentTarget.getAttribute("data-tracker-id"),
-			displayName: event.target.getAttribute("data-display-name"),
+			displayName: event.currentTarget.getAttribute("data-display-name"),
 			merchandiseId: event.currentTarget.getAttribute("data-merchandise-id"),
 			userId:
 				event.currentTarget.getAttribute("data-user-id") ||
