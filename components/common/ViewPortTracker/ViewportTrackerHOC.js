@@ -5,13 +5,15 @@ import Observer from "@researchgate/react-intersection-observer";
  * This is an HOC to track any element in Browser Viewport (Optional)
  * [can be disabled by sending `disableViewportTracking` as `true` in `props`]
  * and Click events where `clickEvent` in `props` is required
- * to send the `actionName` for click event
+ * to send the actionName for click event
  *
- * In Child component it optionally expects `data-page-type`,
+ * In Child component it optionally expects data-attributes as `props` to be logged on server
+ * For example:
+ * `data-page-type` [always expected],
  * `data-tracker-id`[null for productListings],
  * `data-display-name` [null for productListings],
  * `data-merchandise-id`[null for banners] and
- * `data-user-id` as `props`
+ * `data-user-id` [always required]
  *
  * All this tracking data will be sent to newrelic[ENV] app respectively.
  * To visit insights: https://insights.newrelic.com/accounts/2239519/dashboards/986543
