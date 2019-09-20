@@ -186,16 +186,19 @@ export default class FeedbackModal extends Component {
                 </button>
               </div>
               <input ref={fileInput => this.fileInput = fileInput} type='file' className={`${styles['file-input']}`} onChange={this.handleImageUpload} multiple />
+              <div className={`${styles['image-container']}`}>
                 {
                   images && images.length > 0 ?
                     images.map((image, index) => {
                       return (
-                        <span className={`${styles.relative}`}>
+                        <div className={`${styles.relative} ${styles.width20} ${styles['m-5']}`}>
                           <span data_id={index} className={`${styles.thumbnail} `} onClick={this.removeImage}>&times;</span>
-                          <img src={image} className={`${styles.width15} ${styles['ht-07']} ${styles['border-lg']} ${styles['m-5']}`} />
-                        </span>
-                      )}) : null
+                          <img src={image} className={`${styles.width100} ${styles['ht-07']} ${styles['border-lg']} ${styles['m-5']}`} />
+                        </div>
+                      )
+                    }) : null
                 }
+              </div>
               {/* <div className={styles['cl-bth']}></div> */}
               {/* <div
               className={`${styles['flex-center']}
