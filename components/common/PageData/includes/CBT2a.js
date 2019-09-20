@@ -20,8 +20,8 @@ const CBT2a = ({ content }) => {
 				<div
 					className={`${styles["responsively-lazy"]} ${styles["width100"]}`}
 					style={{
-						paddingBottom: `${(100 * banners[0].config.height) /
-							banners[0].config.width}%`
+						paddingBottom: `${(100 * banners[index].config.height) /
+							banners[index].config.width}%`
 					}}
 				>
 					<Image
