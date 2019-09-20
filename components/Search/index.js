@@ -196,6 +196,7 @@ class Search extends Component {
     // }
     // oldY = window.scrollY;
   }
+
   render() {
     const {
       query, optionalParams, isBrandPage, loaderProps, spellCheckResp, categoryQuery, results,
@@ -216,40 +217,44 @@ class Search extends Component {
            null
         }
         <div className={`${styles['header-filter']} ${styles['flex-center']} ${styles['p-10-0']}`}>
-        <div className={`${styles['flex-center']} ${styles['search-val-part']} ${styles['pl-15']} ${spellCheckResp ? `${styles.width30}` : `${styles.width25}`}`}>
-                  <h4 className={spellCheckResp ? `${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`: `${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`}>
-                    {
-                      spellCheckResp ?
-                      <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
-                        <b className={`${styles['fs-16']} ${styles['search-ellipsis']}`}>{`${spellCheckResp[query]}`}</b>
-                        <span className={`${styles['fs-10']} ${styles['textColor']}`}>({ SEARCH_PAGE.AUTO_CORRECTED }):</span>
-                      </a>
-                      :
-                      <div className={`${styles['no-h1']} ${styles['fs-14']} ${styles['search-ellipsis']}`} title={finalQuery}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}<span className={styles['fontW300']}>:</span></div>
-                    }
-                    <span className={`${styles['pl-5']} ${styles['fs-14']}`}>{ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS }</span>
-                  </h4>
-                  {
-                    spellCheckResp &&
-                    <h4 className={`${styles['pl-10']} ${styles['fs-14']} ${styles['sple-check-prt']}`}>
-                      <span>{ SEARCH_PAGE.YOUR_ENTERED }: </span>
-                      <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['fontW600']} ${styles['lgt-blue']}`} data-querysearch={finalQuery && finalQuery.split('-').join(' ')}>
-                        {finalQuery && this.capitalize(finalQuery.split('-').join(' '))}
-                      </a>
-                    </h4>
-                  }
-                </div>
-        <div className={spellCheckResp ? `${styles['search-results']} ${styles['applied-filters-padding']} ${styles.width70} ${styles.relative}` : `${styles['search-results']} ${styles['applied-filters-padding']} ${styles.width75} ${styles.relative}`}>
-         <NoSSR>
-                <AppliedFilters />
-              </NoSSR>
-              </div>
-              </div>
+          <div className={spellCheckResp ? `${styles['flex-center']} ${styles['search-val-part']} ${styles['pl-15']} ${styles.width25}` : `${styles['flex-center']} ${styles['search-val-part']} ${styles['pl-15']} ${styles.width15}`}>
+            <h4 className={spellCheckResp ? `${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles.fontW300}`: `${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles.fontW300}`}>
+              {spellCheckResp ?
+                <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles.fontW600}`} data-querysearch={spellCheckResp[query]}>
+                  <b className={`${styles['fs-16']} ${styles['search-ellipsis']}`}>{`${spellCheckResp[query]}`}</b>
+                  <span className={`${styles['fs-10']} ${styles.textColor}`}>({ SEARCH_PAGE.AUTO_CORRECTED }):</span>
+                </a>
+                :
+                <div className={`${styles['no-h1']} ${styles['fs-14']} ${styles['search-ellipsis']}`} title={finalQuery}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}<span className={styles.fontW300}>:</span></div>
+              }
+              <span className={`${styles['pl-5']} ${styles['fs-14']}`}>{ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS }</span>
+            </h4>
+            {spellCheckResp &&
+              <h4 className={`${styles['pl-10']} ${styles['fs-14']} ${styles['sple-check-prt']}`}>
+                <span>{ SEARCH_PAGE.YOUR_ENTERED }: </span>
+                <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles.fontW600} ${styles['lgt-blue']}`} data-querysearch={finalQuery && finalQuery.split('-').join(' ')}>
+                  {finalQuery && this.capitalize(finalQuery.split('-').join(' '))}
+                </a>
+              </h4>
+            }
+          </div>
+          <div className={spellCheckResp ? `${styles['search-results']} ${styles['applied-filters-padding']} ${styles.width75} ${styles.relative}` : `${styles['search-results']} ${styles['applied-filters-padding']} ${styles.width85} ${styles.relative}`}>
+            <NoSSR>
+              <AppliedFilters />
+            </NoSSR>
+          </div>
+        </div>
         <LoadingBar loadComponent={loadComponent} pathname={pathname} >
           <Grid id="search-container" className={`${styles['pt-60']} ${styles.relative} ${styles['search-container-wrap']}`}>
             <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
               <NoSSR>
-                <CategoriesAndFacets search={query} showPopup={showModal} showBrandsModal={this.showBrandsModal} selectedCheckbox={this.selectedCheckbox} clearSelectedItem={this.clearSelectedItem} />
+                <CategoriesAndFacets
+                  search={query}
+                  showPopup={showModal}
+                  showBrandsModal={this.showBrandsModal}
+                  selectedCheckbox={this.selectedCheckbox}
+                  clearSelectedItem={this.clearSelectedItem}
+                />
               </NoSSR>
 
             </Col>
@@ -264,7 +269,15 @@ class Search extends Component {
                 <div
                   className={`${styles.absolute} ${styles['bg-white']} ${styles.brandsmodal} `}
                 >
-                {showModal && <SelectBrands showPopup={showModal} closePopup={this.closePopup} filteredItems={filteredItems} selectedItems={selectedItems} onFilterData={this.onFilterData} filter={filter} />}
+                  {showModal &&
+                    <SelectBrands
+                      showPopup={showModal}
+                      closePopup={this.closePopup}
+                      filteredItems={filteredItems}
+                      selectedItems={selectedItems}
+                      onFilterData={this.onFilterData}
+                      filter={filter}
+                    />}
                 </div>
               </Modal>
             </div>
@@ -285,8 +298,7 @@ const mapStateToProps = store => ({
   spellCheckResp: selectors.getSpellCheckResponse(store),
   optionalParams: selectors.optionParams(store),
   getFacetfilters: selectors.getFacetfilters(store),
-  spellCheckResp:selectors.getSpellCheckResponse(store),
-  categoryQuery:selectors.getCategorySearchQuery(store),
+  categoryQuery: selectors.getCategorySearchQuery(store),
   query: selectors.getQuery(store),
   results: selectors.getSearchResutls(store),
   appliedFilters: selectors.getAppliedFitlers(store),
