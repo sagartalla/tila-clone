@@ -4,7 +4,6 @@ import { actionCreators } from '../auth';
 const cookies = new Cookies();
 
 const loginReq = (fn) => {
-  debugger
   return (...args) => (dispatch, getState) => {
     const state = getState();
     const ret = fn(...args);
