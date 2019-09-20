@@ -22,7 +22,7 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
-const Order = ({ order, getInvoice, userInfo }) => {
+const Order = ({ order, getInvoice }) => {
   const { totalOrderPrice } = order;
   const [showToolTip, toggleToolTip] = useState(false);
   console.log('order.orderItems', order.orderItems);
@@ -144,7 +144,6 @@ const Order = ({ order, getInvoice, userInfo }) => {
               tuinId={orderItem.tuinId}
               isOrderDetailsPage={false}
               reviewsData={orderItem.reviewsData}
-              userInfo={userInfo}
               catalogObj={orderItem.catalogObj}
             />
           ))}
