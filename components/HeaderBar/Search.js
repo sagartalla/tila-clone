@@ -133,6 +133,10 @@ class Search extends Component {
     const { searchPosition } = this.state;
     e && e.preventDefault();
     if (!this.state.query) return false;
+    this.props.track({
+      event: 'INTERNAL_SEARCH',
+      searchData: this.state.query,
+    });
     // const { isCategoryTree } = this.props;
     digitalData.page.pageInfo.onsiteSearchTerm = this.state.query;
 
@@ -255,6 +259,8 @@ const mapDispatchToProps = dispatch =>
       getSearchResults: actionCreators.getSearchResults,
       fetchSuggestions: actionCreators.fetchSuggestions,
       fetchImageSearchData: actionCreators.fetchImageSearchData,
+      track: actionCreators.track,
+
     },
     dispatch,
   );

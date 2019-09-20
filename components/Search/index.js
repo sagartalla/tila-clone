@@ -171,6 +171,8 @@ class Search extends Component {
 
   querySearch = (e) => {
     let dataSearchQuery = e.currentTarget.dataset.querysearch;
+    console.log("query search");
+    console.log(dataSearchQuery);
     Router.pushRoute(`/${language}/search?q=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 
@@ -220,7 +222,7 @@ class Search extends Component {
                   <h4 className={spellCheckResp ? `${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`: `${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`}>
                     {
                       spellCheckResp ?
-                      <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
+                      <a id = "constantsearch" href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles['fontW600']}`} data-querysearch={spellCheckResp[query]}>
                         <b className={`${styles['fs-16']} ${styles['search-ellipsis']}`}>{`${spellCheckResp[query]}`}</b>
                         <span className={`${styles['fs-10']} ${styles['textColor']}`}>({ SEARCH_PAGE.AUTO_CORRECTED }):</span>
                       </a>

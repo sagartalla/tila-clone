@@ -35,6 +35,7 @@ const track = (params) => {
             },
           },
       });
+      digitalData.page.pageInfo.accountId = params.loginType;
       break;
     default: break;
   }

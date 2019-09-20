@@ -59,6 +59,11 @@ class SearchResults extends Component {
 
   componentDidMount() {
     this.props.resetAddtoCart();
+    console.log(this.props);
+    this.props.track({
+      event: 'INTERNAL_SEARCH_COUNT',
+      searchData: this.props,
+      });
     //console.log('searchlogin',this.props.isLoggedIn);
     if(this.props.isLoggedIn) {
       this.props.getWishlist();
@@ -292,6 +297,7 @@ const mapDispatchToProps = dispatch =>
       resetAddtoCart: cartActionCreators.resetAddtoCart,
       getWishlist: wishlistActionCreators.getWishlist,
       notifyMe: wishlistActionCreators.notifyMe,
+      track: actionCreators.track,
     },
     dispatch,
   );

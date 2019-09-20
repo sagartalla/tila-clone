@@ -87,7 +87,7 @@ const actionCreators = {
       } else {
         dispatch(actionCreators.track({
           event: 'CUSTOMER_ID',
-          loginType: res,
+          loginType: res.value.data.user_id,
         }));
         dispatch(actionCreators.setVerfied(true));
         // }

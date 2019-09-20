@@ -86,15 +86,42 @@ const fetchImageSearchApi = (file) => {
     data: body,
   });
 };
-const track = ({ event, searchData }) => {
-  window.appEventData.push({
-    event,
-    internalSearch: {
-      key: searchData,
-    },
-  });
-};
+const track = ({
+	event,
+	searchData
+}) => {
+	console.log("event", event);
+	switch (event) {
+		case "INTERNAL_SEARCH":
+			window.appEventData.push({
+				event,
+				internalSearch: {
+					key: searchData,
+				},
+			});
+			break;
 
+		case "INTERNAL_SEARCH_COUNT":
+			window.appEventData.push({
+				event,
+				internalSearch: {
+					count: searchData.results.totalCount.toString(),
+					key: searchData.search,
+				},
+			});
+			break;
+
+		case "SEARCH_SORT_BY":
+			window.appEventData.push({
+				event,
+				internalSearch: {
+					sortby: searchData,
+				},
+			});
+			break;
+
+	}
+};
 export default {
   getSearchResultsApi, fetchSuggestions, fetchImageSearchApi, track,
 };

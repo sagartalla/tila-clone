@@ -71,12 +71,9 @@ class MegaMenu extends Component {
   onLinkClick(e) {
     // console.log(e.currentTarget.getAttribute('displayName'));
     // console.log(e, this.state, this.props, 'gsfs');
-    console.log(this.props);
-    console.log(this.props.colorScheme);
-
     this.props.track({
       eventName: 'MEGA_MENU',
-      tree: e.currentTarget.getAttribute('displayName')+"|"+this.props.colorScheme,
+      tree: e.target.innerHTML,
     }),
     this.setState({
       selectedCategory: null,

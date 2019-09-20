@@ -68,12 +68,6 @@ class SearchPage extends Base {
     ]);
     return { isServer };
   }
-  componentDidMount() {
-    this.props.track({
-      event: 'INTERNAL_SEARCH',
-      searchData: this.props,
-    });
-  }
   pageName = 'SEARCH';
 
   render() {

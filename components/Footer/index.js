@@ -139,7 +139,7 @@ const FooterBar = props => (
         <div className={styles['flx-space-bw']}>
           {/* <Col md={3}> */}
 
-          <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
+          <div  className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
               <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/quation" />
             </span>
@@ -188,7 +188,7 @@ const FooterBar = props => (
         </div>
       </Grid>
     </div>
-    <div className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
+    <div id = "constantfootertop" className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
         <div className={`${styles.flex} ${styles['footer-menu-list']}`}>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']} `}>
@@ -196,7 +196,7 @@ const FooterBar = props => (
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/fashion" />
               <span className={styles.pointer}>{FOOTER_PAGE.FASHION}</span>
             </h4>
-            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
+            <ul id = "footertopfashion" className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {f.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
               {/* <li><span className={styles['pointer']}>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.FASHION}`}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.FASHION}`}</span></li>
@@ -213,7 +213,7 @@ const FooterBar = props => (
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/common-icon/processor-icon" />
               <span className={styles.pointer}>{FOOTER_PAGE.ELECTRONICS}</span>
             </h4>
-            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
+            <ul id = "footertopelectronics" className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {e.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
               {/* <li><span className={styles['pointer']}>{FOOTER_PAGE.MOBILES}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.TABLETS}</span></li>
@@ -230,7 +230,7 @@ const FooterBar = props => (
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/life-style" />
               <span className={styles.pointer}>{FOOTER_PAGE.LIFESTYLE}</span>
             </h4>
-            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
+            <ul id = "footertoplifestyle" className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {l.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
               {/* <li><span className={styles['pointer']}>{FOOTER_PAGE.HOME_DECOR}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.KITCHEN} & ${FOOTER_PAGE.DINING}`}</span></li>
@@ -255,11 +255,11 @@ const FooterBar = props => (
       </Grid>
     </div>
     {/* social part start */}
-    <div className={`${styles['footer-social-list-main']} ${styles['pt-40']} ${styles['pb-40']} ${styles['bg-white']}`}>
+    <div id = "constantsocialtab" className={`${styles['footer-social-list-main']} ${styles['pt-40']} ${styles['pb-40']} ${styles['bg-white']}`}>
       <Grid>
         <Row className={styles['footer-social-list']}>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-          <a href="https://www.snapchat.com/add/tilasocial" target="_blank">
+          <a id = "constantsnapchat" href="https://www.snapchat.com/add/tilasocial" target="_blank">
             <h4 className={styles['flex-center']}>
                 <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/snapchat.png" className={styles['img-responsive']} /></span>
                 <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_SNAP}</span>
@@ -268,7 +268,7 @@ const FooterBar = props => (
           </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-          <a href="https://www.twitter.com/tilasocial" target="_blank">
+          <a id = "constanttwitter" href="https://www.twitter.com/tilasocial" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-twitter.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['twitter-clr']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_TWITTER}</span>
@@ -277,7 +277,7 @@ const FooterBar = props => (
           </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-          <a href="https://www.instagram.com/tilasocial/" target="_blank">
+          <a id = "constantinsta" href="https://www.instagram.com/tilasocial/" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_INSTAGRAM}</span>
@@ -286,7 +286,7 @@ const FooterBar = props => (
           </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-          <a href="https://www.facebook.com/tilasocial/" target="_blank">
+          <a id = "constantfacebook" href="https://www.facebook.com/tilasocial/" target="_blank">
             <h4 className={styles['flex-center']}>
               <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
               <span className={`${styles['lgt-blue']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
@@ -298,12 +298,12 @@ const FooterBar = props => (
       </Grid>
     </div>
     {/* footer componay policy part start */}
-    <div className={`${styles['footer-social-main']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
+    <div id = "constantfooterbottom" className={`${styles['footer-social-main']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
         <div className={styles['footer-social-list']}>
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.TILA}</h4>
-              <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+              <ul id = "constantfootertila" className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                 <li>{FOOTER_PAGE.WHO_WE_ARE}</li>
                 <li>{FOOTER_PAGE.OUR_VALUES}</li>
                 <li>{FOOTER_PAGE.OUR_MISSION}</li>
@@ -314,7 +314,7 @@ const FooterBar = props => (
             </div>
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICIES}</h4>
-              <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+              <ul id = "constantfooterpolicy" className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                 <li><a href={`/${lang}/policy/user-terms`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
                 <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
                 <li><a href={`/${lang}/policy/return-and-exchange-policy#exchangePolicy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
@@ -340,7 +340,7 @@ const FooterBar = props => (
             <div className={styles['ipad-pr-0']}>
               <div>
                 <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.HELP}</h4>
-                <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+                <ul id = "constantfooterhelp" className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                   <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
                   <li><a href={`/${lang}/policy/customer-delivery`} target="_blank">{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</a></li>
                   <li>{FOOTER_PAGE.FREQUENTLY_ASKED_QUESTIONS}</li>

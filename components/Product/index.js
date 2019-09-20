@@ -66,6 +66,8 @@ const getProductComponent = (isPreview, taskCode) => {
     }
 
     componentDidMount() {
+      console.log("productViewed");
+      console.log(this.props);
       const {
         productData, getCardResults, getRecentlyViewed,
         variantId, isLoggedIn, addProductToRV, isAddedToCart,

@@ -36,6 +36,7 @@ class SocialLogin extends Component {
       },
     };
     this.props.userLogin(serverData);
+    console.log(socialNetwork);
     this.props.track({
       event: 'LOGIN_TYPE',
       loginType: socialNetwork,

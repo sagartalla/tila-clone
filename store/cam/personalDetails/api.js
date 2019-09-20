@@ -12,13 +12,26 @@ const getUserProfileInfo = () => {
     axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`),
     axios.post(`${constants.CMS_API_URL}/api/v1/user/info?includeSocialAccounts=${true}`)
   ]).then(([data1, data2]) => {
+    var str = JSON.stringify(data2.data); // spacing level = 2
+    digitalData.page.pageInfo.accountId = data2.data.user_id;
+    track({
+      event: 'CUSTOMER_ID',
+      loginData: data2.data.user_id,
+    });
     return {
       personalInfo: data1.data,
       contactInfo: data2.data
     }
   })
 };
-
+const track = (params) => {
+  window.appEventData.push({
+    event: params.event,
+    loginInfo: {
+      account_id: params.loginData,
+    }
+  });
+}
 const downloadPic = (imageId) => {
   return generateURL(imageId).then((data)=>{
     return data;

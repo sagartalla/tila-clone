@@ -36,6 +36,11 @@ class SortByWidget extends Component {
     digitalData.filter['sortBy'] = `sort:${value}`
     var event = new CustomEvent('event-sort-click');
     document.dispatchEvent(event);
+    console.log("sort by- value::", value);
+    this.props.track({
+      event: 'SEARCH_SORT_BY',
+      searchData: value,
+    });
   }
   sortSelect(e) {
     const data = e.currentTarget.getAttribute('data');
@@ -103,6 +108,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getSearchResults: actionCreators.getSearchResults,
+      track:actionCreators.track,
     },
     dispatch,
   );
