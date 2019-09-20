@@ -29,7 +29,7 @@ class Category extends Base {
     store, isServer, query, req,
   }) {
     const {
-      country, language, category, facets, sid,
+      country, language, category, facets, sid, isListed
     } = query;
     const categoryTree = query.categoryTree === 'true';
     const shippingData = req ? req.universalCookies.get('shippingInfo') : cookies.get('shippingInfo');
@@ -45,6 +45,7 @@ class Category extends Base {
       query: categoryValue,
       language: language || 'ar',
       pageNum: 1,
+      isListed: !(isListed === 'false'),
       choosenCategoryName: categoryValue,
       categoryTree
     };
