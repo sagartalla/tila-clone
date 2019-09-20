@@ -14,7 +14,7 @@ const loginReq = (fn) => {
       }
       return dispatch(ret);
     }
-    if(window.sessionStorage.getItem('TILuservisitcount') !== '1') {
+    if (window.sessionStorage.getItem('TILuservisitcount') !== '1') {
       dispatch(actionCreators.showLogin())
     }
     return dispatch(actionCreators.storePostLoginActionInfo(ret));
