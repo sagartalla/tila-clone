@@ -78,8 +78,6 @@ class BT3a extends Component {
 									}`}
 									placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 									alt={banners[0].display_name}
-									width={banners[0].config.width}
-									height={banners[0].config.height}
 								/>
 							</div>
 						</a>
@@ -116,8 +114,6 @@ class BT3a extends Component {
 									} ${styles["animating-placeholder"]}`}
 									placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 									alt={banners[1].display_name}
-									width={banners[1].config.width}
-									height={banners[1].config.height}
 								/>
 							</div>
 						</a>
@@ -155,8 +151,6 @@ class BT3a extends Component {
 									} ${styles["animating-placeholder"]}`}
 									placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
 									alt={banners[2].display_name}
-									width={banners[2].config.width}
-									height={banners[2].config.height}
 								/>
 							</div>
 						</a>

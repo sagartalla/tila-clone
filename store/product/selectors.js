@@ -142,6 +142,7 @@ const getProduct = (store, variantId) => {
     isWishlisted: wishListProductIds && wishListProductIds.indexOf(product_details.product_id) !== -1,
     wishlistId,
     tuin: catalogAttributeMap.tuin ? catalogAttributeMap.tuin.attribute_values[0].value : '',
+    newVariantId: product_details && product_details.product_details_vo && product_details.product_details_vo.cached_variant && Object.keys(product_details.product_details_vo.cached_variant)[0],
   };
 };
 const getTilaPolicy = (store) => {
@@ -465,6 +466,11 @@ const getAllCities = (store) => {
     : allCities;
 };
 
+const getAllDefaultCities = (store) => {
+  const allCities = store.productReducer.allCitiesData;  
+  return allCities;
+};
+
 const getAllCountries = (store) => {
   const countries = store.productReducer.countriesData;
   const searchKey = store.productReducer.searchCountryKeyWord;
@@ -476,5 +482,5 @@ const getAllCountries = (store) => {
 export {
   getProduct, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse, getReviewImage, getReviewPicDocumentId,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
-  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId, getTilaPolicy,
+  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId, getTilaPolicy, getAllDefaultCities,
 };

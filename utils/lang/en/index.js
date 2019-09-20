@@ -445,6 +445,12 @@ export const EN_KEYWORDS = {
     YOUR_ENTERED: 'You entered',
     AUTO_CORRECTED: 'Corrected',
     APPLY_FILTERS: 'Apply Filters',
+    PLEASE_SELECT_LOCATION_WITHIN_SAUDI: 'Please select any location within Saudi',
+    DETECT_LOCATION: 'Detect Location',
+    SELECT_CITY_BELOW: 'Or select city below',
+    NO_MATCHING_SAUDI_CITY: 'No matching Saudi city',
+    OKAY: 'OKAY',
+    WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK: 'We will email you once this is in stock.',
   },
   // adding new page content
   FOOTER_PAGE: {
@@ -759,6 +765,15 @@ export const EN_KEYWORDS = {
     CLICK_HERE: 'Click here',
     YOUR_ITEM_IS_OUT_FOR_DELIVERY: 'Your Item is out for delivery',
     YOUR_ITEM_IS_DELIVERED: 'Your Item is delivered',
+    YOUR_ITEM_RETURN_REQUESTED: 'Your return request is intiated',
+    YOUR_ITEM_PICKED: 'Your item is picked up successfully',
+    YOUR_ITEM_RETURN_QC_APPROVED: 'Your item was QC approved, the amount will be refunded soon',
+    YOUR_ITEM_RETURN_QC_REJECTED: 'Your item was QC rejected. Your item will be returned to you soon',
+    YOUR_ITEM_RETURN_IN_PROGRESS: 'You have initiated a return request, your item will be picked up soon',
+    YOUR_ITEM_EXCHANGE_IN_PROGRESS: 'You have initiated an exchange request, your item will be picked up soon',
+    YOUR_ITEM_REPLACEMENT_IN_PROGRESS: 'You have initiated a replacement request, your item will be picked up soon',
+    YOUR_ITEM_EXCHANGED: 'Your item is exchanged successfully',
+    YOUR_ITEM_REPLACED: 'Your item is replaced successfully',
     REPLACE: 'Replace',
     REFUND_TO: 'Refund to',
     COMPLETED: 'Completed',
@@ -994,5 +1009,9 @@ export const EN_KEYWORDS = {
   },
   WARRANTY_PAGE: {
     WARRANTY_LABEL: '*TiLa Care cost will be added to you cart'
+  },
+  ITEMS_ZONE: {
+    NO_RECENTLY_VIEWED: 'There are no recently viewed items here.',
+    BEGIN_SHOPPING: 'Let\'s begin your TiLa shopping journey now',
   },
 };

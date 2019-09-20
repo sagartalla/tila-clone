@@ -66,7 +66,7 @@ const helpSupportData = typeToReducer({
   },
   [actions.GET_ANSWERS]: {
     PENDING: state => ({
-      ...state, answerData: {},
+      ...state,
     }),
     FULFILLED: (state, action) => {
       const { payload } = action;
@@ -82,7 +82,7 @@ const helpSupportData = typeToReducer({
   },
   [actions.GET_ANSWER_BY_KEYWORD]: {
     PENDING: state => ({
-      ...state, answerData: {},
+      ...state,
     }),
     FULFILLED: (state, action) => {
       const { payload } = action;

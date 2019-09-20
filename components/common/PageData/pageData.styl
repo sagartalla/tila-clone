@@ -308,7 +308,7 @@
     .d13, .d14
       display flex
     .d13
-      padding-bottom 10px
+      margin-bottom 10px
     .d13 > div, .d14 > div
       width 33.3%
       padding 0 5px
@@ -329,12 +329,12 @@
       padding 0 5px
     
     .img2 
-      width 30.3%
+      width 30.32%
       padding 0 5px
       display flex
   
     .img3 
-      width 41.96%
+      width 42%
       display flex
       padding 0 5px
   
@@ -365,12 +365,19 @@
   .fBanners2
     display flex
     justify-content center
-    width 71.08%
+    width 73.03%
     margin auto
-    margin-top -10%
-    .fb2, .fb1
+    margin-top -90px
+    .fb2
       padding 0 5px
-
+      width 27.6%
+      &:nth-child(1) img
+        border-top-left-radius 25px
+      &:last-child img
+        border-top-right-radius 25px
+    .fb1
+      padding 0 5px
+      width 44.9%
 .bannerSpacing
   margin 30px 0
   .fHeading
@@ -382,12 +389,14 @@
 
 .fashionBannerSpacing
   margin 60px 0
+  .pLeft
+    padding-left 102px
   .pdL
     padding-bottom 20px
     .fHeading
       font-size 48px
       font-weight 600
-      line-height 0.46
+      margin-bottom 0
     span
       color #666666
       font-size 16px
@@ -404,7 +413,6 @@
   width calc(100% - 10px)
   position relative
   margin auto
-  margin-bottom 2%
 
 .responsively-lazy:not(img)
   position relative
@@ -415,7 +423,7 @@
   top 0
   left 0
   width 100%
-  height 100%
+  // height 100%
 
 img.responsively-lazy
   width 100%

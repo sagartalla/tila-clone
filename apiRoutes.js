@@ -7,7 +7,7 @@ const constants = require('./store/helper/constants/constants');
 //TODO SF-101 //remove constants from here
 // const constants.AUTH_API_URL = 'http://gateway-dev.fptechscience.com/auth-service';
 const GOOGLE_MAPS_URL = 'https://maps.googleapis.com/maps/api';
-const GOOGLE_KEY = 'AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg';
+const GOOGLE_KEY = 'AIzaSyCqv3XDuutfbdkbTq9vwOxs6WgKq6YDHKA';
 
 
 const removeCookies = (req,res) => {

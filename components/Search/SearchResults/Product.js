@@ -31,7 +31,7 @@ import styles_ar from '../search_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const { PDP_PAGE } = languageDefinations();
+const { PDP_PAGE, SEARCH_PAGE } = languageDefinations();
 
 const cookies = new Cookie();
 
@@ -43,7 +43,7 @@ class Product extends Component {
     super(props);
     this.state = {
       showNotify: false,
-      src: `${constants.mediaDomain}/${props.media[0]}` || '',
+      src: `${constants.mediaDomain}/${props && props.media && props.media[0]}` || '',
       selectedIndex: 0,
       showLoader: false,
       btnType: '',
@@ -141,6 +141,7 @@ class Product extends Component {
         product_id: productId,
         variant_id: variantId,
         email: userDetails.userCreds && userDetails.userCreds.username,
+        hideNotifyMeToast: true,
       });
       this.showNotifyMeMsg();
     } else {
@@ -288,7 +289,8 @@ class Product extends Component {
       itemNum,
       media,
       isQuickView,
-    } = this.props;
+      isNotifyMe,
+    } = this.props;    
     const { src, showNotifyMeMsg } = this.state;
     const product_id = productId;
     const variant_id = variantId || '';
@@ -369,7 +371,7 @@ class Product extends Component {
                         autoplay
                         arrows={false}
                         dots
-                        autoplaySpeed={750}
+                        autoplaySpeed={1000}
                         pauseOnHover={false}
                       >
                         {media && media.slice(0, 5).map((image, index) => (
@@ -400,7 +402,7 @@ class Product extends Component {
                       OncloseVariant={this.closeVariantTab}
                     />
                   }
-                  {showNotifyMeMsg && <div className={`${styles['notifyme-msg']} ${styles['flex-center']} ${styles['justify-center']}`}>We will notify you once this is in stock.</div>}
+                  {showNotifyMeMsg && <div className={`${styles['notifyme-msg']} ${styles['flex-center']} ${styles['justify-center']}`}>{SEARCH_PAGE.WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK}</div>}
                 </div>
                 <div className={styles['desc-cont']}>
                   <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles.flex} ${styles['flex-colum']}`}>
@@ -414,7 +416,7 @@ class Product extends Component {
                 </div>
                 <div className={`${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}` : ''} ${styles['hover-show-date']} ${styles['pb-10']} ${styles.relative}`}>
                   {
-                    variants.length > 0 ?
+                      variants.length > 0 ?
                       <div className={`${styles.flex} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
                         <Button
                           className={`${styles.flex} ${styles['add-to-crt']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
@@ -434,7 +436,7 @@ class Product extends Component {
                         />
                       </div>
                       :
-                      !showNotifyMeMsg && <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
+                      (!showNotifyMeMsg && isNotifyMe) && <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
                         <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
                       </a>
                   }
@@ -486,7 +488,7 @@ class Product extends Component {
         </div>
         <Modal show={showNotify} onHide={this.closeNotify}>
           <Modal.Header closeButton>
-            <Modal.Title>Notify Me</Modal.Title>
+            <Modal.Title>{PDP_PAGE.NOTIFY_ME}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <NotifyMe
