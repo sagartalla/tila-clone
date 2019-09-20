@@ -4,7 +4,6 @@ import { actionCreators } from '../auth';
 const cookies = new Cookies();
 
 const loginReq = (fn) => {
-  debugger
   return (...args) => (dispatch, getState) => {
     const state = getState();
     const ret = fn(...args);
@@ -17,7 +16,7 @@ const loginReq = (fn) => {
     }
     if(window.sessionStorage.getItem('TILuservisitcount') !== '1') {
       dispatch(actionCreators.showLogin())
-    }    
+    }
     return dispatch(actionCreators.storePostLoginActionInfo(ret));
   };
 };
