@@ -8,18 +8,19 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './statusWidget_en.styl';
 import styles_ar from './statusWidget_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const StatusWidget = ({ currentStatus }) => {
   const len = Object.keys(currentStatus[0].state_time_estimates.filter(i => i.valid)).length;
   const pivot = (100 / (len - 1));
   let barLen = 0;
+  const state_time_estimates = currentStatus[0].state_time_estimates.filter(i => i.valid);
   return (
     <div className={`${styles['status-widget']} ${styles['pt-5']} ${styles.relative}`}>
       <Row className={styles['m-0']}>
         <div className={`${styles['gray-line']} ${styles['flx-space-bw']}`}>
           {
-            currentStatus[0].state_time_estimates.filter(i => i.valid).map((i, k) => {
+            state_time_estimates.map((i, k) => {
               const { actual_time } = i;
               if (!i.valid) return null;
               if (actual_time) {
@@ -27,8 +28,8 @@ const StatusWidget = ({ currentStatus }) => {
               }
               return (
                 <div className={`${styles.relative}`} key={k}>
-                  <span className={`${styles.point} ${actual_time && (i.status == 'CANCELLED' ? styles.cancelled : styles.active)} `} style={{ [lang === 'en' ? 'left' : 'right']: `${k == 0 ? '0' : (pivot * k)}%` }} />
-                  <span className={`${styles['pt-10']} ${styles['pb-10']} ${styles.flex} ${styles['fs-12']}`}>{orderStatusAttributes[i.status]}</span>
+                  <span className={`${styles.point} ${actual_time && (i.status === 'CANCELLED' ? styles.cancelled : styles.active)} `} style={{ [lang === 'en' ? 'left' : 'right']: `${k === 0 ? '0' : (pivot * k)}%` }} />
+                  <span style={{ paddingRight: `${k !== state_time_estimates.length - 1 ? '10px' : '0'}`, textAlign: `${k !== state_time_estimates.length - 1 ? 'center' : 'right'}` }} className={`${styles.width100} ${styles['flex-wrp']} ${styles.flex} ${styles['pt-10']} ${styles['pb-10']} ${styles.flex} ${styles['fs-12']}`}>{i.display_status}</span>
                 </div>
               );
             })
