@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
-import Cookie from 'universal-cookie';
+import React from 'react';
 
-import { Link } from '../../../../routes';
-import SVGCompoent from '../../../common/SVGComponet';
-import { Panel, Heading, Body, Title } from 'react-bootstrap';
-
+import Branch from './Branch';
 import lang from '../../../../utils/language';
 
 import main_en from '../../../../layout/main/main_en.styl';
@@ -12,84 +8,55 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from '../../search_en.styl';
 import styles_ar from '../../search_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const cookies = new Cookie();
+// const MaxItems = 3;
 
-const language = cookies.get('language') || 'ar';
-const country = cookies.get('country') || 'SAU';
+const Tree = ({
+  filter, first, sid, categoryQuery,
+}) => {
+  let queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const sidParams = urlParams.get('sid');
+  return (
+    <ul className={`${styles['category-sub-list']} ${sidParams && sid ? sidParams.length <= sid.length ? styles['pl-20'] : styles['p-0'] : styles['pl-20']} ${styles['lne-ht2']}`}>
+      {
+        filter
+          ?
+          filter.children.map((category) => {
+            queryString = queryString.replace(/facets=.*?\&/, '');
+            if (queryString.indexOf('sid') !== -1) {
+              queryString = queryString.replace(/sid=.*/, `sid=${sid ? `${sid},` : ''}${category.id}`);
+            } else {
+              queryString = `${queryString}&sid=${sid ? `${sid},` : ''}${category.id}`;
+            }
+            if (queryString.indexOf('categoryFacet') === -1) {
+              queryString = `${queryString}&categoryFacet=true`;
+            }
 
-const MaxItems = 3;
-
-class Tree extends Component {
-  constructor(props){
-    super(props);
-    const { filter } = props;
-    this.state = {
-      maxRows: MaxItems,
-      isMoreButtonRequired: filter.children.length > MaxItems,
-    };
-    this.toggleMore = this.toggleMore.bind(this);
-  }
-
-  toggleMore() {
-    const { filter } = this.props;
-    this.setState({
-      maxRows: this.state.maxRows === filter.children.length ? MaxItems : filter.children.length
-    });
-  }
-
-  render() {
-    const { filter, first } = this.props;
-    let queryString = window.location.search;
-    return (
-      <ul className={`${styles['category-sub-list']} ${styles['pl-20']} ${styles['lne-ht2']}`}>
-        {
-          filter
-            ?
-            filter.children.slice(0, this.state.maxRows).map((category) => {
-              queryString = queryString.replace(/facets=.*?\&/, '');
-              if(queryString.indexOf('sid') !== -1) {
-                queryString = queryString.replace(/sid=.*/, `sid=${category.id}`);
-              } else {
-                queryString = `${queryString}&sid=${category.id}`;
-              }
-              if(queryString.indexOf('categoryFacet') === -1) {
-                queryString = `${queryString}&categoryFacet=true`;
-              }
-              return (
-                <li key={category.id} className={ first ? styles['main-sub-list'] : styles['category-sub-list-inn']}>
-                  <Link route={`/${language}/search/${category.canonicalId}/${queryString}`}><a className={`${styles['fs-12']}`}>{category.name}</a></Link>
-                  {/*<ul className={`${styles['category-sub-order-list']} ${styles['pl-15']}`}>
-                    {
-                      category.children.map((subcategory) => {
-                        return (
-                          <li key={subcategory.id} className={styles['category-sub-list-inn']}>
-                            <Link route={`/srp/${category.canonicalId}-${category.id}/${subcategory.canonicalId}-${subcategory.id}/${window.location.search}`}>{subcategory.name}</Link>
-                          </li>
-                        )
-                      })
-                    }
-                  </ul>*/}
-                  {
-                    category.children
-                      ?
-                      <Tree filter={category} />
-                      :
-                      null
-                  }
-                </li>
-              );
-            })
-            :
-            null
-        }
-        {
-          this.state.isMoreButtonRequired ? <li onClick={this.toggleMore}><a>{this.state.maxRows === filter.children.length ? '- show less' : ' + show more'}</a></li> : null
-        }
-      </ul>
-    );
-  }
-}
+            return (
+              <Branch
+                first={first}
+                category={category}
+                queryString={queryString}
+                categoryQuery={categoryQuery}
+                sidParams={sidParams && sidParams.split(',')}
+                sid={`${first ? '' : `${sid},`}${category.id}`}
+              />
+            );
+          })
+          :
+          null
+      }
+      {/* {
+        this.state.isMoreButtonRequired ?
+          <li onClick={this.toggleMore}>
+            <a>{this.state.maxRows === filter.children.length ? '- show less' : ' + show more'}</a>
+          </li>
+          : null
+      } */}
+    </ul>
+  );
+};
 
 export default Tree;

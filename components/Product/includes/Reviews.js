@@ -12,7 +12,6 @@ import { languageDefinations } from '../../../utils/lang';
 import ReviewFeedBackModal from './reviewFeedbackModal';
 import StarRating from '../../common/StarRating';
 import AuthWrapper from '../../common/AuthWrapper';
-
 import lang from '../../../utils/language';
 
 import main_en from '../../../layout/main/main_en.styl';
@@ -30,6 +29,7 @@ class Review extends Component {
     reviewData: [],
     openModal: false,
     showReviews: false,
+    openImage: false,
   }
 
   componentDidMount() {
@@ -84,6 +84,12 @@ class Review extends Component {
     }
   }
 
+  openImage = () => {
+    this.setState(prevState => ({
+      openImage: !prevState.openImage,
+    })
+  )}
+
   submituserreview = (reviewObj) => {
     const { userInfo } = this.props;
     this.props.submitUserReview({
@@ -118,7 +124,17 @@ class Review extends Component {
             </div>
           </Col>
           <Col md={8} className={styles['p-0']}>
-            <p className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['break-word']}`}>
+            {
+              data.images && data.images.length>0 ? 
+                data.images.map((image) => {
+                  return (
+                    <>
+                      <img src={image} className={`${styles.width15} ${styles['ht-07']} ${styles['border-lg']} ${styles['m-5']}`} onClick={this.openImage}/>
+                    </>
+                  )
+                }) : null 
+            }
+            <p className={`${styles['fs-12']} ${styles['thick-gry-clr']} ${styles['break-word']} ${styles['m-5']}`}>
               {data.comment}
             </p>
           </Col>
@@ -127,8 +143,8 @@ class Review extends Component {
   })
 
   render() {
-    const { reviewData, openModal, showReviews } = this.state;
-    const { catalogObj, titleInfo } = this.props;
+    const { reviewData, openModal, showReviews, openImage } = this.state;
+    const { catalogObj, titleInfo, setReviewImages, userInfo, documentId, downloadPic } = this.props;
 
     return (
       <Theme.Consumer>
@@ -179,6 +195,10 @@ class Review extends Component {
                               catalogObj={catalogObj}
                               titleInfo={titleInfo}
                               feedbackSubmit={this.submituserreview}
+                              setReviewImages={setReviewImages}
+                              cid={userInfo.contactInfo.user_account_id}
+                              documentId={documentId}
+                              downloadPic={downloadPic}
                             />
                             :
                             <ReviewThankYou toggleReviewModal={this.toggleReviewModal} />
@@ -204,6 +224,8 @@ const mapStateToProps = store => ({
   userInfo: personalDetailsSelectors.getUserInfo(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   userInfoData: authSelectors.getUserInfo(store),
+  documentId: selectors.getReviewPicDocumentId(store),
+  reviewImage: selectors.getReviewImage(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -212,6 +234,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   showLoginScreen: authActionCreators.showLoginScreen,
   v2CurrentFlow: authActionCreators.v2CurrentFlow,
   getUserInfoData: authActionCreators.getUserInfoData,
+  setReviewImages: actionCreators.setReviewImages,
+  downloadPic: actionCreators.downloadReviewPics,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Review);
