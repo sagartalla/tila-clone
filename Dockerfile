@@ -48,6 +48,8 @@ RUN version=$version node --expose-gc --max-old-space-size=14999 ./node_modules/
 COPY deploy/nginx.conf /etc/nginx/nginx.conf
 COPY deploy/nginx-default /etc/nginx/sites-enabled/default
 COPY deploy/static/apple-app-site-association /var/www/ios/apple-app-site-association
+RUN htpasswd -bc /etc/nginx/.htpasswd admin family
+RUN htpasswd -b /etc/nginx/.htpasswd oracle test@oracle
 
 EXPOSE 3002
 
