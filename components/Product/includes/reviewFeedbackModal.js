@@ -114,6 +114,13 @@ export default class FeedbackModal extends Component {
     }
   }
 
+  removeImage = (e) => {
+    this.state.images.splice(e.target.getAttribute('data_id'), 1)
+    this.setState({
+      images: this.state.images,
+    })
+  }
+
   triggerInputFile = () => this.fileInput.click()
 
   render() {
@@ -179,18 +186,16 @@ export default class FeedbackModal extends Component {
                 </button>
               </div>
               <input ref={fileInput => this.fileInput = fileInput} type='file' className={`${styles['file-input']}`} onChange={this.handleImageUpload} multiple />
-              <div className={styles.relative}>
                 {
                   images && images.length > 0 ?
-                    images.map((image) => {
+                    images.map((image, index) => {
                       return (
-                        <>
-                          {/* <span className={`${styles.thumbnail} `}>&times;</span> */}
+                        <span className={`${styles.relative}`}>
+                          <span data_id={index} className={`${styles.thumbnail} `} onClick={this.removeImage}>&times;</span>
                           <img src={image} className={`${styles.width15} ${styles['ht-07']} ${styles['border-lg']} ${styles['m-5']}`} />
-                        </>
+                        </span>
                       )}) : null
                 }
-              </div>
               {/* <div className={styles['cl-bth']}></div> */}
               {/* <div
               className={`${styles['flex-center']}
