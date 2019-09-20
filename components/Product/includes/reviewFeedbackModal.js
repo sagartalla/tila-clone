@@ -181,8 +181,7 @@ export default class FeedbackModal extends Component {
               <div className={styles['mt-10']} onClick={this.triggerInputFile}>
                 <button className={` ${styles['fs-14']} ${styles['flex-center']} ${styles['justify-center']} ${styles['border-radius2']}`}>
                   <SVGComponent clsName={`${styles['image-width']}`} src="icons/common-icon/attach" />
-                  <span className={`${styles['pl-5']} ${styles.width8vw}`}>Attach Images</span>
-
+                  <span className={`${styles['pl-5']} ${styles.width11vw} ${styles['fs-13']}`}>Attach Images&nbsp;<small className={styles['text-lgt-gray']}>(Max 5)</small></span>
                 </button>
               </div>
               <input ref={fileInput => this.fileInput = fileInput} type='file' className={`${styles['file-input']}`} onChange={this.handleImageUpload} multiple />
