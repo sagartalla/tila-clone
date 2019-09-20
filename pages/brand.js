@@ -31,7 +31,7 @@ class Brand extends Base {
     store, isServer, query, req,
   }) {
     const {
-      country, language, brandName, facets,
+      country, language, brandName, facets, isListed
     } = query;
     if (brandName !== '<anonymous>') {
       brandValue = brandName;
@@ -45,6 +45,7 @@ class Brand extends Base {
       language: language || 'ar',
       pageNum: 1,
       choosenCategoryName: brandValue,
+      isListed: isListed === 'true',
     };
     if (shippingCity) {
       searchOptions.shippingDetails = {
