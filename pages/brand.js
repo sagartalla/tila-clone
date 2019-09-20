@@ -45,7 +45,7 @@ class Brand extends Base {
       language: language || 'ar',
       pageNum: 1,
       choosenCategoryName: brandValue,
-      isListed: isListed === 'true',
+      isListed: !(isListed === 'false'),
     };
     if (shippingCity) {
       searchOptions.shippingDetails = {

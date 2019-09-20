@@ -45,7 +45,7 @@ class Category extends Base {
       query: categoryValue,
       language: language || 'ar',
       pageNum: 1,
-      isListed: isListed === 'true',
+      isListed: !(isListed === 'false'),
       choosenCategoryName: categoryValue,
       categoryTree
     };
