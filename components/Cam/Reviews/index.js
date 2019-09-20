@@ -6,11 +6,8 @@ import SVGCompoent from '../../common/SVGComponet';
 import { actionCreators, selectors } from '../../../store/ratingReviews';
 import { actionCreators as productActionCreators } from '../../../store/product';
 import { selectors as personalDetailsSelectors } from '../../../store/cam/personalDetails';
-import constants from '../../../constants';
 import lang from '../../../utils/language';
 import { languageDefinations } from '../../../utils/lang/';
-import StarRating from '../../common/StarRating';
-import Button from '../../common/CommonButton';
 import Review from './Review';
 
 import main_en from '../../../layout/main/main_en.styl';

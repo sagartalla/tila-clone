@@ -120,7 +120,6 @@ class CheckboxFacet extends Component {
     const { filter, index } = this.props;
     const { selectedItems, maxRows, filterItems } = this.state;
     return (
-      <React.Fragment>
       <Panel eventKey={`${index + 'c'}`} key={filter.id}>
         <div className={`${styles['category-list']}`}>
           <Panel.Heading className={styles['category-list-head']}>
@@ -156,7 +155,6 @@ class CheckboxFacet extends Component {
           </Panel.Body>
         </div>
       </Panel>
-      </React.Fragment>
     );
   }
 }
