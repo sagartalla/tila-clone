@@ -155,6 +155,21 @@ const isProductLoaded = (store) => {
   };
 };
 
+const getReviewImage = (store) => {
+  if(store.productReducer.data.downloadPic){
+    return store.productReducer.data.downloadPic
+  }
+}
+
+const getReviewPicDocumentId = (store) => {
+  if(store.productReducer.data.uploadPicStatus) {
+    return store.productReducer.data.uploadPicStatus.map((item) => {
+      return item.documentId;
+    });
+  }
+  return null;
+}
+
 const getLoadingStatus = (store) => {
   return store.productReducer.ui.loading;
 };
@@ -459,7 +474,7 @@ const getAllCountries = (store) => {
 };
 
 export {
-  getProduct, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse,
+  getProduct, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse, getReviewImage, getReviewPicDocumentId,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
   getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId, getTilaPolicy,
 };

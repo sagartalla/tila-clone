@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-
+import { connect } from 'react-redux';
 import constants from '../../../constants';
 import StarRating from '../../common/StarRating';
 import Button from '../../common/CommonButton';
 import SVGCompoent from '../../common/SVGComponet';
 import ReviewThankYou from '../../Product/includes/ReviewThankYou';
 import ReviewFeedBackModal from '../../Product/includes/reviewFeedbackModal';
-
+import { actionCreators, selectors } from '../../../store/product';
+import { selectors as personalDetailsSelectors } from '../../../store/cam/personalDetails'
 import lang from '../../../utils/language';
 import { languageDefinations } from '../../../utils/lang/';
 import main_en from '../../../layout/main/main_en.styl';
@@ -101,7 +102,12 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
                       rating={rev.ratings}
                       comment={rev.comment}
                       titleInfo={titleInfo}
+                      images={rev.images}
                       feedbackSubmit={postUserReview}
+                      setReviewImages={this.props.setReviewImages}
+                      cid={this.props.userInfo.contactInfo.user_account_id}
+                      documentId={this.props.documentId}
+                      downloadPic={this.props.downloadPic}
                     />
                     :
                     <ReviewThankYou toggleReviewModal={closeModal} />
@@ -117,4 +123,15 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
   );
 };
 
-export default Review;
+const mapStateToProps = (store) => ({
+  userInfo: personalDetailsSelectors.getUserInfo(store),
+  documentId: selectors.getReviewPicDocumentId(store),
+  reviewImage: selectors.getReviewImage(store),
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  setReviewImages: actionCreators.setReviewImages,
+  downloadPic: actionCreators.downloadReviewPics,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Review);
