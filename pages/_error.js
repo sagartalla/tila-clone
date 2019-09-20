@@ -1,4 +1,7 @@
 import React from 'react'
+import withRedux from 'next-redux-wrapper';
+import makeStore from '../store';
+
 import ErrorComp from '../components/common/Error'
 import Sentry from '../utils/sentryUtil'
 /**
@@ -61,4 +64,4 @@ class Error extends React.Component {
   }
 }
 
-export default Error
+export default withRedux(makeStore, null, null)(Error);

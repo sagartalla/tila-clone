@@ -148,7 +148,7 @@ class MegaMenu extends Component {
                     style={ (itemColor && hoverItem === item.id) ? { borderBottom: `4px solid ${itemColor}` } : {} }
                     >
                     <div>
-                      {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=false`}> */}
+                      {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
                       <Link route={`/${language}/${this.getLandingPageLink(item.sid)}`}>
                         <a>{item.displayName}</a>
                       </Link>

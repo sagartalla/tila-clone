@@ -234,8 +234,9 @@ const getProductComponent = (isPreview, taskCode) => {
       const {
         catalog, titleInfo, keyfeatures, extraOffers, imgUrls, offerInfo, shippingInfo, isWishlisted, returnInfo,
         details, productDescription, catalogObj, categoryType = '', warranty, breadcrums, product_id, wishlistId,
-        tila_care_policy,
+        tila_care_policy, newVariantId,
       } = productData;
+
       const { offerPricing } = offerInfo;
       const {
         stickyElements, notifyEmail, emailErr, positionStyle, positionTop, defaultPosition, tilaPolicy, rv,
@@ -257,6 +258,7 @@ const getProductComponent = (isPreview, taskCode) => {
                           product_id={product_id}
                           offerPricing={offerPricing}
                           catalogObj={catalogObj}
+                          newVariantId={newVariantId}
                           imgs={imgUrls}
                           isWishlisted={isWishlisted}
                           extraOffers={extraOffers}

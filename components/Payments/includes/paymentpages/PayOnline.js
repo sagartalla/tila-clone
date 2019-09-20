@@ -82,10 +82,14 @@ class PayOnline extends Component {
             ?
               null
             :
-              <SavedCards
-                data={savedCardsData}
-                disableNewCard={this.disableNewCard}
-              />
+            (savedCardsData
+              ?
+                <SavedCards
+                  data={savedCardsData}
+                  disableNewCard={this.disableNewCard}
+                />
+              :
+                null)
         }
         <div>
           {

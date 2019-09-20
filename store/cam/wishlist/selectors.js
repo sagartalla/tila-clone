@@ -28,7 +28,7 @@ const getWishListResults = (store) => {
         name: item && item.product_details && item.product_details.product_details_vo.cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
         brand_name: item && item.product_details && item.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
         img: `${img_url}/${item}` && item.product_details && item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
-        cur: variant_info.selling_price_currency,
+        cur: variant_info && variant_info.selling_price && variant_info.selling_price.display_currency_code,
         price: variant_info.selling_price && variant_info.selling_price.display_value,
         mrp: variant_info.mrp && variant_info.mrp.display_value,
         wishlisted_price: item.wishlisted_price,
@@ -95,7 +95,7 @@ const recentlyViewed = store => store.wishlistReducer.recentlyViewed.map((rv) =>
   return {
     nm: cached_product_details.attribute_map.calculated_display_name.attribute_values[0].value,
     br: rv.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
-    im: cached_product_details.media.gallery_media[0].url,
+    im: cached_product_details && cached_product_details.media && cached_product_details.media.gallery_media && cached_product_details.media.gallery_media[0] && cached_product_details.media.gallery_media[0].url,
     pr: variantDetails.pricing.offer_price.display_value,
     cd: variantDetails.pricing.offer_price.currency_code,
     mrp: variantDetails.pricing.mrp.display_value,

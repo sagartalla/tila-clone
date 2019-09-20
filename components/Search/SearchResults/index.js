@@ -184,6 +184,7 @@ class SearchResults extends Component {
             cartButtonLoaders={cartButtonLoaders}
             userDetails={userDetails}
             notifyMe={notifyMe}
+            isNotifyMe={item.notifyMe}
             productID={item.id}
             selectedProduct={this.selectedProduct}
             selectedID={this.state.productID}

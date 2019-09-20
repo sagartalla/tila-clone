@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
-import { configureUrlQuery } from 'react-url-query';
 import Cookies from 'universal-cookie';
-import createHistory from 'history/createBrowserHistory';
 import Base, { baseActions } from './base';
 import makeStore from '../store';
 import { languageDefinations } from '../utils/lang';
 import { actionCreators, selectors } from '../store/search';
-import { actionCreators as authActionsCreators, selectors as authSelectors } from '../store/auth';
 import { actionCreators as megamenuActionsCreators } from '../store/megamenu';
 import Layout from '../layout/main';
 import Search from '../components/Search';
@@ -20,12 +17,16 @@ const cookies = new Cookies();
 const { SEO_CONTENT } = languageDefinations();
 
 class SearchPage extends Base {
-  static async getInitialProps({ store, isServer, query, req }) {
-    const { country, language, q, facets, category, subCategory, isListed, disableSpellCheck, sid } = query;
-    const categoryTree = query.categoryTree === 'true'; //TODO need better way to identify category tree
+  static async getInitialProps({
+    store, isServer, query, req,
+  }) {
+    const {
+      country, language, q, facets, category, subCategory, isListed, disableSpellCheck, sid,
+    } = query;
+    const categoryTree = query.categoryTree === 'true'; // TODO need better way to identify category tree
     const categoryFacet = query.categoryFacet === 'true';
-    //TODO SF-37 better handling of country
-    const state = store.getState();
+    // TODO SF-37 better handling of country
+    // const state = store.getState();
     // const country = authSelectors.getCountry(state);
     // const country = req ? req.universalCookies.get('country') : cookies.get('country');
     // let [categoryId, ...categoryName] = category ? category.split('-').reverse() : [null, null];
@@ -57,26 +58,26 @@ class SearchPage extends Base {
     if (shippingCity) {
       searchOptions.shippingDetails = {
         shippingCity: shippingCity.toUpperCase(),
-        shippingCountry: (shippingCountry || global.APP_COUNTRY).toUpperCase(),
+        shippingCountry: (shippingCountry || global.APP_COUNTRY) && (shippingCountry || global.APP_COUNTRY).toUpperCase(),
       };
     } else {
       searchOptions.shippingDetails = undefined;
     }
     await Promise.all([
       store.dispatch(actionCreators.getSearchResults(searchOptions)),
-      store.dispatch(megamenuActionsCreators.getMegamenu())
+      store.dispatch(megamenuActionsCreators.getMegamenu()),
     ]);
     return { isServer };
   }
   pageName = 'SEARCH';
 
   render() {
-    const {url, loaderProps} = this.props;
+    const { url, loaderProps } = this.props;
     return (
       <div>
         <SearchContext.Provider value="search">
           <Layout>
-            <Search query={url.query} loaderProps={loaderProps}/>
+            <Search query={url.query} loaderProps={loaderProps} />
           </Layout>
         </SearchContext.Provider>
       </div>

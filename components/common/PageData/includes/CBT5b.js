@@ -17,9 +17,9 @@ const CBT5b = ({ content }) => {
 		return (
 			<a href={banners[index].link}>
 				<div
-					className={`responsively-lazy ${styles["responsively-lazy"]} ${
-						styles["width100"]
-					} ${styles.shadow}`}
+					className={`${styles["responsively-lazy"]} ${styles["width100"]} ${
+						styles.shadow
+					}`}
 					style={{
 						paddingBottom: `${(100 * banners[index].config.height) /
 							banners[index].config.width}%`
@@ -30,10 +30,8 @@ const CBT5b = ({ content }) => {
 						className={`${styles["animating-placeholder"]}  ${
 							styles["width100"]
 						} ${styles["img-responsive"]}`}
-						placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
+						placeholderColor={`linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%)`}
 						alt={banners[index].display_name}
-						width={banners[index].config.width}
-						height={banners[index].config.height}
 					/>
 				</div>
 			</a>

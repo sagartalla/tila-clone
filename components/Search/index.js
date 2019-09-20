@@ -206,7 +206,7 @@ class Search extends Component {
       sideBarPositionClass, containerStyle, showModal, filteredItems, selectedItems, filter,
     } = this.state;
     const { loadComponent, pathname } = loaderProps;
-    const finalQuery = query || categoryQuery;    
+    const finalQuery = query || categoryQuery;
     return (
       <div>
         <HeaderBar />
@@ -218,7 +218,7 @@ class Search extends Component {
            null
         }
         <div className={`${styles['header-filter']} ${styles['flex-center']} ${styles['p-10-0']}`}>
-        <div className={spellCheckResp ? `${styles['flex-center']} ${styles['search-val-part']} ${styles['pl-15']} ${styles.width25}` : `${styles['flex-center']} ${styles['search-val-part']} ${styles['pl-15']} ${styles.width15}`}>
+        <div className={`${styles['flex-center']} ${styles['search-val-part']} ${styles['pl-15']} ${spellCheckResp ? `${styles.width30}` : `${styles.width25}`}`}>
                   <h4 className={spellCheckResp ? `${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`: `${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles['fontW300']}`}>
                     {
                       spellCheckResp ?
@@ -241,7 +241,7 @@ class Search extends Component {
                     </h4>
                   }
                 </div>
-        <div className={spellCheckResp ? `${styles['search-results']} ${styles['applied-filters-padding']} ${styles.width75} ${styles.relative}` : `${styles['search-results']} ${styles['applied-filters-padding']} ${styles.width85} ${styles.relative}`}>
+        <div className={spellCheckResp ? `${styles['search-results']} ${styles['applied-filters-padding']} ${styles.width70} ${styles.relative}` : `${styles['search-results']} ${styles['applied-filters-padding']} ${styles.width75} ${styles.relative}`}>
          <NoSSR>
                 <AppliedFilters />
               </NoSSR>
@@ -249,7 +249,7 @@ class Search extends Component {
               </div>
         <LoadingBar loadComponent={loadComponent} pathname={pathname} >
           <Grid id="search-container" className={`${styles['pt-60']} ${styles.relative} ${styles['search-container-wrap']}`}>
-            <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles['p-0']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
+            <Col md={2} id="sidebar-position" className={`${styles['filter-panel']} ${styles['float-l']} ${styles['border-radius4']} ${styles['bg-white']} ${styles[sideBarPositionClass]}`} style={containerStyle}>
               <NoSSR>
                 <CategoriesAndFacets search={query} showPopup={showModal} showBrandsModal={this.showBrandsModal} selectedCheckbox={this.selectedCheckbox} clearSelectedItem={this.clearSelectedItem} />
               </NoSSR>
@@ -272,12 +272,12 @@ class Search extends Component {
             </div>
             <Col md={10} className={`${styles['search-results']} ${styles['fl-rt']} ${styles['pr-0']}`}>
               <SearchDetailsBar optionalParams={optionalParams} />
-              <SearchResults search={query.q} />
+              <SearchResults search={query} />
             </Col>
           </Grid>
           <CompareWidget />
           <FooterBar />
-        </LoadingBar>        
+        </LoadingBar>
       </div>
     );
   }
@@ -288,10 +288,10 @@ const mapStateToProps = store => ({
   optionalParams: selectors.optionParams(store),
   getFacetfilters: selectors.getFacetfilters(store),
   spellCheckResp:selectors.getSpellCheckResponse(store),
-  categoryQuery:selectors.getCategorySearchQuery(store),  
+  categoryQuery:selectors.getCategorySearchQuery(store),
   query: selectors.getQuery(store),
-  results: selectors.getSearchResutls(store), 
-  appliedFilters: selectors.getAppliedFitlers(store),   
+  results: selectors.getSearchResutls(store),
+  appliedFilters: selectors.getAppliedFitlers(store),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -303,4 +303,3 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
-

@@ -294,11 +294,11 @@ const b_y_l = [{
 }, {
   img: '/static/img/landing-home/Ray_ban_new.jpg',
   title: 'Ray-Ban',
-  links: `/${lang}/search?q=Rayban&isListed=false`,
+  links: `/${lang}/search?q=Rayban&isListed=true`,
 }, {
   img: '/static/img/landing-home/Baseus.jpg',
   title: 'Baseus',
-  links: `/${lang}/search?q=Baseus&isListed=false`,
+  links: `/${lang}/search?q=Baseus&isListed=true`,
 }, {
   img: '/static/img/landing-home/canon.jpg',
   title: 'canon',
@@ -308,7 +308,7 @@ const b_y_l = [{
 //   img: '/static/img/landing-home/levis-m.jpg',
 //   brandImg: '/static/img/landing-home/levis.jpg',
 //   title: 'Levis',
-//   links: `/${lang}/srp?search=Levis&isListed=false`,
+//   links: `/${lang}/srp?search=Levis&isListed=true`,
 // }];
 
 function SamplePrevArrow(props) {
@@ -337,8 +337,8 @@ function SampleNextArrow(props) {
 
 const b_d_b = {
   Mobiles: `/${lang}/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}/clp`,
-  Clothing: `/${lang}/search?q=Clothing?isListed=false`,
-  'Clothing Accessories': `/${lang}/search?q=Clothing&isListed=false`,
+  Clothing: `/${lang}/search?q=Clothing?isListed=true`,
+  'Clothing Accessories': `/${lang}/search?q=Clothing&isListed=true`,
   Laptops: `/${lang}/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}/clp`,
   Memory: `/${lang}/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}/clp`,
   Cameras: `/${lang}/${lang === 'en' ? 'camera' : 'الة-تصوير'}/clp`,
@@ -353,17 +353,17 @@ const b_d_b = {
   Routers: `/${lang}/${lang === 'en' ? 'Routers' : 'راوترات'}/clp`,
   'Womens Clothing': `/${lang}/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}/clp`,
   'Mens Clothing': `/${lang}/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}/clp`,
-  'Fashion Accessories': `/${lang}/srp/${lang === 'en' ? 'fashion-accessories' : 'الإكسسوارات'}?categoryTree=true&isListed=false&sid=892,923`,
-  Watches: `/${lang}/srp/watches?categoryTree=true&isListed=false&sid=892,2446`,
-  Speakers: `/${lang}/search?q=Speakers&&isListed=false`,
-  'Microwave Ovens': `/${lang}/search?q=Microwave%20Ovens&&isListed=false`,
+  'Fashion Accessories': `/${lang}/srp/${lang === 'en' ? 'fashion-accessories' : 'الإكسسوارات'}?categoryTree=true&isListed=true&sid=892,923`,
+  Watches: `/${lang}/srp/watches?categoryTree=true&isListed=true&sid=892,2446`,
+  Speakers: `/${lang}/search?q=Speakers&&isListed=true`,
+  'Microwave Ovens': `/${lang}/search?q=Microwave%20Ovens&&isListed=true`,
   'Smart Watch': `/${lang}/${lang === 'en' ? 'Smart Watch' : 'ساعات ذكية'}/clp`,
-  "Kid's Fashion": `/${lang}/srp?search=Kid%27s%20Fashion&isListed=false`,
+  "Kid's Fashion": `/${lang}/srp?search=Kid%27s%20Fashion&isListed=true`,
   Footwear: `/${lang}/${lang === 'en' ? 'Footwear' : 'أحذية'}/clp`,
-  "Men's Footwear": `/${lang}/srp/${lang === 'en' ? 'footwear' : 'حذاء'}?categoryTree=true&isListed=false&sid=892,907`,
-  'Women Footwear': `/${lang}/srp/${lang === 'en' ? 'footwear' : 'حذاء'}?categoryTree=true&isListed=false&sid=892,921`,
-  Bags: `/${lang}/search?q=BAGS&isListed=false`,
-  Eyewear: `/${lang}/search?q=Eyewear&&isListed=false`,
+  "Men's Footwear": `/${lang}/srp/${lang === 'en' ? 'footwear' : 'حذاء'}?categoryTree=true&isListed=true&sid=892,907`,
+  'Women Footwear': `/${lang}/srp/${lang === 'en' ? 'footwear' : 'حذاء'}?categoryTree=true&isListed=true&sid=892,921`,
+  Bags: `/${lang}/search?q=BAGS&isListed=true`,
+  Eyewear: `/${lang}/search?q=Eyewear&&isListed=true`,
   Jewellery: `/${lang}/${lang === 'en' ? 'Jewellery' : 'مجوهرات'}/clp`,
   Watches: `/${lang}/${lang === 'en' ? 'Watches' : 'ساعات اليد'}/clp`,
   Sunglasses: `/${lang}/${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}/clp`,
@@ -375,21 +375,21 @@ const b_d_b = {
   'Door Mats': `/${lang}/${lang === 'en' ? 'Door Mats' : 'دواسَّات للباب'}/clp`,
   'Car Freshener': `/${lang}/${lang === 'en' ? 'Car Freshener' : 'معطرات جو'}/clp`,
   'Photo Frames': `/${lang}/${lang === 'en' ? 'Photo Frames' : 'اغطية وسادات'}/clp`,
-  GUESS: `/${lang}/search?q=GUESS&isListed=false`,
-  FENDI: `/${lang}/search?q=FENDI&isListed=false`,
-  'MORPHY RICHARDS': `/${lang}/search?q=MORPHY%20RICHARDS%20&disableSpellCheck=true&&isListed=false`,
-  SHIRTS: `/${lang}/search?q=SHIRTS&&isListed=false`,
-  Perfumes: `/${lang}/search?q=perfumes&isListed=false`,
-  Shoes: `/${lang}/search?q=Shoes&&isListed=false`,
+  GUESS: `/${lang}/search?q=GUESS&isListed=true`,
+  FENDI: `/${lang}/search?q=FENDI&isListed=true`,
+  'MORPHY RICHARDS': `/${lang}/search?q=MORPHY%20RICHARDS%20&disableSpellCheck=true&&isListed=true`,
+  SHIRTS: `/${lang}/search?q=SHIRTS&&isListed=true`,
+  Perfumes: `/${lang}/search?q=perfumes&isListed=true`,
+  Shoes: `/${lang}/search?q=Shoes&&isListed=true`,
   Lights: `/${lang}/search?q=Sports%20Essentials`,
   lamps: `/${lang}/search?q=Health%20Beauty`,
   bedding: `/${lang}/search?q=baby%20care`,
   furniture: `/${lang}/search?q=Home%20Furnishing`,
-  'HOME DECOR': `/${lang}/search?q=HOME%20DECOR&isListed=false`,
-  LAPTOPS: `/${lang}/srp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}?categoryTree=true&isListed=false&sid=848,2352`,
-  'MENS CLOTHING': `/${lang}/srp/${lang === 'en' ? 'clothing' : 'ملابس'}?categoryTree=true&isListed=false&sid=892,899`,
-  'MOBILE ACCESSORIES': `/${lang}/srp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}?categoryTree=true&isListed=false&sid=848,850`,
-  'PERFUMES FOR WOMEN': `/${lang}/search?q=perfumes&isListed=false`,
+  'HOME DECOR': `/${lang}/search?q=HOME%20DECOR&isListed=true`,
+  LAPTOPS: `/${lang}/srp/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}?categoryTree=true&isListed=true&sid=848,2352`,
+  'MENS CLOTHING': `/${lang}/srp/${lang === 'en' ? 'clothing' : 'ملابس'}?categoryTree=true&isListed=true&sid=892,899`,
+  'MOBILE ACCESSORIES': `/${lang}/srp/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}?categoryTree=true&isListed=true&sid=848,850`,
+  'PERFUMES FOR WOMEN': `/${lang}/search?q=perfumes&isListed=true`,
   'Go Smart': `/${lang}/search?q=go%20smart`,
   Headphones: `/${lang}/search?q=yison`,
   BASUES: `/${lang}/search?q=Baseus`,
@@ -441,38 +441,38 @@ const HomePage = () => (
         <div className="e">
           <span className={`title ${styles['fs-20']}`}>{lang === 'en' ? 'ELECTRONICS' : 'الكترونيات‎'}</span>
           <div className="home-slider">
-          <Slider
-            asNavFor={sliderTIE}
-            ref={slider => (sliderTIE = slider)}
-            lazyLoad
-            className={`${styles['ht-100per']}`}
-            slidesToShow={10}
-          >
-            {tie.map(i => (
-              <div>
-                <div className="item" key={i}>
-                  <a href={b_d_b[i.key]}>
-                    <img src={i.img} alt={i.title} />
-                  </a>
-                  <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
+            <Slider
+              asNavFor={sliderTIE}
+              ref={slider => (sliderTIE = slider)}
+              lazyLoad
+              className={`${styles['ht-100per']}`}
+              slidesToShow={10}
+            >
+              {tie.map(i => (
+                <div>
+                  <div className="item" key={i}>
+                    <a href={b_d_b[i.key]}>
+                      <img src={i.img} alt={i.title} />
+                    </a>
+                    <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles.flex} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
+                  </div>
                 </div>
-              </div>
               ))}
-          </Slider>
+            </Slider>
           </div>
         </div>
         <div className="h-a-l">
           <span className={`title ${styles['fs-20']}`}> {lang === 'en' ? 'FASHION & LIFESTYLE' : 'أزياء و لايف ستايل'}</span>
           <div className="home-slider">
-          <Slider
-            asNavFor={sliderHAL}
-            ref={slider => (sliderHAL = slider)}
-            lazyLoad
-            className={styles['ht-100per']}
-            slidesToShow={10}
-          >
-            {hal.map(i => (
-              <div>
+            <Slider
+              asNavFor={sliderHAL}
+              ref={slider => (sliderHAL = slider)}
+              lazyLoad
+              className={styles['ht-100per']}
+              slidesToShow={10}
+            >
+              {hal.map(i => (
+                <div>
                   <div className="item" key={i}>
                     <a href={b_d_b[i.key]}>
                       <img src={i.img} />
@@ -480,8 +480,8 @@ const HomePage = () => (
                     <span className={`${styles['fs-10']} ${styles['pt-10']} ${styles['justify-center']} slider-elips ${styles['lne-ht1_2']}`}>{i.title}</span>
                   </div>
                 </div>
-            ))}
-          </Slider>
+              ))}
+            </Slider>
           </div>
         </div>
       </div>
@@ -552,9 +552,9 @@ const HomePage = () => (
           <div className={`${styles['thick-gry-clr']}`}>
             <span><a href={`/${lang}/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}/clp`}>{lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}</a></span> &nbsp; | &nbsp;
             <span><a href={`/${lang}/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'}/clp`}>{lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية\نسائي'}</a></span> &nbsp; | &nbsp;
-            <span><a href={`/${lang}/${lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'}/clp`}>{lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'}</a></span> &nbsp; | &nbsp; 
-            <span><a href={`/${lang}/${lang === 'en' ? 'Footwear' : 'أحذية'}/clp`}>{lang === 'en' ? 'Footwear' : 'أحذية'}</a></span> &nbsp; | &nbsp; 
-            <span><a href={`/${lang}/${lang === 'en' ? 'Jewellery' : 'مجوهرات'}/clp`}>{lang === 'en' ? 'Jewellery' : 'مجوهرات'}</a></span> &nbsp; | &nbsp; 
+            <span><a href={`/${lang}/${lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'}/clp`}>{lang === 'en' ? 'Kids Fashion' : 'ملابس أطفال\أطفال'}</a></span> &nbsp; | &nbsp;
+            <span><a href={`/${lang}/${lang === 'en' ? 'Footwear' : 'أحذية'}/clp`}>{lang === 'en' ? 'Footwear' : 'أحذية'}</a></span> &nbsp; | &nbsp;
+            <span><a href={`/${lang}/${lang === 'en' ? 'Jewellery' : 'مجوهرات'}/clp`}>{lang === 'en' ? 'Jewellery' : 'مجوهرات'}</a></span> &nbsp; | &nbsp;
             <span><a href={`/${lang}/${lang === 'en' ? 'Eyewear' : 'نظارات'}/clp`}>{lang === 'en' ? 'Eyewear' : 'نظارات'}</a></span>
           </div>
         </div>
@@ -575,7 +575,7 @@ const HomePage = () => (
             {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Kids Furniture' : 'أثاث الأطفال'}</span></span> */}
             <a href={b_d_b.furniture}>
               {/* <div className="shadow"> */}
-                <img src={d_tihl[0]} className="img-responsive" />
+              <img src={d_tihl[0]} className="img-responsive" />
               {/* </div> */}
             </a>
             {/* <div className="btn">
@@ -586,7 +586,7 @@ const HomePage = () => (
             {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'}</span></span> */}
             <a href={b_d_b.furniture}>
               {/* <div className="shadow"> */}
-                <img src={d_tihl[1]} className="img-responsive" />
+              <img src={d_tihl[1]} className="img-responsive" />
               {/* </div> */}
             </a>
             {/* <div className="btn">
@@ -599,7 +599,7 @@ const HomePage = () => (
             {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Lamps' : 'مصباح'} </span></span> */}
             <a href={b_d_b.lamps}>
               {/* <div className="shadow"> */}
-                <img src={d_tihl[2]} className="img-responsive" />
+              <img src={d_tihl[2]} className="img-responsive" />
               {/* </div> */}
             </a>
             {/* <div className="btn">
@@ -610,7 +610,7 @@ const HomePage = () => (
             {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Cushions' : 'وسائد'}</span></span> */}
             <a href={b_d_b.bedding}>
               {/* <div className="shadow"> */}
-                <img src={d_tihl[3]} className="img-responsive" />
+              <img src={d_tihl[3]} className="img-responsive" />
               {/* </div> */}
             </a>
             {/* <div className="btn">
@@ -623,7 +623,7 @@ const HomePage = () => (
             {/* <span className={styles['fs-16']}><span className="lite">{lang === 'en' ? 'Lights' : 'الأنوار'}</span></span> */}
             <a href={b_d_b.Lights}>
               {/* <div className="shadow"> */}
-                <img src={d_tihl[4]} className="img-responsive" />
+              <img src={d_tihl[4]} className="img-responsive" />
               {/* </div> */}
             </a>
             {/* <div className="btn">
@@ -635,10 +635,10 @@ const HomePage = () => (
           <div className={`${styles['thick-gry-clr']}`}>
             <span><a href={`/${lang}/${lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير'}/clp`}>{lang === 'en' ? 'Bedsheets' : 'غطاء\شرشف السرير'}</a></span> &nbsp; | &nbsp;
             <span><a href={`/${lang}/${lang === 'en' ? 'Furniture' : 'الأثاث'}/clp`}>{lang === 'en' ? 'Furniture' : 'الأثاث'}</a></span> &nbsp; | &nbsp;
-            <span><a href={`/${lang}/${lang === 'en' ? 'Cushions' : 'وسائد'}/clp`}>{lang === 'en' ? 'Cushions' : 'وسائد'}</a></span> &nbsp; | &nbsp; 
-            <span><a href={`/${lang}/${lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'}/clp`}>{lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'}</a></span> &nbsp; | &nbsp; 
-            <span><a href={`/${lang}/${lang === 'en' ? 'Lights' : 'الأنوار'}/clp`}>{lang === 'en' ? 'Lights' : 'الأنوار'}</a></span> &nbsp; | &nbsp; 
-            <span><a href={`/${lang}/${lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'}/clp`}>{lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'}</a></span> &nbsp; | &nbsp; 
+            <span><a href={`/${lang}/${lang === 'en' ? 'Cushions' : 'وسائد'}/clp`}>{lang === 'en' ? 'Cushions' : 'وسائد'}</a></span> &nbsp; | &nbsp;
+            <span><a href={`/${lang}/${lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'}/clp`}>{lang === 'en' ? 'Wall Decor' : '  جدار ديكورت'}</a></span> &nbsp; | &nbsp;
+            <span><a href={`/${lang}/${lang === 'en' ? 'Lights' : 'الأنوار'}/clp`}>{lang === 'en' ? 'Lights' : 'الأنوار'}</a></span> &nbsp; | &nbsp;
+            <span><a href={`/${lang}/${lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'}/clp`}>{lang === 'en' ? 'Living Room Furniture' : 'غرفة المعيشة الأثاث'}</a></span> &nbsp; | &nbsp;
             <span><a href={`/${lang}/${lang === 'en' ? 'Photo Frames' : 'إطارات صور'}/clp`}>{lang === 'en' ? 'Photo Frames' : 'إطارات صور'}</a></span>
           </div>
         </div>
@@ -726,9 +726,9 @@ const HomePage = () => (
           <div className={`${styles['thick-gry-clr']}`}>
             <span><a href={`/${lang}/${lang === 'en' ? 'Mobiles' : 'الجوالات'}/clp`}>{lang === 'en' ? 'Mobiles' : 'الجوالات'}</a></span> &nbsp; | &nbsp;
             <span><a href={`/${lang}/${lang === 'en' ? 'Laptops' : 'اللاب توبات'}/clp`}>{lang === 'en' ? 'Laptops' : 'اللاب توبات'}</a></span> &nbsp; | &nbsp;
-            <span><a href={`/${lang}/${lang === 'en' ? 'Speakers' : 'مكبر الصوت'}/clp`}>{lang === 'en' ? 'Speakers' : 'مكبر الصوت'}</a></span> &nbsp; | &nbsp; 
-            <span><a href={`/${lang}/${lang === 'en' ? 'Cameras' : 'الكاميرات'}/clp`}>{lang === 'en' ? 'Cameras' : 'الكاميرات'}</a></span> &nbsp; | &nbsp; 
-            <span><a href={`/${lang}/${lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '}/clp`}>{lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '}</a></span> &nbsp; | &nbsp; 
+            <span><a href={`/${lang}/${lang === 'en' ? 'Speakers' : 'مكبر الصوت'}/clp`}>{lang === 'en' ? 'Speakers' : 'مكبر الصوت'}</a></span> &nbsp; | &nbsp;
+            <span><a href={`/${lang}/${lang === 'en' ? 'Cameras' : 'الكاميرات'}/clp`}>{lang === 'en' ? 'Cameras' : 'الكاميرات'}</a></span> &nbsp; | &nbsp;
+            <span><a href={`/${lang}/${lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '}/clp`}>{lang === 'en' ? 'Microwave Ovens' : 'ميكرويفات '}</a></span> &nbsp; | &nbsp;
             <span><a href={`/${lang}/${lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'}/clp`}>{lang === 'en' ? 'Smartwatches' : 'ساعات يد ذكية'}</a></span>
           </div>
         </div>

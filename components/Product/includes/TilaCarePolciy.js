@@ -14,7 +14,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 
 export default function TilaCarePolicy({
   data, setTilaPolicy, choosenPolicyData, selectedTilaPolicy, warranty,
-}) {
+}) {  
   const [state, setState] = useState({
     extended_warranty: selectedTilaPolicy.extended_warranty || '',
     damage_protection: selectedTilaPolicy.damage_protection || '',

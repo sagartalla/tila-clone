@@ -108,7 +108,7 @@ class SavedCards extends Component {
         <h4 className={`${styles['lgt-blue']} ${styles['fontW300']} ${styles['fs-20']} ${styles['pt-25']}`}>{PAYMENT_PAGE.YOUR_SAVED_CREDIT_AND_DEBIT_CARDS}</h4>
         <ul className={`${styles['saved-cards-part']} ${styles['pl-0']}`}>
           {
-            data.cards_list.map((card, index) => {
+            data && data.cards_list && data.cards_list.map((card, index) => {
               return (
                 <li className={`${this.state.card_token === card.card_token ? styles['card-active'] : ''} ${styles['saved-card-item']} ${styles['mt-20']} ${styles['mb-20']}`}>
                   <input

@@ -4,7 +4,7 @@
     position: relative;
     .auto-suggestions-list
       position absolute
-      z-index 999
+      z-index 23
       left 0%
       top 100%
       max-height 200px
@@ -44,12 +44,33 @@ input.delivery-input
   width 10px
   padding 0 !important
 
+.modalClassName
+   position absolute
+   top 35%
+
 input.pdp-border-btm
   border-bottom 1px solid border-gray !important
+
+
+.location-icon
+    width 16px
+    display block
+
+.buttonStyle
+   padding 5px 20px !important
+
+.detect-location
+  padding 3px 12px
+
+.block-location-msg
+  width 265px
+  height 80px
+  border-radius 3px
+  box-shadow 0 4px 6px 0 rgba(0, 0, 0, 0.08)
+  border solid 1px #efeff4
 
 @media screen and (min-device-width: 320px) and (max-device-width: 767px) and (orientation : portrait) {
   .auto-suggestions-wrap {
     width 90%;
   }
-
 }
