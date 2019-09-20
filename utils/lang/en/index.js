@@ -261,7 +261,7 @@ export const EN_KEYWORDS = {
     KEY_FEATURES: 'Key features',
     DESCRIPTION_CANNOT_BE_EMPTY: 'Description cannot be empty',
     PLEASE_SELECT_THE_STAR_RATING: 'Please rate this product',
-    ANY_OTHER_SUGGESTIONS: 'Any Other Suggestions?Let Us Know',
+    ANY_OTHER_SUGGESTIONS: 'Any Other Suggestions? Let Us Know',
     RATE_THE_PRODUCT: 'Rate The Product',
     SUBMIT_FEEDBACK: 'Submit FeedBack',
     NO_REVIEWS_AVAILABLE: 'No reviews available for this product.',
