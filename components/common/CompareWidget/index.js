@@ -45,7 +45,7 @@ class CompareWidget extends React.Component {
           <div className={styles['compare-icon-com']} onClick={this.showComparePage}>
             <a className={styles['compare-icon-holder']} href="javascript: void(0)">
               <SVGCompoent clsName={`${styles['compare-icon']}`} src="icons/compare" />
-              <span className={`${styles['pl-5']} ${styles['fs-10']}`}><span className={styles['pr-5']}>{COMPARE_WIDGET.COMPARE}</span><span className={`${styles['comp-length']}`}>{cmpData.products.length}</span></span>
+              <span className={`${styles['pl-5']} ${styles['fs-10']} ${styles['flex']}`}><span className={styles['pr-5']}>{COMPARE_WIDGET.COMPARE}</span><span className={`${styles['comp-length']}`}>{cmpData.products.length}</span></span>
             </a>
           </div>
           <div className={styles['compare-items']}>

@@ -34,7 +34,8 @@ const addCartAndWishlistDetails = (store, results) => {
   //   return resutls;
   // }
   const cartListingIds = items.map(i => i.listing_id) || [];
-  const wishListProductIds = products && products.length > 0 && (products.map(w => w.product_id) || []);
+  const wishListProductIds = products && products.length > 0 &&
+    (products.map(w => w.product_id) || []);
 
   const wishlistItems = {};
   products.forEach((p) => {
@@ -57,39 +58,30 @@ const getSearchFilters = (store) => {
     category: [],
     facets: [],
   };
-  const { categoryFilter } = store.searchReducer.data;
+  const { categoryFilter, facetResponse } = store.searchReducer.data;
   if (categoryFilter) {
     const { nodes } = categoryFilter;
+    const renderChild = value => _.reduce(value, (acc, val) => {
+      const node = [
+        ...acc,
+        {
+          canonicalId: _.kebabCase(val.name),
+          id: val.id,
+          name: val.name,
+          [val.child && 'children']: renderChild(val.child),
+        },
+      ];
+      return node;
+    }, []);
+
     filters.category = [{
       name: 'Category',
       id: 'category',
-      children: _.reduce(nodes, (acc, value, key) => [
-        ...acc,
-        {
-          canonicalId: _.kebabCase(value.name),
-          children: _.reduce(value.child, (acc, value, key) => [
-            ...acc,
-            {
-              canonicalId: _.kebabCase(value.name),
-              id: value.id,
-              name: value.name,
-              children: _.reduce(value.child, (acc, value, key) => [
-                ...acc,
-                {
-                  canonicalId: _.kebabCase(value.name),
-                  id: value.id,
-                  name: value.name,
-                },
-              ], []),
-            }], []),
-          id: value.id,
-          name: value.name,
-        },
-      ], []),
+      children: renderChild(nodes),
     }];
   }
-  if (store.searchReducer.data.facetResponse) {
-    filters.facets = store.searchReducer.data.facetResponse.facets.reduce((filters, item) => filters.concat({
+  if (facetResponse) {
+    filters.facets = facetResponse.facets.reduce((filter, item) => filter.concat({
       name: item.attributeDisplayName,
       id: item.Id,
       queryParamName: _.camelCase(item.attributeDisplayName),
@@ -177,7 +169,7 @@ const getSearchResutls = (store) => {
 
       return {
         id: product.id,
-        notifyMe:product.attributes.notifyMe || false,
+        notifyMe: product.attributes.notifyMe || false,
         media: product.attributes.media_unrestricted_images,
         productId: product.attributes.productId,
         catalogId: product.attributes.catalogId,
@@ -253,7 +245,6 @@ const getFacetfilters = store => (queryObject) => {
   //       storeValue.Values.map(val => {
   //         queryObject[queryKey].map((item, index) => {
   //             if (val.attributeValue === item) {
-  //               debugger;
   //               facetFilters[queryKey] = facetFilters[queryKey] || [];
   //               facetFilters[queryKey].push(val.Param);
   //               facetFiltersCopyWithNames[queryKey] = facetFiltersCopyWithNames[queryKey] || [];

@@ -13,7 +13,6 @@ const bodyParser = require('body-parser');
 const cookiesMiddleware = require('universal-cookie-express');
 const routes = require('./routes');
 const apiRoutes = require('./apiRoutes');
-const staticRoutes = require('./staticRoutes');
 const uuidv4 = require('uuid/v4');
 //require('./utils/error-handle');
 const myapp = express();
@@ -114,7 +113,6 @@ app.prepare().then(() => {
     .use(sessionCookie)
     // .get(/\.map$/, sourcemapsForSentryOnly(process.env.SENTRY_TOKEN))
     .use('/api', apiRoutes)
-    .use('*policy*', staticRoutes)
     .use(handler);
     // .use(Sentry.Handlers.errorHandler())
     server

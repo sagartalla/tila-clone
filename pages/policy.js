@@ -7,11 +7,26 @@ import makeStore from '../store';
 import Layout from '../layout/main'
 import Policy from '../components/Policy';
 import Base, { baseActions } from './base';
+import { actionCreators as landingactionCreators } from '../store/landing';
 
 class PolicyPage extends Base {
   pageName = 'POLICY';
   static async getInitialProps({ store, query, isServer, req }) {
-    // await store.dispatch(actionCreators.getPage());
+    let params = {};
+    const p = {
+      'privacy-policy': 'privacy_policy',
+      'terms-of-use': 'terms_of_use',
+      'cancellation-policy': 'cancellation_policy',
+      'exchange-policy': 'exchange_policy',
+      'return-policy': 'return_policy',
+      'refund-policy': 'refund_policy',
+      'warranty-policy': 'warranty_policy',
+    }
+    if (query.name) {
+      params.page = 'policyPage';
+      params.id = p[query.name];
+    }
+    await store.dispatch(landingactionCreators.getPage(params));
     return { isServer };
   }
 

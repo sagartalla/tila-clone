@@ -1,3 +1,5 @@
+/* file not in use */
+
 const axios = require('axios');
 
 const staticRoutes = (req, res) => {

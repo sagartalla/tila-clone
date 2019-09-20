@@ -128,7 +128,6 @@ class ActionBar extends Component {
 
 
   // loginClick() {
-  //   debugger;
   //   digitalData.page.pageInfo.pageType = 'Login Page';
   //   digitalData.page.pageInfo.pageName = 'Login Page';
   //   const state = {};
