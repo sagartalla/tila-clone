@@ -33,33 +33,25 @@ class ViewportTrackerHOC extends Component {
 				trackerId: event.target.getAttribute("data-tracker-id")
 			});
 			this.recordedTimeout = setTimeout(() => {
-				newrelic.addPageAction("impression-test", {
-					pageType: event.target.getAttribute("data-page-type"),
-					trackerId: event.target.getAttribute("data-tracker-id"),
-					displayName: event.target.getAttribute("data-display-name"),
-					merchandiseId: event.target.getAttribute("data-merchandise-id"),
-					userId:
-						event.target.getAttribute("data-user-id") || "NOT_A_LOGGED_IN_USER"
-				});
-				// this.setState({ tracked: "ad--tracked" });
+				newrelic.addPageAction(
+					"impression-test",
+					Object.assign({}, { ...event.target.dataset })
+				);
+				this.setState({ tracked: "ad--tracked" });
 			}, 1000);
 			return;
 		}
 		clearTimeout(this.recordedTimeout);
 	};
 	handleClick = event => {
-		console.log(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
-			trackerId: event.currentTarget.getAttribute("data-tracker-id")
-		});
-		newrelic.addPageAction(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
-			pageType: event.currentTarget.getAttribute("data-page-type"),
-			trackerId: event.currentTarget.getAttribute("data-tracker-id"),
-			displayName: event.currentTarget.getAttribute("data-display-name"),
-			merchandiseId: event.currentTarget.getAttribute("data-merchandise-id"),
-			userId:
-				event.currentTarget.getAttribute("data-user-id") ||
-				"NOT_A_LOGGED_IN_USER"
-		});
+		console.log(
+			this.props.clickEvent || "UNKNOWN_CLICK_EVENT",
+			Object.assign({}, { ...event.currentTarget.dataset })
+		);
+		newrelic.addPageAction(
+			this.props.clickEvent || "UNKNOWN_CLICK_EVENT",
+			Object.assign({}, { ...event.currentTarget.dataset })
+		);
 	};
 	render() {
 		return (
