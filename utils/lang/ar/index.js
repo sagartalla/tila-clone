@@ -544,7 +544,7 @@ export const AR_KEYWORDS = {
     "RETURN": "الإرجاع",
     "CONSUMER_RIGHT": "حقوق المستهلك",
     "DOWNLOAD_APP": "حمّل التطبيق",
-    "TILA_RIGHTS": "جميع الحقوق محفوظة. لموقع تيله 2019",
+    "TILA_RIGHTS": "جميع الحقوق محفوظة. لموقع تيله ",
     "SIZE_CHART": "جدول المقاسات",
     "WOMEN_CLOTHING": "أزياء نسائيه",
     "MEN_CLOTHING": "أزياء رجاليه",

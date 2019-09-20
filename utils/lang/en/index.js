@@ -552,7 +552,7 @@ export const EN_KEYWORDS = {
     RETURN: 'Returns',
     CONSUMER_RIGHT: 'Consumer Rights',
     DOWNLOAD_APP: 'Download the app',
-    TILA_RIGHTS: 'Tila.com. All rights reserved 2019',
+    TILA_RIGHTS: 'Tila.com. All rights reserved',
     SIZE_CHART: 'Size Chart',
     WOMEN_CLOTHING: 'Women\'s Clothing',
     MEN_CLOTHING: 'Men\'s Clothing',
