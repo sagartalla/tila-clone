@@ -274,7 +274,7 @@ export const EN_KEYWORDS = {
     NOT_COVERED_IN_WARRANTY: 'Not Covered in Warranty',
     ENTER_VALID_EMAIL: 'Enter Valid EmailID',
     GET_NOTIFIED: 'Get Notified',
-    SHOW_OUT_OF_STOCK: 'Show Out of Stock',
+    SHOW_OUT_OF_STOCK: 'Include Out of Stock',
     PLEASE_SELECT_PRODUCT_SIZE: 'Please Select Product Size',
     PDP_DONE: 'Done',
     OUT_OF_STOCK: 'Out of stock',

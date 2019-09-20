@@ -274,7 +274,7 @@ export const AR_KEYWORDS = {
     "ENTER_VALID_EMAIL": "أدخل بريدك الإلكتروني الصالح للإستعمال",
     "GET_NOTIFIED": "نبهني",
     // "HIDE_OUT_OF_STOCK": "اخفي المنتجات نافذه الكمية",
-    "SHOW_OUT_OF_STOCK": 'Show Out of Stock',
+    "SHOW_OUT_OF_STOCK": 'Include Out of Stock',
     "PLEASE_SELECT_PRODUCT_SIZE": "ماعليك أمر   تختار مقاس المنتج",
     "PDP_DONE": "انتهينا",
     "OUT_OF_STOCK": "نفذت الكمية",
