@@ -21,37 +21,31 @@ import Observer from "@researchgate/react-intersection-observer";
  */
 
 class ViewportTrackerHOC extends Component {
-	state = { tracked: "" };
+	// state = { tracked: "" };
 	handleChange = (event, unobserve) => {
-		// used for tracking only once
-		// if (event.isIntersecting) {
-		// 	unobserve();
-		// }
-
 		if (event.isIntersecting && event.intersectionRatio >= 1) {
-			console.log("impression-test", {
-				trackerId: event.target.getAttribute("data-tracker-id")
-			});
 			this.recordedTimeout = setTimeout(() => {
-				newrelic.addPageAction(
-					"impression-test",
-					Object.assign({}, { ...event.target.dataset })
-				);
-				this.setState({ tracked: "ad--tracked" });
+				newrelic.addPageAction("impression-test", { ...event.target.dataset });
+				console.log("impression-test", {
+					...event.target.dataset
+				});
+				// this.setState({ tracked: "ad--tracked" });
+				// used for tracking only once
+				// if (event.isIntersecting) {
+				// 	unobserve();
+				// }
 			}, 1000);
 			return;
 		}
 		clearTimeout(this.recordedTimeout);
 	};
 	handleClick = event => {
-		console.log(
-			this.props.clickEvent || "UNKNOWN_CLICK_EVENT",
-			Object.assign({}, { ...event.currentTarget.dataset })
-		);
-		newrelic.addPageAction(
-			this.props.clickEvent || "UNKNOWN_CLICK_EVENT",
-			Object.assign({}, { ...event.currentTarget.dataset })
-		);
+		console.log(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
+			...event.currentTarget.dataset
+		});
+		newrelic.addPageAction(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
+			...event.currentTarget.dataset
+		});
 	};
 	render() {
 		return (
