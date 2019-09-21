@@ -45,18 +45,9 @@ class PageData extends React.Component {
 			case "CT1":
 				return <CT1 content={content} />;
 
-			case "CBT6a": {
-				return (
-					<CBT6a content={content} index={`${content.layout_id}${index}`} />
-				);
-			}
-			case "CBT6b": {
-				return (
-					<CBT6b content={content} index={`${content.layout_id}${index}`} />
-				);
-			}
 			case "DT1":
 				return <DT content={content} index={`${content.layout_id}${index}`} />;
+
 			case "FT1":
 				return (
 					<FT
@@ -133,12 +124,6 @@ class PageData extends React.Component {
 					<CBT6b content={content} index={`${content.layout_id}${index}`} />
 				);
 			}
-
-			case "DT1":
-				return <DT content={content} index={`${content.layout_id}${index}`} />;
-
-			case "FT1":
-				return <FT content={content} index={`${content.layout_id}${index}`} />;
 
 			case "CBT12":
 				return (
