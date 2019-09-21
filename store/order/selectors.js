@@ -20,7 +20,7 @@ const getOrderDetails = (store) => {
       payments,
       status,
       invoice_id: order_items.find(x => x.invoice_id !== '').invoice_id,
-      //TODO move compose to common util
+    //TODO move compose to common util
       orderItems: _.compose(
         _.reduce.convert({ 'cap': false })((acc, val, key) => {
           return acc.concat({
@@ -36,6 +36,18 @@ const getOrderDetails = (store) => {
             listingId: val.listingId,
             tilaPolicy: val.tilaPolicy,
             tuinId: val.tuinId,
+            reviewsData: {
+              media: val.img,
+              title: val.name,
+            },
+            catalogObj: {
+              catalog_id: val.catalogId,
+              variant_id: val.variantId,
+              product_id: val.productId,
+              item_type: val.itemType,
+            },
+            returnPolicy: val.returnPolicy,
+            ratingApplicable: val.ratingApplicable,
           });
         }, []),
         _.map((i) => {
@@ -83,6 +95,8 @@ const getOrderDetails = (store) => {
             tuinId: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.tuin ?
               i.variant_info.variant_details.attribute_map.tuin.attribute_values[0].value : null,
             return_tracking,
+            returnPolicy: i.return_policy,     
+            ratingApplicable: i.rating_applicable,                   
           };
         }),
       )(order_items),

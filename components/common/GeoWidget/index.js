@@ -324,7 +324,7 @@ class GeoWidget extends Component {
           <div className={`${styles['flex-center']} ${styles['justify-center']} ${styles['flex-colum']}`}>
             <Modal.Body>
              {!showServingLocations && <div className={`${styles['fs-20']} ${styles['fontW800']}`}>{SEARCH_PAGE.PLEASE_SELECT_LOCATION_WITHIN_SAUDI}</div>}
-             {showServingLocations && <div className={`${styles['fs-20']} ${styles['fontW800']}`}>We are only serving locations within Saudi</div>}
+             {showServingLocations && <div className={`${styles['fs-20']} ${styles['fontW800']}`}>{SEARCH_PAGE.WE_ARE_SERVING_WITHIN_SAUDI}</div>}
             </Modal.Body>
             <div className={`${styles['mt-20']} `}>
             <Button

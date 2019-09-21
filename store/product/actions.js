@@ -33,9 +33,9 @@ const actionCreators = {
     type: actions.GET_PREVIEW,
     payload: api.getPreview(params),
   }),
-  getRatingsAndReviews: params => ({
+  getRatingsAndReviews: (params, orderId, orderItemId) => ({
     type: actions.GET_REVIEW_RATINGS,
-    payload: api.getReviewRatings(params),
+    payload: api.getReviewRatings(params, orderId, orderItemId),
   }),
   submitUserReview: params => ({
     type: actions.SUBMIT_USER_REVIEW,
