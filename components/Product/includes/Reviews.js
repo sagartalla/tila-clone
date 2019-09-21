@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Cookies from 'universal-cookie';
 import Theme from '../../helpers/context/theme';
 import { selectors, actionCreators } from '../../../store/product';
 import { selectors as authSelectors, actionCreators as authActionCreators } from '../../../store/auth';
@@ -18,9 +17,9 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 import PopUp from '../../common/PopUp';
+// import Slider from 'react-slick';
 
 const { PDP_PAGE } = languageDefinations();
-const cookies = new Cookies();
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
@@ -86,7 +85,7 @@ class Review extends Component {
   }
 
   handleImagePopUp = (e) => {
-    let source = e.target.getAttribute('src')
+    let source = e && e.target.getAttribute('src');
     this.setState(prevState => ({
       openImage: !prevState.openImage,
       source: source,
@@ -141,12 +140,44 @@ class Review extends Component {
             {data.comment}
           </p>
         </Col>
+        {/* <Slider
+            asNavFor={this.state.nav2}
+            ref={slider => (this.slider1 = slider)}
+            lazyLoad
+            className={`${styles['ht-100per']} ${styles.slick}`}
+            beforeChange={this.pauseVideo}
+          >
+            {(data.images && data.images.length > 0) && data.images.map(({ image }) => (
+              <div className={styles['selected-item-wrap']}>
+                <img src={image} className={`${styles.width15} ${styles['ht-07']} ${styles['border-lg']} ${styles['m-5']}`} alt="" />
+              </div>
+            ))}
+          </Slider> */}
         <PopUp
           isOpen={this.state.openImage}
           width="500px"
           height="500px"
           closePopUp={this.handleImagePopUp}
         >
+        {/* <Slider
+            // asNavFor={this.state.nav2}
+            // ref={slider => (this.slider1 = slider)}
+            // lazyLoad
+            // className={`${styles['ht-100per']} ${styles.slick}`}
+            // beforeChange={this.pauseVideo}
+              dots = {true}
+              infinite = {true}
+              speed = {500}
+              slidesToShow = {1}
+              slidesToScroll = {1}
+              className={`${styles['ht-100per']} ${styles.slick}`}
+          >
+            {(data.images && data.images.length > 0) && data.images.map(( image ) => {
+              return (
+                <img src={image} className={`${styles.width15} ${styles['ht-07']} ${styles['border-lg']} ${styles['m-5']}`} onClick={this.handleImagePopUp} />
+              )
+              })}
+          </Slider> */}
           {<img src={this.state.source} className={styles.width100}/>}
         </PopUp>
       </Col>
@@ -154,7 +185,7 @@ class Review extends Component {
   })
 
   render() {
-    const { reviewData, openModal, showReviews, openImage } = this.state;
+    const { reviewData, openModal, showReviews } = this.state;
     const { catalogObj, titleInfo, setReviewImages, userInfo, documentId, downloadPic } = this.props;
 
     return (
