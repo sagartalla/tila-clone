@@ -451,6 +451,7 @@ export const EN_KEYWORDS = {
     NO_MATCHING_SAUDI_CITY: 'No matching Saudi city',
     OKAY: 'OKAY',
     WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK: 'We will email you once this is in stock.',
+    WE_ARE_SERVING_WITHIN_SAUDI: 'We are only serving locations within Saudi',
   },
   // adding new page content
   FOOTER_PAGE: {
@@ -786,6 +787,9 @@ export const EN_KEYWORDS = {
     ORDERED_ON: 'Ordered on',
     INCLUSIVE_OF_ALL_TAXES: '*inclusive of all taxes',
     TILA_CARE_SERVICE_FEE: 'TiLa Care Service Fee :',
+    RATE_PRODUCT: 'RATE PRODUCT',
+    WARRANTY_ENDS_ON: 'Warranty ends on',
+    RETURN_WINDOW_CLOSED_ON: 'Return window closed on',
   },
   COUPON_OFFERS: {
     VIEW_TERMS: 'Terms & Conditions',

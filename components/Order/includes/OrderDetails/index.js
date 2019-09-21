@@ -78,7 +78,8 @@ const OrderDetails = ({ query, orderData, thankyouPage }) => {
                   tuinId={item.tuinId}
                   isOrderDetailsPage={true}
                   reviewsData={item.reviewsData}
-                  catalogObj={item.catalogObj}                
+                  catalogObj={item.catalogObj}
+                  ratingApplicable={item.ratingApplicable}                                  
                 />
               ))}
             </div>

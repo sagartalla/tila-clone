@@ -145,6 +145,7 @@ const Order = ({ order, getInvoice }) => {
               isOrderDetailsPage={false}
               reviewsData={orderItem.reviewsData}
               catalogObj={orderItem.catalogObj}
+              ratingApplicable={orderItem.ratingApplicable}
             />
           ))}
         </Col>

@@ -25,8 +25,14 @@ const getPreview = (options) => {
   });
 };
 
-const getReviewRatings = (options) => {
-  return axios.post(`${constants.REVIEWS_API_URL}/api/v1/reviews/fetch`,options)
+const getReviewRatings = (options, orderId, orderItemId) => {
+  return axios.post(`${constants.REVIEWS_API_URL}/api/v1/reviews/fetch`,options).then(({ data }) => {
+    return {
+      data,
+      orderId,
+      orderItemId,
+    };
+  });
 };
 
 const submitUserReview = (options) => {

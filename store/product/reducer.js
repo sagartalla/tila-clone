@@ -21,6 +21,7 @@ const initialState = {
     damage_protection: '',
   },
   policyLocation: {},
+  reviewsData: {},
 };
 const productReducer = typeToReducer({
   [actions.GET_PRODUCT]: {
@@ -56,7 +57,20 @@ const productReducer = typeToReducer({
       return Object.assign({}, state, { ui: { loading: true }});
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { reviews: action.payload.data, ui: { loading: false } });
+      const orderId = action.payload.orderId;
+      const orderItemId = action.payload.orderItemId;      
+      return Object.assign({}, state, {
+        reviews: action.payload.data,
+        reviewsData: {
+          ...state.reviewsData,
+          [orderId] : {
+            ...state.reviewsData[orderId],
+            [orderItemId]: action.payload.data,
+          },
+        },
+        ui: {
+          loading: false
+        } });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: {loading: false }} )

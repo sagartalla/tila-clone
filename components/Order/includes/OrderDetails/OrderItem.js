@@ -7,15 +7,18 @@ import Cookies from 'universal-cookie';
 import moment from 'moment-timezone';
 
 import SVGComponent from '../../../common/SVGComponet';
+import { selectors as personalDetailsSelectors } from '../../../../store/cam/personalDetails';
 import StatusWidget from '../StatusWidget';
 import { Link, Router } from '../../../../routes';
 import constants from '../../../../constants';
-import { actionCreators as productActionCreators } from '../../../../store/product';
+import { actionCreators as orderActionCreators } from '../../../../store/cam/orders';
+import { actionCreators as productActionCreators, selectors as productSelectors } from '../../../../store/product';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 import { actionCreators } from '../../../../store/order';
 import Warranty from '../../../../components/Product/includes/Warranty';
 import OrderTracker from './OrderTracker';
 import ReviewThankYou from '../../../Product/includes/ReviewThankYou';
+import StarRating from '../../../common/StarRating';
 import ReviewFeedBackModal from '../../../Product/includes/reviewFeedbackModal';
 
 // import  styles from '../order.styl';
@@ -31,6 +34,7 @@ import styles_ar from '../../order_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
+let warrantyData;
 
 const { ORDER_PAGE, CART_PAGE, ORDERS } = languageDefinations();
 
@@ -61,11 +65,25 @@ class OrderItem extends Component {
     };
     this.getCurrencyValue = this.getCurrencyValue.bind(this);
   }
+  componentDidMount() {
+    const { catalogObj, userInfo, orderItem, orderId } = this.props;
+    const { catalog_id, product_id, item_type } = catalogObj;
+    const paramsobj = {
+      catalog_id,
+      product_id,
+      review_type: 'USER',
+      user_id: userInfo.personalInfo.user_account_id,
+    };
+    this.props.getRatingsAndReviews(paramsobj, orderId, orderItem.id);
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+  }
+
   getCurrencyValue(finalPrice) {
     const {isDamageProtectionAvailable,isWarrantyAvailable } = this.props
     return <span><span className={`${styles['fs-12']}`}>&nbsp;{finalPrice.currency_code}</span>&nbsp;<span>{finalPrice.display_value}</span></span>
   }
   getWarrantyDuration = (product) => {
+
     const {
       isDamageProtectionAvailable,
       isWarrantyAvailable,
@@ -82,6 +100,32 @@ class OrderItem extends Component {
     }
     return warrantyInfo;
   }
+  getWarranty = (product) => {
+    const {
+      tilaPolicy,
+    } = product;
+    if (tilaPolicy.length === 0) return null;
+    const preferredPolicy = product.returnPolicy.preferred_policy; 
+    tilaPolicy.length > 0 && tilaPolicy.forEach((item) => {
+        if (item.policy_type === 'EXTENDED' && item.valid_upto !== null) {
+          warrantyData = moment(item.valid_upto).tz('Asia/Riyadh').format("MMM Do 'YY");
+        } else if(item.policy_type === 'NORMAL' && item.valid_upto !== null) {
+          warrantyData = moment(item.valid_upto).tz('Asia/Riyadh').format("MMM Do 'YY");
+        } else {
+          warrantyData = 'Invalid'
+        }
+      });
+      return (warrantyData !== 'Invalid' && warrantyData !== '') &&
+      <React.Fragment>
+      <div className={`${styles['flex']} ${styles['align-start']}`}>
+      <SVGComponent clsName={`${styles['help-icon']}`} src="icons/common-icon/shield" />
+      <div className={`${styles['ml-10']}`}>{ORDER_PAGE.WARRANTY_ENDS_ON} - {warrantyData}</div>
+      </div>
+      {product.returnPolicy && product.returnPolicy.policies && product.returnPolicy.policies[preferredPolicy] && product.returnPolicy.policies[preferredPolicy].valid_upto !== null &&
+      <div className={`${styles['border-b']} ${styles['m-5']} ${styles['width63']}`}></div>}
+      </React.Fragment>
+  }
+
   getDate = (estimates) => {
     const { orderItem } = this.props;
     const t = estimates.filter(state => state.status === orderItem.status);
@@ -184,13 +228,25 @@ class OrderItem extends Component {
     });
   }
 
+  renderReviewDetails = (reviewData) => {
+    return (
+          <div className={`${styles['pl-10']} ${styles['thick-gry-clr']} ${styles.flex} ${styles['review-start-inn']}`}>
+              <StarRating
+                interactive={false}
+                count={5}
+                rating={reviewData.ratings}
+                clsStyl={{ width: '15px', marginRight: '5px' }}
+              />
+          </div>
+  )}
+
   render() {
     const {
       payments = [{}], orderItem, orderId, thankyouPage, isCancelable,
       isReturnable, isExchangable, needHelp, showPriceInfo, isDamageProtectionAvailable,
-      isWarrantyAvailable, tilaPolicy, tuinId, reviewsData, catalogObj,
+      isWarrantyAvailable, tilaPolicy, tuinId, reviewsData, catalogObj, getReviewRatings, getReviewsData,
     } = this.props;
-    console.log('reviewData', reviewsData, catalogObj);
+    console.log('getReviewsData', getReviewsData);
     const { showToolTip, openModal, showReviews } = this.state;
     const btnType = (() => {
       if (['PLACED', 'SHIPPED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
@@ -238,10 +294,11 @@ class OrderItem extends Component {
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
           {orderItem.products.map((product) => {
-            const { catalogId: catalog_id, name, productId: product_id, variantId, listing_id='oos' } = product;
+            const { catalogId: catalog_id, name, productId: product_id, variantId, listing_id='oos'} = product;
             const {
               final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {}, discount = {},
             } = product.price;
+            const preferredPolicy = product.returnPolicy.preferred_policy;
             return (
               <React.Fragment key={product.id}>
                 <div className={`${styles.relative} ${styles['ht-100P']} ${styles['products-wrap']} ${styles.flex} ${styles['p-15']}`}>
@@ -333,6 +390,17 @@ class OrderItem extends Component {
                             </span>
                           </div>
                           : null}
+                          <div className={`${styles['mt-10']}`}>
+                          {this.getWarranty(product)}
+                          {product.returnPolicy && product.returnPolicy.policies && product.returnPolicy.policies[preferredPolicy] && product.returnPolicy.policies[preferredPolicy].valid_upto &&
+                          <React.Fragment>
+                          <div className={`${styles['flex']} ${styles['align-start']}`}>
+                          <SVGComponent clsName={`${styles['help-icon']}`} src="icons/common-icon/order-return" />
+                          {product.returnPolicy ? <div className={`${styles['ml-10']}`}>{ORDER_PAGE.RETURN_WINDOW_CLOSED_ON} - {moment(product.returnPolicy.policies[preferredPolicy].valid_upto).tz('Asia/Riyadh').format("MMM Do 'YY")}</div> : ''}
+                          </div>
+                          </React.Fragment>
+                          }
+                          </div>                    
                       </div>
                     </Col>
                   </div>
@@ -429,17 +497,26 @@ class OrderItem extends Component {
                   }
                 </div>
               </div>
-              <div className={`${styles['widget-wrap']} ${styles['p-20']}`}>
+              <div className={`${styles['widget-wrap']} ${styles['p-20']} ${styles['mb-30']}`}>
                 {thankyouPage ?
                   null
                   :
                   <StatusWidget currentStatus={orderItem.products} />
                 }
               </div>
-              {(orderItem.status === 'DELIVERED' || orderItem.status === 'EXCHANGE_IN_PROGRESS' ||  orderItem.status === 'RETURN_IN_PROGRESS' || orderItem.status === 'REPLACEMENT_IN_PROGRESS') &&
-              <div className={`${styles['flex-center']} ${styles['justify-end']}`}>
-              <SVGComponent clsName={`${styles['rate-product-icon']}`} src="icons/common-icon/rate-product" />
-              <div onClick={this.toggleReviewModal}>RATE PRODUCT</div>
+              {orderItem.ratingApplicable &&
+              <div className={`${styles['flex-center']} ${styles['justify-end']} ${styles['mr-25']} ${styles['rate-product-style']}`}>
+              <img src="/static/img/icons/common-icon/rate-product.png" alt="" className={`${styles['rate-product-icon']} ${styles['ml-5']}`} />
+              {Object.keys(getReviewsData).map(id => {
+                if (id === orderId) {
+                  return Object.keys(getReviewsData[id]).map((itemId, index) => {
+                    if (itemId === orderItem.id) {
+                      return getReviewsData[id] && getReviewsData[id][itemId] && getReviewsData[id][itemId][0] && getReviewsData[id][itemId][0].ratings > 0 ? <div>{this.renderReviewDetails(getReviewsData[id][itemId][0])}</div> : <div onClick={this.toggleReviewModal} className={`${styles['m-5']} ${styles['fs-12']} ${styles['m-5']} ${styles.pointer}`}>{ORDER_PAGE.RATE_PRODUCT}</div>
+                    }
+                  })
+                }
+              })
+              }
               </div>}
             </React.Fragment>
           }
@@ -478,10 +555,19 @@ class OrderItem extends Component {
   }
 }
 
+const mapStateToProps = store => ({
+  userInfo: personalDetailsSelectors.getUserInfo(store),
+  getReviewRatings: productSelectors.getReviewRatings(store),
+  getReviewsData: productSelectors.getReviewsData(store),
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   raiseOrderIssue: actionCreators.raiseOrderIssue,
   getOrderDetails: actionCreators.getOrderDetails,
-  submitUserReview: productActionCreators.submitUserReview,  
+  submitUserReview: productActionCreators.submitUserReview,
+  getRatingsAndReviews: productActionCreators.getRatingsAndReviews,
+  getOrderHistory: orderActionCreators.getOrderHistory,
+  getWarrantyHistory: orderActionCreators.getWarrantyHistory,
 }, dispatch);
 
 OrderItem.propTypes = {
@@ -490,7 +576,7 @@ OrderItem.propTypes = {
   orderId: PropTypes.string.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(OrderItem);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);
 
 
 // btnType ?

@@ -4,7 +4,6 @@ import shortid from 'shortid';
 
 const getOrdersData = (store,data) => {
   const { orders } = store.ordersReducer[data];
-
   if (orders && orders.length) {
     return orders.map((order) => {
       const {
@@ -20,7 +19,6 @@ const getOrdersData = (store,data) => {
         order_type,
         invoice_id,
       } = order;
-      debugger;
       const orderItems = _.compose(
         _.reduce.convert({ cap: false })((acc, val, key) => acc.concat({
           id: val.id,
@@ -44,7 +42,9 @@ const getOrdersData = (store,data) => {
             variant_id: val.variantId,
             product_id: val.productId,
             item_type: val.itemType,
-          }
+          },
+          returnPolicy: val.returnPolicy,
+          ratingApplicable: val.ratingApplicable,
         }), []),
         _.map(i => ({
           id: i.order_item_ids[0],
@@ -76,6 +76,8 @@ const getOrdersData = (store,data) => {
             Object.values(i.variant_info.variant_details.attribute_map).filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
           tuinId: i.variant_info && i.variant_info.variant_details && i.variant_info.variant_details.attribute_map && i.variant_info.variant_details.attribute_map.tuin ?
             i.variant_info.variant_details.attribute_map.tuin.attribute_values[0].value : null,
+          returnPolicy: i.return_policy,
+          ratingApplicable: i.rating_applicable,
         })),
         _.filter(i => i.order_item_type === 'DELIVERY'),
       )(order_items);
