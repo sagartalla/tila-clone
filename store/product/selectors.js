@@ -148,7 +148,6 @@ const getTilaPolicy = (store) => {
   return store.productReducer.tilaPolicy;
 };
 const isProductLoaded = (store) => {
-  // console.log('productdetails', store.productReducer.data[0]);
   return {
     isProductLoaded: store.productReducer.data[0],
     productDetails: store.productReducer.data[0],
@@ -293,7 +292,6 @@ const getVariantsAndSimilarProducts = variantId => (store) => {
       map,
     };
   }, { display: {}, map: [], order: [] }) : { display: {}, map: [], order: [] };
-  console.log('similarProducts', similarProducts);
   if (similar_products.length && similarProducts.order[0]) {
     const primaryValues = attribute_map[similarProducts.order[0]].attribute_values.map(av => av.value);
     const shortList = _.reduce(similarProducts.map, (acc, attrs, pid) => {
