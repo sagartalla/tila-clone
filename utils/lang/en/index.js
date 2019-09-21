@@ -1014,4 +1014,10 @@ export const EN_KEYWORDS = {
     NO_RECENTLY_VIEWED: 'There are no recently viewed items here.',
     BEGIN_SHOPPING: 'Let\'s begin your TiLa shopping journey now',
   },
+  PAGE_NOT_FOUND: {
+    "PAGENOTFOUND": 'PAGE NOT FOUND',
+    "OOPS": "Oops! This page is not available. Please choose any of the categories above",
+    "OR": 'or',
+    "GO_TO_HOMEPAGE": 'GO TO HOMEPAGE',
+  }
 };

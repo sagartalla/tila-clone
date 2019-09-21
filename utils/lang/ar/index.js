@@ -207,7 +207,7 @@ export const AR_KEYWORDS = {
     "DAYS": "الأيام",
     "PRODUCT_DETAILS": "تفاصيل منتجك",
     "ADD_TO_CART": "ضيفها ل عربة التسوق",
-    "ADD_MORE": 'ADD MORE',   
+    "ADD_MORE": 'ADD MORE',
     "BUY_NOW": "اشتري اللحين",
     "NOTIFY_ME": "نبهني",
     "BUY_FOR": "أشتري ل...",
@@ -444,7 +444,7 @@ export const AR_KEYWORDS = {
     "SELECT_CITY_BELOW": 'Or select city below',
     "NO_MATCHING_SAUDI_CITY": 'No matching Saudi city',
     "OKAY": 'OKAY',
-    "WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK": 'We will email you once this is in stock.',    
+    "WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK": 'We will email you once this is in stock.',
   },
   "FOOTER_PAGE": {
     "GOT_QUESTION": "عندك أي سؤال؟",
@@ -1006,4 +1006,10 @@ export const AR_KEYWORDS = {
     NO_RECENTLY_VIEWED: 'There are no recently viewed items here.',
     BEGIN_SHOPPING: 'Let\'s begin your TiLa shopping journey now',
   },
+  PAGE_NOT_FOUND: {
+    "PAGENOTFOUND": 'الصفحة غير موجودة',
+    "OOPS": "للأسف! هذه الصفحة غير موجودة. من فضلك اختار أي من الفئات بالأعلى",
+    "OR": 'أو',
+    "GO_TO_HOMEPAGE": 'اذهب  للصفحة الرئيسية',
+  }
 };
