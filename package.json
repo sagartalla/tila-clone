@@ -10,6 +10,7 @@
 		"start:prod": "NODE_ENV=production ENV=production node server.js"
 	},
 	"dependencies": {
+		"@researchgate/react-intersection-observer": "^1.0.1",
 		"@sentry/browser": "^4.6.4",
 		"@sentry/node": "^4.6.4",
 		"@zeit/next-css": "1.0.1",
