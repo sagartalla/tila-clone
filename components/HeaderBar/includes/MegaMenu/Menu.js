@@ -64,7 +64,7 @@ const brandImages = {
         link: `/${lang}/brand/casio`,
       },
       {
-        value: 'Rayban',
+        value: 'RayBan',
         link: `/${lang}/brand/ray-ban`,
       },
       {
