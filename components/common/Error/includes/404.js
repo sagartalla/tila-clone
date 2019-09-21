@@ -8,6 +8,10 @@ import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './404error_en.styl';
 import styles_ar from './404error_ar.styl';
 
+
+import { languageDefinations } from '../../../../utils/lang';
+const { PAGE_NOT_FOUND } = languageDefinations();
+
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 
@@ -155,14 +159,14 @@ function FourNotFour() {
           <span className={styles['four-not-four-no']}>4</span>
         </div>
         <div className={`${styles['page-nt-found']} ${styles['t-c']}`}>
-          <h4 className={`${styles['fs-30']}`}>PAGE NOT FOUND</h4>
+          <h4 className={`${styles['fs-30']}`}>{PAGE_NOT_FOUND.PAGENOTFOUND}</h4>
           <p className={`${styles['fs-16']}`}>
-            Oops, this page is not available. Please choose categories above
+            {PAGE_NOT_FOUND.OOPS}
           </p>
           <p>
-          or
+            {PAGE_NOT_FOUND.OR}
           </p>
-          <a href="/" className={`${styles['landing-page-btn']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']} ${styles['fs-18']} ${styles['text-uppercase']} ${styles['small-btn']}`}>Go to home page</a>
+          <a href="/" className={`${styles['landing-page-btn']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']} ${styles['fs-18']} ${styles['text-uppercase']} ${styles['small-btn']}`}>{PAGE_NOT_FOUND.GO_TO_HOMEPAGE}</a>
         </div>
       </div>
 
