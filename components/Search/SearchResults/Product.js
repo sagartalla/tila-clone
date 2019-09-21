@@ -290,7 +290,7 @@ class Product extends Component {
       media,
       isQuickView,
       isNotifyMe,
-    } = this.props;    
+    } = this.props;
     const { src, showNotifyMeMsg } = this.state;
     const product_id = productId;
     const variant_id = variantId || '';
@@ -345,7 +345,7 @@ class Product extends Component {
           className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
           onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
         >
-          <Link route={`/${language}/pdp/${displayName.replace(/[^a-zA-Z ]/g, '').replace(/\s+/g, '-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id ? `${listing_id}`: 'oos'}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
+          <Link route={`/${language}/pdp/${encodeURI(displayName.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase())}/${tuinId ? `${tuinId}/`: '' }${listing_id ? `${listing_id}`: 'oos'}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
             <a target="_blank">
               <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
                 {showLoader ?
