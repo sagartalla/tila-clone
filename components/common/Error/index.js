@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component }  from 'react';
 import lang from '../../../utils/language';
 import FourNotFour from './includes/404';
 import Layout from '../../../layout/main';
@@ -11,15 +11,11 @@ import styles_ar from './error_ar.styl';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
+
 const getErrComp = (statusCode) => {
   switch (statusCode) {
     case 404:
-      return (
-        <Layout>
-          <HeaderBar />
-          <FourNotFour />
-        </Layout>
-      );
+      return null
       break;
     default:
       return (
@@ -34,10 +30,18 @@ const getErrComp = (statusCode) => {
       );
   }
 }
-const Error = ({ statusCode, messege }) => {
-  messege = messege || 'Something went wrong';
-  return getErrComp(statusCode)
 
+class Error extends Component {
+  componentDidMount() {
+    if(this.props.statusCode == 404) {
+      window.location.replace(`/${lang}/404`);
+    }
+  }
+  render() {
+    let { statusCode, messege } = this.props;
+    messege = messege || 'Something went wrong';
+    return getErrComp(statusCode)
+  }
 }
 
 export default Error;
