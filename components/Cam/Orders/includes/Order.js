@@ -25,7 +25,6 @@ const country = cookies.get('country') || 'SAU';
 const Order = ({ order, getInvoice }) => {
   const { totalOrderPrice } = order;
   const [showToolTip, toggleToolTip] = useState(false);
-  console.log('order.orderItems', order.orderItems);
 
   const renderToolTip = () => {
     return toggleToolTip(!showToolTip);
