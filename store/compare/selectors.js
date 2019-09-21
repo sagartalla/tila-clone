@@ -115,7 +115,7 @@ const getCompareInfo = (store) => {
 
 const getBrandsInfo = (store) => {
   const { brands } = store.compareReducer.data;
-  return brands.facetResponse && brands.facetResponse.facets && brands.facetResponse.facets[0].Values;
+  return brands.facetResponse && brands.facetResponse.facets && brands.facetResponse.facets.length > 0 && brands.facetResponse.facets[0].Values;
 };
 
 const getProductList = (store) => {

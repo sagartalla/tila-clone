@@ -71,9 +71,11 @@ class OrderTracker extends React.Component {
     };
 
     return (
-      <div className={`${styles['p-10']} ${styles['bg-light-gray']} ${styles['flex-center']} ${styles.relative} ${styles.pointer}`}>
-        <div>{status()}</div>
-        <a className={`${styles.fontW600} ${styles['ml-10']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{CART_PAGE.VIEW_MORE}</a>
+      <div className={`${styles['p-10']} ${styles['flex-center']} ${styles.relative} ${styles['trackorder-request']}`}>
+      <span className={`${styles['width63']}`}>
+        <span>{status()}</span>
+        <a className={`${styles.fontW600} ${styles['ml-10']} ${styles['view-more-label']} ${styles['fs-12']} ${styles.pointer}`} onClick={this.openSlider}>{CART_PAGE.VIEW_MORE}</a>
+        </span>
         {this.state.slider &&
         <Slider label="Order Tracking" isOpen={this.state.slider} closeSlider={this.closeSlider}>
           <div className={`${styles['ht-80per']} ${styles.width100}`}>
