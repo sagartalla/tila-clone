@@ -36,7 +36,6 @@ const BT = ({ content, pageType }) => {
 								data-tracker-id={banner.placementId}
 								data-display-name={banner.display_name}
 								data-merchandise-id={banner.merchandiseId}
-								data-user-id={`u765432563856856`}
 								className={styles["banner-inn-prt"]}
 								style={{ width: `${100 / banners.length}%` }}
 							>

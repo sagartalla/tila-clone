@@ -27,8 +27,18 @@ class ViewportTrackerHOC extends Component {
 	handleChange = (event, unobserve) => {
 		if (event.isIntersecting && event.intersectionRatio >= 1) {
 			this.recordedTimeout = setTimeout(() => {
-				newrelic.addPageAction("impression-test", { ...event.target.dataset });
-				console.log("impression-test", {
+				newrelic.addPageAction("IMPRESSIONS", {
+					...event.target.dataset,
+					userId: digitalData.page.pageInfo.accountId
+				});
+				appEventData.push({
+					event: "IMPRESSIONS",
+					trkData: {
+						...event.target.dataset,
+						userId: digitalData.page.pageInfo.accountId
+					}
+				});
+				console.log("IMPRESSIONS", {
 					...event.target.dataset
 				});
 				// this.setState({ tracked: "ad--tracked" });
@@ -45,8 +55,16 @@ class ViewportTrackerHOC extends Component {
 		console.log(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
 			...event.currentTarget.dataset
 		});
+		appEventData.push({
+			event: this.props.clickEvent || "UNKNOWN_CLICK_EVENT",
+			trkData: {
+				...event.currentTarget.dataset,
+				userId: digitalData.page.pageInfo.accountId
+			}
+		});
 		newrelic.addPageAction(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
-			...event.currentTarget.dataset
+			...event.currentTarget.dataset,
+			userId: digitalData.page.pageInfo.accountId
 		});
 	};
 	render() {
