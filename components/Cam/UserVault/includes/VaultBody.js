@@ -64,7 +64,7 @@ class VaultBody extends Component {
                 <Col md={4} key={index} className={styles['pr-0']}>
                   <div className={`${styles['vault-card-item']} ${styles['mb-25']} ${styles['p-15']} ${styles['border-radius4']} ${card.default ? styles['active-card'] : ''}`}>
                     <span className={`${styles['vault-card-delete-icon']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={this.deleteCard.bind(this, card_token)}>
-                      <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
+                      <SVGComponent clsName={`${styles['delete-icon']} ${styles.pointer}`} src="icons/delete-icon/delete-icon" />
                     </span>
                     <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['vault-card-item-inn']}`}>
                       <span>{bank_name}</span>
