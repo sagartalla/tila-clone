@@ -355,6 +355,7 @@ class FTB extends React.Component {
 													key={content}
 													index={index}
 													content={content}
+													pageType={pageData.page_type}
 												/>
 											</React.Fragment>
 										))}

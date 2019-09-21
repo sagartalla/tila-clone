@@ -101,7 +101,48 @@ const productReducer = typeToReducer({
   [actions.SET_SELECTED_PRODUCT_DATA]: (state, action) => {
     return state;
   },
-
+  [actions.SET_REVIEW_IMAGES]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => {
+      const uploadPicStatus = { uploadPicStatus: action.payload };
+      const newState = {
+        ...state,
+        data: {
+          ...state.data,
+          ...uploadPicStatus,
+        },
+        ui: {
+          loading: false
+        },
+      };
+      return newState;
+    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false },
+    }),
+  },
+  [actions.DOWNLOAD_REVIEW_PIC]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => {
+      const downloadPic = { downloadPic: action.payload };
+      const newState = {
+        ...state,
+        data: {
+          ...state.data,
+          ...downloadPic,
+        },
+        ui: {
+          loading: false
+        },
+      };
+      return newState;
+    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false },
+    }),
+  },
   [actions.GET_CITIES]: {
     PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true } }),
     FULFILLED: (state, action) => Object.assign({}, state, {

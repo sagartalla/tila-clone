@@ -261,7 +261,7 @@ export const EN_KEYWORDS = {
     KEY_FEATURES: 'Key features',
     DESCRIPTION_CANNOT_BE_EMPTY: 'Description cannot be empty',
     PLEASE_SELECT_THE_STAR_RATING: 'Please rate this product',
-    ANY_OTHER_SUGGESTIONS: 'Any Other Suggestions?Let Us Know',
+    ANY_OTHER_SUGGESTIONS: 'Any Other Suggestions? Let Us Know',
     RATE_THE_PRODUCT: 'Rate The Product',
     SUBMIT_FEEDBACK: 'Submit FeedBack',
     NO_REVIEWS_AVAILABLE: 'No reviews available for this product.',
@@ -274,7 +274,7 @@ export const EN_KEYWORDS = {
     NOT_COVERED_IN_WARRANTY: 'Not Covered in Warranty',
     ENTER_VALID_EMAIL: 'Enter Valid EmailID',
     GET_NOTIFIED: 'Get Notified',
-    SHOW_OUT_OF_STOCK: 'Show Out of Stock',
+    SHOW_OUT_OF_STOCK: 'Include Out of Stock',
     PLEASE_SELECT_PRODUCT_SIZE: 'Please Select Product Size',
     PDP_DONE: 'Done',
     OUT_OF_STOCK: 'Out of stock',
@@ -553,7 +553,7 @@ export const EN_KEYWORDS = {
     RETURN: 'Returns',
     CONSUMER_RIGHT: 'Consumer Rights',
     DOWNLOAD_APP: 'Download the app',
-    TILA_RIGHTS: 'Tila.com. All rights reserved 2019',
+    TILA_RIGHTS: 'Tila.com. All rights reserved',
     SIZE_CHART: 'Size Chart',
     WOMEN_CLOTHING: 'Women\'s Clothing',
     MEN_CLOTHING: 'Men\'s Clothing',
@@ -1018,4 +1018,10 @@ export const EN_KEYWORDS = {
     NO_RECENTLY_VIEWED: 'There are no recently viewed items here.',
     BEGIN_SHOPPING: 'Let\'s begin your TiLa shopping journey now',
   },
+  PAGE_NOT_FOUND: {
+    "PAGENOTFOUND": 'PAGE NOT FOUND',
+    "OOPS": "Oops! This page is not available. Please choose any of the categories above",
+    "OR": 'or',
+    "GO_TO_HOMEPAGE": 'GO TO HOMEPAGE',
+  }
 };

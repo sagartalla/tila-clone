@@ -51,7 +51,6 @@ class CategoriesAndFacets extends Component {
         if (!params[facetName].length) { delete params[facetName]; }
       }
       // }
-      console.log('ndiu', params);
       this.props.onChangeFacets(params);
       this.submitQuery(params);
     };
@@ -63,11 +62,16 @@ class CategoriesAndFacets extends Component {
   }
 
   render() {
-    const { filters, facets, search, selectedVal } = this.props;
+    const {
+      filters, facets, search, selectedVal, categoryQuery,
+    } = this.props;
     return (
       <PanelGroup accordion id="categories-panel" className={styles['filter-sub-panel']}>
-        {filters.category.map((filter, index) => (
-          filter.children.length ? <Panel eventKey={`${`${index}l`}`} key={filter.id}><LinkFacet filter={filter} /></Panel> : null
+        {filters.category.map(filter => (
+          filter.children.length ?
+            <Panel key={filter.id}>
+              <LinkFacet filter={filter} categoryQuery={categoryQuery} />
+            </Panel> : null
         ))}
         {
         filters.facets.map((filter, index) => {
@@ -93,8 +97,8 @@ class CategoriesAndFacets extends Component {
               clearSelectedItem={this.props.clearSelectedItem}
             />
             : null;
-        })
-      }
+          })
+        }
         <ExcludeOOS />
       </PanelGroup>
     );
@@ -105,6 +109,7 @@ const mapStateToProps = store => ({
   filters: selectors.getSearchFilters(store),
   getFacetfilters: selectors.getFacetfilters(store),
   optionalParams: selectors.optionParams(store),
+  categoryQuery: selectors.getCategorySearchQuery(store),
 });
 
 const mapDispatchToProps = dispatch =>

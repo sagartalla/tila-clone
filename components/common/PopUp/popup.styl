@@ -1,0 +1,31 @@
+@import '../../../layout/main/executables.styl';
+.popup 
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+    .inner 
+        overflow: scroll;
+        align-items: center;
+        justify-content: space-around;
+        border: 1px solid #cdcecc;
+        border-radius: 6px;
+        z-index: 9999;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        min-height: 180px;
+        .cross 
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 25px;
+            z-index:1000;
+        
+    

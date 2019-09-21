@@ -462,7 +462,7 @@ class OrderItem extends Component {
             <div className={`${styles['unsuccessful-mesg']}`}>{ORDER_PAGE.ORDER_UNSUCCESSFUL}</div>
             :
             <React.Fragment>
-              <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>
+              <div className={`${styles['pt-15']} ${styles['pl-15']} ${styles['pr-15']} ${styles['pb-0']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>
                 {showMsgAndDate()}
                 <div className={styles.flex}>
                   {isCancelable === 'TRUE' &&

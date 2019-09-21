@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-
+import generateURL from '../../utils/urlGenerator';
 import { pimServiceInstance } from '../helper/services';
 import constants from '../helper/constants';
 
@@ -33,7 +33,12 @@ const getReviewRatings = (options, orderId, orderItemId) => {
       orderItemId,
     };
   });
-};
+}
+const downloadReviewPics = (imageIds) => {
+  return Promise.all(imageIds.map((imageId) => {
+    return generateURL(imageId)
+  }))
+}
 
 const submitUserReview = (options) => {
   return axios.post(`${constants.REVIEWS_API_URL}/api/v1/reviews/write_or_edit`,options)
@@ -55,6 +60,21 @@ const setSelectedVariant = ({ selectedVariantData, itemType, catalogId, variantI
     };
   });
 };
+
+const uploadReviewImages = (body, cid) => {
+  return axios.request({
+    method: 'POST',
+    url: `${constants.TRANSFORMER_API_URL}/fpts/document-service/upload/bulk?directory=${cid}`,
+    data: body,
+    headers: {
+      'tenant': 'review-service',
+    },
+  }).then(({data}) => {
+    return data;
+  }).catch((data) => {
+    console.log(data);
+  })
+}
 
 const track = (params) => {
   window.appEventData.push({
@@ -93,6 +113,6 @@ const getCities = (code) => {
 const getCountries = () => axios.get(`${constants.TRANSFORMER_API_URL}/fpts/geolocation/country`);
 
 export default {
-  getProduct, getPreview, getReviewRatings, submitUserReview,
-  setSelectedVariant, getCities, track, getCountries,
+  getProduct, getPreview, getReviewRatings, submitUserReview, downloadReviewPics,
+  setSelectedVariant, getCities, track, getCountries, uploadReviewImages
 };

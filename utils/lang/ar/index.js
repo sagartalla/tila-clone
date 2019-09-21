@@ -207,7 +207,7 @@ export const AR_KEYWORDS = {
     "DAYS": "الأيام",
     "PRODUCT_DETAILS": "تفاصيل منتجك",
     "ADD_TO_CART": "ضيفها ل عربة التسوق",
-    "ADD_MORE": 'ADD MORE',   
+    "ADD_MORE": 'ADD MORE',
     "BUY_NOW": "اشتري اللحين",
     "NOTIFY_ME": "نبهني",
     "BUY_FOR": "أشتري ل...",
@@ -274,7 +274,7 @@ export const AR_KEYWORDS = {
     "ENTER_VALID_EMAIL": "أدخل بريدك الإلكتروني الصالح للإستعمال",
     "GET_NOTIFIED": "نبهني",
     // "HIDE_OUT_OF_STOCK": "اخفي المنتجات نافذه الكمية",
-    "SHOW_OUT_OF_STOCK": 'Show Out of Stock',
+    "SHOW_OUT_OF_STOCK": 'Include Out of Stock',
     "PLEASE_SELECT_PRODUCT_SIZE": "ماعليك أمر   تختار مقاس المنتج",
     "PDP_DONE": "انتهينا",
     "OUT_OF_STOCK": "نفذت الكمية",
@@ -545,7 +545,7 @@ export const AR_KEYWORDS = {
     "RETURN": "الإرجاع",
     "CONSUMER_RIGHT": "حقوق المستهلك",
     "DOWNLOAD_APP": "حمّل التطبيق",
-    "TILA_RIGHTS": "جميع الحقوق محفوظة. لموقع تيله 2019",
+    "TILA_RIGHTS": "جميع الحقوق محفوظة. لموقع تيله ",
     "SIZE_CHART": "جدول المقاسات",
     "WOMEN_CLOTHING": "أزياء نسائيه",
     "MEN_CLOTHING": "أزياء رجاليه",
@@ -1010,4 +1010,10 @@ export const AR_KEYWORDS = {
     NO_RECENTLY_VIEWED: 'There are no recently viewed items here.',
     BEGIN_SHOPPING: 'Let\'s begin your TiLa shopping journey now',
   },
+  PAGE_NOT_FOUND: {
+    "PAGENOTFOUND": 'الصفحة غير موجودة',
+    "OOPS": "للأسف! هذه الصفحة غير موجودة. من فضلك اختار أي من الفئات بالأعلى",
+    "OR": 'أو',
+    "GO_TO_HOMEPAGE": 'اذهب  للصفحة الرئيسية',
+  }
 };
