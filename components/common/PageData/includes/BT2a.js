@@ -48,7 +48,7 @@ class BT2a extends Component {
 	};
 
 	render() {
-		const { content } = this.props;
+		const { content, pageType } = this.props;
 		const { config = {}, data } = content;
 		const { banners, breadcrumb, title } = content.data[lang];
 		return (
