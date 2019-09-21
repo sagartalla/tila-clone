@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import constants from '../../../constants';
 import StarRating from '../../common/StarRating';
 import Button from '../../common/CommonButton';
