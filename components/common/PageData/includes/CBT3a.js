@@ -26,6 +26,7 @@ const CBT3a = ({ content, pageType }) => {
 					data-page-type={pageType}
 					data-tracker-id={banners[index].placementId}
 					data-display-name={banners[index].display_name}
+					className={styles.width100}
 				>
 					<div
 						className={`${styles["responsively-lazy"]}`}
