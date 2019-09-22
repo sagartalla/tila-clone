@@ -3,8 +3,9 @@ import styles from './popup.styl';
 
 const PopUp = ({
   isOpen, width, height, closePopUp, children,
-}) => (
-  isOpen &&
+}) => {
+  return (
+  isOpen ?
   <div className={styles["popup"]} onClick={closePopUp}>
     <div
       className={styles["inner"]}
@@ -12,7 +13,8 @@ const PopUp = ({
     >
       {children}
     </div>
-  </div>
+  </div> : null
 );
+}
 
 export default PopUp;
