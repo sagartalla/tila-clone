@@ -14,7 +14,7 @@ class PageNotFound extends Base {
   render() {
     return (
       <Layout>
-        <HeaderBar />
+        <HeaderBar hideMegamenu={true}/>
         <FourNotFour />
       </Layout>
     );
