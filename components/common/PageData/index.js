@@ -158,7 +158,7 @@ class PageData extends React.Component {
 				return <CBT6c content={content} pageType={pageType} />;
 
 			case "ST1a":
-				return <ST1a content={content} />;
+				return <ST1a content={content} pageType={pageType} />;
 
 			case "CBT2a":
 				return <CBT2a content={content} pageType={pageType} />;
