@@ -142,6 +142,9 @@ const Order = ({ order, getInvoice }) => {
               tilaPolicy={orderItem.tilaPolicy}
               tuinId={orderItem.tuinId}
               isOrderDetailsPage={false}
+              reviewsData={orderItem.reviewsData}
+              catalogObj={orderItem.catalogObj}
+              ratingApplicable={orderItem.ratingApplicable}
             />
           ))}
         </Col>

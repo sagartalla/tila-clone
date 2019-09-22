@@ -37,7 +37,7 @@ class PageData extends React.Component {
 	// breadcrums are pending...
 	getContent = () => {
 		const { content, index, pageType } = this.props;
-		// console.log(content);
+		console.log(content);
 		switch (content.layout_id) {
 			case "CT1a":
 				return <CT1a content={content} />;
@@ -45,20 +45,17 @@ class PageData extends React.Component {
 			case "CT1":
 				return <CT1 content={content} />;
 
-			case "CBT6a": {
-				return (
-					<CBT6a content={content} index={`${content.layout_id}${index}`} />
-				);
-			}
-			case "CBT6b": {
-				return (
-					<CBT6b content={content} index={`${content.layout_id}${index}`} />
-				);
-			}
 			case "DT1":
 				return <DT content={content} index={`${content.layout_id}${index}`} />;
+
 			case "FT1":
-				return <FT content={content} index={`${content.layout_id}${index}`} />;
+				return (
+					<FT
+						content={content}
+						index={`${content.layout_id}${index}`}
+						pageType={pageType}
+					/>
+				);
 
 			// case 'BT9':
 			//   return (
@@ -127,12 +124,6 @@ class PageData extends React.Component {
 					<CBT6b content={content} index={`${content.layout_id}${index}`} />
 				);
 			}
-
-			case "DT1":
-				return <DT content={content} index={`${content.layout_id}${index}`} />;
-
-			case "FT1":
-				return <FT content={content} index={`${content.layout_id}${index}`} />;
 
 			case "CBT12":
 				return (

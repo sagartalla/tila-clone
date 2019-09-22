@@ -25,15 +25,20 @@ const getPreview = (options) => {
   });
 };
 
+const getReviewRatings = (options, orderId, orderItemId) => {
+  return axios.post(`${constants.REVIEWS_API_URL}/api/v1/reviews/fetch`,options).then(({ data }) => {
+    return {
+      data,
+      orderId,
+      orderItemId,
+    };
+  });
+}
 const downloadReviewPics = (imageIds) => {
   return Promise.all(imageIds.map((imageId) => {
     return generateURL(imageId)
   }))
 }
-
-const getReviewRatings = (options) => {
-  return axios.post(`${constants.REVIEWS_API_URL}/api/v1/reviews/fetch`,options)
-};
 
 const submitUserReview = (options) => {
   return axios.post(`${constants.REVIEWS_API_URL}/api/v1/reviews/write_or_edit`,options)
