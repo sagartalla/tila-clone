@@ -40,7 +40,7 @@ const getCartResults = (store) => {
           selling_price: listingInfo.pricing && listingInfo.pricing.price.display_value,
           total_amount: item.total_amount && item.total_amount.display_value,
           cur: listingInfo.selling_price.display_currency_code,
-          img: `${img_url}/${item}` && item.product_details && item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
+          img: `${img_url}/${item}` && item.product_details && item.product_details.product_details_vo && item.product_details.product_details_vo.cached_product_details && item.product_details.product_details_vo.cached_product_details.media.gallery_media[0] && item.product_details.product_details_vo.cached_product_details.media.gallery_media[0].url,
           quantity: item.quantity,
           inventory: listingInfo.total_inventory_count,
           max_limit: listingInfo.max_limit_per_user,

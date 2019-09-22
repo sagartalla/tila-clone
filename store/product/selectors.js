@@ -413,6 +413,11 @@ const getSelectedVariantId = ({selectedVariantData, map}) => {
 const getReviewRatings = (store) => {
   return store.productReducer.reviews;
 };
+
+const getReviewsData = (store) => {
+  return store.productReducer.reviewsData;
+};
+
 const getReviewResponse = (store) => {
   return store.productReducer.reviewResponse;
 };
@@ -481,5 +486,5 @@ const getAllCountries = (store) => {
 export {
   getProduct, getPreview, getSelectedVariantId, getReviewRatings, getReviewResponse, getReviewImage, getReviewPicDocumentId,
   getVariantsAndSimilarProducts, getSelectedPropductId, getSelectedVariantData, getAllCities, getAllCountries,
-  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId, getTilaPolicy, getAllDefaultCities,
+  getLoadingStatus, getErrorMessage, isProductLoaded, getProductId, getVariantId, getTilaPolicy, getAllDefaultCities, getReviewsData,
 };
