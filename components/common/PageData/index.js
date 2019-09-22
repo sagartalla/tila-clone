@@ -37,13 +37,13 @@ class PageData extends React.Component {
 	// breadcrums are pending...
 	getContent = () => {
 		const { content, index, pageType } = this.props;
-		console.log(content);
+		// console.log(content);
 		switch (content.layout_id) {
 			case "CT1a":
-				return <CT1a content={content} />;
+				return <CT1a content={content} pageType={pageType} />;
 
 			case "CT1":
-				return <CT1 content={content} />;
+				return <CT1 content={content} pageType={pageType} />;
 
 			case "DT1":
 				return <DT content={content} index={`${content.layout_id}${index}`} />;
@@ -116,56 +116,84 @@ class PageData extends React.Component {
 			}
 			case "CBT6a": {
 				return (
-					<CBT6a content={content} index={`${content.layout_id}${index}`} />
+					<CBT6a
+						content={content}
+						pageType={pageType}
+						index={`${content.layout_id}${index}`}
+					/>
 				);
 			}
 			case "CBT6b": {
 				return (
-					<CBT6b content={content} index={`${content.layout_id}${index}`} />
+					<CBT6b
+						content={content}
+						pageType={pageType}
+						index={`${content.layout_id}${index}`}
+					/>
 				);
 			}
 
 			case "CBT12":
 				return (
-					<CBT12 content={content} index={`${content.layout_id}${index}`} />
+					<CBT12
+						content={content}
+						pageType={pageType}
+						index={`${content.layout_id}${index}`}
+					/>
 				);
 
 			case "CBT12a":
 				return (
-					<CBT12a content={content} index={`${content.layout_id}${index}`} />
+					<CBT12a
+						content={content}
+						pageType={pageType}
+						index={`${content.layout_id}${index}`}
+					/>
 				);
 
 			case "CBT5b":
 				return <CBT5b content={content} pageType={pageType} />;
 
 			case "CBT6c":
-				return <CBT6c content={content} />;
+				return <CBT6c content={content} pageType={pageType} />;
 
 			case "ST1a":
-				return <ST1a content={content} />;
+				return <ST1a content={content} pageType={pageType} />;
 
 			case "CBT2a":
-				return <CBT2a content={content} />;
+				return <CBT2a content={content} pageType={pageType} />;
 
 			case "CBT3a":
-				return <CBT3a content={content} />;
+				return <CBT3a content={content} pageType={pageType} />;
 
 			case "CBT8a":
-				return <CBT8a content={content} />;
+				return <CBT8a content={content} pageType={pageType} />;
 
 			case "BT2a":
 				return (
-					<BT2a content={content} index={`${content.layout_id}${index}`} />
+					<BT2a
+						content={content}
+						pageType={pageType}
+						index={`${content.layout_id}${index}`}
+					/>
 				);
 
 			case "BT3a":
 				return (
-					<BT3a content={content} index={`${content.layout_id}${index}`} />
+					<BT3a
+						content={content}
+						pageType={pageType}
+						index={`${content.layout_id}${index}`}
+					/>
 				);
 
 			case "BT6a":
 				return (
-					<BT6a content={content} index={`${content.layout_id}${index}`} />
+					<BT6a
+						content={content}
+						pageType={pageType}
+						index={`${content.layout_id}${index}`}
+					/>
 				);
 
 			default:

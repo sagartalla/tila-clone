@@ -38,9 +38,9 @@ class ViewportTrackerHOC extends Component {
 						userId: digitalData.page.pageInfo.accountId
 					}
 				});
-				console.log("IMPRESSIONS", {
-					...event.target.dataset
-				});
+				// console.log("IMPRESSIONS", {
+				// 	...event.target.dataset
+				// });
 				// this.setState({ tracked: "ad--tracked" });
 				// used for tracking only once
 				// if (event.isIntersecting) {
@@ -52,9 +52,9 @@ class ViewportTrackerHOC extends Component {
 		clearTimeout(this.recordedTimeout);
 	};
 	handleClick = event => {
-		console.log(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
-			...event.currentTarget.dataset
-		});
+		// console.log(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
+		// 	...event.currentTarget.dataset
+		// });
 		appEventData.push({
 			event: this.props.clickEvent || "UNKNOWN_CLICK_EVENT",
 			trkData: {

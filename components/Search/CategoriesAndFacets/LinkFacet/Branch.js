@@ -35,7 +35,8 @@ class Branch extends Component {
 
   render() {
     const {
-      first, category, queryString, sid, sidParams, showSiblings, categoryQuery,
+      first, category, queryString, sid, sidParams,
+      showSiblings, categoryQuery, isFromCategoryTree,
     } = this.props;
     const { active } = this.state;
     let isValid = true;
@@ -44,18 +45,16 @@ class Branch extends Component {
         if (!sidParams.includes(n)) isValid = false;
       });
     }
-    if (!isValid) return null;
+    if (!isValid && !isFromCategoryTree) return null;
     // if ((sidParams && !sidParams.includes(category.id.toString()))) return null;
     return (
       <li key={category.id} className={categoryQuery === category.canonicalId ? styles['main-sub-list'] : styles['category-sub-list-inn']}>
         {category.children.length > 0 && <span className={`${styles.pointer} ${styles['fs-12']}`} onClick={this.toggle}>{active ? 'v ' : '> '}</span>}
         <Link route={`/${language}/search/${category.canonicalId}/${queryString}`}><a className={`${styles['fs-12']}`}>{category.name}</a></Link>
-        {
-          category.children
-            ?
-              active && <Tree filter={category} sid={sid} categoryQuery={categoryQuery} />
-            :
-            null
+        {category.children ?
+          active && <Tree filter={category} sid={sid} categoryQuery={categoryQuery} />
+          :
+          null
         }
       </li>
     );

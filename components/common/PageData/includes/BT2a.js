@@ -11,6 +11,7 @@ import styles_en from "../pageData_en.styl";
 import styles_ar from "../pageData_ar.styl";
 
 const Image = dynamic(import("react-graceful-image"), { ssr: false });
+import ViewportTrackerHOC from "../../ViewPortTracker/ViewportTrackerHOC";
 
 const styles =
 	lang === "en" ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
@@ -47,87 +48,109 @@ class BT2a extends Component {
 	};
 
 	render() {
-		const { content } = this.props;
+		const { content, pageType } = this.props;
 		const { config = {}, data } = content;
 		const { banners, breadcrumb, title } = content.data[lang];
 		return (
 			<div>
 				<div className={`${styles["display-t-i-cb"]} ${styles["flex"]}`}>
 					<div className={`${styles["fs-20"]} ${styles.title}`}>{title}</div>
-					<div style={{ width: "50%" }} className={`${styles["p-0-5"]}`}>
+					<ViewportTrackerHOC
+						clickEvent={`BANNER-CLICK`}
+						disableViewportTracking={false}
+					>
 						<div
-							className={`${styles["mb-5"]} ${styles["fs-18"]} ${
-								styles["fontW800"]
-							} ${styles["error-color"]}`}
+							style={{ width: "50%" }}
+							className={`${styles["p-0-5"]}`}
+							data-page-type={pageType}
+							data-tracker-id={banners[0].placementId}
+							data-display-name={banners[0].display_name}
 						>
-							{content.data[lang].banners[0].title}
-						</div>
-						<a href={banners[0].link}>
 							<div
-								className={`${styles["responsively-lazy"]} ${
-									styles["width100"]
-								}`}
-								style={{
-									paddingBottom: `${(100 * banners[0].config.height) /
-										banners[0].config.width}%`
-								}}
+								className={`${styles["mb-5"]} ${styles["fs-18"]} ${
+									styles["fontW800"]
+								} ${styles["error-color"]}`}
 							>
-								<Image
-									src={banners[0].img}
-									className={styles["img-responsive"]}
-									className={`${styles["width100"]} ${
-										styles["animating-placeholder"]
-									}`}
-									placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
-									alt={banners[0].display_name}
-								/>
+								{content.data[lang].banners[0].title}
 							</div>
-						</a>
-						<div
-							className={`${styles["thick-gry-clr"]} ${styles["fs-14"]} ${
-								styles["mt-10"]
-							} ${styles.pointer}`}
-						>
-							{this.returnBanner(0, banners)}
-						</div>
-					</div>
-					<div style={{ width: "50%" }} className={`${styles["p-0-5"]}`}>
-						<div
-							className={`${styles["mb-5"]} ${styles["fs-18"]} ${
-								styles["fontW800"]
-							} ${styles["error-color"]}`}
-						>
-							{content.data[lang].banners[1].title}
-						</div>
-						<a href={banners[1].link}>
+							<a href={banners[0].link}>
+								<div
+									className={`${styles["responsively-lazy"]} ${
+										styles["width100"]
+									}`}
+									style={{
+										paddingBottom: `${(100 * banners[0].config.height) /
+											banners[0].config.width}%`
+									}}
+								>
+									<Image
+										src={banners[0].img}
+										className={styles["img-responsive"]}
+										className={`${styles["width100"]} ${
+											styles["animating-placeholder"]
+										}`}
+										placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
+										alt={banners[0].display_name}
+									/>
+								</div>
+							</a>
 							<div
-								className={`${styles["responsively-lazy"]} ${
-									styles["width100"]
-								}`}
-								style={{
-									paddingBottom: `${(100 * banners[1].config.height) /
-										banners[1].config.width}%`
-								}}
+								className={`${styles["thick-gry-clr"]} ${styles["fs-14"]} ${
+									styles["mt-10"]
+								} ${styles.pointer}`}
 							>
-								<Image
-									src={banners[1].img}
-									className={styles["img-responsive"]}
-									className={`${styles["width100"]} ${
-										styles["animating-placeholder"]
-									}`}
-									placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
-									alt={banners[1].display_name}
-								/>
+								{this.returnBanner(0, banners)}
 							</div>
-						</a>
-						<div
-							className={`${styles["thick-gry-clr"]} ${styles["fs-14"]} ${
-								styles["mt-10"]
-							} ${styles.pointer}`}
-						>
-							{this.returnBanner(1, banners)}
 						</div>
-					</div>
+					</ViewportTrackerHOC>
+					<ViewportTrackerHOC
+						clickEvent={`BANNER-CLICK`}
+						disableViewportTracking={false}
+					>
+						<div
+							style={{ width: "50%" }}
+							className={`${styles["p-0-5"]}`}
+							data-page-type={pageType}
+							data-tracker-id={banners[1].placementId}
+							data-display-name={banners[1].display_name}
+						>
+							<div
+								className={`${styles["mb-5"]} ${styles["fs-18"]} ${
+									styles["fontW800"]
+								} ${styles["error-color"]}`}
+							>
+								{content.data[lang].banners[1].title}
+							</div>
+							<a href={banners[1].link}>
+								<div
+									className={`${styles["responsively-lazy"]} ${
+										styles["width100"]
+									}`}
+									style={{
+										paddingBottom: `${(100 * banners[1].config.height) /
+											banners[1].config.width}%`
+									}}
+								>
+									<Image
+										src={banners[1].img}
+										className={styles["img-responsive"]}
+										className={`${styles["width100"]} ${
+											styles["animating-placeholder"]
+										}`}
+										placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
+										alt={banners[1].display_name}
+									/>
+								</div>
+							</a>
+							<div
+								className={`${styles["thick-gry-clr"]} ${styles["fs-14"]} ${
+									styles["mt-10"]
+								} ${styles.pointer}`}
+							>
+								{this.returnBanner(1, banners)}
+							</div>
+						</div>
+					</ViewportTrackerHOC>
 				</div>
 			</div>
 		);
