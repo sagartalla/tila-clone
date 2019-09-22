@@ -21,7 +21,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 const { REVIEWS } = languageDefinations();
 
 
-const Review = ({ rev, deleteReview, submitUserReview }) => {
+const Review = ({ rev, deleteReview, submitUserReview, setReviewImages, userInfo, documentId, downloadPic}) => {
   const [openModal, setModal] = useState(false);
   const [showReviews, setReviews] = useState(true);
 
@@ -105,10 +105,10 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
                       titleInfo={titleInfo}
                       images={rev.images}
                       feedbackSubmit={postUserReview}
-                      setReviewImages={this.props.setReviewImages}
-                      cid={this.props.userInfo.contactInfo.user_account_id}
-                      documentId={this.props.documentId}
-                      downloadPic={this.props.downloadPic}
+                      setReviewImages={setReviewImages}
+                      cid={userInfo.contactInfo.user_account_id}
+                      documentId={documentId}
+                      downloadPic={downloadPic}
                     />
                     :
                     <ReviewThankYou toggleReviewModal={closeModal} />
