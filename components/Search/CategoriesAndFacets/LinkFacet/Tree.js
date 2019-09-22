@@ -40,6 +40,7 @@ const Tree = ({
                 category={category}
                 queryString={queryString}
                 categoryQuery={categoryQuery}
+                isFromCategoryTree={urlParams.has('categoryTree')}
                 sidParams={sidParams && sidParams.split(',')}
                 sid={`${first ? '' : `${sid},`}${category.id}`}
               />

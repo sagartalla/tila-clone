@@ -1,4 +1,5 @@
-import { Grid, Row, Col } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Modal, Grid, Row, Col } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
 import SVGComponent from '../common/SVGComponet';
 import publicUrls from '../../constants';
@@ -131,8 +132,30 @@ const t = [
   },
 ];
 
+class FooterBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showPopup: false,
+    };
+  }
 
-const FooterBar = props => (
+  showAddress = () => {
+    this.setState({
+      showPopup: true,
+    });
+  }
+
+  closeTerms = () => {
+    this.setState({
+      showPopup: false,
+    });
+  }
+
+
+render() {
+  const { showPopup } = this.state;
+  return (
   <div id="footer-container" className={`${styles['footer-container']} ${styles['mt-25']}`}>
     <div className={`${styles['footer-container-inn']} ${styles['pt-40']} ${styles['pb-40']}`}>
       <Grid>
@@ -141,12 +164,12 @@ const FooterBar = props => (
 
           <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
-              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/quation" />
+              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/homegrown" />
             </span>
             <a href={`/${lang}/help/faq`} target="_blank" className={styles.black}>
               <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
                     <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.GOT_QUESTION}</span>
-                    <span className={styles['footer-suport-title']}>{`${FOOTER_PAGE.WE_CARE_TILA} | 900-66666`}</span>
+                    <span className={`${styles['footer-suport-title']} ${styles['fs-12']}`}>{FOOTER_PAGE.WE_CARE_TILA}</span>
                   </div>
             </a>
           </div>
@@ -155,33 +178,33 @@ const FooterBar = props => (
           <Col md={3}> */}
           <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
-              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/guarantee" />
+              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/retun-exchange" />
             </span>
             <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
-              <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{`100% ${FOOTER_PAGE.ORIGINAL}`}</span>
-              <span className={styles['footer-suport-title']}>{FOOTER_PAGE.GURANTEE_PRODUCTS_AT_TILA}</span>
+              <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.ORIGINAL}</span>
+              <span className={`${styles['footer-suport-title']} ${styles['fs-12']}`}>{FOOTER_PAGE.GURANTEE_PRODUCTS_AT_TILA}</span>
             </div>
           </div>
           {/* </Col>
           <Col md={3}> */}
           <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
-              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/return" />
+              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/pay-secure" />
             </span>
             <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
-              <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{`${FOOTER_PAGE.RETURN_WITHIN} 15 ${FOOTER_PAGE.DAYS}`}</span>
-              <span className={styles['footer-suport-title']}>{FOOTER_PAGE.PLACING_ORDER}</span>
+              <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.RETURN_WITHIN}</span>
+              <span className={`${styles['footer-suport-title']} ${styles['fs-12']}`}>{FOOTER_PAGE.PLACING_ORDER}</span>
             </div>
           </div>
           {/* </Col>
           <Col md={3}> */}
           <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
-              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/trust-secure" />
+              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/tila-care-logo" />
             </span>
             <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
               <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.TRUST_PAY}</span>
-              <span className={styles['footer-suport-title']}>{`100% ${FOOTER_PAGE.SECURE_PAYMENTS_TILA}`}</span>
+              <span className={`${styles['footer-suport-title']} ${styles['fs-12']}`}>{FOOTER_PAGE.SECURE_PAYMENTS_TILA}</span>
             </div>
           </div>
           {/* </Col> */}
@@ -254,6 +277,27 @@ const FooterBar = props => (
         </div>
       </Grid>
     </div>
+    <div>
+      <Modal
+        show={showPopup}
+        onHide={this.closeTerms}
+        className={`${styles.modalClassName} ${styles['address-bdy']}`}
+      >
+        <Modal.Body>
+          <address className={styles['mb-0']}>
+            <div className={styles['flex']}>
+              <SVGComponent clsName={styles['logo-icon']} src={`icons/logos/default-logo-${lang}`} />
+            </div>
+            <div className={styles['pl-5']}><b>Tila</b><br/>
+            c/o Afdal Al Mazaya Co. Ltd<br/>
+            Office No.5,Second Floor,Al Saedan Tower<br/>
+            King Fahd Branch Rd,Al Muruj,<br/>
+            Riyadh 11322,PO Box: 240220 Kingdom of Saudi Arabia
+            </div>
+          </address>
+        </Modal.Body>
+      </Modal>
+    </div>
     {/* social part start */}
     <div className={`${styles['footer-social-list-main']} ${styles['pt-40']} ${styles['pb-40']} ${styles['bg-white']}`}>
       <Grid>
@@ -309,7 +353,7 @@ const FooterBar = props => (
                 <li>{FOOTER_PAGE.OUR_MISSION}</li>
                 <li>{FOOTER_PAGE.PRESS_REALESES}</li>
                 <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li>
-                <li>{FOOTER_PAGE.CORPARATE_ADDRESS}</li>
+                <li onClick={this.showAddress}><a>{FOOTER_PAGE.CORPARATE_ADDRESS}</a></li>
               </ul>
             </div>
             <div className={styles['ipad-pr-0']}>
@@ -343,8 +387,7 @@ const FooterBar = props => (
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                   <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
                   <li><a href={`/${lang}/policy/customer-delivery`} target="_blank">{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</a></li>
-                  <li>{FOOTER_PAGE.FREQUENTLY_ASKED_QUESTIONS}</li>
-                  <li>{FOOTER_PAGE.CUSTOMER_CARE}</li>
+                  <li><a href={`https://www.tila.com/${lang}/help/faq`} target="_blank">{FOOTER_PAGE.CUSTOMER_CARE}</a></li>
                 </ul>
               </div>
             </div>
@@ -371,5 +414,7 @@ const FooterBar = props => (
     </div>
   </div>
 );
+}
+}
 
 export default FooterBar;
