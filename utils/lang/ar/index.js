@@ -586,7 +586,7 @@ export const AR_KEYWORDS = {
     "MY_ACCOUNT": "حسابك",
     "MY_ORDERS": "طلباتي",
     "NOTIFICATIONS": "التنبهات",
-    "HELP_SUPPORT": "الدعم والمساعدة",
+    "HELP_SUPPORT": "الدعم و المساعدة",
     "LOGIN": "تسجيل دخولك",
     "LOGOUT": "تسجيل خروجك",
     "SELL_WITH_TILA": "بيع مع تيله",
