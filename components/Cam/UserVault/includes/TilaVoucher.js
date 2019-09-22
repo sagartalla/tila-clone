@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { languageDefinations } from '../../../../utils/lang/';
 import moment from 'moment-timezone';
+import { OverlayTrigger, Modal, Popover } from 'react-bootstrap';
 import lang from '../../../../utils/language';
 import SVGComponent from '../../../common/SVGComponet';
 import styles_en from '../uservault_en.styl';
@@ -16,23 +17,44 @@ const { VAULT_PAGE } = languageDefinations();
 
 const TilaVoucher = (props) => {
     const { transactions } = props;
+    const popover = (
+        <Popover id="popover-positioned-right" >
+          hjkhkjhkj
+        </Popover>
+      );
     return (
-        <div>
+        <div className={`${styles['flex']} ${styles['flex-colum']}`}>
+            <Col md={12} sm={12} xs={12}>
+            <Col md={6} sm={6} xs={6} className={`${styles['tila-credit']}`}>
+                <div className={`${styles['tila-credit-wrap']} ${styles['tila-credit-left']} ${styles.flex} ${styles['align-center']} ${styles['justify-center']} ${styles['mt-20']}`}>
+                    <div className={`${styles.label} ${styles['fs-16']} ${styles['fontW600']}`}>{VAULT_PAGE.YOUR_TILA_CREDIT_BALANCE_IS} &nbsp; &nbsp;</div>
+                    <div className={`${styles['amount-wrap']} ${styles['align-baseline']}`}>
+                    <div className={`${styles['currency']} ${styles['fs-12']}`}>{props.tilaCredit.currency_code} &nbsp;</div>
+                    <div className={`${styles.amount} ${styles['fs-30']} ${styles['fontW300']}`}>{props.tilaCredit.display_value}</div>
+                    </div>
+                </div>
+            </Col>
+            <Col md={6} sm={6} xs={6} className={`${styles['tila-credit']}`}>
+                <div className={`${styles['tila-credit-wrap']} ${styles['tila-credit-right']} ${styles.flex} ${styles['align-center']} ${styles['justify-center']} ${styles['mt-20']}`}>
+                    <div className={`${styles.label} ${styles['fs-16']} ${styles['fontW600']}`}>{VAULT_PAGE.YOUR_REDEEMABLE_BALANCE_IS} &nbsp; &nbsp;</div>
+                    <div className={`${styles['amount-wrap']} ${styles['align-baseline']}`}>
+                    <div className={`${styles['currency']} ${styles['fs-12']}`}>{props.tilaCredit.currency_code} &nbsp;</div>
+                    <div className={`${styles.amount} ${styles['fs-30']} ${styles['fontW300']}`}>{props.tilaCredit.display_value}</div>
+                    </div>
+                </div>
+            </Col>
+            </Col>
             {transactions.length > 0 ?
-            <div>
-                <div className={`${styles['broad']}`}>
-                    <span className={styles['pl-15']}>
-                        <strong>
+            <div className={`${styles['mt-30']}`}>
+                    <span className={`${styles['pl-15']} ${styles['fs-16']} ${styles['fontW600']}`}>
                             {VAULT_PAGE.VOUCHER_HISTORY}
-                        </strong>
                     </span>
                     {/* <div className={styles['gift-voucher']}>
                         <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']}`}>
                             ADD TILA GIFT VOUCHER
                         </button>
                     </div> */}
-                </div>
-                <Row className={`${styles['titleRow']} ${styles['m-0']}`} >
+                <Row className={`${styles['titleRow']} ${styles['m-0']} ${styles['mt-10']}`} >
                     <Col md={3}>
                         Date
                     </Col>
@@ -69,8 +91,21 @@ const TilaVoucher = (props) => {
                                 <Col md={2}>
                                     {transaction_type === 'DEBIT' ? amount.display_value : ''}
                                 </Col>
-                                <Col md={2}>
+                                <Col md={2} className={`${styles['flex-center']}`}>
                                     {balance.display_value}
+                                    {/* <div className={`${styles['flex-center']} ${styles['voucher-inn']}`}>
+                                 <SVGComponent clsName={`${styles['status-icon']} ${styles['ml-10']}`} src="icons/common-icon/warning" />
+                                 <div className={`${styles['voucher-item']} ${styles['tool-tip']}`}>asasasa</div>                                 
+                                 </div> */}
+                                 <OverlayTrigger
+                                    placement="top"
+                                    overlay={popover}
+                                >
+                                    <span className={`${styles['ml-10']}`}>
+                                     <SVGComponent clsName={`${styles['status-icon']}`} src="icons/common-icon/warning" />
+                                     </span>
+                                </OverlayTrigger>
+                                 {/* <SVGComponent clsName={`${styles['status-icon']}`} src="icons/common-icon/bg-tick-mark" />}*/}
                                 </Col>
                             </Row>
                         </div>
