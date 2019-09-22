@@ -40,10 +40,10 @@ class PageData extends React.Component {
 		console.log(content);
 		switch (content.layout_id) {
 			case "CT1a":
-				return <CT1a content={content} />;
+				return <CT1a content={content} pageType={pageType} />;
 
 			case "CT1":
-				return <CT1 content={content} />;
+				return <CT1 content={content} pageType={pageType} />;
 
 			case "DT1":
 				return <DT content={content} index={`${content.layout_id}${index}`} />;
