@@ -13,18 +13,9 @@ class PolicyPage extends Base {
   pageName = 'POLICY';
   static async getInitialProps({ store, query, isServer, req }) {
     let params = {};
-    const p = {
-      'privacy-policy': 'privacy_policy',
-      'terms-of-use': 'terms_of_use',
-      'cancellation-policy': 'cancellation_policy',
-      'exchange-policy': 'exchange_policy',
-      'return-policy': 'return_policy',
-      'refund-policy': 'refund_policy',
-      'warranty-policy': 'warranty_policy',
-    }
     if (query.name) {
       params.page = 'policyPage';
-      params.id = p[query.name];
+      params.id = query.name;
     }
     await store.dispatch(landingactionCreators.getPage(params));
     return { isServer };
