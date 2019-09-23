@@ -130,7 +130,7 @@ export const EN_KEYWORDS = {
     PAYMENT_MODE: 'Net banking, credit card, vouchers etc....',
     ON_DELIVERY: 'on delivery',
     DROP_THE_ANSWER_INTO_THE_BOX: 'Drop the answer icon into the box above',
-    COD_TC: 'By choosing the correct image, I accept the T&Cs and to pay cash on delivery.',
+    COD_TC: 'By choosing the correct image, I accept the T&C for cash on delivery orders.',
     LOADING_CAPTCHA: 'Loading Captcha...',
     YOU_ARE_SIGNED_IN_AS: 'Logged in as',
     CHANGE: 'Change',
@@ -138,7 +138,11 @@ export const EN_KEYWORDS = {
     CONTINUE_TO_CHECKOUT: 'Continue To Checkout',
     DEFAULT_CARD: 'Default Card',
     "CREDIT_CARD": 'Credit Card',
-    "DEBIT_CARD": 'Debit Card'
+    "DEBIT_CARD": 'Debit Card',
+    TERMS_AND_CONDITIONS_FOR_COD: 'Terms and conditions for cash on delivery',
+    BY_CHOOSING_COD: 'By choosing cash on delivery as your method of payment, you authorize TiLa or its partners to collect, process, facilitate and remit payments and/or the transaction price electronically or through cash on delivery.',
+    CASH_ON_DELIVERY_REFUNDS: 'Cash on Delivery refunds will be processed as TiLa Credit only.',
+    REFRESH: 'Refresh',
   },
   DELIVERY_ADDR_PAGE: {
     DELIVERY_ADDR: 'Delivery Address',

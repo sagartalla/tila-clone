@@ -307,7 +307,7 @@ class OrderItem extends Component {
                   <div key={product.id} className={`${styles['product-item']} ${styles.width100} ${styles.flex}`}>
                     <Col md={2} className={styles['p-0']}>
                       <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
-                        <Link route={`/${language}/pdp/${encodeURI(name.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase())}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variantId}&cid=${catalog_id}`}>
+                        <Link route={`/${language}/pdp/${encodeURI(name && name.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase())}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variantId}&cid=${catalog_id}`}>
                             <a target="_blank" className={`${styles.width100} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
                           </a>
@@ -324,7 +324,7 @@ class OrderItem extends Component {
                     </Col>
                     <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
-                        <Link route={`/${language}/pdp/${encodeURI(name.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase())}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variantId}&cid=${catalog_id}`}>
+                        <Link route={`/${language}/pdp/${encodeURI(name && name.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase())}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variantId}&cid=${catalog_id}`}>
                           <a target="_blank" className={`${styles.width100} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <span className={`${styles.fontW600}`}>{product.name}</span>
                           </a>
