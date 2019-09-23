@@ -246,9 +246,10 @@ class OrderItem extends Component {
     const {
       payments = [{}], orderItem, orderId, thankyouPage, isCancelable,
       isReturnable, isExchangable, needHelp, showPriceInfo, isDamageProtectionAvailable,
-      isWarrantyAvailable, tilaPolicy, tuinId, reviewsData, catalogObj, getReviewRatings, getReviewsData,
+      isWarrantyAvailable, tilaPolicy, tuinId, reviewsData, catalogObj, getReviewRatings, getReviewsData, setReviewImages,
+      documentId, downloadPic, userInfo,
     } = this.props;
-    console.log('getReviewsData', getReviewsData);
+
     const { showToolTip, openModal, showReviews } = this.state;
     const btnType = (() => {
       if (['PLACED', 'SHIPPED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
@@ -541,6 +542,10 @@ class OrderItem extends Component {
                               catalogObj={catalogObj}
                               titleInfo={reviewsData}
                               feedbackSubmit={this.submituserreview}
+                              setReviewImages={setReviewImages}
+                              cid={userInfo.contactInfo.user_account_id}
+                              documentId={documentId}
+                              downloadPic={downloadPic}
                             />
                             :
                             <ReviewThankYou toggleReviewModal={this.toggleReviewModal} />
@@ -561,6 +566,7 @@ const mapStateToProps = store => ({
   userInfo: personalDetailsSelectors.getUserInfo(store),
   getReviewRatings: productSelectors.getReviewRatings(store),
   getReviewsData: productSelectors.getReviewsData(store),
+  documentId: productSelectors.getReviewPicDocumentId(store), 
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -570,6 +576,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getRatingsAndReviews: productActionCreators.getRatingsAndReviews,
   getOrderHistory: orderActionCreators.getOrderHistory,
   getWarrantyHistory: orderActionCreators.getWarrantyHistory,
+  setReviewImages: productActionCreators.setReviewImages,
+  downloadPic: productActionCreators.downloadReviewPics,
 }, dispatch);
 
 OrderItem.propTypes = {
