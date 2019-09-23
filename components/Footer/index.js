@@ -19,28 +19,57 @@ const country = cookies.get('country');
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
+// const f = [
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}/clp`,
+//     title: FOOTER_PAGE.WOMEN_CLOTHING,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}/clp`,
+//     title: FOOTER_PAGE.MEN_CLOTHING,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'Footwear' : 'أحذية'}/clp`,
+//     title: FOOTER_PAGE.FOOT_WEAR,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}/clp`,
+//     title: FOOTER_PAGE.SUNGLASSES,
+//   },
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'Watches' : 'ساعات اليد'}/clp`,
+//     title: FOOTER_PAGE.WATCHES,
+//   },
+//   {
+//     url: `/${lang}/Fashion%20Accessories/clp`,
+//     title: FOOTER_PAGE.FASHION_ACCESSORIES,
+//   },
+// ];
 const f = [
   {
-    url: `/${lang}/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'Women\'s Clothing' : 'Women\'s Clothing'}/clp`,
     title: FOOTER_PAGE.WOMEN_CLOTHING,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'Men\'s Clothing' : 'Men\'s Clothing'}/clp`,
     title: FOOTER_PAGE.MEN_CLOTHING,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'Footwear' : 'أحذية'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'Footwear' : 'Footwear'}/clp`,
     title: FOOTER_PAGE.FOOT_WEAR,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'Sunglasses' : 'Sunglasses'}/clp`,
     title: FOOTER_PAGE.SUNGLASSES,
   },
   {
-    url: `/${lang}/${lang === 'en' ? 'Watches' : 'ساعات اليد'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'Watches' : 'Watches'}/clp`,
     title: FOOTER_PAGE.WATCHES,
   },
   {
@@ -48,35 +77,65 @@ const f = [
     title: FOOTER_PAGE.FASHION_ACCESSORIES,
   },
 ];
+// const e = [
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}/clp`,
+//     title: FOOTER_PAGE.MOBILES,
+//   },
 
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}/clp`,
+//     title: FOOTER_PAGE.LAPTOPS,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'camera' : 'الة-تصوير'}/clp`,
+//     title: FOOTER_PAGE.CAMERAS,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'televisions' : 'التلفزيونات'}/clp`,
+//     title: FOOTER_PAGE.TELEVISIONS,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}/clp`,
+//     title: FOOTER_PAGE.STORAGE_DEVICES,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}/clp`,
+//     title: FOOTER_PAGE.MOBILE_ACCESSORIES,
+//   },
+// ];
 const e = [
   {
-    url: `/${lang}/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'mobiles' : 'mobiles'}/clp`,
     title: FOOTER_PAGE.MOBILES,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'laptops' : 'laptops'}/clp`,
     title: FOOTER_PAGE.LAPTOPS,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'camera' : 'الة-تصوير'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'camera' : 'camera'}/clp`,
     title: FOOTER_PAGE.CAMERAS,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'televisions' : 'التلفزيونات'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'televisions' : 'televisions'}/clp`,
     title: FOOTER_PAGE.TELEVISIONS,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'storage devices' : 'storage devices'}/clp`,
     title: FOOTER_PAGE.STORAGE_DEVICES,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'mobile-accessories' : 'mobile-accessories'}/clp`,
     title: FOOTER_PAGE.MOBILE_ACCESSORIES,
   },
 ];
