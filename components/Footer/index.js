@@ -407,8 +407,8 @@ render() {
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.TILA}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li>{FOOTER_PAGE.WHO_WE_ARE}</li>
-                <li>{FOOTER_PAGE.OUR_VALUES}</li>
+                <li><a href={`/${lang}/policy/aboutus-policy`} target="_blank">{FOOTER_PAGE.WHO_WE_ARE}</a></li>
+                <li><a href={`/${lang}/policy/ourvalues-policy`} target="_blank">{FOOTER_PAGE.OUR_VALUES}</a></li>
                 <li>{FOOTER_PAGE.OUR_MISSION}</li>
                 <li>{FOOTER_PAGE.PRESS_REALESES}</li>
                 <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li>
