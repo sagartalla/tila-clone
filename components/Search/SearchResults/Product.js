@@ -309,7 +309,7 @@ class Product extends Component {
       </Popover>
     );
     let title = displayName.replace(brand, '');
-    if(title.length > 75) {
+    if (title.length > 75) {
       title = title.substring(0, title.substring(0, 75).lastIndexOf(' ')) + '...';
     }
     const getPriceAndOffer = () => (
