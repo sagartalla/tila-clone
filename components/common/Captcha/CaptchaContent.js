@@ -57,7 +57,7 @@ const CaptchaContent = ({items,state,handleDrop,handleClick}) => {
                   <span className={styles['fs-14']}>{items.question}</span>
                     <span onClick={handleClick} className={`${styles['flex']} ${styles['refresh-part-inn']} ${styles['p-5']} ${styles.pointer} ${styles['blue-color']} ${styles['fontW600']}`}>
                       {/* <SVGComponent clsName={`${styles['refresh-icon']}`} src="icons/captcha-icons-list/refresh-icon" /> */}
-                      Refresh
+                      {PAYMENT_PAGE.REFRESH}
                     </span>
                 </span>
               <div>
