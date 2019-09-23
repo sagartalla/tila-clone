@@ -43,16 +43,18 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
-const RenderButton = ({ callbackMethod, refundType }) => (
-  <div className={styles['ml-5']}>
-    <button
-      className={`${styles['mini-btn']} ${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${(refundType === 'DAMAGE PROTECTION' || 'CLAIM WARRANTY') ? styles['fs-10'] :styles['fs-12']}`}
-      onClick={callbackMethod}
-    >
-      {refundType}
-    </button>
-  </div>
-);
+const RenderButton = ({ callbackMethod, refundType }) => {
+  return (
+    <div className={styles['ml-5']}>
+      <button
+        className={`${styles['mini-btn']} ${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${(refundType === 'DAMAGE PROTECTION' || 'CLAIM WARRANTY') ? styles['fs-10'] : styles['fs-12']}`}
+        onClick={callbackMethod}
+      >
+        {ORDER_PAGE[refundType.toUpperCase().replace(' ', '_')]}
+      </button>
+    </div>
+  );
+};
 
 
 class OrderItem extends Component {
@@ -259,17 +261,17 @@ class OrderItem extends Component {
     })();
     const displayText = () => {
       if (['SHIPPED', 'PLACED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
-        return 'Delivery by';
+        return ORDERS.DELIVERY_BY;
       } else if (orderItem.status === 'DELIVERED') {
-        return 'Delivered on';
+        return ORDERS.DELIVERED_ON;
       } else if (orderItem.status === 'CANCELLED') {
-        return 'Cancelled On';
+        return ORDERS.CANCEL_ON;
       } else if (orderItem.status === 'RETURN_IN_PROGRESS') {
-        return 'Return in progress';
+        return ORDERS.RETURN_IN_PROGRESS;
       } else if (orderItem.status === 'EXCHANGE_IN_PROGRESS') {
-        return 'Exchange in progress';
+        return ORDERS.EXCHANGE_IN_PROGRESS;
       } else if (orderItem.status === 'REPLACEMENT_IN_PROGRESS') {
-        return 'Replace in progress';
+        return ORDERS.REPLACE_IN_PROGRESS;
       } return '';
     };
 
