@@ -62,6 +62,11 @@ export const EN_KEYWORDS = {
     DONE: 'Done',
     ADD: 'Add',
     DONT_WAIT: "Don't wait any longer!",
+   ADD_FROM_WISHLIST: ' Add from Wishlist',
+   YOUR_SHOPPING_CART_IS_EMPTY: 'Your shopping cart is empty.', 
+   PLEASE_WAIT_FETCHING_CART_ITEMS: 'Please Wait Fetching Cart Items',
+   ITEM: 'item',
+   NO_WARRANTY: 'No Warranty',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'Secure Checkout',
@@ -823,6 +828,7 @@ export const EN_KEYWORDS = {
     START_SHOPPING: 'Start shopping now to grab more coupons and enjoy great discounts!',
     NO_COUPONS_AVAILABLE: 'Currently, no coupons are available.',
     CHECK_BACK_LATER: 'Please check later.',
+    PLEASE_ENTER_COUPON_CODE: 'Please enter coupon code',
   },
   EMAIL_VERIFICATION: {
     VERIFY_YOUR_EMAIL: 'Verify your email address',
