@@ -62,6 +62,11 @@ export const AR_KEYWORDS = {
     "DONE": "خلصّنا",
     "ADD": "ضيف",
     'DONT_WAIT': "لاتنتظر أكثر من كذا",
+     ADD_FROM_WISHLIST: 'أضيفها من القائمة المفضلة',
+     YOUR_SHOPPING_CART_IS_EMPTY: 'Your shopping cart is empty.',
+     PLEASE_WAIT_FETCHING_CART_ITEMS: 'Please Wait Fetching Cart Items',
+     ITEM: 'المنتج',
+     NO_WARRANTY: 'No Warranty',    
   },
   "PAYMENT_PAGE": {
     "SECURE_CHECKOUT": "عملية خروج آمنة",
@@ -815,6 +820,7 @@ export const AR_KEYWORDS = {
     "START_SHOPPING": 'ل ابدأ تسوّقك الآن لتحصل على كوبونات وتستمتع بأفضل التخفيضات!',
     "NO_COUPONS_AVAILABLE": "حالياً، مافي كوبونات متوفرة",
     "CHECK_BACK_LATER": "من فضلك راجعنا في وقت آخر",
+    PLEASE_ENTER_COUPON_CODE: 'Please enter coupon code',    
   },
   "EMAIL_VERIFICATION": {
     "VERIFY_YOUR_EMAIL": "فعّل  ايميلك",

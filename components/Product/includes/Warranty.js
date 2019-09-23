@@ -55,7 +55,7 @@ class Warranty extends React.Component {
          className="warranty-class-name"
        >
           <div className={`${styles['m-15']} ${styles['flex-center']} ${styles['justify-between']}`}>
-            <div ><Modal.Title>Warranty</Modal.Title></div>
+            <div ><Modal.Title>{PDP_PAGE.WARRANTY}</Modal.Title></div>
               <div className={`${styles['fs-18']} ${styles.pointer}`} onClick={this.closeSlider}>X</div>
             </div>
       <div className={`${styles['warranty-modal']}`}>
