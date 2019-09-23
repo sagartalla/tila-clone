@@ -88,7 +88,7 @@ class Help extends Component {
   );
   renderContactCard = (selectedOrder, selectedIssue) => (type, index) => {
     return (
-    <div key={type.type} className={`${styles['flexCenterContainer']} ${styles['wh-200']} ${index !== 0 && styles['bL']}`}>
+    <div key={type.type} className={`${styles['flexCenterContainer']} ${styles['wh-200']}`}>
       <div className={styles['contactIcon']}>
         <SVGComponent src={`helpsupport/${type.type}`} />
       </div>

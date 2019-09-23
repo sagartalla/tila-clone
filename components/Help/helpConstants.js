@@ -47,4 +47,24 @@ const categoryImages = {
   10: 'help_payments',
   55: 'help_warranty'
 }
-export {ContactTabs, helpComponents, Issues, countryLanguageHelpCode, categoryImages}
+
+const categoryTranslations = {
+  "Orders & Shipping": {
+    en: "Orders & Shipping",
+    ar: "الطلبات والشحن"
+  },
+  "Returns/Exchanges/Refunds": {
+    en: "Returns/Exchanges/Refunds",
+    ar: "الاسترجاع / الاستبدال / الإرجاع"
+  },
+  "Payments": {
+    en: "Payments",
+    ar: "الدفع"
+  },
+  "Warranty": {
+    en: "Warranty",
+    ar: "الضمان"
+  }
+}
+
+export { ContactTabs, helpComponents, Issues, countryLanguageHelpCode, categoryImages, categoryTranslations }

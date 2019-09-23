@@ -41,13 +41,13 @@ class Orders extends Component {
       {
         tabType:'ordersTab',
         tabData:'ordersData',
-        display_name:'All Orders',
+        display_name: ORDERS.ALL_ORDERS,
         page:'orderCurrentPage'
       },
       {
         tabType:'warrantyTab',
         tabData:'warrantyData',
-        display_name:'Orders With Warranty',
+        display_name: ORDERS.ORDERS_WITH_WARRANTY,
         page:'warrantyCurrentPage'
       }
     ]

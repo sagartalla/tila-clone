@@ -12,6 +12,7 @@ import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
 import SVGComponent from '../common/SVGComponet';
 import { languageDefinations } from '../../utils/lang';
+import { categoryTranslations } from './helpConstants';
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -117,7 +118,7 @@ class Answers extends Component {
                   href={this.getUrl(fromParent, categoryId, parentId, childLength ? categoryObj.child[0] : null)}
                   className={`${isSelected ? `${styles['whiteColor']} ${styles['fwBolder']}` : styles['blackColor']}`}
                 >
-                  {categoryObj.name}
+                  {categoryTranslations[categoryObj.name][lang]}
                 </a>
             }
           </div>
