@@ -138,8 +138,8 @@ class Orders extends Component {
                       <div className={`${styles['no-order-part']}`}>
                         <div className={`${styles['flex']} ${styles['no-order-part-inn']}`}>
                           <SVGComponent clsName={`${styles['no-order-list-icon']}`} src="icons/common-icon/no-order-icon" />
-                          <h4 className={`${styles['fs-24']} ${styles['t-c']} ${styles['pt-40']}`}>{ORDERS.NO_WISHLIST_LABEL}</h4>
-                          <div className={`${styles['fs-14']} ${styles['thick-gry-clr']} ${styles['pt-10']}`}>{ORDERS.START_SHOPPING_TO_MAKE_KITTEN_HAPPY}</div>
+                          <h4 className={`${styles['fs-24']} ${styles['t-c']} ${styles['pt-40']}`}>{item.tabType !== 'ordersTab' ? ORDERS.NO_WISHLIST_LABEL : ORDERS.WARRANTY_BENEFITS}</h4>
+                          <div className={`${styles['fs-14']} ${styles['thick-gry-clr']} ${styles['pt-10']}`}>{item.tabType === 'ordersTab' ? ORDERS.START_SHOPPING_TO_MAKE_KITTEN_HAPPY : ORDERS.ENJOY_THE_PERKS}</div>
                           <a href={`/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles['fontW600']} ${styles['mt-40']}`}>{ORDERS.START_SHOPPING}</a>
                         </div>
                       </div>
