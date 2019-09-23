@@ -59,10 +59,13 @@ const coupons = props => (
             <div className={`${styles['coupon-result']} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100} ${styles['flex-col']} ${styles['black-color']}`}>
             {/* <SVGComponent clsName={`${styles['coupon-img']}`} src="icons/common-icon/NoCoupons" /> */}
             <img className={styles['coupon-img']} src={"/static/img/icons/coupon-img.png"} />
-            <div className={`${styles['black-color']} ${styles['t-c']}  ${styles['fs-24']} ${styles['p-10']}`}>{COUPON_OFFERS.EMPTY_COUPON_BOX}</div>
+            <div className={`${styles['black-color']} ${styles['t-c']}  ${styles['fs-24']} ${styles['p-10']}`}>
+              {props.showExpiredCoupons ? COUPON_OFFERS.EXPIRED_CONTENT : COUPON_OFFERS.EMPTY_COUPON_BOX}
+            </div>
             <div className={`${styles['thick-gry-clr']} ${styles['t-c']} ${styles['fs-14']}`}>
-                  {COUPON_OFFERS.NO_COUPONS_AVAILABLE}<br />
-                  {COUPON_OFFERS.CHECK_BACK_LATER}</div>
+              {props.showExpiredCoupons ? COUPON_OFFERS.START_SHOPPING : COUPON_OFFERS.NO_COUPONS_AVAILABLE}<br />
+              {!props.showExpiredCoupons && COUPON_OFFERS.CHECK_BACK_LATER}
+            </div>
             </div>
      );
 
