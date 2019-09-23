@@ -38,7 +38,7 @@ export const AR_KEYWORDS = {
     "MAXIMUM_RETAIL_PRICE": "آخر حد لسعر البيع بالتجزئه",
     "INCL_OF_ALL_TAXES": "شامل الضرائب",
     "SELLING_PRICE": "سعر البيع",
-    "DELIVERY_CHARGES": "Delivery charges",
+    "DELIVERY_CHARGES": "رسوم التوصيل",
     "FREE": "ببلاش",
     "OVERALL_YOU_SAVE": "بشكل عام حفظتها",
     "ON_THIS_PRODUCT": "على ذا المنتج",
@@ -46,22 +46,22 @@ export const AR_KEYWORDS = {
     "THERE_IS_SOME_ISSUE_WITH_CART_ITEMS": "في مشكلة في عربة التسوق",
     "COUPONS": "كوبونات",
     "GIFT_MESSAGE_OPTIONAL": "رسالة الهدية (اختياري)",
-    "CANNOT_DELIVER": "Unfortunately, we cannot deliver this item to your selected address. Please remove the item or move it to your wishlist to continue.",
+    "CANNOT_DELIVER": "للأسف، مانقدر نوصل المنتج للعنوان المختار. من فضلك احذف المنتج أو ضيفه لقائمتك المفضلة للإكمال.",
     "THERE_IS": "يوجد",
     "THERE_ARE": "يوجد",
     "ITEM_IN_YOUR_WISHLIST": "المنتج في قائمك المفضلة ",
     "ITEMS_IN_YOUR_WISHLIST": "منتجاتك الموجودة في قائمتك المفضلة",
     "MY_CART": "عربة التسوق",
     "MY_CART_EMPTY": "منتجات كثيرة في تيله وأنا لسا عربتي فاضية!",
-    "TILA_CARE_PROTECTION": "Tila Care Protection",
-    "VIEW_T_AND_C": "View T & C ",
-    "DURATION": "Duration",
-    "EXTENDED_WARRANTY": "Extended Warranty",
-    "DAMAGE_PROTECTION": "Damage Protection",
+    "TILA_CARE_PROTECTION": " تيله للعناية",
+    "VIEW_T_AND_C": "عرض الشروط والأحكام ",
+    "DURATION": "المدّة",
+    "EXTENDED_WARRANTY": "الضمان الممدد",
+    "DAMAGE_PROTECTION": "الحماية من التلف",
     "CLAIM_WARRANTY": "مطالبة الضمان",
-    "DONE": "Done",
-    "ADD": "Add",
-    'DONT_WAIT': "Dont wait no more!",
+    "DONE": "خلصّنا",
+    "ADD": "ضيف",
+    'DONT_WAIT': "لاتنتظر أكثر من كذا",
   },
   "PAYMENT_PAGE": {
     "SECURE_CHECKOUT": "عملية خروج آمنة",
@@ -93,7 +93,7 @@ export const AR_KEYWORDS = {
     "TC": "الشروط والأحكام",
     "PRIVACY_POLICY": "قوانين الخصوصية",
     "AGREE_TO": "أنا موافق على",
-    "TERMS_AND_CONDITIONS": 'Terms and Conditions',
+    "TERMS_AND_CONDITIONS": 'الشروط والأحكام',
     "CLOSE": "قفّل",
     "VISA": "الفيزا",
     "MASTER": " الماستر",
@@ -127,10 +127,10 @@ export const AR_KEYWORDS = {
     "REMAINING_AMOUNT_TO_PAY": "المبلغ المتبقي للدفع",
     "PAY_USING_TILA_CREDIT": "الدفع باستخدام رصيدك في تيله",
     "PAYMENT_MODE": "الخدمات المصرفية والبطاقات الإئتمانية والقسائم الشرائيه",
-    "ON_DELIVERY": "on delivery",
+    "ON_DELIVERY": "عند الاستلام",
     "DROP_THE_ANSWER_INTO_THE_BOX": "حط إجابتك في  أعلى الصندوق ",
-    "COD_TC": "By choosing correct image, I accept T&C and pay cash delivery",
-    "LOADING_CAPTCHA": "Loading Captcha...",
+    "COD_TC": "باختيارك للصورة الصحيحة، أنا قبلت الشروط والأحكام والدفع كاش عند الاستلام ",
+    "LOADING_CAPTCHA": "تحميل كلمة التحقق",
     "YOU_ARE_SIGNED_IN_AS": "سجلت دخولك كا",
     "CHANGE": "غيّر",
     "SIGN_IN_AS_DIFF_USER": "سجلت خروجك وودك تنشئ حسابك بمستخدم جديد ",
@@ -170,11 +170,11 @@ export const AR_KEYWORDS = {
     "PO_BOX": "صندوق بريدك",
     "CODE": "الكود",
     "MOBILE_NUMBER": "جوالك",
-    "NOT_SHIPPABLE": "Not Shippable",
+    "NOT_SHIPPABLE": "غير قابلة للشحن",
     "UNFORTUNATELY_WE_CANNOT_DELIVER_REMOVE_ITEM": "نعتذر ، مانقدر نسلم بعض المنتجات لعنوانك اللي حددته. ماعليك أمر تشيل منتجك من عربة التسوق الصغيرة على اليمين، أو تغير عنوانك للتسليم عشان تكمل.",
     "LOCATE_ME": "تحديد موقع لي  ",
-    "NO_DELIVER_ADDRESS_TITLE": "Where are all the saved addresses?",
-    "NO_DELIVERY_ADDRESS_LABEL": "Do tell us where you stay for faster Delivery"
+    "NO_DELIVER_ADDRESS_TITLE": "وين كل العناوين المحفوظة؟",
+    "NO_DELIVERY_ADDRESS_LABEL": "قولّنا مكان سكنك لتوصيل أسرع"
   },
   "WISH_LIST_PAGE": {
     "WISHLIST_HEADER": "منتجاتك الموجودة في قائمتك المفضلة",
@@ -187,7 +187,7 @@ export const AR_KEYWORDS = {
     "DONT_WAIT_NO_MORE": "لاتستنى أكثر من كذا",
     "START_SHOPPING": "ابدأ التسوق",
     "PRICE_DECRECED_BY": "انخفض السعر بنسبة",
-    "PRICE_INCREASED_BY": "Price Increased by"
+    "PRICE_INCREASED_BY": "ارتفع السعر بنسبة"
   },
   "PDP_PAGE": {
     "ITEM_IN_CART": "المنتج في عربة التسوَّق",
@@ -257,7 +257,7 @@ export const AR_KEYWORDS = {
     "FULLFILLED_BY_TILA": "التجهيز والشحن من تيله",
     "ADD_TO_COMPARE": "ضيفها للمقارنة",
     "EMI": "أي أم آي",
-    "NO_OFFERS": 'No offers',
+    "NO_OFFERS": 'لا توجد عروض',
     "KEY_FEATURES": "المميزات",
     "DESCRIPTION_CANNOT_BE_EMPTY": "الوصف ماينفع  يكون فاضي",
     "PLEASE_SELECT_THE_STAR_RATING": "لو سمحت اقيّم المنتج",
@@ -281,8 +281,10 @@ export const AR_KEYWORDS = {
     "OUT_OF_STOCK": "نفذت الكمية",
     "THANKS_FOR_RATING": "مشكور على التقييم!",
     "THANKS_DESCRIPTION": "مشكورعلى وقتك لتقييم المنتج،هذا بيساعد الكثير من المستخدمين في اتخاذ قرار أسهل في التسوق",
-    "MAX_LENGTH": "characters left",
-    "ITEM_LOCATION": "عنوان المنتج"
+    "MAX_LENGTH": "حروف متبقية",
+    "ITEM_LOCATION": "عنوان المنتج",
+    "TILA_CARE_DAMAGE_PROTECTION": 'TiLa Care damage protection',
+    "TILA_CARE_EXTENDED_WARRANTY": 'TiLa Care extended warranty',  
   },
   "VAULT_PAGE": {
     "MANAGE_VAULT_HDR": "إدارة البطاقات المحفوظة ورصيد تيله",
@@ -934,17 +936,17 @@ export const AR_KEYWORDS = {
     "SAVE": "احفظ"
   },
   "REVIEWS": {
-    "TITLE": "My Reviews & Ratings",
-    "SUB_TITLE": "All your reviews & ratings at one place",
-    "RATED_REVIEWS": "You have Rated & Reviewed",
-    "ITEMS": "منتجاتك",
+    "TITLE": "آرائي وتقييماتي",
+    "SUB_TITLE": " سهلّناها عليك ! كل آراءك وتقييماتك في مكان واحد",
+    "RATED_REVIEWS": " مشكور! كتبت تقييمك ورأيك بنجاح",
+    "ITEMS": "المنتجات",
     "WRITE_A_REVIEW": "أكتب تعليقك",
     "NO_REVIEW_TITLE": "): مافي شي غيري هنا",
     "NO_REVIEW_LABEL": "لا توجد تقييمات للعرض إلى الآن."
   },
   "HNS": {
     "BACK_TO_HELP": "! العودة لمركز المساعدة ، لو تكرمت",
-    "SEARCH_RESULTS": "SEARCH RESULTS",
+    "SEARCH_RESULTS": "ابحث النتائج",
     "RESULTS_FOR": "النتائج  ل",
     "LOADING": "!تحميل ، ثواني يالغالي",
     "NO_Q_AVAILABLE": "!لا توجد أسئلة موجودة ، حنا مستعدين لأي أسئلة",
@@ -1017,7 +1019,7 @@ export const AR_KEYWORDS = {
     "COMPARE": "مقارنة"
   },
   "WARRANTY_PAGE": {
-    "WARRANTY_LABEL": "*Tila Care cost will be added to you cart"
+    "WARRANTY_LABEL": "قيمة تيله للعناية ستضاف لعربة التسوَّق"
   },
   ITEMS_ZONE: {
     NO_RECENTLY_VIEWED: 'There are no recently viewed items here.',
