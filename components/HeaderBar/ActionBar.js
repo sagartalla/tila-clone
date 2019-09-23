@@ -334,7 +334,7 @@ class ActionBar extends Component {
                         <span className={styles.support}>
                           <span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span>
                         </span>
-                        <span className={styles['pl-25']}>{HEADER_PAGE.HELP_SUPPORT}</span>
+                        <span className={styles['pl-15']}>{HEADER_PAGE.HELP_SUPPORT}</span>
                       </a>
                     </li>
                     <li onClick={this.logoutClick} className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
@@ -355,7 +355,7 @@ class ActionBar extends Component {
                         <span className={styles.support}>
                           <span className={`${styles['flex-center']} ${styles['justify-center']}`}>?</span>
                         </span>
-                        <span className={styles['pl-25']}>{HEADER_PAGE.HELP_SUPPORT}</span>
+                        <span className={styles['pl-15']}>{HEADER_PAGE.HELP_SUPPORT}</span>
                       </a>
                     </li>
                     <li onClick={this.loginClick} className={`${styles['flex-center']} ${styles['pl-30']} ${styles['pr-20']}`}>
