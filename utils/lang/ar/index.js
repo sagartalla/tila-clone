@@ -62,6 +62,11 @@ export const AR_KEYWORDS = {
     "DONE": "خلصّنا",
     "ADD": "ضيف",
     'DONT_WAIT': "لاتنتظر أكثر من كذا",
+     ADD_FROM_WISHLIST: 'أضيفها من القائمة المفضلة',
+     YOUR_SHOPPING_CART_IS_EMPTY: 'Your shopping cart is empty.',
+     PLEASE_WAIT_FETCHING_CART_ITEMS: 'Please Wait Fetching Cart Items',
+     ITEM: 'المنتج',
+     NO_WARRANTY: 'No Warranty',    
   },
   "PAYMENT_PAGE": {
     "SECURE_CHECKOUT": "عملية خروج آمنة",
@@ -137,7 +142,11 @@ export const AR_KEYWORDS = {
     "CONTINUE_TO_CHECKOUT": "تابع للدفع",
     "DEFAULT_CARD": 'البطاقة الأساسية',
     "CREDIT_CARD": 'البطاقة الائتمانية',
-    "DEBIT_CARD": 'بطاقة الحساب الجاري'
+    "DEBIT_CARD": 'بطاقة الحساب الجاري',
+    "TERMS_AND_CONDITIONS_FOR_COD": 'الشروط والأحكام للدفع كاش عند الاستلام',
+    "BY_CHOOSING_COD": 'باختيارك  لطريقة الدفع كاش عند الاستلام، أنتَ تسمح لتيله وشركاؤها بجمع ومعالجة وتسهيل وتحويل المدفوعات و\ أو سعر المعاملة إلكترونياً  أو عن طريق الدفع كاش عند الاستلام',
+    "CASH_ON_DELIVERY_REFUNDS": 'بنرجعْ المبلغ المدفوع للدفع كاش عند الاستلام كرصيد تيله فقط',
+    "REFRESH": 'Refresh', 
   },
   "DELIVERY_ADDR_PAGE": {
     "DELIVERY_ADDR": "عنوانك للتوصيل",
@@ -811,6 +820,7 @@ export const AR_KEYWORDS = {
     "START_SHOPPING": 'ل ابدأ تسوّقك الآن لتحصل على كوبونات وتستمتع بأفضل التخفيضات!',
     "NO_COUPONS_AVAILABLE": "حالياً، مافي كوبونات متوفرة",
     "CHECK_BACK_LATER": "من فضلك راجعنا في وقت آخر",
+    PLEASE_ENTER_COUPON_CODE: 'Please enter coupon code',    
   },
   "EMAIL_VERIFICATION": {
     "VERIFY_YOUR_EMAIL": "فعّل  ايميلك",
