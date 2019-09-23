@@ -55,16 +55,16 @@ const categoryTranslations = {
   },
   "Returns/Exchanges/Refunds": {
     en: "Returns/Exchanges/Refunds",
-    ar: "إرجاع / تبادل / المبالغ المستردة"
+    ar: "الاسترجاع / الاستبدال / الإرجاع"
   },
   "Payments": {
     en: "Payments",
-    ar: "المدفوعات"
+    ar: "الدفع"
   },
   "Warranty": {
     en: "Warranty",
-    ar: "الضمانات"
-  },
+    ar: "الضمان"
+  }
 }
 
 export { ContactTabs, helpComponents, Issues, countryLanguageHelpCode, categoryImages, categoryTranslations }
