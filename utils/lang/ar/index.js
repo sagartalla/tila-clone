@@ -135,9 +135,9 @@ export const AR_KEYWORDS = {
     "CHANGE": "غيّر",
     "SIGN_IN_AS_DIFF_USER": "سجلت خروجك وودك تنشئ حسابك بمستخدم جديد ",
     "CONTINUE_TO_CHECKOUT": "تابع للدفع",
-    "DEFAULT_CARD": 'Default Card',
-    "CREDIT_CARD": 'Credit Card',
-    "DEBIT_CARD": 'Debit Card'
+    "DEFAULT_CARD": 'البطاقة الأساسية',
+    "CREDIT_CARD": 'البطاقة الائتمانية',
+    "DEBIT_CARD": 'بطاقة الحساب الجاري'
   },
   "DELIVERY_ADDR_PAGE": {
     "DELIVERY_ADDR": "عنوانك للتوصيل",
@@ -441,14 +441,14 @@ export const AR_KEYWORDS = {
     "MAXIMUN_TEXT_EXCEEDED": "لقد تخطيت الحد الأقصى للنص المسموح به للبحث",
     "YOUR_ENTERED": "تم تسجيل دخولك",
     "AUTO_CORRECTED": "تصحيح تلقائي",
-    "APPLY_FILTERS": "Apply Filters",
-    "PLEASE_SELECT_LOCATION_WITHIN_SAUDI": 'Please select any location within Saudi',
-    "DETECT_LOCATION": 'Detect Location',
-    "SELECT_CITY_BELOW": 'Or select city below',
-    "NO_MATCHING_SAUDI_CITY": 'No matching Saudi city',
-    "OKAY": 'OKAY',
-    "WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK": 'We will email you once this is in stock.',
-    WE_ARE_SERVING_WITHIN_SAUDI: 'We are only serving locations within Saudi',
+    "APPLY_FILTERS": "ضيف الترتيب حسب",
+    "PLEASE_SELECT_LOCATION_WITHIN_SAUDI": 'من فضلك اختارأي عنوان داخل السعودية',
+    "DETECT_LOCATION": 'اكشفْ عنوانك',
+    "SELECT_CITY_BELOW": 'أواختارمدينة من القائمة بالأسفل',
+    "NO_MATCHING_SAUDI_CITY": 'لا توجد مدينة سعودية مطابقة',
+    "OKAY": 'تمام',
+    "WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK": 'بنرسلّك إيميل إذا كانت هذه متوفرة',
+    WE_ARE_SERVING_WITHIN_SAUDI: 'نخدمْ لمناطق داخل السعودية فقط',
   },
   "FOOTER_PAGE": {
     "GOT_QUESTION": "ماركة محلية",
@@ -782,9 +782,9 @@ export const AR_KEYWORDS = {
     "ORDERED_ON": "طُلب في",
     "INCLUSIVE_OF_ALL_TAXES": "*شاملة كل الضرائب",
     "TILA_CARE_SERVICE_FEE": "رسوم خدمة تيله للعناية",
-    RATE_PRODUCT: 'RATE PRODUCT',
-    WARRANTY_ENDS_ON: 'Warranty ends on',
-    RETURN_WINDOW_CLOSED_ON: 'Return window closed on', 
+    RATE_PRODUCT: 'قيَّم المنتج',
+    WARRANTY_ENDS_ON: 'طلب الضمان ينتهي في تاريخ',
+    RETURN_WINDOW_CLOSED_ON: 'طلب الاسترجاع ينتهي في تاريخ', 
   },
   "COUPON_OFFERS": {
     "VIEW_TERMS": "الشروط والأحكام",
@@ -1022,8 +1022,8 @@ export const AR_KEYWORDS = {
     "WARRANTY_LABEL": "قيمة تيله للعناية ستضاف لعربة التسوَّق"
   },
   ITEMS_ZONE: {
-    NO_RECENTLY_VIEWED: 'There are no recently viewed items here.',
-    BEGIN_SHOPPING: 'Let\'s begin your TiLa shopping journey now',
+    NO_RECENTLY_VIEWED: 'لم تتطلع على أي منتجات مؤخراً. ',
+    BEGIN_SHOPPING: ' يلا نبدأ تجربة تسوّق تيله الآن',
   },
   PAGE_NOT_FOUND: {
     "PAGENOTFOUND": 'الصفحة غير موجودة',
