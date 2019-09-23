@@ -35,7 +35,7 @@ const ProductPrice = ({
   const {
     strickedPrice: mrp, sellingPrice: sp, offerDiscounts, showPrise: total, totalDiscountMRP: discountMrp, currency,
   } = offerPricing;
-  
+
   const [showToolTip, toggleTooltip] = useState(false);
   return(
   <div className={`${styles['product-price-bg']} ${styles['border-radius4']}`}>
@@ -45,7 +45,7 @@ const ProductPrice = ({
         <Fragment>
           <div className={`${styles['flex']} ${styles['align-baseline']}`}>
             <div className={`${styles['flex']} ${styles['align-baseline']}`}>
-            <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{(offerPricing && offerPricing.showPrise && offerPricing.showPrise.currency_code) || (offerPricing && offerPricing.currency)}</span>
+            <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{(offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_currency_code) || (offerPricing && offerPricing.currency)}</span>
               {offerPricing && offerPricing.showPrise && <span className={`${styles['fs-24']} ${styles['fontW600']} ${styles['pr-5']}`}><ShowPriceFormat showPrice={offerPricing.showPrise.display_value} strickedPrice={offerPricing.strickedPrice.display_value}/></span>}
             </div>
             <Fragment>
@@ -71,7 +71,7 @@ const ProductPrice = ({
                             <div className={styles['fs-12']}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
                           </div>
                           <div className={styles['t-cell']}>
-                            <span className={styles['fs-12']}>{`${mrp.currency_code || currency} ${mrp.display_value}`}</span>
+                            <span className={styles['fs-12']}>{`${mrp.display_currency_code || currency} ${mrp.display_value}`}</span>
                           </div>
                         </div>
                         <div className={styles['t-row']}>
@@ -79,7 +79,7 @@ const ProductPrice = ({
                             <div className={styles['fs-12']}>{CART_PAGE.SELLING_PRICE}</div>
                           </div>
                           <div className={styles['t-cell']}>
-                            <span className={styles['fs-12']}>{`${sp.currency_code || currency} ${sp.display_value}`}</span>
+                            <span className={styles['fs-12']}>{`${sp.display_currency_code || currency} ${sp.display_value}`}</span>
                           </div>
                         </div>
                         {
@@ -90,7 +90,7 @@ const ProductPrice = ({
                                   <div className={styles['fs-12']}>{od.description}</div>
                                 </div>
                                 <div className={styles['t-cell']}>
-                                  <span className={styles['fs-12']}>{`${od.discount.currency_code || currency} ${od.discount.display_value}`}</span>
+                                  <span className={styles['fs-12']}>{`${od.discount.display_currency_code || currency} ${od.discount.display_value}`}</span>
                                 </div>
                               </div>
                             );
@@ -106,11 +106,11 @@ const ProductPrice = ({
                         </div>
                         <div className={`${styles['t-row']} ${styles['total-amount']}`}>
                           <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{ORDER_PAGE.TOTAL}</div>
-                          <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{`${total.currency_code || currency} ${total.display_value}`}</div>
+                          <div className={`${styles['t-cell']} ${styles['fs-12']}`}>{`${total.display_currency_code || currency} ${total.display_value}`}</div>
                         </div>
                       </div>
                       <div>
-                        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {(discountMrp && discountMrp.display_value) && `${discountMrp.currency_code} ${discountMrp.display_value}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
+                        <div className={`${styles['p-5']} ${styles['mt-5']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {(discountMrp && discountMrp.display_value) && `${discountMrp.display_currency_code} ${discountMrp.display_value}`} {CART_PAGE.ON_THIS_PRODUCT}</div>
                       </div>
                     </div>
                         : null
