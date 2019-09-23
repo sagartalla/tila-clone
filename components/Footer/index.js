@@ -158,7 +158,7 @@ render() {
   return (
   <div id="footer-container" className={`${styles['footer-container']} ${styles['mt-25']}`}>
     <div className={`${styles['footer-container-inn']} ${styles['pt-40']} ${styles['pb-40']}`}>
-      <Grid>
+      <Grid className={styles['footer-usb-links']}>
         <div className={styles['flx-space-bw']}>
           {/* <Col md={3}> */}
 
