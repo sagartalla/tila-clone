@@ -20,6 +20,7 @@ const removeCookies = (req,res) => {
 apiRoutes
   .post('/login', (req, res) => {
     const params = req.body;
+    params.headers = { 'x-country-code': req.headers['x-country-code'] || '', 'x-language':req.headers['x-language'] }
     return axios.post(`${constants.AUTH_API_URL}/api/v1/sls/auth`, Object.assign({}, params, {})).then(({data, status}) => {
       let isLoggedIn = false;
       if(status === 200) {

@@ -43,12 +43,6 @@ const UserData = ({
           <ContactInfo />
         </Col>
       </Row>
-      <span
-        className={`${styles.flex} ${styles.pointer} ${styles['thick-red-clr']} ${styles['deactive-account-lable']} ${styles['p-10-40']} ${styles['bg-light-gray']}`}
-        onClick={deactiveProfile}
-      >
-        {CONTACT_INFO_MODAL.DEACTIVATE_ACCOUNT}
-      </span>
     </div>
   );
 };
