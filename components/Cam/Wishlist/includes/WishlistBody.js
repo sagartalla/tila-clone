@@ -33,20 +33,19 @@ const WishlistBody = (props) => {
   const getPriceAlert = (status, wishlisted_price, changed_price, cur) => {
     let str = '';
     if (status === 'SAME') return str;
-    const priceVal = Math.abs(wishlisted_price - changed_price);
-    if (priceVal === 0) return str;
+    if (changed_price === 0) return str;
     if (status === 'INCREASED') {
       str = (
         <span className={`${styles['thick-red-clr']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`} src="icons/increase/increase" />
-          {`${WISH_LIST_PAGE.PRICE_INCREASED_BY} ${cur} ${priceVal.toFixed(2)}`}
+          {`${WISH_LIST_PAGE.PRICE_INCREASED_BY} ${cur} ${changed_price.toFixed(2)}`}
         </span>
       );
     } else {
       str = (
         <span className={`${styles['success-green']} ${styles.flex}`}>
           <SVGComponent clsName={`${styles['alert-icon']}`}src="icons/decrease/decrease" />
-          {`${WISH_LIST_PAGE.PRICE_DECRECED_BY} ${cur} ${priceVal.toFixed(2)}`}
+          {`${WISH_LIST_PAGE.PRICE_DECRECED_BY} ${cur} ${changed_price.toFixed(2)}`}
         </span>
       );
     }
@@ -135,7 +134,7 @@ const WishlistBody = (props) => {
                         {getPriceAlert(changed_status, wishlisted_price, changed_price, cur)}
                         {price && cur && wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price ?
                         <span className={`${styles['thick-gry-clr']}`}>
-                          {WISH_LIST_PAGE.ITEM_WAS} {cur} {mrp} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
+                          {WISH_LIST_PAGE.ITEM_WAS} {cur} {wishlisted_price} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
                         </span> : ''}
                       </div>
                     </Col>

@@ -14,7 +14,7 @@ const KeyFeatures = ({ features }) => (
   <div className={`${styles['pt-0']}`}>
     <ul className={`${styles['kf-list']} ${styles.flex} ${styles['flex-wrp']} ${styles['fs-12']} ${styles['mb-0']} ${styles['pl-0']}`}>
       {features && features.attribute_values && features.attribute_values.length > 0 &&
-        features.attribute_values.map(feature => <li key={feature.value} className={`${styles['pr-20']} ${!features.translation ? `${styles['direction-ir']}` : ''}`}><span>{feature.value}</span> </li>)}
+        features.attribute_values.map(feature => <li key={feature.value} className={`${styles['pr-20']}`}><span>{feature.value}</span> </li>)}
     </ul>
   </div>
 );
