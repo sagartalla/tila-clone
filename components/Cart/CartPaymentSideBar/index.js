@@ -181,8 +181,8 @@ class CartAndPaymentSideBar extends Component {
                   <span>
                     {total_tila_care_charges &&
                       <span>
-                        <span className={`${styles['fs-12']}`}>{total_tila_care_charges.currency_code}</span>&nbsp;
-                    <span className={`${styles['fs-14']}`}>{total_tila_care_charges.display_value}</span>
+                        <span className={`${styles['fs-10']}`}>{total_tila_care_charges.currency_code}</span>&nbsp;
+                    <span className={`${styles['fs-12']}`}>{total_tila_care_charges.display_value}</span>
                       </span>
                     }
                   </span>
