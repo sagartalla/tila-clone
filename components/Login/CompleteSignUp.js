@@ -33,13 +33,13 @@ class ContinueLogin extends Component {
         field: 'mobile_no',
         method: this.mobileValidation,
         validWhen: false,
-        message: 'Enter valid mobile number',
+        message: LOGIN_PAGE.ENTER_VALID_MOBILE_NUMBER,
       },
       {
         field: 'mobile_no',
         method: this.mobileWithZeroValidation,
         validWhen: false,
-        message: 'Enter valid mobile number',
+        message: LOGIN_PAGE.ENTER_VALID_MOBILE_NUMBER,
       },
     ]);
     this.state = {

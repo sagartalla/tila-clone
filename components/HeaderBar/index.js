@@ -21,13 +21,13 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const HeaderBar = props => (
   <div className={`${styles['header-container']}`}>
-    <div className={`${styles['header-container-inn']} ${ props.showFitlers ? styles['faded'] : {} }`}>
+    <div className={`${styles['header-container-inn']}`}>
       <Grid>
         <Row className={`${styles['flex-center']} ${styles['pb-10']} ${styles['pt-10']} ${styles['border-b']} ${styles['header-inn-wrap']}`}>
           <Col md={1} sm={2}>
             <NoSSR>
               <Logo />
-            </NoSSR>              
+            </NoSSR>
           </Col>
           <Col md={7} sm={5}>
             {
