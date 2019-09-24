@@ -496,7 +496,7 @@ class InstantCheckout extends Component {
               closeButton
               className={`${styles['modal-headerStyl']}`}
             >
-              <Modal.Title>Instant Checkout COD </Modal.Title>
+              <Modal.Title>{PAYMENT_PAGE.INSTANT_CHECKOUT_COD} </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               {checked
