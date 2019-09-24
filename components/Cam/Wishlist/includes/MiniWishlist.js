@@ -25,7 +25,7 @@ const MiniWishlist = (props) => {
   const {
     addToCart,
     notifyMe,
-  } = props;
+  } = props;  
   const { WISH_LIST_PAGE, HEADER_PAGE, PDP_PAGE, CART_PAGE } = languageDefinations();
   return (
     <div className={`${styles['mini-wishlist']}`}>
