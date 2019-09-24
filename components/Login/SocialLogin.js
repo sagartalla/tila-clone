@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { selectors, actionCreators } from '../../store/auth';
 
 import lang from '../../utils/language';
+import { languageDefinations } from '../../utils/lang';
 
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
@@ -11,6 +12,7 @@ import styles_ar from './login_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
+const { LOGIN_PAGE } = languageDefinations();
 
 const snMetaObj = {
   google: {
@@ -56,7 +58,7 @@ class SocialLogin extends Component {
   }
 
   showErrorAlert = (socialNetwork) => {
-    window.alert(`Unable to currently support ${socialNetwork} login, Pls try later or other network`);
+    window.alert(`${LOGIN_PAGE.UNABLE_TO_CURRENTLY_SUPPORT} ${socialNetwork} ${LOGIN_PAGE.PLEASE_TRY_LATER}`);
   }
 
   googleSignIn = () => {

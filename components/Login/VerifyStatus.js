@@ -30,7 +30,7 @@ class VerifyStatus extends React.Component {
       {
         field: 'otpValue',
         method: this.emptyValue,
-        message: 'OTP should not be empty',
+        message: LOGIN_PAGE.OTP_SHOULD_NOT_BE_EMPTY,
         validWhen: false,
         resendClicked: false,
       },
