@@ -49,6 +49,7 @@ export const AR_KEYWORDS = {
     "CANNOT_DELIVER": "للأسف، مانقدر نوصل المنتج للعنوان المختار. من فضلك احذف المنتج أو ضيفه لقائمتك المفضلة للإكمال.",
     "THERE_IS": "يوجد",
     "THERE_ARE": "يوجد",
+    "NO_PRODUCTS_IN_YOUR_FAVOURITES":"لا توجد منتجات في قائمتك المفضلة",
     "ITEM_IN_YOUR_WISHLIST": "المنتج في قائمك المفضلة ",
     "ITEMS_IN_YOUR_WISHLIST": "منتجاتك الموجودة في قائمتك المفضلة",
     "MY_CART": "عربة التسوق",
@@ -66,7 +67,7 @@ export const AR_KEYWORDS = {
      YOUR_SHOPPING_CART_IS_EMPTY: 'Your shopping cart is empty.',
      PLEASE_WAIT_FETCHING_CART_ITEMS: 'Please Wait Fetching Cart Items',
      ITEM: 'المنتج',
-     NO_WARRANTY: 'No Warranty',    
+     NO_WARRANTY: 'No Warranty',
   },
   "PAYMENT_PAGE": {
     "SECURE_CHECKOUT": "عملية خروج آمنة",
@@ -146,7 +147,7 @@ export const AR_KEYWORDS = {
     "TERMS_AND_CONDITIONS_FOR_COD": 'الشروط والأحكام للدفع كاش عند الاستلام',
     "BY_CHOOSING_COD": 'باختيارك  لطريقة الدفع كاش عند الاستلام، أنتَ تسمح لتيله وشركاؤها بجمع ومعالجة وتسهيل وتحويل المدفوعات و\ أو سعر المعاملة إلكترونياً  أو عن طريق الدفع كاش عند الاستلام',
     "CASH_ON_DELIVERY_REFUNDS": 'بنرجعْ المبلغ المدفوع للدفع كاش عند الاستلام كرصيد تيله فقط',
-    "REFRESH": 'Refresh', 
+    "REFRESH": 'Refresh',
   },
   "DELIVERY_ADDR_PAGE": {
     "DELIVERY_ADDR": "عنوانك للتوصيل",
@@ -293,9 +294,9 @@ export const AR_KEYWORDS = {
     "MAX_LENGTH": "حروف متبقية",
     "ITEM_LOCATION": "عنوان المنتج",
     "TILA_CARE_DAMAGE_PROTECTION": 'TiLa Care damage protection',
-    "TILA_CARE_EXTENDED_WARRANTY": 'TiLa Care extended warranty', 
+    "TILA_CARE_EXTENDED_WARRANTY": 'TiLa Care extended warranty',
     ADD_IMAGES: 'Attach Images',
-    MAX_FIVE: '(Max 5)',     
+    MAX_FIVE: '(Max 5)',
   },
   "VAULT_PAGE": {
     "MANAGE_VAULT_HDR": "إدارة البطاقات المحفوظة ورصيد تيله",
@@ -795,7 +796,7 @@ export const AR_KEYWORDS = {
     "TILA_CARE_SERVICE_FEE": "رسوم خدمة تيله للعناية",
     RATE_PRODUCT: 'قيَّم المنتج',
     WARRANTY_ENDS_ON: 'طلب الضمان ينتهي في تاريخ',
-    RETURN_WINDOW_CLOSED_ON: 'طلب الاسترجاع ينتهي في تاريخ', 
+    RETURN_WINDOW_CLOSED_ON: 'طلب الاسترجاع ينتهي في تاريخ',
   },
   "COUPON_OFFERS": {
     "VIEW_TERMS": "الشروط والأحكام",
@@ -822,7 +823,7 @@ export const AR_KEYWORDS = {
     "START_SHOPPING": 'ل ابدأ تسوّقك الآن لتحصل على كوبونات وتستمتع بأفضل التخفيضات!',
     "NO_COUPONS_AVAILABLE": "حالياً، مافي كوبونات متوفرة",
     "CHECK_BACK_LATER": "من فضلك راجعنا في وقت آخر",
-    PLEASE_ENTER_COUPON_CODE: 'Please enter coupon code',    
+    PLEASE_ENTER_COUPON_CODE: 'Please enter coupon code',
   },
   "EMAIL_VERIFICATION": {
     "VERIFY_YOUR_EMAIL": "فعّل  ايميلك",
