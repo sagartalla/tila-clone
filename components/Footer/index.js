@@ -276,7 +276,7 @@ render() {
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']} `}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-50']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/fashion" />
-              <span className={styles.pointer}>{FOOTER_PAGE.FASHION}</span>
+              <span className={styles.pointer}><a href={`/${lang}/fashion`}>{FOOTER_PAGE.FASHION}</a></span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {f.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
@@ -293,7 +293,7 @@ render() {
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']}  ${styles['mr-35']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/common-icon/processor-icon" />
-              <span className={styles.pointer}>{FOOTER_PAGE.ELECTRONICS}</span>
+              <span className={styles.pointer}><a href={`/${lang}/electronics`}>{FOOTER_PAGE.ELECTRONICS}</a></span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {e.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
@@ -310,7 +310,7 @@ render() {
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-80']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/life-style" />
-              <span className={styles.pointer}>{FOOTER_PAGE.LIFESTYLE}</span>
+              <span className={styles.pointer}><a href={`/${lang}/lifestyle`}>{FOOTER_PAGE.LIFESTYLE}</a></span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {l.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
