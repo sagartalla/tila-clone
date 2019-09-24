@@ -27,14 +27,14 @@ class ResetPasswordMain extends Component {
       {
         field: 'password',
         method: this.emptyValue,
-        message: 'Password should not be empty',
+        message: LOGIN_PAGE.PASSWORD_SHOULD_NOT_BE_EMPTY,
         validWhen: false,
       },
       {
         field: 'password',
         method: this.passwordValidation,
         validWhen: false,
-        message: 'Password must be atleast 8 characters',
+        message: LOGIN_PAGE.PASSWORD_MUST_BE_ATLEASE_EIGHT_CHARACTERS,
       },
     ]);
     this.state = {

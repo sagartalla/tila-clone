@@ -27,14 +27,14 @@ class LoginPage extends React.Component {
       {
         field: 'email',
         method: this.emptyValue,
-        message: 'Please enter email Id',
+        message: LOGIN_PAGE.EMAIL_ERROR,
         validWhen: false,
       },
       {
         field: 'email',
         method: this.checkEmailValidation,
         validWhen: false,
-        message: 'Password enter valid email id',
+        message: LOGIN_PAGE.VALID_EMAIL,
       },
     ]);
     this.state = {
