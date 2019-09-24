@@ -196,7 +196,7 @@ class ActionBar extends Component {
   moveToWishlist = () => {
     const { isLoggedIn } = this.props;
     if (isLoggedIn) {
-      Router.push(`/${language}/customer/wishlist`);
+      Router.pushRoute(`/${language}/customer/wishlist`);
     } else {
       this.loginClick();
     }
