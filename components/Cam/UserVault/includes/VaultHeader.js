@@ -36,7 +36,7 @@ const VaultHeader = props => (
             {props.children}
           </Tab>
           <Tab eventKey={2} title={`${VAULT_PAGE.TILA_GIFT}`} className={`${styles['thick-gry-clr']}`}>
-            <TilaVoucher transactions={props.transactions} tilaCredit={props.tilaCredit}/>
+            <TilaVoucher transactions={props.transactions} redeemableBalance={props.redeemableBalance} totalAmount={props.totalAmount}/>
           </Tab>
         </Tabs>
       </Col>
@@ -45,7 +45,8 @@ const VaultHeader = props => (
 );
 
 const mapStateToProps = store => ({
-  tilaCredit: selectors.getTilaCredit(store),
+  redeemableBalance: selectors.getTilaCredit(store),
+  totalAmount: selectors.getTotalAmount(store),
 });
 
 export default connect(mapStateToProps, null)(VaultHeader);

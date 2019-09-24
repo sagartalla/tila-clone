@@ -20,6 +20,7 @@ const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styl
 
 const languageLabel = languageDefinations();
 
+
 import constants from '../../constants';
 import { toast } from 'react-toastify';
 import ToastContent from '../common/ToastContent';
@@ -111,12 +112,12 @@ class EmailModal extends Component {
       {
         field: 'issueSearchQuery',
         method: this.emptyValue,
-        message: 'Please select issue',
+        message: 'Please select issue', 
         validWhen: false,
       },
       {
         field: 'message',
-        method: this.emptyValue,
+        method: props.type === 'chat' ? () => false : this.emptyValue,
         validWhen: false,
         message: 'Please enter message',
       },
@@ -191,11 +192,9 @@ class EmailModal extends Component {
     this.state.currentOrderPage < this.state.totalOrderPages && this.props.getOrderHistory(this.state.currentOrderPage);
   }
   openChat = () => {
+    const validation = this.validations.validate(this.state);
+    if (validation.isValid) {    
     const baseURL = lang === 'en' ? `https://tila-en.custhelp.com/app/chat/chat_landing` : `https://tila-ar.custhelp.com/app/chat/chat_landing`;
-    if (!this.state.email || !this.state.selectedIssue) {
-      alert('Email and Issue is mandatory');
-      return
-    }
     const baseCustomObjectUrl = `/Incident.CustomFields.c`
     const firstName = this.state.firstname ? `/Contact.Name.First/${this.state.firstname}` : '';
     const lastName = this.state.lastname ? `/Contact.Name.Last/${this.state.lastname}` : '';
@@ -206,6 +205,8 @@ class EmailModal extends Component {
     const categoryCode = this.state.selectedIssue.catId ? `/Incident.Category/${Number(this.state.selectedIssue.catId)}` : '';
     const chatURL = `${baseURL}${firstName}${lastName}${email}${categoryCode}${order_number}${countryCode}${languageCode}`;
     window.open(chatURL, '_blank');
+    }
+    this.setState({ validation }); 
   }
   handleOrdersScroll = (e) => {
     clearTimeout(this.scrollTimeout)
