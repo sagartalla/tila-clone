@@ -62,11 +62,11 @@ export const EN_KEYWORDS = {
     DONE: 'Done',
     ADD: 'Add',
     DONT_WAIT: "Don't wait any longer!",
-    ADD_FROM_WISHLIST: ' Add from Wishlist',
-    YOUR_SHOPPING_CART_IS_EMPTY: 'Your shopping cart is empty.',
-    PLEASE_WAIT_FETCHING_CART_ITEMS: 'Please Wait Fetching Cart Items',
-    ITEM: 'item',
-    NO_WARRANTY: 'No Warranty',
+   ADD_FROM_WISHLIST: ' Add from Wishlist',
+   YOUR_SHOPPING_CART_IS_EMPTY: 'Your shopping cart is empty.', 
+   PLEASE_WAIT_FETCHING_CART_ITEMS: "Just a sec, we're fetching the items from your cart",
+   ITEM: 'item',
+   NO_WARRANTY: 'No Warranty',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'Secure Checkout',
@@ -150,6 +150,7 @@ export const EN_KEYWORDS = {
     REFRESH: 'Refresh',
     ENTER_VALID_EMAIL: 'Enter Valid EmailID',
     PASSWORD_LENGTH: 'Password must be atleast 8 characters',
+    INSTANT_CHECKOUT_COD: 'Instant Checkout COD',  
   },
   DELIVERY_ADDR_PAGE: {
     DELIVERY_ADDR: 'Delivery Address',
@@ -938,6 +939,7 @@ export const EN_KEYWORDS = {
     ITEM_REMOVED_FROM_COMPARE: 'Item removed from compare list.',
     WARRANTY_REMOVED_FROM_CART_ITEM: 'removed from cart',
     WARRANTY_ADDED_CART_ITEM: 'added to cart',
+    PREFERENCES_SAVED_SUCCESSFULLY: 'Preferences Saved Successfully',
   },
   MOBILE_FOOTER: {
     HOME: 'home',
