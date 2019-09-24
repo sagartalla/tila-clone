@@ -714,6 +714,7 @@ export const AR_KEYWORDS = {
     PLEASE_TRY_LATER: 'login, Pls try later or other network',
     OTP_SHOULD_NOT_BE_EMPTY: 'OTP should not be empty',
     ENTER_VALID_MOBILE_NUMBER: 'Enter valid mobile number',
+    "I_HAVE_TILA": "لدى تيله",
   },
   ORDER_PAGE: {
     LOADING: 'تحميل',

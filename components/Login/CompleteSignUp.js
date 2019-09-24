@@ -434,7 +434,19 @@ class ContinueLogin extends Component {
           onClick={this.submit}
         />
         <a className={`${styles['t-c']} ${styles['fs-14']}`} onClick={this.skipAndContinue}>{LOGIN_PAGE.SKIP_AND_CONTINUE}</a>
-        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/user-terms" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/privacy-policy" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/cookie-policy" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span> {LOGIN_PAGE.NAME_TILA}</span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>
+          {LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } 
+          <span className={`${styles['text-blue']} ${styles.fontW600}`}>
+            <a href="/en/policy/user-terms" target="_blank">{LOGIN_PAGE.T_AND_C}</a>
+          </span>,
+          <span className={`${styles['text-blue']} ${styles.fontW600}`}>
+            <a href="/en/policy/privacy-policy" target="_blank">{LOGIN_PAGE.PRIVACY}</a>
+          </span> {LOGIN_PAGE.AND}
+          <span className={`${styles['text-blue']} ${styles.fontW600}`}>
+            <a href="/en/policy/cookie-policy" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a>
+          </span> {LOGIN_PAGE.NAME_TILA}
+          {lang === 'ar' ? LOGIN_PAGE.I_HAVE_TILA : ''}
+        </span>
       </div>
     );
   }
