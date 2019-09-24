@@ -293,7 +293,9 @@ export const EN_KEYWORDS = {
     MAX_LENGTH: 'characters left',
     ITEM_LOCATION: 'Item Location',
     TILA_CARE_DAMAGE_PROTECTION: 'TiLa Care damage protection',
-    TILA_CARE_EXTENDED_WARRANTY: 'TiLa Care extended warranty', 
+    TILA_CARE_EXTENDED_WARRANTY: 'TiLa Care extended warranty',
+    ADD_IMAGES: 'Attach Images',
+    MAX_FIVE: '(Max 5)',     
   },
   VAULT_PAGE: {
     MANAGE_VAULT_HDR: 'Manage Saved Cards & TiLa Credit',

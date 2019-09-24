@@ -57,8 +57,6 @@ const getSearchResultsApi = ({
       categoryFilter,
       shippingDetails,
       sort,
-      categoryTree,
-      categoryFacet,
       choosenCategoryName,
     };
     data.geoDetails = {
