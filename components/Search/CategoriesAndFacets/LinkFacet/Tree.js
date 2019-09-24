@@ -33,6 +33,9 @@ const Tree = ({
             if (queryString.indexOf('categoryFacet') === -1) {
               queryString = `${queryString}&categoryFacet=true`;
             }
+            if (queryString.indexOf('categoryTree') !== -1) {
+              queryString = queryString.replace(/categoryTree=.*?\&/, '');
+            }
 
             return (
               <Branch
