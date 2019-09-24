@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import { toast } from 'react-toastify';
 import { languageDefinations } from '../../utils/lang/';
 import { actionCreators, selectors } from '../../store/cart';
+import { selectors as authSelectors, actionCreators as authActionCreators } from '../../store/auth';
 import { actionCreators as wishlistActionCreators, selectors as wishlistSelectors } from '../../store/cam/wishlist';
 import HeaderBar from '../HeaderBar/index';
 import CartBody from './includes/CartBody';
@@ -146,10 +147,13 @@ class Cart extends Component {
   }
 
   addToWishlist(e) {
-    const { cartData } = this.props;
+    const { cartData, isLoggedIn, showLoginScreen } = this.props;
     const cart_id = e.currentTarget.getAttribute('data-id');
     const cart_scroll_id = e.currentTarget.getAttribute('data_scrollId');
     const item = cartData.items.filter(_item => cart_id === _item.item_id)[0];
+    if (!isLoggedIn) {
+      showLoginScreen();
+    } else {
     this.props.addToWishlistAndFetch({
       catalog_id: item.item_id,
       product_id: item.product_id,
@@ -160,6 +164,7 @@ class Cart extends Component {
     this.props.removeCartItem(cart_id, {
       showToast: false,
     });
+  }
     document.getElementById(cart_scroll_id).scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -243,6 +248,7 @@ const mapStateToProps = store => ({
   cartData: selectors.getCartResults(store),
   wishListCount: wishlistSelectors.getProductsDetails(store).length,
   isLoading: store.cartReducer.ui.loading,
+  isLoggedIn: authSelectors.getLoggedInStatus(store),
 });
 
 const mapDispatchToProps = dispatch =>
@@ -256,6 +262,7 @@ const mapDispatchToProps = dispatch =>
       addToWishlistAndFetch: wishlistActionCreators.addToWishlistAndFetch,
       getWishlist: wishlistActionCreators.getWishlist,
       track: actionCreators.track,
+      showLoginScreen: authActionCreators.showLoginScreen,      
     },
     dispatch,
   );

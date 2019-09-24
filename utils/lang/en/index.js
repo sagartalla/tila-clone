@@ -64,7 +64,7 @@ export const EN_KEYWORDS = {
     DONT_WAIT: "Don't wait any longer!",
    ADD_FROM_WISHLIST: ' Add from Wishlist',
    YOUR_SHOPPING_CART_IS_EMPTY: 'Your shopping cart is empty.', 
-   PLEASE_WAIT_FETCHING_CART_ITEMS: 'Please Wait Fetching Cart Items',
+   PLEASE_WAIT_FETCHING_CART_ITEMS: "Just a sec, we're fetching the items from your cart",
    ITEM: 'item',
    NO_WARRANTY: 'No Warranty',
   },
@@ -148,6 +148,7 @@ export const EN_KEYWORDS = {
     BY_CHOOSING_COD: 'By choosing cash on delivery as your method of payment, you authorize TiLa or its partners to collect, process, facilitate and remit payments and/or the transaction price electronically or through cash on delivery.',
     CASH_ON_DELIVERY_REFUNDS: 'Cash on Delivery refunds will be processed as TiLa Credit only.',
     REFRESH: 'Refresh',
+    INSTANT_CHECKOUT_COD: 'Instant Checkout COD',  
   },
   DELIVERY_ADDR_PAGE: {
     DELIVERY_ADDR: 'Delivery Address',
@@ -293,7 +294,9 @@ export const EN_KEYWORDS = {
     MAX_LENGTH: 'characters left',
     ITEM_LOCATION: 'Item Location',
     TILA_CARE_DAMAGE_PROTECTION: 'TiLa Care damage protection',
-    TILA_CARE_EXTENDED_WARRANTY: 'TiLa Care extended warranty', 
+    TILA_CARE_EXTENDED_WARRANTY: 'TiLa Care extended warranty',
+    ADD_IMAGES: 'Attach Images',
+    MAX_FIVE: '(Max 5)',     
   },
   VAULT_PAGE: {
     MANAGE_VAULT_HDR: 'Manage Saved Cards & TiLa Credit',
@@ -913,6 +916,7 @@ export const EN_KEYWORDS = {
     ITEM_REMOVED_FROM_COMPARE: 'Item removed from compare list.',
     WARRANTY_REMOVED_FROM_CART_ITEM: 'removed from cart',
     WARRANTY_ADDED_CART_ITEM: 'added to cart',
+    PREFERENCES_SAVED_SUCCESSFULLY: 'Preferences Saved Successfully',
   },
   MOBILE_FOOTER: {
     HOME: 'home',
