@@ -186,8 +186,8 @@ const t = [
   },
 
   {
-    url: `/${lang}/brand/fossil`,
-    title: '/static/img/bg-img/Fossil.png',
+    url: `/${lang}/brand/michael-kors`,
+    title: '/static/img/bg-img/michael-kors.png', 
   },
 ];
 
@@ -212,10 +212,10 @@ class FooterBar extends Component {
   }
 
 
-  render() {
-    const { showPopup } = this.state;
-    return (
-    <div id="footer-container" className={`${styles['footer-container']} ${styles['mt-25']}`}>
+render() {
+  const { showPopup } = this.state;
+  return (
+  <div id="footer-container" className={`${styles['footer-container']} ${styles['mt-25']}`}>
     <div className={`${styles['footer-container-inn']} ${styles['pt-40']} ${styles['pb-40']}`}>
       <Grid className={styles['footer-usb-links']}>
         <div className={styles['flx-space-bw']}>
@@ -227,9 +227,9 @@ class FooterBar extends Component {
             </span>
             <div className={styles.black}>
               <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
-                <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.GOT_QUESTION}</span>
-                <span className={`${styles['footer-suport-title']} ${styles['fs-12']}`}>{FOOTER_PAGE.WE_CARE_TILA}</span>
-              </div>
+                    <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.GOT_QUESTION}</span>
+                    <span className={`${styles['footer-suport-title']} ${styles['fs-12']}`}>{FOOTER_PAGE.WE_CARE_TILA}</span>
+                  </div>
             </div>
           </div>
 
@@ -270,7 +270,7 @@ class FooterBar extends Component {
         </div>
       </Grid>
     </div>
-    <div id ="constantfootertop" className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
+    <div className={`${styles['footer-menu-items']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
         <div className={`${styles.flex} ${styles['footer-menu-list']}`}>
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']} `}>
@@ -278,7 +278,7 @@ class FooterBar extends Component {
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/fashion" />
               <span className={styles.pointer}><a href={`/${lang}/fashion`}>{FOOTER_PAGE.FASHION}</a></span>
             </h4>
-            <ul id= "footertopfashion" className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
+            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {f.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
               {/* <li><span className={styles['pointer']}>{`${FOOTER_PAGE.WOMENS} ${FOOTER_PAGE.FASHION}`}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.MENS} ${FOOTER_PAGE.FASHION}`}</span></li>
@@ -295,7 +295,7 @@ class FooterBar extends Component {
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/common-icon/processor-icon" />
               <span className={styles.pointer}><a href={`/${lang}/electronics`}>{FOOTER_PAGE.ELECTRONICS}</a></span>
             </h4>
-            <ul id ="footertopelectronics" className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
+            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {e.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
               {/* <li><span className={styles['pointer']}>{FOOTER_PAGE.MOBILES}</span></li>
               <li><span className={styles['pointer']}>{FOOTER_PAGE.TABLETS}</span></li>
@@ -312,7 +312,7 @@ class FooterBar extends Component {
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/life-style" />
               <span className={styles.pointer}><a href={`/${lang}/lifestyle`}>{FOOTER_PAGE.LIFESTYLE}</a></span>
             </h4>
-            <ul id ="footertoplifestyle" className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
+            <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {l.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
               {/* <li><span className={styles['pointer']}>{FOOTER_PAGE.HOME_DECOR}</span></li>
               <li><span className={styles['pointer']}>{`${FOOTER_PAGE.KITCHEN} & ${FOOTER_PAGE.DINING}`}</span></li>
@@ -344,13 +344,13 @@ class FooterBar extends Component {
       >
         <Modal.Body>
           <address className={styles['mb-0']}>
-            <div className={styles.flex}>
+            <div className={styles['flex']}>
               <SVGComponent clsName={styles['logo-icon']} src={`icons/logos/default-logo-${lang}`} />
             </div>
-            <div className={styles['pl-5']}><b>Tila</b><br />
-            c/o Afdal Al Mazaya Co. Ltd<br />
-            Office No.5,Second Floor,Al Saedan Tower<br />
-            King Fahd Branch Rd,Al Muruj,<br />
+            <div className={styles['pl-5']}><b>Tila</b><br/>
+            c/o Afdal Al Mazaya Co. Ltd<br/>
+            Office No.5,Second Floor,Al Saedan Tower<br/>
+            King Fahd Branch Rd,Al Muruj,<br/>
             Riyadh 11322,PO Box: 240220 Kingdom of Saudi Arabia
             </div>
           </address>
@@ -358,76 +358,76 @@ class FooterBar extends Component {
       </Modal>
     </div>
     {/* social part start */}
-    <div id="constantsocialtab" className={`${styles['footer-social-list-main']} ${styles['pt-40']} ${styles['pb-40']} ${styles['bg-white']}`}>
+    <div className={`${styles['footer-social-list-main']} ${styles['pt-40']} ${styles['pb-40']} ${styles['bg-white']}`}>
       <Grid>
         <Row className={styles['footer-social-list']}>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-            <a id="constantsnapchat" href="https://www.snapchat.com/add/tilasocial" target="_blank">
-              <h4 className={styles['flex-center']}>
+          <a href="https://www.snapchat.com/add/tilasocial" target="_blank">
+            <h4 className={styles['flex-center']}>
                 <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/snapchat.png" className={styles['img-responsive']} /></span>
                 <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_SNAP}</span>
                 <span className={`${styles['follow-sc-btn']} ${styles['fs-10']} ${styles['lne-ht2']}  ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
-              </h4>
-            </a>
+            </h4>
+          </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-            <a id="constanttwitter" href="https://www.twitter.com/tilasocial" target="_blank">
-              <h4 className={styles['flex-center']}>
-                <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-twitter.jpg" className={styles['img-responsive']} /></span>
-                <span className={`${styles['twitter-clr']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_TWITTER}</span>
-                <span className={`${styles['follow-twi-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
-              </h4>
-            </a>
+          <a href="https://www.twitter.com/tilasocial" target="_blank">
+            <h4 className={styles['flex-center']}>
+              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-twitter.jpg" className={styles['img-responsive']} /></span>
+              <span className={`${styles['twitter-clr']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_TWITTER}</span>
+              <span className={`${styles['follow-twi-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
+            </h4>
+          </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-            <a id="constantinsta" href="https://www.instagram.com/tilasocial/" target="_blank">
-              <h4 className={styles['flex-center']}>
-                <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
-                <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_INSTAGRAM}</span>
-                <span className={`${styles['follow-inst-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
-              </h4>
-            </a>
+          <a href="https://www.instagram.com/tilasocial/" target="_blank">
+            <h4 className={styles['flex-center']}>
+              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-instgram.jpg" className={styles['img-responsive']} /></span>
+              <span className={`${styles.fontW600}`}>{FOOTER_PAGE.ON_INSTAGRAM}</span>
+              <span className={`${styles['follow-inst-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
+            </h4>
+          </a>
           </Col>
           <Col md={3} sm={6} className={`${styles['footer-social-list']} ${styles['pr-0']}`}>
-            <a id="constantfacebook" href="https://www.facebook.com/tilasocial/" target="_blank">
-              <h4 className={styles['flex-center']}>
-                <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
-                <span className={`${styles['lgt-blue']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
-                <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
-              </h4>
-            </a>
+          <a href="https://www.facebook.com/tilasocial/" target="_blank">
+            <h4 className={styles['flex-center']}>
+              <span className={`${styles['footer-social-title']} ${styles['mr-10']}`}><img src="/static/img/bg-img/bitmap-social-fb.jpg" className={styles['img-responsive']} /></span>
+              <span className={`${styles['lgt-blue']} ${styles.fontW600}`}>{FOOTER_PAGE.ON_FACEBOOK}</span>
+              <span className={`${styles['follow-fb-btn']} ${styles['fs-10']} ${styles['lne-ht2']} ${styles['white-color']} ${styles['ml-10']} ${styles['pl-15']} ${styles['pr-15']}`}>{FOOTER_PAGE.FOLLOW}</span>
+            </h4>
+          </a>
           </Col>
         </Row>
       </Grid>
     </div>
     {/* footer componay policy part start */}
-    <div id ="constantfooterbottom" className={`${styles['footer-social-main']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
+    <div className={`${styles['footer-social-main']} ${styles['pt-30']} ${styles['pb-30']} ${styles['bg-white']}`}>
       <Grid>
         <div className={styles['footer-social-list']}>
-          <div className={styles['ipad-pr-0']}>
+            <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.TILA}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                 <li><a href={`/${lang}/policy/aboutus-policy`} target="_blank">{FOOTER_PAGE.WHO_WE_ARE}</a></li>
                 <li><a href={`/${lang}/policy/ourvalues-policy`} target="_blank">{FOOTER_PAGE.OUR_VALUES}</a></li>
-                <li>{FOOTER_PAGE.OUR_MISSION}</li>
-                <li>{FOOTER_PAGE.PRESS_REALESES}</li>
-                <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li>
+                <li><a href={`/${lang}/policy/aboutus-policy#mission-vision`}>{FOOTER_PAGE.OUR_MISSION}</a></li>
+                {/* <li>{FOOTER_PAGE.PRESS_REALESES}</li>
+                <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li> */}
                 <li onClick={this.showAddress}><a>{FOOTER_PAGE.CORPARATE_ADDRESS}</a></li>
               </ul>
             </div>
-          <div className={styles['ipad-pr-0']}>
+            <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICIES}</h4>
-              <ul id ="constantfooterpolicy" className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li><a href={`/${lang}/policy/user-terms`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
-                <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/return-and-exchange-policy#exchangePolicy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/return-and-refund-policy#returnPolicy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/warranty-policy#warrantyPolicy`} target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
-                {/* <li><a href="/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
-                <li><a href={`/${lang}/policy/privacy-policy`} target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
+              <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+                <li><a href={`/${lang}/policy/user-terms`}>{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+                <li><a href={`/${lang}/policy/cancellation-policy`}>{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-exchange-policy#exchangePolicy`}>{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-refund-policy#returnPolicy`}>{FOOTER_PAGE.REFUND_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/warranty-policy#warrantyPolicy`}>{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+                {/* <li><a href="/en/policy/sp">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
+                <li><a href={`/${lang}/policy/privacy-policy`}>{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
               </ul>
             </div>
-          {/* <Col md={2} sm={2} className={styles['ipad-pr-0']}>
+            {/* <Col md={2} sm={2} className={styles['ipad-pr-0']}>
               <div>
                 <h4 className={`${styles['fontW600']} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.SELL_ON_TILA}</h4>
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
@@ -440,17 +440,17 @@ class FooterBar extends Component {
                 </ul>
               </div>
             </Col> */}
-          <div className={styles['ipad-pr-0']}>
+            <div className={styles['ipad-pr-0']}>
               <div>
                 <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.HELP}</h4>
-                <ul id= "constantfooterhelp" className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                  <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
+                <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
+                  {/* <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li> */}
                   <li><a href={`/${lang}/policy/customer-delivery`} target="_blank">{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</a></li>
                   <li><a href={`https://www.tila.com/${lang}/help/faq`} target="_blank">{FOOTER_PAGE.CUSTOMER_CARE}</a></li>
                 </ul>
               </div>
             </div>
-          <div className={styles['ipad-pr-0']}>
+            <div className={styles['ipad-pr-0']}>
               <div className={`${styles['fs-12']} ${styles['footer-download-app']}`}>
                 <div className={styles['ml-20']}>
                   <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.DOWNLOAD_APP}</h4>
@@ -468,12 +468,12 @@ class FooterBar extends Component {
                 </div>
               </div>
             </div>
-        </div>
+          </div>
       </Grid>
     </div>
   </div>
-    );
-  }
+);
+}
 }
 
 export default FooterBar;
