@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import Cookie from 'universal-cookie';
 import { Modal } from 'react-router-modal';
 import { connect } from 'react-redux';
+import dynamic from 'next/dynamic';
 import { bindActionCreators } from 'redux';
+
 import { selectors as productSelectors, actionCreators as productActionCreators } from '../../../store/product';
 import { selectors as cartSelectors } from '../../../store/cart';
-//import AddressNew from './includes/AddressNew';
-import dynamic from 'next/dynamic';
-//import AddressBody from './includes/AddressBody';
 import MiniAddress from './includes/MiniAddress';
 import AddressHeader from './includes/AddressHeader';
 import { languageDefinations } from '../../../utils/lang/';
@@ -26,7 +25,10 @@ import styles_ar from './address_ar.styl';
 
 const AddressBody = dynamic(import('./includes/AddressBody'));
 const AddressNew = dynamic(import('./includes/AddressNew'));
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+
+const { DELIVERY_ADDR_PAGE } = languageDefinations();
+
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 let validCountry = null;
 let validCity = null;
@@ -58,62 +60,62 @@ class ShippingAddress extends Component {
       {
         field: 'first_name',
         method: this.validateNames,
-        message: 'Minimum 3 characters required',
+        message: DELIVERY_ADDR_PAGE.MINIMUM_THREE_CHARACTERS,
         validWhen: false,
       },
       {
         field: 'last_name',
         method: this.validateNames,
-        message: 'Minimum 3 characters required',
+        message: DELIVERY_ADDR_PAGE.MINIMUM_THREE_CHARACTERS,
         validWhen: false,
       },
       {
         field: 'address_line_1',
         method: this.validate,
-        message: 'Required',
+        message: DELIVERY_ADDR_PAGE.REQUIRED,
         validWhen: false,
       },
       {
         field: 'shipping_country_code',
         method: this.validate,
-        message: 'Select country from list',
+        message: DELIVERY_ADDR_PAGE.SELECT_COUNTRY_FROM_LIST,
         validWhen: false,
       },
       {
         field: 'country_name',
         method: this.validate,
-        message: 'Select Country',
+        message: DELIVERY_ADDR_PAGE.SELECT_COUNTRY,
         validWhen: false,
       },
       {
         field: 'city',
         method: this.validate,
-        message: 'Required City',
+        message: DELIVERY_ADDR_PAGE.REQUIRED_CITY,
         validWhen: false,
       },
       {
         field: 'city_code',
         method: this.validate,
-        message: 'Select City from list',
+        message: DELIVERY_ADDR_PAGE.SELECT_COUNTRY_FROM_LIST,
         validWhen: false,
       },
       {
         field: 'mobile_no',
         method: this.validate,
         validWhen: false,
-        message: 'Phone number cannot be empty',
+        message: DELIVERY_ADDR_PAGE.PHONE_NUMBER_CANNOT_EMPTY,
       },
       {
         field: 'mobile_no',
         method: this.mobileValidation,
         validWhen: false,
-        message: 'Enter valid mobile number',
+        message: DELIVERY_ADDR_PAGE.ENTER_VALID_MOBILE_NUMBER,
       },
       {
         field: 'mobile_no',
         method: this.mobileWithZeroValidation,
         validWhen: false,
-        message: 'Enter valid mobile number',
+        message: DELIVERY_ADDR_PAGE.ENTER_VALID_MOBILE_NUMBER,
       },
       // {
       //   field: 'mobile_no',
@@ -218,18 +220,18 @@ class ShippingAddress extends Component {
       showCitiesData,
       showCountriesData,
     }, () => {
-        const validation = this.validations.validateOnBlur({[target.name]: target.value});
+        const validation = this.validations.validateOnBlur({ [target.name]: target.value });
         if(target.name === 'country_name' || target.name === 'city'){
-          validCountry = this.validations.validateOnBlur({'shipping_country_code': addr.shipping_country_code})
-          validCity = this.validations.validateOnBlur({'city_code': addr.city_code})
+          validCountry = this.validations.validateOnBlur({ 'shipping_country_code': addr.shipping_country_code })
+          validCity = this.validations.validateOnBlur({ 'city_code': addr.city_code })
         }
         this.setState({
           validation: Object.assign(
             {},
             this.state.validation,
-            {...validation},
-            {...validCountry},
-            {...validCity},
+            { ...validation },
+            { ...validCountry },
+            { ...validCity },
           )
         })
     }
@@ -265,14 +267,14 @@ class ShippingAddress extends Component {
     addr.city = target.innerHTML;
     this.setState({ addr }, () => {
       if(addr.city_code !== ''){
-        validCity = this.validations.validateOnBlur({'city_code': addr.city_code})
+        validCity = this.validations.validateOnBlur({ 'city_code': addr.city_code })
       }
       this.setState({
         showCitiesData: false,
         validation: Object.assign(
           {},
           this.state.validation,
-          {...validCity}
+          { ...validCity }
         )
       });
     });
@@ -289,13 +291,13 @@ class ShippingAddress extends Component {
       showCountriesData: false,
     }, () => {
       if(addr.shipping_country_code !== ''){
-        validCountry = this.validations.validateOnBlur({'shipping_country_code': addr.shipping_country_code})
+        validCountry = this.validations.validateOnBlur({ 'shipping_country_code': addr.shipping_country_code })
       }
       this.setState({
         validation: Object.assign(
           {},
           this.state.validation,
-          {...validCountry}
+          { ...validCountry }
         )
       })
       getCitiesByCountryCode(target.getAttribute('data-id'));
@@ -415,7 +417,6 @@ class ShippingAddress extends Component {
     const {
       showNewAddr, addr, showCitiesData, showCountriesData, validation, showSlider, isEditAddr, slider,
     } = this.state;
-    const { DELIVERY_ADDR_PAGE } = languageDefinations();
     return (
       <div className={`${styles['address-container']} ${styles['pt-15']} ${standalone !== true ? '' : `${styles.box} ${styles['ml-5']}`} `}>
         {cartResults.address !== null && !cartResults.cart_shippable && (cartResults.cart_shippable !== undefined) && showNonShippable &&
