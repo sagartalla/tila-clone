@@ -133,7 +133,7 @@ class Coupon extends Component {
     const { couponCode, appliedCoupon } = this.state;
     if (couponCode === '' && appliedCoupon === '') {
       this.setState({
-        errorMsg: 'Please enter coupon code',
+        errorMsg: COUPON_OFFERS.PLEASE_ENTER_COUPON_CODE,
       });
       return false;
     }

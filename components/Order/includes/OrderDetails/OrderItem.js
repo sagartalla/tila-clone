@@ -7,13 +7,19 @@ import Cookies from 'universal-cookie';
 import moment from 'moment-timezone';
 
 import SVGComponent from '../../../common/SVGComponet';
+import { selectors as personalDetailsSelectors } from '../../../../store/cam/personalDetails';
 import StatusWidget from '../StatusWidget';
 import { Link, Router } from '../../../../routes';
 import constants from '../../../../constants';
+import { actionCreators as orderActionCreators } from '../../../../store/cam/orders';
+import { actionCreators as productActionCreators, selectors as productSelectors } from '../../../../store/product';
 import { ORDER_ISSUE_TYPES, ORDER_ISSUE_STEPS } from '../../constants';
 import { actionCreators } from '../../../../store/order';
 import Warranty from '../../../../components/Product/includes/Warranty';
 import OrderTracker from './OrderTracker';
+import ReviewThankYou from '../../../Product/includes/ReviewThankYou';
+import StarRating from '../../../common/StarRating';
+import ReviewFeedBackModal from '../../../Product/includes/reviewFeedbackModal';
 
 // import  styles from '../order.styl';
 
@@ -28,6 +34,7 @@ import styles_ar from '../../order_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
+let warrantyData;
 
 const { ORDER_PAGE, CART_PAGE, ORDERS } = languageDefinations();
 
@@ -36,16 +43,18 @@ const cookies = new Cookies();
 const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
-const RenderButton = ({ callbackMethod, refundType }) => (
-  <div className={styles['ml-5']}>
-    <button
-      className={`${styles['mini-btn']} ${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${(refundType === 'DAMAGE PROTECTION' || 'CLAIM WARRANTY') ? styles['fs-10'] :styles['fs-12']}`}
-      onClick={callbackMethod}
-    >
-      {refundType}
-    </button>
-  </div>
-);
+const RenderButton = ({ callbackMethod, refundType }) => {
+  return (
+    <div className={styles['ml-5']}>
+      <button
+        className={`${styles['mini-btn']} ${styles['link-text']} ${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['text-uppercase']} ${styles['left-radius']} ${(refundType === 'DAMAGE PROTECTION' || 'CLAIM WARRANTY') ? styles['fs-10'] : styles['fs-12']}`}
+        onClick={callbackMethod}
+      >
+        {ORDER_PAGE[refundType.toUpperCase().replace(' ', '_')]}
+      </button>
+    </div>
+  );
+};
 
 
 class OrderItem extends Component {
@@ -53,14 +62,30 @@ class OrderItem extends Component {
     super();
     this.state = {
       showToolTip: false,
+      openModal: false,
+      showReviews: false,
     };
     this.getCurrencyValue = this.getCurrencyValue.bind(this);
   }
+  componentDidMount() {
+    const { catalogObj, userInfo, orderItem, orderId } = this.props;
+    const { catalog_id, product_id, item_type } = catalogObj;
+    const paramsobj = {
+      catalog_id,
+      product_id,
+      review_type: 'USER',
+      user_id: userInfo.personalInfo.user_account_id,
+    };
+    this.props.getRatingsAndReviews(paramsobj, orderId, orderItem.id);
+    document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+  }
+
   getCurrencyValue(finalPrice) {
     const {isDamageProtectionAvailable,isWarrantyAvailable } = this.props
     return <span><span className={`${styles['fs-12']}`}>&nbsp;{finalPrice.currency_code}</span>&nbsp;<span>{finalPrice.display_value}</span></span>
   }
   getWarrantyDuration = (product) => {
+
     const {
       isDamageProtectionAvailable,
       isWarrantyAvailable,
@@ -77,6 +102,32 @@ class OrderItem extends Component {
     }
     return warrantyInfo;
   }
+  getWarranty = (product) => {
+    const {
+      tilaPolicy,
+    } = product;
+    if (tilaPolicy.length === 0) return null;
+    const preferredPolicy = product.returnPolicy.preferred_policy; 
+    tilaPolicy.length > 0 && tilaPolicy.forEach((item) => {
+        if (item.policy_type === 'EXTENDED' && item.valid_upto !== null) {
+          warrantyData = moment(item.valid_upto).tz('Asia/Riyadh').format("MMM Do 'YY");
+        } else if(item.policy_type === 'NORMAL' && item.valid_upto !== null) {
+          warrantyData = moment(item.valid_upto).tz('Asia/Riyadh').format("MMM Do 'YY");
+        } else {
+          warrantyData = 'Invalid'
+        }
+      });
+      return (warrantyData !== 'Invalid' && warrantyData !== '') &&
+      <React.Fragment>
+      <div className={`${styles['flex']} ${styles['align-start']}`}>
+      <SVGComponent clsName={`${styles['help-icon']}`} src="icons/common-icon/shield" />
+      <div className={`${styles['ml-10']}`}>{ORDER_PAGE.WARRANTY_ENDS_ON} - {warrantyData}</div>
+      </div>
+      {product.returnPolicy && product.returnPolicy.policies && product.returnPolicy.policies[preferredPolicy] && product.returnPolicy.policies[preferredPolicy].valid_upto !== null &&
+      <div className={`${styles['border-b']} ${styles['m-5']} ${styles['width63']}`}></div>}
+      </React.Fragment>
+  }
+
   getDate = (estimates) => {
     const { orderItem } = this.props;
     const t = estimates.filter(state => state.status === orderItem.status);
@@ -152,13 +203,54 @@ class OrderItem extends Component {
     // });
   };
 
+  toggleReviewModal = () => {
+    const { openModal } = this.state;
+    const { isLoggedIn, userInfoData, v2CurrentFlow, userInfo } = this.props;
+      this.setState(prevState => ({
+        openModal: !prevState.openModal,
+        showReviews: true,
+      }), () => {
+        if (!openModal) {
+          document.getElementsByTagName('BODY')[0].style.overflow = 'hidden';
+        } else {
+          document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
+        }
+      });
+  }
+
+  submituserreview = (reviewObj) => {
+    const { userInfo } = this.props;
+    this.props.submitUserReview({
+      ...reviewObj,
+      reviewer_name: userInfo.personalInfo.user_name,
+    }).then(() => {
+      this.setState({
+        showReviews: false,
+      });
+    });
+  }
+
+  renderReviewDetails = (reviewData) => {
+    return (
+          <div className={`${styles['pl-10']} ${styles['thick-gry-clr']} ${styles.flex} ${styles['review-start-inn']}`}>
+              <StarRating
+                interactive={false}
+                count={5}
+                rating={reviewData.ratings}
+                clsStyl={{ width: '15px', marginRight: '5px' }}
+              />
+          </div>
+  )}
+
   render() {
     const {
       payments = [{}], orderItem, orderId, thankyouPage, isCancelable,
       isReturnable, isExchangable, needHelp, showPriceInfo, isDamageProtectionAvailable,
-      isWarrantyAvailable, tilaPolicy, tuinId
+      isWarrantyAvailable, tilaPolicy, tuinId, reviewsData, catalogObj, getReviewRatings, getReviewsData, setReviewImages,
+      documentId, downloadPic, userInfo,
     } = this.props;
-    const { showToolTip } = this.state;
+
+    const { showToolTip, openModal, showReviews } = this.state;
     const btnType = (() => {
       if (['PLACED', 'SHIPPED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
         return 'cancel';
@@ -170,17 +262,17 @@ class OrderItem extends Component {
     })();
     const displayText = () => {
       if (['SHIPPED', 'PLACED', 'PROCESSING'].indexOf(orderItem.status) !== -1) {
-        return 'Delivery by';
+        return ORDERS.DELIVERY_BY;
       } else if (orderItem.status === 'DELIVERED') {
-        return 'Delivered on';
+        return ORDERS.DELIVERED_ON;
       } else if (orderItem.status === 'CANCELLED') {
-        return 'Cancelled On';
+        return ORDERS.CANCEL_ON;
       } else if (orderItem.status === 'RETURN_IN_PROGRESS') {
-        return 'Return in progress';
+        return ORDERS.RETURN_IN_PROGRESS;
       } else if (orderItem.status === 'EXCHANGE_IN_PROGRESS') {
-        return 'Exchange in progress';
+        return ORDERS.EXCHANGE_IN_PROGRESS;
       } else if (orderItem.status === 'REPLACEMENT_IN_PROGRESS') {
-        return 'Replace in progress';
+        return ORDERS.REPLACE_IN_PROGRESS;
       } return '';
     };
 
@@ -205,17 +297,18 @@ class OrderItem extends Component {
       <div className={`${styles['shipment-wrap']} ${styles['mb-20']} ${styles['mt-20']} ${styles.flex}`}>
         <Col md={7} sm={7} className={`${styles['pl-0']} ${styles['pr-0']} ${styles.flex} ${styles['flex-colum']}`}>
           {orderItem.products.map((product) => {
-            const { catalogId: catalog_id, name, productId: product_id, variantId, listing_id='oos' } = product;
+            const { catalogId: catalog_id, name, productId: product_id, variantId, listing_id='oos'} = product;
             const {
               final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {}, discount = {},
             } = product.price;
+            const preferredPolicy = product.returnPolicy.preferred_policy;
             return (
               <React.Fragment key={product.id}>
                 <div className={`${styles.relative} ${styles['ht-100P']} ${styles['products-wrap']} ${styles.flex} ${styles['p-15']}`}>
                   <div key={product.id} className={`${styles['product-item']} ${styles.width100} ${styles.flex}`}>
                     <Col md={2} className={styles['p-0']}>
                       <div className={`${styles['img-wrap']} ${styles['flex-center']} ${styles['justify-center']}`}>
-                        <Link route={`/${language}/pdp/${name.replace(/[^a-zA-Z ]/g, '').replace(/\s+/g, '-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variantId}&cid=${catalog_id}`}>
+                        <Link route={`/${language}/pdp/${encodeURI(name && name.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase())}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variantId}&cid=${catalog_id}`}>
                             <a target="_blank" className={`${styles.width100} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <img className={`${styles['order-item-img']}`} src={`${constants.mediaDomain}/${product.img}`} alt={product.img} />
                           </a>
@@ -232,7 +325,7 @@ class OrderItem extends Component {
                     </Col>
                     <Col md={10} className={`${styles['ipad-pr-0']} ${styles['pt-15']}`}>
                       <div className={`${styles['text-wrap']}`}>
-                        <Link route={`/${language}/pdp/${name.replace(/[^a-zA-Z ]/g, '').replace(/\s+/g, '-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variantId}&cid=${catalog_id}`}>
+                        <Link route={`/${language}/pdp/${encodeURI(name && name.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase())}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variantId}&cid=${catalog_id}`}>
                           <a target="_blank" className={`${styles.width100} ${styles['fs-14']} ${styles['ht-100P']} ${styles['light-gry-clr']}`}>
                             <span className={`${styles.fontW600}`}>{product.name}</span>
                           </a>
@@ -300,6 +393,17 @@ class OrderItem extends Component {
                             </span>
                           </div>
                           : null}
+                          <div className={`${styles['mt-10']}`}>
+                          {this.getWarranty(product)}
+                          {product.returnPolicy && product.returnPolicy.policies && product.returnPolicy.policies[preferredPolicy] && product.returnPolicy.policies[preferredPolicy].valid_upto &&
+                          <React.Fragment>
+                          <div className={`${styles['flex']} ${styles['align-start']}`}>
+                          <SVGComponent clsName={`${styles['help-icon']}`} src="icons/common-icon/order-return" />
+                          {product.returnPolicy ? <div className={`${styles['ml-10']}`}>{ORDER_PAGE.RETURN_WINDOW_CLOSED_ON} - {moment(product.returnPolicy.policies[preferredPolicy].valid_upto).tz('Asia/Riyadh').format("MMM Do 'YY")}</div> : ''}
+                          </div>
+                          </React.Fragment>
+                          }
+                          </div>                    
                       </div>
                     </Col>
                   </div>
@@ -361,7 +465,7 @@ class OrderItem extends Component {
             <div className={`${styles['unsuccessful-mesg']}`}>{ORDER_PAGE.ORDER_UNSUCCESSFUL}</div>
             :
             <React.Fragment>
-              <div className={`${styles['p-15']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>
+              <div className={`${styles['pt-15']} ${styles['pl-15']} ${styles['pr-15']} ${styles['pb-0']} ${styles['ipad-pl-0']} ${styles['ipad-pr-0']} ${styles['flx-space-bw']}`}>
                 {showMsgAndDate()}
                 <div className={styles.flex}>
                   {isCancelable === 'TRUE' &&
@@ -396,25 +500,84 @@ class OrderItem extends Component {
                   }
                 </div>
               </div>
-              <div className={`${styles['widget-wrap']} ${styles['p-20']}`}>
+              <div className={`${styles['widget-wrap']} ${styles['p-20']} ${styles['mb-30']}`}>
                 {thankyouPage ?
                   null
                   :
                   <StatusWidget currentStatus={orderItem.products} />
                 }
               </div>
+              {orderItem.ratingApplicable &&
+              <div className={`${styles['flex-center']} ${styles['justify-end']} ${styles['mr-25']} ${styles['rate-product-style']}`}>
+              <img src="/static/img/icons/common-icon/rate-product.png" alt="" className={`${styles['rate-product-icon']} ${styles['ml-5']}`} />
+              {Object.keys(getReviewsData).map(id => {
+                if (id === orderId) {
+                  return Object.keys(getReviewsData[id]).map((itemId, index) => {
+                    if (itemId === orderItem.id) {
+                      return getReviewsData[id] && getReviewsData[id][itemId] && getReviewsData[id][itemId][0] && getReviewsData[id][itemId][0].ratings > 0 ? <div>{this.renderReviewDetails(getReviewsData[id][itemId][0])}</div> : <div onClick={this.toggleReviewModal} className={`${styles['m-5']} ${styles['fs-12']} ${styles['m-5']} ${styles.pointer}`}>{ORDER_PAGE.RATE_PRODUCT}</div>
+                    }
+                  })
+                }
+              })
+              }
+              </div>}
             </React.Fragment>
           }
           {orderItem.products[0].trackingId && <OrderTracker orderItem={orderItem.products[0]} showMsgAndDate={showMsgAndDate()} />}
         </Col>
+        <div>
+                {openModal ?
+                  <React.Fragment>
+                    <div onClick={this.closeSlider} className={openModal ? `${styles.modalContainer} ${styles.showDiv}` : `${styles.modalContainer} ${styles.hideDiv}`}>
+                      <div className={`${styles.disabled}`} />
+                    </div>
+                    <div className={`${styles['overflow-y-auto']} ${styles['p-30']} ${openModal ? `${styles.openModal}` : `${styles.closeModal}`}`}>
+                      <div className={styles['p-40']}>
+                        <h4 className={`${styles.flex} ${styles['justify-flex-end']} ${styles['m-0']} ${styles['mb-20']}`}>
+                          <a onClick={this.toggleReviewModal} className={`${styles['fs-22']} ${styles['black-color']}`}>X</a>
+                        </h4>
+                        <div>
+                          {showReviews ?
+                            <ReviewFeedBackModal
+                              catalogObj={catalogObj}
+                              titleInfo={reviewsData}
+                              feedbackSubmit={this.submituserreview}
+                              setReviewImages={setReviewImages}
+                              cid={userInfo.contactInfo.user_account_id}
+                              documentId={documentId}
+                              downloadPic={downloadPic}
+                            />
+                            :
+                            <ReviewThankYou toggleReviewModal={this.toggleReviewModal} />
+                          }
+                        </div>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                  : null
+                }
+              </div>
       </div>
     );
   }
 }
 
+const mapStateToProps = store => ({
+  userInfo: personalDetailsSelectors.getUserInfo(store),
+  getReviewRatings: productSelectors.getReviewRatings(store),
+  getReviewsData: productSelectors.getReviewsData(store),
+  documentId: productSelectors.getReviewPicDocumentId(store), 
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   raiseOrderIssue: actionCreators.raiseOrderIssue,
   getOrderDetails: actionCreators.getOrderDetails,
+  submitUserReview: productActionCreators.submitUserReview,
+  getRatingsAndReviews: productActionCreators.getRatingsAndReviews,
+  getOrderHistory: orderActionCreators.getOrderHistory,
+  getWarrantyHistory: orderActionCreators.getWarrantyHistory,
+  setReviewImages: productActionCreators.setReviewImages,
+  downloadPic: productActionCreators.downloadReviewPics,
 }, dispatch);
 
 OrderItem.propTypes = {
@@ -423,7 +586,7 @@ OrderItem.propTypes = {
   orderId: PropTypes.string.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(OrderItem);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);
 
 
 // btnType ?

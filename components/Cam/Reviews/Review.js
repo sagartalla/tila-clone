@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import constants from '../../../constants';
 import StarRating from '../../common/StarRating';
 import Button from '../../common/CommonButton';
+import PopUp from '../../common/PopUp';
 import SVGCompoent from '../../common/SVGComponet';
 import ReviewThankYou from '../../Product/includes/ReviewThankYou';
 import ReviewFeedBackModal from '../../Product/includes/reviewFeedbackModal';
-
+import { actionCreators, selectors } from '../../../store/product';
+import { selectors as personalDetailsSelectors } from '../../../store/cam/personalDetails'
 import lang from '../../../utils/language';
 import { languageDefinations } from '../../../utils/lang/';
 import main_en from '../../../layout/main/main_en.styl';
@@ -19,9 +22,11 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 const { REVIEWS } = languageDefinations();
 
 
-const Review = ({ rev, deleteReview, submitUserReview }) => {
+const Review = ({ rev, deleteReview, submitUserReview, setReviewImages, userInfo, documentId, downloadPic}) => {
   const [openModal, setModal] = useState(false);
+  const [openImage, setBoolImage] = useState(false);
   const [showReviews, setReviews] = useState(true);
+  const [imgSource, setSource] = useState('');
 
   const catalogObj = {
     catalog_id: rev.catalog_id,
@@ -53,6 +58,12 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
     setModal(true);
   };
 
+  const handleImagePopUp = (e) => {
+    let source = e && e.target.getAttribute('src');
+    setSource(source);
+    setBoolImage(!openImage);
+  }
+
   return (
     <div key={rev.review_id} className={`${styles.relative} ${styles.review} ${styles['pl-15']} ${styles['pr-15']} ${styles['pt-15']} ${styles['flex-center']}`}>
       <div>
@@ -66,7 +77,27 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
           rating={rev.ratings}
           clsStyl={{ width: '15px', marginRight: '5px' }}
         />
+        <div className={`${styles['image-container']}`}>
+          {
+            (rev.images && rev.images.length > 0) &&
+              rev.images.map((image) => {
+                return (
+                  <div className={`${styles.relative} ${styles['m-5']}`}>
+                  <img src={image} className={`${styles.width8vw} ${styles['ht-07']} ${styles['border-lg']} ${styles['m-5']}`} onClick={handleImagePopUp}/>
+                  </div>
+                )
+              })
+          }
+        </div>
         <div className={`${styles['pt-10']} ${styles['fs-12']} ${styles['dottes-gry-clr']} ${styles['cam-reviw']}`}>{rev.comment}</div>
+        <PopUp
+          isOpen={openImage}
+          width="500px"
+          height="500px"
+          closePopUp={handleImagePopUp}
+        >
+          <img src={imgSource} className={styles.width100}/>
+        </PopUp>
         {!rev.comment &&
           <Button
             id={rev.review_id}
@@ -101,7 +132,12 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
                       rating={rev.ratings}
                       comment={rev.comment}
                       titleInfo={titleInfo}
+                      images={rev.images}
                       feedbackSubmit={postUserReview}
+                      setReviewImages={setReviewImages}
+                      cid={userInfo.contactInfo.user_account_id}
+                      documentId={documentId}
+                      downloadPic={downloadPic}
                     />
                     :
                     <ReviewThankYou toggleReviewModal={closeModal} />
@@ -117,4 +153,15 @@ const Review = ({ rev, deleteReview, submitUserReview }) => {
   );
 };
 
-export default Review;
+const mapStateToProps = (store) => ({
+  userInfo: personalDetailsSelectors.getUserInfo(store),
+  documentId: selectors.getReviewPicDocumentId(store),
+  reviewImage: selectors.getReviewImage(store),
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  setReviewImages: actionCreators.setReviewImages,
+  downloadPic: actionCreators.downloadReviewPics,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Review);

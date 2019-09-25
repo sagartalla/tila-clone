@@ -95,9 +95,14 @@ const getZonedItems = (store) => {
 
 const getIsListingLoading = store => store.landingReducer.ui.isListingLoading;
 
+const getPolicy = store => {
+  return store.landingReducer.data.page_content[0].data;
+}
+
 export {
   getPage,
   getListings,
   getZonedItems,
   getIsListingLoading,
+  getPolicy,
 };

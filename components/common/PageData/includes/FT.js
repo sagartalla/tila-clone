@@ -5,6 +5,7 @@ import { Row } from "react-bootstrap";
 import Slider from "react-slick";
 import dynamic from "next/dynamic";
 const Image = dynamic(import("react-graceful-image"), { ssr: false });
+import ViewportTrackerHOC from "../../ViewPortTracker/ViewportTrackerHOC";
 
 import { Router, Link } from "../../../../routes";
 import constants from "../../../../constants";
@@ -110,6 +111,7 @@ class FT extends React.Component {
 		const {
 			listingsData = [],
 			content,
+			pageType,
 			isLoggedIn,
 			showLoginScreen,
 			isListingLoading
@@ -153,22 +155,51 @@ class FT extends React.Component {
 												styles.width100
 											}`}
 										>
-											<div className={`${styles.flex} ${styles.ft_card_img}`}>
-												{/* <img
+											<ViewportTrackerHOC
+												clickEvent={`BANNER-CLICK`}
+												disableViewportTracking={false}
+											>
+												<div
+													className={`${styles.flex} ${styles.ft_card_img}`}
+													data-page-type={pageType}
+													data-tracker-id={
+														data[lang]["banners"][index].placementId
+													}
+													data-display-name={
+														data[lang]["banners"][index].display_name
+													}
+													data-merchandise-id={
+														data[lang]["banners"][index].merchandising_id
+													}
+												>
+													{/* <img
 													width="226"
 													height="250"
 													src={`${constants.mediaDomain}/${listing.image}`}
 													alt={listing.name}
 												/> */}
-												<Image
-													width={data[lang] && data[lang]["banners"] && data[lang]["banners"][index] && data[lang]["banners"][index]["config"] && data[lang]["banners"][index]["config"].width}
-													height={data[lang] && data[lang]["banners"] && data[lang]["banners"][index] && data[lang]["banners"][index]["config"] && data[lang]["banners"][index]["config"].height}
-													src={`${constants.mediaDomain}/${listing.image}`}
-													alt={listing.name}
-													className={`${styles["animating-placeholder"]}`}
-													placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
-												/>
-											</div>
+													<Image
+														width={
+															data[lang] &&
+															data[lang]["banners"] &&
+															data[lang]["banners"][index] &&
+															data[lang]["banners"][index]["config"] &&
+															data[lang]["banners"][index]["config"].width
+														}
+														height={
+															data[lang] &&
+															data[lang]["banners"] &&
+															data[lang]["banners"][index] &&
+															data[lang]["banners"][index]["config"] &&
+															data[lang]["banners"][index]["config"].height
+														}
+														src={`${constants.mediaDomain}/${listing.image}`}
+														alt={listing.name}
+														className={`${styles["animating-placeholder"]}`}
+														placeholderColor={`linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%)`}
+													/>
+												</div>
+											</ViewportTrackerHOC>
 											<div
 												className={`${styles["p-10"]} ${styles.ft_card_title}`}
 											>

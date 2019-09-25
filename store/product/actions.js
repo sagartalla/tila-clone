@@ -16,6 +16,8 @@ const actions = {
   SET_VARIANTID: 'SET_VARIANTID',
   SET_TILA_POLICY: 'GET_SELECTED_TILA_POLICY',
   GET_POLICY_LOCATION: 'GET_POLICY_LOCATION',
+  SET_REVIEW_IMAGES: 'SET_REVIEW_IMAGES',
+  DOWNLOAD_REVIEW_PIC: 'DOWNLOAD_REVIEW_PIC',
 };
 
 const actionCreators = {
@@ -31,9 +33,9 @@ const actionCreators = {
     type: actions.GET_PREVIEW,
     payload: api.getPreview(params),
   }),
-  getRatingsAndReviews: params => ({
+  getRatingsAndReviews: (params, orderId, orderItemId) => ({
     type: actions.GET_REVIEW_RATINGS,
-    payload: api.getReviewRatings(params),
+    payload: api.getReviewRatings(params, orderId, orderItemId),
   }),
   submitUserReview: params => ({
     type: actions.SUBMIT_USER_REVIEW,
@@ -47,6 +49,16 @@ const actionCreators = {
     type: actions.SET_SELECTED_PRODUCT_DATA,
     payload: params,
   }),
+  setReviewImages: (body, cid) => ({
+    type: actions.SET_REVIEW_IMAGES,
+    payload: api.uploadReviewImages(body, cid),
+  }),
+  downloadReviewPics: (imageIds) => {
+    return ({
+      type: actions.DOWNLOAD_REVIEW_PIC,
+      payload: api.downloadReviewPics(imageIds),
+    })
+  },
   track: params => (dispatch, getState) => {
     const state = getState();
     params.postResult = state.cartReducer.data.items;

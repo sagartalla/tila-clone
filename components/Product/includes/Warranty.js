@@ -43,11 +43,11 @@ class Warranty extends React.Component {
     const warranty_display = `${warranty.duration} ${_.startCase(_.toLower(warranty.duration_unit))} ${PDP_PAGE.WARRANTY}`;
     const warranty_time = warranty.duration;
     return (
-      <div className={`${styles['flex-center']} ${styles['warranty-part']}  ${styles.relative} ${styles.pointer}`}>
+      <div className={`${styles['flex-center']} ${styles['warranty-part']}  ${styles.relative}`}>
         <span className={`${styles['flex-center']}`}>
           <span>{warranty_display}</span>
         </span>
-        <a className={`${styles.fontW600} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']}`} onClick={this.openSlider}>{warranty_time > 0 ? CART_PAGE.VIEW_MORE : ''}</a>
+        <a className={`${styles.fontW600} ${styles['ml-20']} ${styles['view-more-label']} ${styles['fs-12']} ${styles.pointer}`} onClick={this.openSlider}>{warranty_time > 0 ? CART_PAGE.VIEW_MORE : ''}</a>
         {this.state.slider &&
         <Modal
          show={this.state.slider}
@@ -55,8 +55,8 @@ class Warranty extends React.Component {
          className="warranty-class-name"
        >
           <div className={`${styles['m-15']} ${styles['flex-center']} ${styles['justify-between']}`}>
-            <div ><Modal.Title>Warranty</Modal.Title></div>
-              <div className={`${styles['fs-18']}`} onClick={this.closeSlider}>X</div>
+            <div ><Modal.Title>{PDP_PAGE.WARRANTY}</Modal.Title></div>
+              <div className={`${styles['fs-18']} ${styles.pointer}`} onClick={this.closeSlider}>X</div>
             </div>
       <div className={`${styles['warranty-modal']}`}>
             {warranty.summary &&

@@ -12,7 +12,6 @@ const getUserProfileInfo = () => {
     axios.get(`${constants.CMS_API_URL}/api/v1/user/account/details`),
     axios.post(`${constants.CMS_API_URL}/api/v1/user/info?includeSocialAccounts=${true}`)
   ]).then(([data1, data2]) => {
-    var str = JSON.stringify(data2.data); // spacing level = 2
     digitalData.page.pageInfo.accountId = data2.data.user_id;
     track({
       event: 'CUSTOMER_ID',
@@ -108,5 +107,5 @@ const deactivateUserProfile = () =>
 
 export default {
   getUserProfileInfo, changePassword, uploadProfilePic, forgotPassword, editPersonalInfo,
-  deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile, downloadPic
+  deactivateUserProfile, resetPassword, otpUserUpdate, verifyOtp,sendOtpToMobile, downloadPic,track
 };

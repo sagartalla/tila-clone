@@ -109,6 +109,11 @@ $shipment-wrap-border-color = #D8D8D8
   width 80px
   height 25px
 
+.rate-product-icon
+  width 30px
+  height 30px
+  display block
+
 .track-img-wrap
   height 90px
   .track-img
@@ -191,3 +196,67 @@ $shipment-wrap-border-color = #D8D8D8
   padding 3px
 .pl-4
   padding-left 4px
+
+.modalContainer
+  height 100%
+  width 100%
+  top 0
+  left 0
+  .disabled
+    height 100%
+    width 100%
+    position fixed
+    top 0
+    left 0
+    z-index 100
+    background-color grey
+    opacity 0.8
+
+.openModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right 0
+  z-index 2001
+  background-color white
+  animation-name slideOpen
+  animation-duration 0.5s
+  animation-fill-mode both
+
+.closeModal
+  height 100%
+  width 40%
+  position fixed
+  top 0
+  right 0px
+  z-index 2001
+  background-color white
+  animation-name slideClose
+  animation-duration 0.2s
+  animation-fill-mode both
+
+.showDiv
+  display block
+
+.hideDiv
+  display none
+
+.review-start-inn
+  .star-icon
+    width 15px
+    height 15px
+    margin-right 5px
+
+.rate-product-style
+    border solid 1px #efeff4
+    border-bottom none
+    border-top-right-radius 4px
+    border-top-left-radius 4px
+    position absolute
+    bottom 0
+
+.trackorder-request
+   border-top solid 1px #efeff4
+   border-right solid 1px #efeff4   
+    

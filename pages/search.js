@@ -49,7 +49,7 @@ class SearchPage extends Base {
       facetFilters,
       facetFiltersCopyWithNames,
       pageNum: 1,
-      isListed: isListed === 'true',
+      isListed: !(isListed === 'false'),
       categoryTree,
       disableSpellCheck,
       choosenCategoryName: category || subCategory,

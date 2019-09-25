@@ -47,6 +47,18 @@ server {
 		default_type application/json;
 	}
 
+	location /en/robot.txt {
+		root /var/www/tila;
+		index robot.txt;
+		default_type application/text;
+	}
+
+	location /ar/robot.txt {
+		root /var/www/tila;
+		index robot.txt;
+		default_type application/text;
+	}
+
 }
 
 server {

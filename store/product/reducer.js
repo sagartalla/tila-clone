@@ -21,6 +21,7 @@ const initialState = {
     damage_protection: '',
   },
   policyLocation: {},
+  reviewsData: {},
 };
 const productReducer = typeToReducer({
   [actions.GET_PRODUCT]: {
@@ -56,7 +57,20 @@ const productReducer = typeToReducer({
       return Object.assign({}, state, { ui: { loading: true }});
     },
     FULFILLED: (state, action) => {
-      return Object.assign({}, state, { reviews: action.payload.data, ui: { loading: false } });
+      const orderId = action.payload.orderId;
+      const orderItemId = action.payload.orderItemId;      
+      return Object.assign({}, state, {
+        reviews: action.payload.data,
+        reviewsData: {
+          ...state.reviewsData,
+          [orderId] : {
+            ...state.reviewsData[orderId],
+            [orderItemId]: action.payload.data,
+          },
+        },
+        ui: {
+          loading: false
+        } });
     },
     REJECTED: (state, action) => {
       return Object.assign({}, state, { error: action.payload.message, ui: {loading: false }} )
@@ -87,7 +101,48 @@ const productReducer = typeToReducer({
   [actions.SET_SELECTED_PRODUCT_DATA]: (state, action) => {
     return state;
   },
-
+  [actions.SET_REVIEW_IMAGES]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => {
+      const uploadPicStatus = { uploadPicStatus: action.payload };
+      const newState = {
+        ...state,
+        data: {
+          ...state.data,
+          ...uploadPicStatus,
+        },
+        ui: {
+          loading: false
+        },
+      };
+      return newState;
+    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false },
+    }),
+  },
+  [actions.DOWNLOAD_REVIEW_PIC]: {
+    PENDING: state => Object.assign({}, state, { ui: { loading: true } }),
+    FULFILLED: (state, action) => {
+      const downloadPic = { downloadPic: action.payload };
+      const newState = {
+        ...state,
+        data: {
+          ...state.data,
+          ...downloadPic,
+        },
+        ui: {
+          loading: false
+        },
+      };
+      return newState;
+    },
+    REJECTED: (state, action) => Object.assign({}, state, {
+      error: action.payload.data,
+      ui: { loading: false },
+    }),
+  },
   [actions.GET_CITIES]: {
     PENDING: state => Object.assign({}, state, { ui: { ...state.ui, loading: true } }),
     FULFILLED: (state, action) => Object.assign({}, state, {

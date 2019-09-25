@@ -59,6 +59,7 @@ class SearchResults extends Component {
 
   componentDidMount() {
     this.props.resetAddtoCart();
+    console.log("ashok");
     console.log(this.props);
     this.props.track({
       event: 'INTERNAL_SEARCH_COUNT',
@@ -111,7 +112,7 @@ class SearchResults extends Component {
     // window.open(`/${language}/product?productId=${options.productId}${options.variantId ? `&variantId=${options.variantId}`: ''}&catalogId=${options.catalogId}&itemType=${options.itemType}`)
     //changes will get reflected on quickview
     // window.open(`/${country}/${language}/pdp/${name.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalog_id}/p/${product_id}/l/${listing_id}/v/${variant_id ? `${variant_id}` : ''}`)
-    window.open(`/${language}/pdp/${name.replace(/[^a-zA-Z ]/g, '').replace(/\s+/g, '-').toLowerCase()}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
+    window.open(`/${language}/pdp/${encodeURI(name.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase())}/${tuinId ? `${tuinId}/`: '' }${listing_id}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`);
   }
   renderNext() {
     const { results } = this.props;

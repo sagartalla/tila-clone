@@ -48,6 +48,7 @@ RUN version=$version node --expose-gc --max-old-space-size=14999 ./node_modules/
 COPY deploy/nginx.conf /etc/nginx/nginx.conf
 COPY deploy/nginx-default /etc/nginx/sites-enabled/default
 COPY deploy/static/apple-app-site-association /var/www/ios/apple-app-site-association
+COPY deploy/static/robot.txt /var/www/tila/robot.txt
 
 EXPOSE 3002
 

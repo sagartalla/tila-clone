@@ -26,16 +26,15 @@ const track = (params) => {
       });
       break;
     case 'CUSTOMER_ID':
-      window.appEventData.push({
-        event: params.event,
-        login:
-          {
-            loginInfo: {
-              accountId: params.loginType,
-            },
-          },
-      });
-      digitalData.page.pageInfo.accountId = params.loginType;
+      // window.appEventData.push({
+      //   event: params.event,
+      //   login:
+      //     {
+      //       loginInfo: {
+      //         accountId: params.loginType,
+      //       },
+      //     },
+      // });
       break;
     default: break;
   }
