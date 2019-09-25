@@ -69,12 +69,6 @@ class SearchPage extends Base {
     ]);
     return { isServer };
   }
-  componentDidMount() {
-    this.props.track({
-      event: 'INTERNAL_SEARCH',
-      searchData: this.props,
-    });
-  }
   pageName = 'SEARCH';
 
   render() {
@@ -100,7 +94,6 @@ const mapDispatchToProps = dispatch =>
     {
       ...baseActions,
       getSearchResults: actionCreators.getSearchResults,
-      track: actionCreators.track,
       // setSessionID: authActionsCreators.setSessionID,
     },
     dispatch,

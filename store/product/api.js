@@ -94,7 +94,9 @@ const track = (params) => {
           ratingCount: params.ProductData.titleInfo.rating.count,
           reviewsCount: params.ProductData.titleInfo.reviews.count,
           productTitle: params.ProductData.titleInfo.title,
-          productPrice: params.ProductData.titleInfo.price,
+          sellingPrice: params.ProductData.offerInfo.offerPricing.sellingPrice.money_value,
+          discountPrice : params.ProductData.offerInfo.offerPricing.totalDiscountMRP.money_value,
+          brand : params.ProductData.titleInfo.brand.attribute_values[0].value,
           isOutOfStock: false,
         },
         price: {
