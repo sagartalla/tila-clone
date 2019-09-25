@@ -626,6 +626,7 @@ export const AR_KEYWORDS = {
     MORE_ITEMS: 'منتجات أكثر',
     GO_TO_WISHLIST: 'اذهب للقائمة المفضلة',
     MORE_ITEM: 'more item',
+    COMING_SOON: "قريبا"
   },
   LOGIN_PAGE: {
     SIGN_UP: 'أنشئ حسابك',

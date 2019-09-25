@@ -634,6 +634,7 @@ export const EN_KEYWORDS = {
     MORE_ITEMS: 'more items',
     GO_TO_WISHLIST: 'Go To Wishlist',
     MORE_ITEM: 'more item',
+    COMING_SOON: "Coming Soon"
   },
   LOGIN_PAGE: {
     SIGN_UP: 'Sign up',
