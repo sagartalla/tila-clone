@@ -31,7 +31,6 @@ const cookies = new Cookies();
 
 const language = clCode[cookies.get('language') || 'ar'];
 const country = clCode[cookies.get('country') || 'SAU'];
-const userCredentials = cookies.get('userCreds');
 const sort = (a, b) => a - b;
 
 const FileAttachment = (props) => {
@@ -130,7 +129,7 @@ class EmailModal extends Component {
       orders: [],
       currentOrderPage: 0,
       totalOrderPages: 1,
-      email: props.isLoggedIn ? userCredentials.username : '',
+      email: props.isLoggedIn ? props && props.userInfo && props.userInfo.contactInfo && props.userInfo.contactInfo.email : '',
       firstname: '',
       lastname: '',
       incidentCreated: false,
@@ -377,7 +376,6 @@ class EmailModal extends Component {
     const allIssues = Object.keys(allIssueData).sort(sort);
     const allIssuesVal = Object.values(allIssueData);
     const searchIssues = this.state.issueSearchQuery ? allIssuesVal.filter(iss => iss[1].toLowerCase().includes(this.state.issueSearchQuery.toLowerCase()) || iss[1] === 'Others').map(iss => iss[0]) : allIssues;
-    console.log('validation', validation);
     return (
       <div className={styles['modalCont']}>
         {!incidentCreated ?

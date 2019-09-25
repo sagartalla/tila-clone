@@ -21,7 +21,7 @@ const country = cookies.get('country') || 'SAU';
 class VaultBody extends Component {
 
   makeCardDefault(token) {
-    this.props.makeDefault(token)
+    this.props.makeCardDefault(token);
   }
 
   deleteCard(token) {
@@ -63,9 +63,9 @@ class VaultBody extends Component {
               return (
                 <Col md={4} key={index} className={styles['pr-0']}>
                   <div className={`${styles['vault-card-item']} ${styles['mb-25']} ${styles['p-15']} ${styles['border-radius4']} ${card.default ? styles['active-card'] : ''}`}>
-                    <span className={`${styles['vault-card-delete-icon']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={this.deleteCard.bind(this, card_token)}>
+                    {!card.default && <span className={`${styles['vault-card-delete-icon']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={this.deleteCard.bind(this, card_token)}>
                       <SVGComponent clsName={`${styles['delete-icon']} ${styles.pointer}`} src="icons/delete-icon/delete-icon" />
-                    </span>
+                    </span>}
                     <div className={`${styles['flex']} ${styles['flex-colum']} ${styles['vault-card-item-inn']}`}>
                       <span>{bank_name}</span>
                       <span className={`${styles['pt-25']} ${styles['pb-25']} ${styles['fs-18']} ${styles['card-number']}`}>{masked_number.replace(/(.{4})/g, '$1 ')}</span>
@@ -88,7 +88,7 @@ class VaultBody extends Component {
                         card.default ?
                           <div>
                             <label className={`${styles['fs-12']} ${styles['pr-5']}`}> {VAULT_PAGE.DEFAULT} </label>
-                            <input type="radio" className={styles['tickmark-radio']} name="make-default" defaultChecked="checked" onClick={this.makeCardDefault.bind(this, card_token)} />
+                            <input type="radio" className={styles['tickmark-radio']} name="make-default" defaultChecked="checked" />
                           </div>
                           :
                           <span>

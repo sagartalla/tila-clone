@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import HeaderBar from '../HeaderBar';
 import { actionCreators } from '../../store/helpsupport';
+import { selectors as personalSelectors } from '../../store/cam/personalDetails';
 import { selectors } from '../../store/auth';
 import {Router} from '../../routes';
 import { ContactTabs, helpComponents } from './helpConstants';
@@ -80,10 +81,10 @@ class Help extends Component {
     }
     e.target.scrollTop > (this.props.isLoggedIn ? 390 : 420) ? !this.state.fixCatContainer && this.setState({ fixCatContainer: true }) : this.state.fixCatContainer && this.setState({ fixCatContainer : false })
   }
-  renderModal = (isLoggedIn) => (
+  renderModal = (isLoggedIn, userInfo) => (
     {
-      'email': <EmailModal type="email" closeModal={this.closeModal} query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />,
-      'chat': <EmailModal type="chat" closeModal={this.closeModal} query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} />
+      'email': <EmailModal type="email" closeModal={this.closeModal} query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} userInfo={userInfo}/>,
+      'chat': <EmailModal type="chat" closeModal={this.closeModal} query={this.props.query[0]} selectedOrder={this.state.selectedOrder} selectedIssue={this.state.selectedIssue} isLoggedIn={isLoggedIn} userInfo={userInfo}/>
     }[this.state.modalType]
   );
   renderContactCard = (selectedOrder, selectedIssue) => (type, index) => {
@@ -100,7 +101,7 @@ class Help extends Component {
   )}
 
   render(){
-    const {isCategoryLoaded, categoryData, query, isLoggedIn} = this.props;
+    const {isCategoryLoaded, categoryData, query, isLoggedIn, userInfo} = this.props;
     const {type, url, showModal} = this.state;
     return(
       !!isCategoryLoaded ?
@@ -133,7 +134,7 @@ class Help extends Component {
           <div className={`${styles['disabled']}`} onClick={this.closeModal}></div>
         </div>
         <div className={`${styles['modal']} ${showModal ? styles['showModal'] : styles['hideModal']}`}>
-          <div className={styles['modalFill']}>{this.renderModal(this.props.isLoggedIn)}</div>
+          <div className={styles['modalFill']}>{this.renderModal(this.props.isLoggedIn, userInfo)}</div>
         </div>
       </div> : null
     )
@@ -143,6 +144,7 @@ class Help extends Component {
 export default connect((state) => ({
   categoryData: state.helpSupportReducer.categoryData,
   isCategoryLoaded: state.helpSupportReducer.isCategoryLoaded,
-  isLoggedIn: selectors.getLoggedInStatus(state)
+  isLoggedIn: selectors.getLoggedInStatus(state),
+  userInfo: personalSelectors.getUserInfo(state),
   }),
   {...actionCreators})(Help);

@@ -17,30 +17,51 @@ const { VAULT_PAGE } = languageDefinations();
 
 const TilaVoucher = (props) => {
     const { transactions } = props;
-    const popover = (
-        <Popover id="popover-positioned-right" >
-          hjkhkjhkj
+
+  const alertPopover = (
+        <Popover id="popover-positioned-right" className={`${styles['balancepopover']}`}>
+          <div className={`${styles['fs-12']}`}>{VAULT_PAGE.AMOUNT_CAN_BE_REDEEMED}</div>
         </Popover>
       );
+
+const successPopover = (
+        <Popover id="popover-positioned-right" className={`${styles['balancepopover']}`}>
+          <div className={`${styles['fs-12']}`}>{VAULT_PAGE.THIS_IS_YOUR_REDEMABLE_BALANCE}</div>
+        </Popover>
+      );
+
+const redeemPopover = (
+        <Popover id="popover-positioned-right" className={`${styles['balancepopover']}`}>
+            <div className={`${styles['fs-12']}`}>{VAULT_PAGE.REDEEM_YOUR_BALANCE_NOW}</div>
+        </Popover>
+        );
     return (
         <div className={`${styles['flex']} ${styles['flex-colum']}`}>
             <Col md={12} sm={12} xs={12}>
             <Col md={6} sm={6} xs={6} className={`${styles['tila-credit']}`}>
-                <div className={`${styles['tila-credit-wrap']} ${styles['tila-credit-left']} ${styles.flex} ${styles['align-center']} ${styles['justify-center']} ${styles['mt-20']}`}>
+                <div className={`${styles['tila-credit-wrap']} ${styles.flex} ${styles['align-center']} ${styles['justify-center']} ${styles['mt-20']}`}>
                     <div className={`${styles.label} ${styles['fs-16']} ${styles['fontW600']}`}>{VAULT_PAGE.YOUR_TILA_CREDIT_BALANCE_IS} &nbsp; &nbsp;</div>
                     <div className={`${styles['amount-wrap']} ${styles['align-baseline']}`}>
-                    <div className={`${styles['currency']} ${styles['fs-12']}`}>{props.tilaCredit.currency_code} &nbsp;</div>
-                    <div className={`${styles.amount} ${styles['fs-30']} ${styles['fontW300']}`}>{props.tilaCredit.display_value}</div>
+                    <div className={`${styles['currency']} ${styles['fs-12']}`}>{props.totalAmount.currency_code} &nbsp;</div>
+                    <div className={`${styles.amount} ${styles['fs-30']} ${styles['fontW300']}`}>{props.totalAmount.display_value}</div>
                     </div>
                 </div>
             </Col>
             <Col md={6} sm={6} xs={6} className={`${styles['tila-credit']}`}>
-                <div className={`${styles['tila-credit-wrap']} ${styles['tila-credit-right']} ${styles.flex} ${styles['align-center']} ${styles['justify-center']} ${styles['mt-20']}`}>
+                <div className={`${styles['tila-redeemable-wrap']} ${styles.flex} ${styles['align-center']} ${styles['justify-center']} ${styles['mt-20']}`}>
                     <div className={`${styles.label} ${styles['fs-16']} ${styles['fontW600']}`}>{VAULT_PAGE.YOUR_REDEEMABLE_BALANCE_IS} &nbsp; &nbsp;</div>
                     <div className={`${styles['amount-wrap']} ${styles['align-baseline']}`}>
-                    <div className={`${styles['currency']} ${styles['fs-12']}`}>{props.tilaCredit.currency_code} &nbsp;</div>
-                    <div className={`${styles.amount} ${styles['fs-30']} ${styles['fontW300']}`}>{props.tilaCredit.display_value}</div>
+                    <div className={`${styles['currency']} ${styles['fs-12']}`}>{props.redeemableBalance.currency_code} &nbsp;</div>
+                    <div className={`${styles.amount} ${styles['fs-30']} ${styles['fontW300']}`}>{props.redeemableBalance.display_value}</div>
                     </div>
+                    <OverlayTrigger
+                        placement="top"
+                        overlay={redeemPopover}
+                    >
+                        <span className={`${styles['ml-50']}`}>
+                            {<SVGComponent clsName={`${styles['status-icon']}`} src={"icons/common-icon/question-mark" }/>}
+                            </span>
+                        </OverlayTrigger>
                 </div>
             </Col>
             </Col>
@@ -56,56 +77,65 @@ const TilaVoucher = (props) => {
                     </div> */}
                 <Row className={`${styles['titleRow']} ${styles['m-0']} ${styles['mt-10']}`} >
                     <Col md={3}>
-                        Date
+                        {VAULT_PAGE.DATE}
                     </Col>
                     <Col md={3}>
-                        Description
+                        {VAULT_PAGE.DESCRIPTION}
                     </Col>
                     <Col md={2}>
-                        Added
+                      {VAULT_PAGE.ADDED}
                     </Col>
-                    <Col md={2}>
-                        Used
+                    <Col md={1}>
+                    {VAULT_PAGE.USED}
                     </Col>
-                    <Col md={2}>
-                        Balance
+                    <Col md={3}>
+                    {VAULT_PAGE.BALANCE}
                     </Col>
                 </Row>
                 {transactions.map((transaction, index) => {
-                    const { created_date, transaction_description, transaction_type, amount, balance } = transaction;
+                    const { created_date, transaction_description, transaction_type, amount, balance, status, future_reedemable, expired, no_of_days_to_expire } = transaction;
                     const date_arr = created_date.split('.')[0];
                     const date = moment(date_arr).tz('Asia/Riyadh').format('MMM D, YYYY')
                     const time = moment(date_arr).tz('Asia/Riyadh').format('hh:mm A')
                     return (
                         <div className={styles['bodyRow']} key={index}>
-                            <Row className={`${styles['m-0']}`}>
-                                <Col md={3}>
+                            <Row className={`${styles['m-0']} ${styles['flex-center']}`}>
+                                <Col md={3} className={transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired ? `${styles['thick-red-clr']}` : ''}>
                                     {`${date}, ${time}`}
                                 </Col>
-                                <Col md={3}>
+                                <Col md={3} className={transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired ? `${styles['thick-red-clr']}` : ''}>
                                     {transaction_description}
                                 </Col>
-                                <Col md={2}>
+                                <Col md={2} className={transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired ? `${styles['thick-red-clr']}` : ''}>
                                     {transaction_type === 'CREDIT' ? amount.display_value : ''}
                                 </Col>
-                                <Col md={2}>
+                                <Col md={1}>
                                     {transaction_type === 'DEBIT' ? amount.display_value : ''}
                                 </Col>
-                                <Col md={2} className={`${styles['flex-center']}`}>
-                                    {balance.display_value}
-                                    {/* <div className={`${styles['flex-center']} ${styles['voucher-inn']}`}>
-                                 <SVGComponent clsName={`${styles['status-icon']} ${styles['ml-10']}`} src="icons/common-icon/warning" />
-                                 <div className={`${styles['voucher-item']} ${styles['tool-tip']}`}>asasasa</div>                                 
-                                 </div> */}
+                                <Col md={3} className={`${styles['flex-center']}`}>
+                                    <div className={`${styles.width30}`}>{balance.display_value}</div>
+                                    {transaction_type === 'CREDIT' &&
+                                 (status === 'ACTIVE' || status === 'INACTIVE') && !future_reedemable && !expired &&
                                  <OverlayTrigger
                                     placement="top"
-                                    overlay={popover}
+                                    overlay={alertPopover}
                                 >
                                     <span className={`${styles['ml-10']}`}>
-                                     <SVGComponent clsName={`${styles['status-icon']}`} src="icons/common-icon/warning" />
+                                     {<SVGComponent clsName={`${styles['status-icon']}`} src={"icons/common-icon/warning"}/>}
                                      </span>
-                                </OverlayTrigger>
-                                 {/* <SVGComponent clsName={`${styles['status-icon']}`} src="icons/common-icon/bg-tick-mark" />}*/}
+                                </OverlayTrigger>}
+                                {transaction_type === 'CREDIT' &&
+                                status === 'ACTIVE' && future_reedemable &&
+                                <OverlayTrigger
+                                    placement="top"
+                                    overlay={successPopover}
+                                >
+                                    <span className={`${styles['ml-10']}`}>
+                                     {<SVGComponent clsName={`${styles['status-icon']}`} src={"icons/common-icon/bg-tick-mark" }/>}
+                                     </span>
+                                 </OverlayTrigger>}
+                                 {transaction_type === 'CREDIT' && expired && <div className={`${styles.fontW600}`}>{(VAULT_PAGE.EXPIRED)}</div>}
+                                 {transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired && <span className={`${styles['fs-12']} ${styles['thick-red-clr']} ${styles['ml-10']}`}><span>{no_of_days_to_expire === 0 ? VAULT_PAGE.EXPIRING : VAULT_PAGE.EXPIRING_IN}</span> <span className={`${styles.fontW600}`}>{`${no_of_days_to_expire === 0 ? VAULT_PAGE.EXPIRING_TODAY : no_of_days_to_expire === 1 ? `${no_of_days_to_expire} ${VAULT_PAGE.DAY}` : `${no_of_days_to_expire} ${VAULT_PAGE.DAYS}`}`}</span></span>}
                                 </Col>
                             </Row>
                         </div>
