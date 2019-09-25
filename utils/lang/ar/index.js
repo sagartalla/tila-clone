@@ -459,7 +459,7 @@ export const AR_KEYWORDS = {
     SEARCH_RESULTS_FOR: 'عرض النتائج ل...',
     DATA: 'data',
     SEARCH_INSTEAD_FOR: 'البحث بدلاً عن ',
-    SEARCH_YOUR_FAV_ITEM: 'كتشف المنتجات والماركات وأكثر من كذا',
+    SEARCH_YOUR_FAV_ITEM: 'ابحث المنتجات والماركات والمزيد...',
     MAXIMUN_TEXT_EXCEEDED: 'لقد تخطيت الحد الأقصى للنص المسموح به للبحث',
     YOUR_ENTERED: 'تم تسجيل دخولك',
     AUTO_CORRECTED: 'تصحيح تلقائي',
@@ -899,7 +899,7 @@ export const AR_KEYWORDS = {
     REPLACE_IN_PROGRESS: 'جاري عملية الاستبدال',
   },
   BETA: {
-    BETA: 'فترة تجريبية',
+    BETA: 'تجربي',
   },
   DRAG_DROP: {
     DRAG_AND_DROP: '  أرفق الملفات أو أسحبهم وضعهم',
