@@ -543,7 +543,7 @@ export const AR_KEYWORDS = {
     TILA: 'تيله',
     WHO_WE_ARE: 'مين حِنَّا',
     OUR_VALUES: 'قِيمْنا',
-    OUR_MISSION: 'مُهِمتنا',
+    OUR_MISSION: 'رسالتنا و رؤيتنا',
     PRESS_REALESES: 'أخبار وتصريحات صحفية',
     JOIN_OUR_TEAM: 'انضمْ لنا',
     CORPARATE_ADDRESS: 'عنوان الشركة',
@@ -626,6 +626,7 @@ export const AR_KEYWORDS = {
     MORE_ITEMS: 'منتجات أكثر',
     GO_TO_WISHLIST: 'اذهب للقائمة المفضلة',
     MORE_ITEM: 'more item',
+    COMING_SOON: "قريبا"
   },
   LOGIN_PAGE: {
     SIGN_UP: 'أنشئ حسابك',
