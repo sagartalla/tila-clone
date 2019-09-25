@@ -1,22 +1,24 @@
-/*eslint-disable*/
 import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
+
 import { actionCreators as helpActions } from '../../store/helpsupport';
 import { selectors as orderSelectors, actionCreators as orderActions } from '../../store/cam/orders';
 import { selectors as authSelectors } from '../../store/auth';
 import { countryLanguageHelpCode as clCode } from './helpConstants';
 import FormValidator from '../common/FormValidator';
+import constants from '../../constants';
+import ToastContent from '../common/ToastContent';
+import SVGComponent from '../common/SVGComponet';
 
 import lang from '../../utils/language';
+import { languageDefinations } from '../../utils/lang';
 
 import main_en from '../../layout/main/main_en.styl';
 import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
-import { languageDefinations } from '../../utils/lang';
-
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
 const languageLabel = languageDefinations();
 
@@ -25,7 +27,9 @@ import constants from '../../constants';
 import { toast } from 'react-toastify';
 import ToastContent from '../common/ToastContent';
 import SVGComponent from '../common/SVGComponet';
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
+const { HNS } = languageDefinations();
 
 const cookies = new Cookies();
 
@@ -39,56 +43,57 @@ const FileAttachment = (props) => {
     if (file) {
       if (file.size < 10485760) {
         const reader = new FileReader();
-        reader.onload = () => { props.setFiles({ [file.name]: reader.result }) };
-        reader.onerror = (error) => { console.log('Error: ', error) };
+        reader.onload = () => { props.setFiles({ [file.name]: reader.result }); };
+        reader.onerror = (error) => { console.log('Error: ', error); };
         reader.readAsDataURL(file);
       } else {
-        alert(languageLabel['HNS']['FILE_SIZE_LIMIT'])
+        alert(HNS.FILE_SIZE_LIMIT);
       }
     }
-  }
-  const removeFile = (fileName) => (e) => {
+  };
+  const removeFile = fileName => (e) => {
     const newFileObj = { ...props.files };
-    delete newFileObj[fileName]
+    delete newFileObj[fileName];
     props.setFiles(newFileObj);
-  }
+  };
+
   const renderFiles = (fileName, index) => (
-    <div key={String(index)} className={`${styles['flex']} ${styles['justify-between']} ${styles['wh-250']}`}>
-      <div className={styles['fileNameCont']}>
+    <div key={String(index)} className={`${styles.flex} ${styles['justify-between']} ${styles['wh-250']}`}>
+      <div className={styles.fileNameCont}>
         <a href={props.files[fileName]} download={fileName}>{fileName}</a>
       </div>
-      <div className={styles['fileNameDelete']} onClick={removeFile(fileName)}>x</div>
+      <div className={styles.fileNameDelete} onClick={removeFile(fileName)}>x</div>
     </div>
-  )
+  );
   return (
     <div>
       <div className={styles['pV-10']}>
-        <div className={styles['fileUploadInputCont']}>
-          <input type="file" disabled={props.loading} onChange={handleAttachements} className={styles['fileInput']} />
+        <div className={styles.fileUploadInputCont}>
+          <input type="file" disabled={props.loading} onChange={handleAttachements} className={styles.fileInput} />
           <div>
-            <div className={styles['fa']}>
-              <div className={styles['fileAttachIcon']}>
-                <SVGComponent src={`helpsupport/hnsAttach`} />
+            <div className={styles.fa}>
+              <div className={styles.fileAttachIcon}>
+                <SVGComponent src="helpsupport/hnsAttach" />
               </div>
               <div>
-                {languageLabel['HNS']['ATTACH']}
+                {HNS.ATTACH}
               </div>
             </div>
-            <div className={`${styles['fs-12p']} ${styles['greyColor']}`}>
-              {languageLabel['HNS']['ATTACH_FILE_TYPES']}
+            <div className={`${styles['fs-12p']} ${styles.greyColor}`}>
+              {HNS.ATTACH_FILE_TYPES}
             </div>
           </div>
         </div>
       </div>
       {Object.keys(props.files).length ?
         <div className={styles['fs-12p']}>
-          <div>{`${languageLabel['HNS']['ATTACHMENTS']} (${Object.keys(props.files).length})`}</div>
+          <div>{`${HNS.ATTACHMENTS} (${Object.keys(props.files).length})`}</div>
           {Object.keys(props.files).map(renderFiles)}
         </div>
         : null}
     </div>
-  )
-}
+  );
+};
 
 
 class EmailModal extends Component {
@@ -98,27 +103,27 @@ class EmailModal extends Component {
     this.validations = new FormValidator([
       {
         field: 'email',
-        method:this.emptyValue,
-        message: 'Please enter email Id',
+        method: this.emptyValue,
+        message: HNS.EMAIL_ERROR,
         validWhen: false,
       },
       {
         field: 'email',
         method: this.checkEmailValidation,
-        message: 'Please enter correct email Id',
+        message: HNS.ENTER_CORRECT_EMAIL,
         validWhen: false,
       },
       {
         field: 'issueSearchQuery',
         method: this.emptyValue,
-        message: 'Please select issue', 
+        message: HNS.SELECT_ISSUE,
         validWhen: false,
       },
       {
         field: 'message',
         method: props.type === 'chat' ? () => false : this.emptyValue,
         validWhen: false,
-        message: 'Please enter message',
+        message: HNS.ENTER_MESSAGE,
       },
     ]);
     this.state = {
@@ -137,7 +142,7 @@ class EmailModal extends Component {
       incidentId: '',
       files: {},
       issueSearchQuery: props.selectedIssue ? props.selectedIssue.q.trim() : ''
-    }
+    };
     this.state.selectedIssue && this.state.selectedIssue.orderRelated && this.getOrders();
     props.getAllIssues();
     this.scrollTimeout = '';
@@ -149,34 +154,34 @@ class EmailModal extends Component {
         orders: [...this.state.orders, ...nextProps.ordersData.orders],
         currentOrderPage: nextProps.ordersData.page + 1,
         totalOrderPages: nextProps.ordersData.total_pages
-      })
+      });
     }
   }
   stripHtml = (html) => {
-   var tmp = document.createElement("DIV");
+   var tmp = document.createElement('DIV');
    tmp.innerHTML = html;
-   return tmp.textContent || tmp.innerText || "";
+   return tmp.textContent || tmp.innerText || '';
   }
-  handleDropDown = (type) => (e) => {
+  handleDropDown = type => (e) => {
     this.setState({
       showDropDown: !this.state.showDropDown,
       dropDownType: type === this.state.dropDownType ? '' : type
-    })
+    });
   }
   handleUserInfoChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
-    })
+    });
   }
   handleMsg = (e) => {
     this.setState({
       [e.target.name]: e.target.value
-    })
+    });
   }
-  handleIssueSelect = (issue) => (e) => {
+  handleIssueSelect = issue => (e) => {
     const q = this.stripHtml(issue.q);
     this.setState({
-      selectedIssue: {...issue, q},
+      selectedIssue: { ...issue, q },
       showDropDown: false,
       dropDownType: '',
       selectedOrder: issue.orderRelated ? this.state.selectedOrder : '',
@@ -185,7 +190,7 @@ class EmailModal extends Component {
       if (issue.orderRelated && !this.state.orders.length) {
         this.props.isLoggedIn && this.getOrders();
       }
-    })
+    });
   }
   getOrders = () => {
     this.state.currentOrderPage < this.state.totalOrderPages && this.props.getOrderHistory(this.state.currentOrderPage);
@@ -208,23 +213,23 @@ class EmailModal extends Component {
     this.setState({ validation }); 
   }
   handleOrdersScroll = (e) => {
-    clearTimeout(this.scrollTimeout)
+    clearTimeout(this.scrollTimeout);
     const { scrollHeight, scrollTop, offsetHeight } = e.target;
     if ((scrollTop + 10 + offsetHeight) > scrollHeight) {
-      this.scrollTimeout = setTimeout(this.getOrders, 100)
+      this.scrollTimeout = setTimeout(this.getOrders, 100);
     }
   }
 
-  selectOrder = (orderObj) => (e) => {
+  selectOrder = orderObj => (e) => {
     this.setState({
       selectedOrder: orderObj
-    })
+    });
   }
 
   setFiles = (files) => {
     this.setState({
       files
-    })
+    });
   }
 
   focusIssueSearch = (e) => {
@@ -232,15 +237,15 @@ class EmailModal extends Component {
       issueSearchQuery: '',
       showDropDown: true,
       dropDownType: 'issue'
-    })
+    });
   }
 
   handleIssueSearch = (e) => {
     this.setState({
       issueSearchQuery: e.target.value,
       [e.target.name]: e.target.value,
-      ...(!!!e.target.value || (this.state.selectedIssue && this.state.selectedIssue.q.trim() !== e.target.value) && {selectedIssue: '', showDropDown: true, dropDownType: 'issue'}),
-    })
+      ...(!!!e.target.value || (this.state.selectedIssue && this.state.selectedIssue.q.trim() !== e.target.value) && { selectedIssue: '', showDropDown: true, dropDownType: 'issue' }),
+    });
   }
 
   emptyValue = fieldValue => (fieldValue === '' || fieldValue === undefined);
@@ -256,7 +261,7 @@ class EmailModal extends Component {
     this.setState({ validation });
   }
 
-  handleIssueSelectSearch = (issueArr) => (e) => {
+  handleIssueSelectSearch = issueArr => (e) => {
     if (e.keyCode === 13) {
       const [id, q, catId, parentId, orderRelated] = this.props.allIssueData[issueArr[0]];
       const issueObj = { id, q, catId, parentId, orderRelated };
@@ -264,11 +269,11 @@ class EmailModal extends Component {
     }
     if (e.type === 'blur') {
       if(this.state.issueSearchQuery) {
-        this.handleIssueSelectSearch(issueArr)({keyCode: 13});
+        this.handleIssueSelectSearch(issueArr)({ keyCode: 13 });
       } else {
         this.state.selectedIssue && this.setState({
           issueSearchQuery: this.state.selectedIssue.q.trim()
-        })
+        });
       }
     }
     
@@ -277,44 +282,44 @@ class EmailModal extends Component {
   createIncident = () => {
     const validation = this.validations.validate(this.state);
     const param = {
-      "emailId": this.state.email
-    }
+      'emailId': this.state.email
+    };
     const fileArr = Object.entries(this.state.files);
     let contentType = '';
     let data = '';
     if(fileArr.length) {
       const stringArr = fileArr[0][1].split(',');
       data = stringArr[1];
-      contentType = stringArr[0].replace('data:','').replace(';base64','')
+      contentType = stringArr[0].replace('data:','').replace(';base64','');
     }
     const serverData = {
-      "subject": this.state.selectedIssue.q,
-      "threads": {
-        "entryType": {
-          "id": 3
+      'subject': this.state.selectedIssue.q,
+      'threads': {
+        'entryType': {
+          'id': 3
         },
-        "text": this.state.message
+        'text': this.state.message
       },
-      "channel": { "id": 9 },
-      ...(this.state.selectedIssue.catId && { "category": { "id": Number(this.state.selectedIssue.catId) } }),
-      "customFields": {
-        "c": {
-          "incident_source_country": { "id": country },
-          "incident_source_language": { "id": language },
-          ...(this.state.selectedOrder && { "order_number": this.state.selectedOrder.order_item_ids[0] })
+      'channel': { 'id': 9 },
+      ...(this.state.selectedIssue.catId && { 'category': { 'id': Number(this.state.selectedIssue.catId) } }),
+      'customFields': {
+        'c': {
+          'incident_source_country': { 'id': country },
+          'incident_source_language': { 'id': language },
+          ...(this.state.selectedOrder && { 'order_number': this.state.selectedOrder.order_item_ids[0] })
         }
       },
       ...(fileArr.length && {
-        "fileAttachments": {
-          "fileName": fileArr[0][0],
+        'fileAttachments': {
+          'fileName': fileArr[0][0],
           data,
           contentType
         },
       })
-    }
-    validation.isValid && this.props.raiseTicket(param, serverData).then(res => {
+    };
+    validation.isValid && this.props.raiseTicket(param, serverData).then((res) => {
       const { pathname } = window.location;
-      const incidentsURL = pathname.replace(this.props.query, `incidents#${this.state.incidentId}`)
+      const incidentsURL = pathname.replace(this.props.query, `incidents#${this.state.incidentId}`);
       this.setState({
         incidentCreated: false,
         referenceNumber: res.value.data.referenceNumber,
@@ -323,12 +328,12 @@ class EmailModal extends Component {
         this.props.closeModal();
         toast(
           <ToastContent
-            msg={`${languageLabel['HNS']['QUERY_SUCCESS']} - ${this.state.referenceNumber}. ${languageLabel['HNS']['QUERY_TIME']}`}
+            msg={`${HNS.QUERY_SUCCESS} - ${this.state.referenceNumber}. ${HNS.QUERY_TIME}`}
             msgType='success'
           />,
           { autoClose: 5000 }
-        )
-      })
+        );
+      });
     });
     this.setState({ validation });
   }
@@ -338,10 +343,10 @@ class EmailModal extends Component {
     const isSelected = this.state.selectedIssue.id === id;
     return (
       <div onMouseDown={this.handleIssueSelect(issueObj)} key={id}
-        className={`${styles['facp']} ${styles['ht-45']} ${index !== 0 && styles['bT']} ${isSelected && styles['highlightColor']}`}
+        className={`${styles.facp} ${styles['ht-45']} ${index !== 0 && styles.bT} ${isSelected && styles.highlightColor}`}
         dangerouslySetInnerHTML={{ __html: q }}
       />
-    )
+    );
   }
   renderOrderItems = (orderItemObj, index) => {
     const { order_item_ids, status, variant_info } = orderItemObj;
@@ -349,26 +354,26 @@ class EmailModal extends Component {
     const [order_item_id] = order_item_ids;
     const isSelected = this.state.selectedOrder ? this.state.selectedOrder.order_item_ids[0] === order_item_id : false;
     return (
-      <div key={order_item_id} className={`${styles['bB']} ${index !== undefined && isSelected && styles['highlightColor']}`} onClick={this.selectOrder(orderItemObj)}>
-        <div className={styles['orderItemContainer']}>
-          <div className={styles['orderImgContainer']}><img className={styles['imgContain']} src={`${constants.mediaDomain}/${image_url}`} /></div>
+      <div key={order_item_id} className={`${styles.bB} ${index !== undefined && isSelected && styles.highlightColor}`} onClick={this.selectOrder(orderItemObj)}>
+        <div className={styles.orderItemContainer}>
+          <div className={styles.orderImgContainer}><img className={styles.imgContain} src={`${constants.mediaDomain}/${image_url}`} /></div>
           <div className={styles['p-10-20']}>
             <div>{title}</div>
-            <div className={`${styles['mV-5']} ${styles['fs-12p']}`}>{`${languageLabel['HNS']['ORDER_STATUS']} - ${status}`}</div>
+            <div className={`${styles['mV-5']} ${styles['fs-12p']}`}>{`${HNS.ORDER_STATUS} - ${status}`}</div>
           </div>
         </div>
       </div>
-    )
+    );
   }
   renderOrders = (orderObj, index) => {
-    const { order_id, order_items } = orderObj
+    const { order_id, order_items } = orderObj;
     return (
       <div key={order_id}>
         <div>
           {order_items.map(this.renderOrderItems)}
         </div>
       </div>
-    )
+    );
   }
   render() {
     const { dropDownType, orders, selectedOrder, selectedIssue, email, incidentCreated, referenceNumber, firstname, lastname, validation } = this.state;
@@ -377,16 +382,16 @@ class EmailModal extends Component {
     const allIssuesVal = Object.values(allIssueData);
     const searchIssues = this.state.issueSearchQuery ? allIssuesVal.filter(iss => iss[1].toLowerCase().includes(this.state.issueSearchQuery.toLowerCase()) || iss[1] === 'Others').map(iss => iss[0]) : allIssues;
     return (
-      <div className={styles['modalCont']}>
+      <div className={styles.modalCont}>
         {!incidentCreated ?
           <React.Fragment>
-            <div className={styles['modalTitleContainer']}>
-              <h4>{languageLabel['HNS']['MODAL_TITLE_MSG']}</h4>
-              <h4 className={styles['pointer']} onClick={this.props.closeModal}>X</h4>
+            <div className={styles.modalTitleContainer}>
+              <h4>{HNS.MODAL_TITLE_MSG}</h4>
+              <h4 className={styles.pointer} onClick={this.props.closeModal}>X</h4>
             </div>
             <div className={styles['pV-40']}>
               <div className={styles['pV-10']}>
-                <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_EMAIL']}</div>
+                <div className={styles.formLabel}>{HNS.ENTER_EMAIL}</div>
                 <input disabled={this.props.isLoggedIn} type="text" dir="auto" name="email" value={email} onChange={this.handleUserInfoChange} onBlur={this.handleValidation}/>
                 {
                   validation && validation.email && validation.email.isInValid ?
@@ -397,26 +402,26 @@ class EmailModal extends Component {
               </div>
               {this.props.type === 'chat' &&
                 <div className={styles['pV-10']}>
-                  <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_FIRSTNAME']}</div>
+                  <div className={styles.formLabel}>{HNS.ENTER_FIRSTNAME}</div>
                   <input type="text" dir="auto" name="firstname" value={firstname} onChange={this.handleUserInfoChange} />
                 </div>
               }
               {this.props.type === 'chat' &&
                 <div className={styles['pV-10']}>
-                  <div className={styles['formLabel']}>{languageLabel['HNS']['ENTER_LASTNAME']}</div>
+                  <div className={styles.formLabel}>{HNS.ENTER_LASTNAME}</div>
                   <input type="text" dir="auto" name="lastname" value={lastname} onChange={this.handleUserInfoChange} />
                 </div>
               }
               <div className={styles['pV-20']}>
-                <div className={styles['formLabel']}>{languageLabel['HNS']['SELECT_ISSUE_MODAL']}</div>
-                <div className={styles['relative']}>
+                <div className={styles.formLabel}>{HNS.SELECT_ISSUE_MODAL}</div>
+                <div className={styles.relative}>
                   <div tabIndex={0} onBlur={this.handleDropDown('')}
-                    className={styles['dropDownInput']}
+                    className={styles.dropDownInput}
                   >
                     <input type="text"
                       dir="auto" 
                       name="issue"
-                      className={styles['searchInputIssue']} 
+                      className={styles.searchInputIssue} 
                       placeholder={selectedIssue ? selectedIssue.q.trim() : ''} 
                       value={this.state.issueSearchQuery} 
                       onChange={this.handleIssueSearch}
@@ -425,7 +430,7 @@ class EmailModal extends Component {
                       onKeyUp={this.handleIssueSelectSearch(searchIssues)}
                       onBlur={this.handleValidation}
                     />
-                    <div className={styles['dropDownArrow']}>v</div>
+                    <div className={styles.dropDownArrow}>v</div>
                     {/* <div dangerouslySetInnerHTML={{ __html: selectedIssue ? selectedIssue.q : '' }} /> */}
                   </div>
                   <div className={dropDownType !== 'issue' ? styles['dropDownBox-close'] : styles['dropDownBox-open']}
@@ -442,31 +447,31 @@ class EmailModal extends Component {
               </div>
               {selectedIssue && selectedIssue.orderRelated && this.props.isLoggedIn ?
                 <div className={styles['pV-20']}>
-                  <div className={styles['formLabel']}>{languageLabel['HNS']['SELECT_ORDER']}</div>
-                  <div className={styles['relative']}>
+                  <div className={styles.formLabel}>{HNS.SELECT_ORDER}</div>
+                  <div className={styles.relative}>
                     <div tabIndex={1} onBlur={this.handleDropDown('')} onClick={this.handleDropDown('order')}
-                      className={styles['dropDownInput']}
+                      className={styles.dropDownInput}
                     >
-                      <div className={styles['dropDownArrow']}>v</div>
+                      <div className={styles.dropDownArrow}>v</div>
                       <div>{selectedOrder ? this.renderOrderItems(selectedOrder) : ''}</div>
                     </div>
                     <div className={dropDownType !== 'order' ? styles['dropDownBox-close'] : styles['dropDownBox-open']}
                       onScroll={this.handleOrdersScroll}
                     >
-                      {orders.length ? orders.map(this.renderOrders) : languageLabel['HNS']['NO_ORDERS']}
+                      {orders.length ? orders.map(this.renderOrders) : HNS.NO_ORDERS}
                     </div>
                   </div>
                 </div>
                 : null}
-              {this.props.type === "email" ?
+              {this.props.type === 'email' ?
                 <div className={styles['pV-20']}>
-                  <div className={styles['formLabel']}>{languageLabel['HNS']['WRITE_MSG']}</div>
+                  <div className={styles.formLabel}>{HNS.WRITE_MSG}</div>
                   <textarea
                     dir="auto"
                     name="message"
                     value={this.state.message}
                     onChange={this.handleMsg}
-                    className={styles['ModalTextArea']}
+                    className={styles.ModalTextArea}
                   />
                   {
                   validation && validation.message && validation.message.isInValid ?
@@ -477,23 +482,23 @@ class EmailModal extends Component {
                 </div>
                 : null
               }
-              {this.props.type === "email" ?
+              {this.props.type === 'email' ?
                 <FileAttachment setFiles={this.setFiles} files={this.state.files} /> : null
               }
             </div>
-            {this.props.type === "email" ?
+            {this.props.type === 'email' ?
               <div
                 onClick={this.createIncident}
-                className={styles['modalFormButton']}
+                className={styles.modalFormButton}
               >
-                {languageLabel['HNS']['SEND_EMAIL']}
+                {HNS.SEND_EMAIL}
           </div>
               :
               <div
                 onClick={this.openChat}
-                className={styles['modalFormButton']}
+                className={styles.modalFormButton}
               >
-                {languageLabel['HNS']['START_CHATTING']}
+                {HNS.START_CHATTING}
           </div>
             }
           </React.Fragment>
@@ -501,11 +506,11 @@ class EmailModal extends Component {
         }
 
       </div>
-    )
+    );
   }
 }
 
-export default connect((state) => ({
+export default connect(state => ({
   ordersData: state.ordersReducer.data,
   allIssueData: state.helpSupportReducer.allIssueData
-}), { ...helpActions, ...orderActions })(EmailModal)
+}), { ...helpActions, ...orderActions })(EmailModal);

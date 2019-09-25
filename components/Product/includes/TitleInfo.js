@@ -8,7 +8,7 @@ import constants from '../../../constants';
 import { actionCreators as cartActionCreators, selectors as cartSelectors } from '../../../store/listingCart';
 import { actionCreators as compareActions, selectors } from '../../../store/compare';
 import { selectors as authSelectors } from '../../../store/auth';
-import { actionCreators as instantCheckoutActionCreators } from '../../../store/common/instantCheckout'
+import { actionCreators as instantCheckoutActionCreators } from '../../../store/common/instantCheckout';
 import { languageDefinations } from '../../../utils/lang';
 import lang from '../../../utils/language';
 import { actionCreators, selectors as paymentSelectors } from '../../../store/payments';
@@ -19,7 +19,7 @@ import main_ar from '../../../layout/main/main_ar.styl';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
 
-const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
+const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { PDP_PAGE } = languageDefinations();
 
@@ -61,7 +61,7 @@ class TitleInfo extends Component {
   componentWillReceiveProps(nextProps) {
     let { showCheckoutModal, isCheckoutLoaded } = this.state;
     if (nextProps && (nextProps.listingCartData.ui.loader && !isCheckoutLoaded)) {
-        this.setState({ showCheckoutModal:true, isCheckoutLoaded:true });
+        this.setState({ showCheckoutModal: true, isCheckoutLoaded: true });
     }
     // if (nextProps && nextProps.listingCartData.ui.hideLoader) {
     //   showCheckoutModal = false;
@@ -103,19 +103,18 @@ class TitleInfo extends Component {
     const { listingCartData, removeCartItem, clearInstantCheckout } = this.props;
 
     if (!showCheckoutModal) { // adding item to cart
-        if(isCheckoutLoaded) {
-          isCheckoutLoaded = false;
-        }
-        this.addToCart()
-
+      if (isCheckoutLoaded) {
+        isCheckoutLoaded = false;
+      }
+      this.addToCart();
     } else { // removing item from cart.
       document.getElementsByTagName('BODY')[0].style.overflow = 'auto';
-      this.setState(
-        {showCheckoutModal:false}
-      ,() => clearInstantCheckout())
-      //removeCartItem(listingCartData.items[0].cart_item_id);
+      this.setState({
+        showCheckoutModal: false,
+      }, () => clearInstantCheckout());
+      // removeCartItem(listingCartData.items[0].cart_item_id);
     }
-    this.setState({ isCheckoutLoaded })
+    this.setState({ isCheckoutLoaded });
   }
 
   increaseItemCnt(e) {
@@ -134,7 +133,7 @@ class TitleInfo extends Component {
     const {
       brand, title, rating, product_id, shippingInfo,
       totalInventoryCount, isPreview, listingCartData, comparable, cmpData, isLoggedIn, savedCardsData,
-      getSavedCardDetails
+      getSavedCardDetails,
     } = this.props;
     const { showCheckoutModal } = this.state;
     return (
@@ -165,11 +164,11 @@ class TitleInfo extends Component {
             ))
           } */}
         </div>
-        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>
+        <h1 className={`${styles['fs-18']} ${styles.fontW700} ${styles['black-color']} ${styles['mt-0']} ${styles['mb-0']} ${title.alignment ? styles['direction-ir'] : ''}`}>
           {title.attribute_values && title.attribute_values.length > 0
             && title.attribute_values[0].value}
         </h1>
-        <h1 className={`${styles['fs-16']} ${styles.fontW300} ${styles['black-color']} ${styles['mt-5']} ${styles['mb-0']} ${!title.translation ? styles['direction-ir'] : ''}`}>
+        <h1 className={`${styles['fs-16']} ${styles.fontW300} ${styles['black-color']} ${styles['mt-5']} ${styles['mb-0']} ${title.alignment ? styles['direction-ir'] : ''}`}>
           {title.attribute_values && title.attribute_values.length > 1
             && title.attribute_values[1].value}
         </h1>
@@ -192,8 +191,8 @@ class TitleInfo extends Component {
             <div className={`${styles['flex-center']} ${styles['checkout-instantly']} ${styles['pt-5']}`}>
               <div className={`${styles.flex}`}>
                 {totalInventoryCount > 0 && isLoggedIn &&
-                ((savedCardsData && savedCardsData.length > 0) || (getSavedCardDetails && getSavedCardDetails.length > 0))&& shippingInfo && shippingInfo.shippable &&
-                    <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>
+                ((savedCardsData && savedCardsData.length > 0) || (getSavedCardDetails && getSavedCardDetails.length > 0)) && shippingInfo && shippingInfo.shippable &&
+                  <a className={`${styles['fp-btn']} ${styles['fp-btn-default']} ${styles['fs-14']} ${styles['mr-10']} ${styles['small-btn']} ${styles['checkout-instant-btn']} ${styles['left-radius']}`} onClick={this.checkoutInstantHandler}>{PDP_PAGE.CHECKOUT_INSTANT}</a>
                 }
               </div>
               <div className={styles['flex']}>
@@ -261,7 +260,7 @@ const mapStateToProps = store => ({
   listingCartData: cartSelectors.getListingCartResults(store),
   isLoggedIn: authSelectors.getLoggedInStatus(store),
   cmpData: selectors.getCmpData(store),
-  getSavedCardDetails:vaultSelectors.getSavedCardDetails(store)
+  getSavedCardDetails: vaultSelectors.getSavedCardDetails(store)
 
 });
 
@@ -273,7 +272,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addToCompare: compareActions.addToCompare,
   getCompareCount: compareActions.getCompareCount,
   removeCompareData: compareActions.removeCompareData,
-  clearInstantCheckout:instantCheckoutActionCreators.clearInstantCheckout
+  clearInstantCheckout: instantCheckoutActionCreators.clearInstantCheckout
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TitleInfo);

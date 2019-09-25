@@ -3,7 +3,6 @@ import { Panel } from 'react-bootstrap';
 
 import SVGCompoent from '../../../common/SVGComponet';
 import { Router } from '../../../../routes';
-
 import Tree from './Tree';
 
 import lang from '../../../../utils/language';
@@ -18,7 +17,7 @@ const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...s
 const LinkFacet = ({ filter, categoryQuery }) => {
   const urlParams = new URLSearchParams(window.location.search);
   const sidParams = urlParams.get('sid');
-  
+
   const showAll = () => {
     urlParams.delete('sid');
     urlParams.delete('categoryFacet');
@@ -34,19 +33,13 @@ const LinkFacet = ({ filter, categoryQuery }) => {
         </Panel.Title>
       </Panel.Heading>
       <Panel.Body collapsible className={`${styles['border-b']}`}>
-        {sidParams &&
+        {urlParams.has('q') && sidParams &&
           <div onClick={showAll} className={`${styles.pointer} ${styles['pl-20']} ${styles['fs-12']}`}>
             <span>{'> '}</span>
             <span>All Categories</span>
-          </div>
-        }
-        {
-          filter
-            ?
-              <Tree filter={filter} first categoryQuery={categoryQuery} />
-            :
-            null
-        }
+          </div>}
+
+        {filter && <Tree filter={filter} first categoryQuery={categoryQuery} />}
       </Panel.Body>
     </li>
   );

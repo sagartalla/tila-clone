@@ -284,11 +284,11 @@ class CartItem extends React.Component {
                   <React.Fragment>
                     <div className={`${styles['warranty-part']} ${styles['p-10']} ${styles['black-color']}`}>
                       <div className={`${styles['mb-0']} ${styles.flex} ${styles['pb-5']}`}>
-                        <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>Warranty : </span>
+                        <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{PDP_PAGE.WARRANTY} : </span>
                         <span className={`${styles['pl-10']} ${styles['fs-15']} ${styles['pr-10']}`}>
                           {(warranty_duration && Object.keys(warranty_duration).length > 0) && warranty_duration.duration !== 0 ?
                             <Warranty warranty={warranty_duration} />
-                            : 'No Warranty'}
+                            : CART_PAGE.NO_WARRANTY}
                         </span>
                       </div>
                       {

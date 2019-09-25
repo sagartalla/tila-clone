@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../store/helpsupport';
 import { Link } from '../../routes';
-import { categoryImages } from './helpConstants';
+import { categoryImages, categoryTranslations } from './helpConstants';
 import lang from '../../utils/language';
 
 import main_en from '../../layout/main/main_en.styl';
@@ -42,7 +42,7 @@ class Faq extends Component {
         <div className={styles['faqIcon']}>
           <SVGComponent src={`helpsupport/${categoryImages[topicKey]}`}/>
         </div>
-        <h4>{this.props.categoriesObj[topicKey].name}</h4>
+        <h4>{categoryTranslations[this.props.categoriesObj[topicKey].name][lang]}</h4>
         <div className={styles['ht-185']}>
           {questionKeys.map(this.renderQuestions(topicKey))}
         </div>

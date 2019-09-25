@@ -45,10 +45,10 @@ const CartBody = ({
   const cnt = flag > 0 ? items.length : 0;
   const { CART_PAGE, WISH_LIST_PAGE} = languageDefinations();
   if(data.ui.loading) {
-    return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>Please Wait Fetching Cart Items</div>
+    return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>{CART_PAGE.PLEASE_WAIT_FETCHING_CART_ITEMS}</div>
   }
   return (
-    data.ui.loading ? <Blocker message={"Please wait, fetching cart items"}/> : 
+    data.ui.loading ? <Blocker message={CART_PAGE.PLEASE_WAIT_FETCHING_CART_ITEMS}/> :
     <>
     <div className={styles['cart-container']}>
       {
@@ -58,7 +58,7 @@ const CartBody = ({
         <Col md={12} sm={12} xs={12}>
           <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW600']} ${styles['fs-20']} ${styles['light-gry-clr']}`}>
             {
-              cnt===1 ? <span>{`${cnt} item`}</span> : cnt===0 ? <span>Your shopping cart is empty.</span> :<span>{`${cnt} ${CART_PAGE.ITEMS_IN_CART}`}</span> }
+              cnt===1 ? <span>{`${cnt} ${CART_PAGE.ITEM}`}</span> : cnt===0 ? <span>{CART_PAGE.YOUR_SHOPPING_CART_IS_EMPTY}</span> :<span>{`${cnt} ${CART_PAGE.ITEMS_IN_CART}`}</span> }
           </h4>
           {
             cnt === 0 ?
@@ -77,7 +77,7 @@ const CartBody = ({
                   OR
                 </div>
                 <div>
-                  <a href={`/${language}/customer/wishlist`} className={`${styles['fp-btn']} ${styles['add-from-wishlist']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} `}>Add from Wishlist</a>
+                  <a href={`/${language}/customer/wishlist`} className={`${styles['fp-btn']} ${styles['add-from-wishlist']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} `}>{CART_PAGE.ADD_FROM_WISHLIST}</a>
                 </div>
                 </React.Fragment>
                 }
