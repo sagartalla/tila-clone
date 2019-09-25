@@ -32,11 +32,13 @@ class SortByWidget extends Component {
     };
     this.sortSelect = this.sortSelect.bind(this);
   }
+
+  getSortParam = selectedValue => ({
+    2: { sellingPrice: 'desc' },
+    1: { sellingPrice: 'asc' },
+  }[selectedValue])
+
   fireAnalyticEvent = (value) => {
-    digitalData.filter['sortBy'] = `sort:${value}`
-    var event = new CustomEvent('event-sort-click');
-    document.dispatchEvent(event);
-    console.log("sort by- value::", value);
     this.props.track({
       event: 'SEARCH_SORT_BY',
       searchData: value,
@@ -51,13 +53,6 @@ class SortByWidget extends Component {
     this.props.getSearchResults({
       sort: this.getSortParam(index),
     });
-  }
-
-  getSortParam(selectedValue) {
-    return {
-      2: { 'sellingPrice': 'desc' },
-      1: { 'sellingPrice': 'asc' },
-    }[selectedValue];
   }
 
   render() {

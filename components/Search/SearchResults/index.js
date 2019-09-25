@@ -59,17 +59,14 @@ class SearchResults extends Component {
 
   componentDidMount() {
     this.props.resetAddtoCart();
-    console.log("ashok");
-    console.log(this.props);
     this.props.track({
       event: 'INTERNAL_SEARCH_COUNT',
       searchData: this.props,
-      });
-    //console.log('searchlogin',this.props.isLoggedIn);
-    if(this.props.isLoggedIn) {
+    });
+
+    if (this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-
   }
   onClose() {
     this.rowNumber = null;

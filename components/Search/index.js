@@ -171,8 +171,6 @@ class Search extends Component {
 
   querySearch = (e) => {
     let dataSearchQuery = e.currentTarget.dataset.querysearch;
-    console.log("query search");
-    console.log(dataSearchQuery);
     Router.pushRoute(`/${language}/search?q=${dataSearchQuery}&disableSpellCheck=true&${Object.entries(this.props.optionalParams).map(([key, val]) => `${key}=${val}`).join('&')}`);
   }
 

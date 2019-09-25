@@ -94,7 +94,6 @@ const mapDispatchToProps = dispatch =>
     {
       ...baseActions,
       getSearchResults: actionCreators.getSearchResults,
-      track: actionCreators.track,
       // setSessionID: authActionsCreators.setSessionID,
     },
     dispatch,

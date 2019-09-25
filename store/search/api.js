@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import axios from 'axios';
-import constants from '../helper/constants';
 import Cookies from 'universal-cookie';
+import constants from '../helper/constants';
 
 const cookies = new Cookies();
 
@@ -88,17 +88,7 @@ const track = ({
 	event,
 	searchData
 }) => {
-	console.log("event", event);
 	switch (event) {
-		case "INTERNAL_SEARCH":
-			window.appEventData.push({
-				event,
-				internalSearch: {
-					key: searchData,
-				},
-			});
-			break;
-
 		case "INTERNAL_SEARCH_COUNT":
 			window.appEventData.push({
 				event,
@@ -108,7 +98,6 @@ const track = ({
 				},
 			});
 			break;
-
 		case "SEARCH_SORT_BY":
 			window.appEventData.push({
 				event,
@@ -117,7 +106,7 @@ const track = ({
 				},
 			});
 			break;
-
+    default: break;
 	}
 };
 export default {
