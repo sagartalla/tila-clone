@@ -551,7 +551,7 @@ export const EN_KEYWORDS = {
     TILA: 'TiLa',
     WHO_WE_ARE: 'Who We Are',
     OUR_VALUES: 'Our Values',
-    OUR_MISSION: 'Our Mission',
+    OUR_MISSION: 'Our Mission & Vision',
     PRESS_REALESES: 'Press Releases',
     JOIN_OUR_TEAM: 'Join Our Team',
     CORPARATE_ADDRESS: 'Corporate Address',

@@ -409,7 +409,7 @@ render() {
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                 <li><a href={`/${lang}/policy/aboutus-policy`} target="_blank">{FOOTER_PAGE.WHO_WE_ARE}</a></li>
                 <li><a href={`/${lang}/policy/ourvalues-policy`} target="_blank">{FOOTER_PAGE.OUR_VALUES}</a></li>
-                <li>{FOOTER_PAGE.OUR_MISSION}</li>
+                <li><a href={`/${lang}/policy/aboutus-policy#mission-vision`}>{FOOTER_PAGE.OUR_MISSION}</a></li>
                 {/* <li>{FOOTER_PAGE.PRESS_REALESES}</li>
                 <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li> */}
                 <li onClick={this.showAddress}><a>{FOOTER_PAGE.CORPARATE_ADDRESS}</a></li>
