@@ -6,11 +6,13 @@ import Description from './ElectronicsDescription';
 // import Compare from './ElectronicsCompare';
 
 import lang from '../../../utils/language';
-
 import main_en from '../../../layout/main/main_en.styl';
 import main_ar from '../../../layout/main/main_ar.styl';
+import { languageDefinations } from '../../../utils/lang/';
 import styles_en from '../product_en.styl';
 import styles_ar from '../product_ar.styl';
+
+const { PDP_PAGE } = languageDefinations();
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -18,11 +20,11 @@ const ElectronicsTab = ({ catalog, productDescription, catalogObj, isPreview, ti
   return (
     <div>
       <Tabs defaultActiveKey={1} id="electronics-tab">
-        <Tab eventKey={1} title="Overview">
+        <Tab eventKey={1} title={PDP_PAGE.OVERVIEW}>
           <OverView  catalog={catalog}/>
         </Tab>
         {
-          productDescription && <Tab eventKey={2} title="Description">
+          productDescription && <Tab eventKey={2} title={PDP_PAGE.DESCRIPTION}>
             <Description productDescription={productDescription} />
           </Tab>
         }
@@ -33,7 +35,7 @@ const ElectronicsTab = ({ catalog, productDescription, catalogObj, isPreview, ti
           <Specification />
         </Tab>*/}
         {isPreview ? null :
-          <Tab eventKey={4} title="Reviews">
+          <Tab eventKey={4} title={PDP_PAGE.REVIEWS}>
             <Review catalogObj={catalogObj} titleInfo={titleInfo} />
           </Tab>
         }
