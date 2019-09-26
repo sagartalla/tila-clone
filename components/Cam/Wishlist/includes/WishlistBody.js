@@ -68,7 +68,7 @@ const WishlistBody = (props) => {
       <div className={`${styles.flex}`}>
         <Col md={12} sm={12} xs={12} className={`${styles['pl-0']}`}>
           <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles.fontW300}}`}>
-            <span>{`Showing ${(pageDetails.number * pageDetails.size) + 1}-${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size} of ${pageDetails.total_elements} ${WISH_LIST_PAGE.WISHLIST_HEADER}`}</span>
+            <span>{`Showing ${(pageDetails.number * pageDetails.size) + 1}-${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size} of ${pageDetails.total_elements} ${pageDetails.total_elements === 1 ? WISH_LIST_PAGE.WISHLIST_HEADER_ONE : WISH_LIST_PAGE.WISHLIST_HEADER}`}</span>
           </h4>
         </Col>
       </div>
@@ -127,7 +127,7 @@ const WishlistBody = (props) => {
                         </span></h4>
                         {variant_id && percentage(price, mrp) > 5 ?
                           <span className={`${styles.flex} ${styles['flex-center']}`}>
-                            <span className={`${styles['success-green']} ${styles.flex}`}>{percentage(price, mrp)}%</span>&nbsp;&nbsp;&nbsp;
+                            <span className={`${styles['success-green']} ${styles.flex}`}>{lang === 'ar' ? '%'+percentage(price, mrp) : percentage(price, mrp)+'%'}</span>&nbsp;&nbsp;&nbsp;
                             <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{cur} {mrp}</strike>
                           </span> : ''
                         }

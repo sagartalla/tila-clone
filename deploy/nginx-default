@@ -47,7 +47,7 @@ server {
 		default_type application/json;
 	}
 
-	location /robot.txt {
+	location /robots.txt {
 		root /var/www/tila;
 		index robot.txt;
 		default_type application/text;

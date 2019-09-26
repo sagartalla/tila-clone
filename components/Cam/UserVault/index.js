@@ -81,6 +81,11 @@ class UserVault extends Component {
     selectedSavedCard(card_token);
   }
 
+  makeCardDefault = (card_token) => {
+    const { makeCardDefault } = this.props;
+    makeCardDefault(card_token);
+  }
+
   deleteCard(card_token) {
     this.props.deleteCard(card_token);
   }
@@ -127,7 +132,7 @@ class UserVault extends Component {
               <VaultHeader transactions={this.state.transactions}>
                 <VaultBody
                   data={results}
-                  makeDefault={this.makeDefault}
+                  makeCardDefault={this.makeCardDefault}
                   deleteCard={this.deleteCard}
                   toggleAddCardBlock={this.toggleAddCardBlock}
                 />

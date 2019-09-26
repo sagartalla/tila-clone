@@ -130,7 +130,7 @@ class CartAndPaymentSideBar extends Component {
                   {CART_PAGE.ORDER_SUMMARY}
                 </h5>
               </li>
-              <li><span className={styles['thick-gry-clr']}>{CART_PAGE.PRICE} ({`${item_cnt} ${CART_PAGE.ITEMS}`})</span>
+              <li><span className={styles['thick-gry-clr']}>{CART_PAGE.PRICE} ({`${item_cnt} ${item_cnt === 1 ? CART_PAGE.ITEM : CART_PAGE.ITEMS}`})</span>
                 <span>
                   <span className={`${styles['fs-10']}`}>{total_offer_price.currency_code || currency}</span>&nbsp;
                <span className={`${styles['fs-12']}`}>{total_offer_price.display_value}</span>
