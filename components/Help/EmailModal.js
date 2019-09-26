@@ -23,7 +23,6 @@ import styles_ar from './help_ar.styl';
 const languageLabel = languageDefinations();
 
 
-import constants from '../../constants';
 import { toast } from 'react-toastify';
 import ToastContent from '../common/ToastContent';
 import SVGComponent from '../common/SVGComponet';
@@ -197,7 +196,7 @@ class EmailModal extends Component {
   }
   openChat = () => {
     const validation = this.validations.validate(this.state);
-    if (validation.isValid) {    
+    if (validation.isValid) {
     const baseURL = lang === 'en' ? `https://tila-en.custhelp.com/app/chat/chat_landing` : `https://tila-ar.custhelp.com/app/chat/chat_landing`;
     const baseCustomObjectUrl = `/Incident.CustomFields.c`
     const firstName = this.state.firstname ? `/Contact.Name.First/${this.state.firstname}` : '';
@@ -210,7 +209,7 @@ class EmailModal extends Component {
     const chatURL = `${baseURL}${firstName}${lastName}${email}${categoryCode}${order_number}${countryCode}${languageCode}`;
     window.open(chatURL, '_blank');
     }
-    this.setState({ validation }); 
+    this.setState({ validation });
   }
   handleOrdersScroll = (e) => {
     clearTimeout(this.scrollTimeout);
@@ -276,7 +275,7 @@ class EmailModal extends Component {
         });
       }
     }
-    
+
   }
 
   createIncident = () => {
@@ -419,11 +418,11 @@ class EmailModal extends Component {
                     className={styles.dropDownInput}
                   >
                     <input type="text"
-                      dir="auto" 
+                      dir="auto"
                       name="issue"
-                      className={styles.searchInputIssue} 
-                      placeholder={selectedIssue ? selectedIssue.q.trim() : ''} 
-                      value={this.state.issueSearchQuery} 
+                      className={styles.searchInputIssue}
+                      placeholder={selectedIssue ? selectedIssue.q.trim() : ''}
+                      value={this.state.issueSearchQuery}
                       onChange={this.handleIssueSearch}
                       onFocus={this.focusIssueSearch}
                       // onBlur={this.handleIssueSelectSearch(searchIssues)}
