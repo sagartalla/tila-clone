@@ -73,7 +73,7 @@ class FT extends React.Component {
 	}
 
 	addToCart = e => {
-		e.stopPropagation();
+		// e.stopPropagation();
 		e.preventDefault();
 		const isAddedToCart = e.currentTarget.getAttribute("data-added");
 		if (isAddedToCart === "false") {
@@ -92,7 +92,7 @@ class FT extends React.Component {
 	};
 
 	buyNow = e => {
-		e.stopPropagation();
+		// e.stopPropagation();
 		e.preventDefault();
 		const { currentTarget } = e;
 		this.setState(
@@ -106,7 +106,9 @@ class FT extends React.Component {
 			}
 		);
 	};
-
+	stopEventPropagation = e => {
+		e.stopPropagation();
+	};
 	render() {
 		const {
 			listingsData = [],
@@ -245,6 +247,7 @@ class FT extends React.Component {
 												<ViewportTrackerHOC
 													clickEvent={`HOME-BUY-NOW-CLICK`}
 													disableViewportTracking={true}
+													onClick={this.stopEventPropagation}
 												>
 													<div data-listing-id={listing.listingId}>
 														<button
@@ -266,6 +269,7 @@ class FT extends React.Component {
 												<ViewportTrackerHOC
 													clickEvent={`HOME-ADD-TO-CART-CLICK`}
 													disableViewportTracking={true}
+													onClick={this.stopEventPropagation}
 												>
 													<div data-listing-id={listing.listingId}>
 														<button
