@@ -478,15 +478,15 @@ export const AR_KEYWORDS = {
     WE_ARE_SERVING_WITHIN_SAUDI: 'نخدمْ لمناطق داخل السعودية فقط',
   },
   FOOTER_PAGE: {
-    GOT_QUESTION: 'Homegrown', // starting from here
-    WE_CARE_TILA: 'نخدم السعودية من السعودية.', 
-    ORIGINAL: 'Free Returns and Exchange',
-    GURANTEE_PRODUCTS_AT_TILA: 'Return/Exchange within 15 days of delivery',
-    RETURN_WITHIN: 'Pay Securely',
+    GOT_QUESTION: 'ماركة محلية', // starting from here
+    WE_CARE_TILA: 'نخدم السعودية من السعودية.',
+    ORIGINAL: 'إرجاع وتبديل مجاناً',
+    GURANTEE_PRODUCTS_AT_TILA: 'إرجاع وتبديل مجاني خلال ١٥يوم من التوصيل',
+    RETURN_WITHIN: 'ادفع بآمان',
     DAYS: 'أيام',
     PLACING_ORDER: 'المدفوعات آمنة ١٠٠٪',
     TRUST_PAY: 'برنامج تيله للعناية',
-    SECURE_PAYMENTS_TILA: 'كلها جمعناها في مكان واحد عشان تشتري أو تتطالب بالضمان،حماية من التلف والضمان المطوّل', // till here need arabic
+    SECURE_PAYMENTS_TILA: 'كلها جمعناها في مكان واحد لتشتري و تطالب بالضمان و حماية من التلف والضمان المطوّل  في مكان واحد  ', // till here need arabic
     FASHION: 'أزياء',
     WOMENS: 'النسائية',
     MENS: 'الرجالية',

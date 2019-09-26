@@ -218,7 +218,7 @@ class Search extends Component {
         }
         <div className={`${styles['header-filter']} ${styles['flex-center']} ${styles['p-10-0']}`}>
           <div className={`${styles['flex-center']} ${styles['search-val-part']} ${styles['pl-15']} ${spellCheckResp ? `${styles.width30}` : `${styles.width25}`}`}>
-            <h4 className={spellCheckResp ? `${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles.fontW300} ${styles['flex-center']}`: `${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles.fontW300} ${styles['flex-center']}`}>
+            <h4 className={spellCheckResp ? `${styles['meta-info']} ${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles.fontW300}`: `${styles['mt-0']} ${styles['mb-0']} ${styles['pr-10']} ${styles['fs-14']} ${styles.fontW300}`}>
               {spellCheckResp ?
                 <a href="javascript: void(0)" onClick={this.querySearch} className={`${styles['black-color']} ${styles.fontW600}`} data-querysearch={spellCheckResp[query]}>
                   <b className={`${styles['fs-16']} ${styles['search-ellipsis']}`}>{`${spellCheckResp[query]}`}</b>
@@ -226,12 +226,12 @@ class Search extends Component {
                 </a>
                 :
                 <React.Fragment>
-                <div className={`${styles['no-h1']} ${styles['fs-14']} ${styles['search-ellipsis']}`} title={finalQuery}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}
-                <span className={styles.fontW300}>:</span>
+                <div className={`${styles['no-h1']} ${styles['fs-14']} ${styles['search-ellipsis']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`} title={finalQuery}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}
+                <span className={`${styles.fontW600} ${styles['pr-5']}`}>:</span>
                 </div>
                 </React.Fragment>
               }
-              <span className={`${styles['pl-5']} ${styles['fs-14']}`}>{ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS }</span>
+              <span className={`${styles['fs-14']}`}>{ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS }</span>
             </h4>
             {spellCheckResp &&
               <h4 className={`${styles['pl-10']} ${styles['fs-14']} ${styles['sple-check-prt']}`}>
