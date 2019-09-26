@@ -109,7 +109,7 @@ class OrderHeader extends Component {
                   </h5> */}
                 </div>
                 <div className={`${styles['ff-sb']} ${styles['mb-5']} ${styles['text-capitalize']}`}>{name}</div>
-                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']}`}>{address}</div>
+                <div className={`${styles['thick-gry-clr']} ${styles['fs-14']} ${styles['full-adress-dtls']}`}>{address}</div>
               </Col>
               {order_type !== 'EXCHANGE' && order_type !== 'REPLACEMENT' ?
                 <Col md={5} xs={6} sm={5} className={`${styles['ipad-p-0']} ${styles['thick-border-left']} ${styles['pb-20']} ${styles['pt-20']} ${styles['thin-border-right']}`}>

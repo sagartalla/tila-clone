@@ -23,7 +23,6 @@ const getUserProfileInfo = () => {
     }
   })
 };
-
 const track = (params) => {
   window.appEventData.push({
     event: params.event,
@@ -32,7 +31,6 @@ const track = (params) => {
     }
   });
 }
-
 const downloadPic = (imageId) => {
   return generateURL(imageId).then((data)=>{
     return data;
