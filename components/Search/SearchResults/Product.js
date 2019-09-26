@@ -310,21 +310,29 @@ class Product extends Component {
       </Popover>
     );
     let title = displayName.replace(brand, '');
-    if(title.length > 75) {
+    if (title.length > 75) {
       title = title.substring(0, title.substring(0, 75).lastIndexOf(' ')) + '...';
     }
     const getPriceAndOffer = () => (
-      <span>
+      <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
         <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>&nbsp;
         <span
           className={`${styles['fs-16']} ${styles.fontW600} ${styles['black-color']}`}
         >
-          <ShowPriceFormat showPrice={variants[selectedIndex].sellingPrice[0].toString()} strickedPrice={variants[selectedIndex].mrp[0].toString()} />
+          <ShowPriceFormat
+            showPrice={variants[selectedIndex].sellingPrice[0].toString()}
+            strickedPrice={variants[selectedIndex].mrp[0].toString()}
+          />
         </span>
         {discountValue > 5 &&
           <React.Fragment>
             <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s><StrickedPriceFormat showPrice={variants[selectedIndex].sellingPrice[0].toString()} strickedPrice={variants[selectedIndex].mrp[0].toString()} /></s>
+              <s>
+                <StrickedPriceFormat
+                  showPrice={variants[selectedIndex].sellingPrice[0].toString()}
+                  strickedPrice={variants[selectedIndex].mrp[0].toString()}
+                />
+              </s>
             </span>
             {variants[selectedIndex].offersApplied &&
               variants[selectedIndex].offersApplied.length > 0 &&
@@ -439,7 +447,10 @@ class Product extends Component {
 											}`}
 										>
 											<span>
-												{discountValue}% {PDP_PAGE.OFF}
+												{lang === "en"
+													? discountValue + "%"
+													: "%" + discountValue}{" "}
+												{PDP_PAGE.OFF}
 											</span>
 										</span>
 									)}
@@ -488,7 +499,7 @@ class Product extends Component {
 											</span>
 										</h5>
 										<span>
-											<span className={`${styles["pr-5"]}`}>
+											<span className={`${styles["pr-5"]} ${styles["flex"]}`}>
 												{variants.length > 0 &&
 													variants[selectedIndex].sellingPrice &&
 													getPriceAndOffer()}
@@ -657,7 +668,7 @@ class Product extends Component {
 											styles["black-color"]
 										}`}
 									>
-										<span className={`${styles["pr-5"]}`}>
+										<span className={`${styles["pr-5"]} ${styles["flex"]}`}>
 											{variants.length > 0 &&
 												variants[selectedIndex].sellingPrice &&
 												getPriceAndOffer()}

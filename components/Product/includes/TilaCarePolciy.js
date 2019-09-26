@@ -34,7 +34,7 @@ export default function TilaCarePolicy({
       if (Array.isArray(dataObj[key])) {
         return (
           <div key={`index+${i}`} className={`${styles.flex} ${styles['flex-colum']} ${styles['tila-care-warty']}`}>
-            <h5 className={`${styles.fontW600}`}>{`Tila Care ${key.split('_').join(' ')}`}</h5>
+            <h5 className={`${styles.fontW600}`}>{`${key === 'damage_protection' ? PDP_PAGE.TILA_CARE_DAMAGE_PROTECTION : PDP_PAGE.TILA_CARE_EXTENDED_WARRANTY}`}</h5>
             {
             data[key].map((item, i) => (
               <div

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import axios from 'axios';
-import constants from '../helper/constants';
 import Cookies from 'universal-cookie';
+import constants from '../helper/constants';
 
 const cookies = new Cookies();
 
@@ -57,8 +57,6 @@ const getSearchResultsApi = ({
       categoryFilter,
       shippingDetails,
       sort,
-      categoryTree,
-      categoryFacet,
       choosenCategoryName,
     };
     data.geoDetails = {
@@ -86,15 +84,31 @@ const fetchImageSearchApi = (file) => {
     data: body,
   });
 };
-const track = ({ event, searchData }) => {
-  window.appEventData.push({
-    event,
-    internalSearch: {
-      key: searchData,
-    },
-  });
+const track = ({
+	event,
+	searchData
+}) => {
+	switch (event) {
+		case "INTERNAL_SEARCH_COUNT":
+			window.appEventData.push({
+				event,
+				internalSearch: {
+					count: searchData.results.totalCount.toString(),
+					key: searchData.search,
+				},
+			});
+			break;
+		case "SEARCH_SORT_BY":
+			window.appEventData.push({
+				event,
+				internalSearch: {
+					sortby: searchData,
+				},
+			});
+			break;
+    default: break;
+	}
 };
-
 export default {
   getSearchResultsApi, fetchSuggestions, fetchImageSearchApi, track,
 };

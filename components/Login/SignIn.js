@@ -28,50 +28,50 @@ class SignIn extends Component {
       {
         field: 'password',
         method: props.mode === 'NEW_USER' || props.mode === 'EXISTING_USER' ? this.emptyValue : () => false,
-        message: props.mode === 'NEW_USER' ? 'Please enter password' : 'Please enter password',
+        message: LOGIN_PAGE.PLEASE_ENTER_PASSWORD,
         validWhen: false,
       },
       {
         field: 'password',
         method: props.mode === 'NEW_USER' ? this.passwordValidation : () => false,
         validWhen: false,
-        message: 'Your password must be atleast 8 characters long',
+        message: LOGIN_PAGE.PASSWORD_MUST_BE_ATLEASE_EIGHT_CHARACTERS_LONG,
       },
       {
         field: 'email',
         method: props.mode === 'SOCIAL_LOGIN' ? this.emptyValue : () => false,
-        message: 'Please enter email Id',
+        message: LOGIN_PAGE.EMAIL_ERROR,
         validWhen: false,
       },
       {
         field: 'email',
         method: props.mode === 'SOCIAL_LOGIN' ? this.checkEmailValidation : () => false,
-        message: 'Please enter correct email Id',
+        message: LOGIN_PAGE.VALID_EMAIL,
         validWhen: false,
       },
       {
         field: 'first_name',
         method: props.mode === 'NEW_USER' || props.mode === 'SOCIAL_LOGIN' ? this.emptyValue : () => false,
-        message: 'Please enter first name',
+        message: LOGIN_PAGE.PLEASE_ENTER_FIRST_NAME,
         validWhen: false,
       },
       {
         field: 'first_name',
         method: props.mode === 'NEW_USER' || props.mode === 'SOCIAL_LOGIN' ? this.checkNameValidation : () => false,
         validWhen: false,
-        message: 'First name should not exceed 30 characteristics',
+        message: LOGIN_PAGE.FIRST_NAME_SHOULD_NOT_EXCEED_THIRTY_CHARACTERS,
       },
       {
         field: 'last_name',
         method: props.mode === 'NEW_USER' || props.mode === 'SOCIAL_LOGIN' ? this.emptyValue : () => false,
-        message: 'Please enter last name',
+        message: LOGIN_PAGE.PLEASE_ENTER_LAST_NAME,
         validWhen: false,
       },
       {
         field: 'last_name',
         method: props.mode === 'NEW_USER' || props.mode === 'SOCIAL_LOGIN' ? this.checkNameValidation : () => false,
         validWhen: false,
-        message: 'Last name should not exceed 30 characteristics',
+        message: LOGIN_PAGE.LAST_NAME_SHOULD_NOT_EXCEED_THIRTY_CHARACTERS,
       },
     ]);
     this.state = {
@@ -351,7 +351,7 @@ class SignIn extends Component {
           btnLoading={loadingStatus}
           onClick={this.login}
         />
-        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/user-terms" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/privacy-policy" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/cookie-policy" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span> {LOGIN_PAGE.NAME_TILA}</span>
+        <span className={`${styles['m-20']} ${styles['t-c']} ${styles['fs-12']} ${styles['register-policy-gray']}`}>{mode === 'EXISTING_USER' ? LOGIN_PAGE.BY_LOGIN_I_AGREE_TO_TERMS : LOGIN_PAGE.BY_SIGNUP_I_AGREE_TO_TERMS } <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/user-terms" target="_blank">{LOGIN_PAGE.T_AND_C}</a></span>, <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/privacy-policy" target="_blank">{LOGIN_PAGE.PRIVACY}</a></span> {LOGIN_PAGE.AND} <span className={`${styles['text-blue']} ${styles.fontW600}`}><a href="/en/policy/cookie-policy" target="_blank">{LOGIN_PAGE.COOKIE_POLICY}</a></span> {LOGIN_PAGE.NAME_TILA} {lang === 'ar' ? LOGIN_PAGE.I_HAVE_TILA : ''}</span>
       </div>
     );
   }

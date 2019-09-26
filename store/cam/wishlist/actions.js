@@ -17,7 +17,7 @@ const actions = {
 const actionCreators = {
   getWishlist: loginReq((currentPage, size) => (dispatch, getState) => {
     const state = getState();
-    dispatch({
+    return dispatch({
       type: actions.GET_WISHLIST,
       payload: apis.getWishlistApi(currentPage || state.currentPage, size)
     });

@@ -258,7 +258,7 @@ class FTB extends React.Component {
 										pageData.page_content.length > 0 &&
 										pageData.page_content.map((content, index) => (
 											<React.Fragment>
-												{index === 1 && pageData.page_type === "homePage" && (
+												{false && pageData.page_type === "homePage" && (
 													<div className={styles["ff-t-i"]}>
 														<div className={styles.e}>
 															<span

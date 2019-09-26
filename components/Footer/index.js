@@ -1,4 +1,5 @@
-import { Grid, Row, Col } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Modal, Grid, Row, Col } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
 import SVGComponent from '../common/SVGComponet';
 import publicUrls from '../../constants';
@@ -18,28 +19,57 @@ const country = cookies.get('country');
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
+// const f = [
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}/clp`,
+//     title: FOOTER_PAGE.WOMEN_CLOTHING,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}/clp`,
+//     title: FOOTER_PAGE.MEN_CLOTHING,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'Footwear' : 'أحذية'}/clp`,
+//     title: FOOTER_PAGE.FOOT_WEAR,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}/clp`,
+//     title: FOOTER_PAGE.SUNGLASSES,
+//   },
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'Watches' : 'ساعات اليد'}/clp`,
+//     title: FOOTER_PAGE.WATCHES,
+//   },
+//   {
+//     url: `/${lang}/Fashion%20Accessories/clp`,
+//     title: FOOTER_PAGE.FASHION_ACCESSORIES,
+//   },
+// ];
 const f = [
   {
-    url: `/${lang}/${lang === 'en' ? 'Women\'s Clothing' : 'ملابس نسائية'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'Women\'s Clothing' : 'Women\'s Clothing'}/clp`,
     title: FOOTER_PAGE.WOMEN_CLOTHING,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'Men\'s Clothing' : 'ملابس رجالية'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'Men\'s Clothing' : 'Men\'s Clothing'}/clp`,
     title: FOOTER_PAGE.MEN_CLOTHING,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'Footwear' : 'أحذية'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'Footwear' : 'Footwear'}/clp`,
     title: FOOTER_PAGE.FOOT_WEAR,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'Sunglasses' : 'نظارات شمسية'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'Sunglasses' : 'Sunglasses'}/clp`,
     title: FOOTER_PAGE.SUNGLASSES,
   },
   {
-    url: `/${lang}/${lang === 'en' ? 'Watches' : 'ساعات اليد'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'Watches' : 'Watches'}/clp`,
     title: FOOTER_PAGE.WATCHES,
   },
   {
@@ -47,35 +77,65 @@ const f = [
     title: FOOTER_PAGE.FASHION_ACCESSORIES,
   },
 ];
+// const e = [
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}/clp`,
+//     title: FOOTER_PAGE.MOBILES,
+//   },
 
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}/clp`,
+//     title: FOOTER_PAGE.LAPTOPS,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'camera' : 'الة-تصوير'}/clp`,
+//     title: FOOTER_PAGE.CAMERAS,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'televisions' : 'التلفزيونات'}/clp`,
+//     title: FOOTER_PAGE.TELEVISIONS,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}/clp`,
+//     title: FOOTER_PAGE.STORAGE_DEVICES,
+//   },
+
+//   {
+//     url: `/${lang}/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}/clp`,
+//     title: FOOTER_PAGE.MOBILE_ACCESSORIES,
+//   },
+// ];
 const e = [
   {
-    url: `/${lang}/${lang === 'en' ? 'mobiles' : 'الهواتف-النقالة'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'mobiles' : 'mobiles'}/clp`,
     title: FOOTER_PAGE.MOBILES,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'laptops' : 'أجهزة-الكمبيوتر-المحمولة'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'laptops' : 'laptops'}/clp`,
     title: FOOTER_PAGE.LAPTOPS,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'camera' : 'الة-تصوير'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'cameras' : 'cameras'}/clp`,
     title: FOOTER_PAGE.CAMERAS,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'televisions' : 'التلفزيونات'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'televisions' : 'televisions'}/clp`,
     title: FOOTER_PAGE.TELEVISIONS,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'storage devices' : 'أجهزة التخزين'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'storage devices' : 'storage devices'}/clp`,
     title: FOOTER_PAGE.STORAGE_DEVICES,
   },
 
   {
-    url: `/${lang}/${lang === 'en' ? 'mobile-accessories' : 'ملحقات-الهاتف-المحمول'}/clp`,
+    url: `/${lang}/${lang === 'en' ? 'mobile-accessories' : 'mobile-accessories'}/clp`,
     title: FOOTER_PAGE.MOBILE_ACCESSORIES,
   },
 ];
@@ -126,62 +186,84 @@ const t = [
   },
 
   {
-    url: `/${lang}/brand/fossil`,
-    title: '/static/img/bg-img/Fossil.png',
+    url: `/${lang}/brand/michael-kors`,
+    title: '/static/img/bg-img/michael-kors.png', 
   },
 ];
 
+class FooterBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showPopup: false,
+    };
+  }
 
-const FooterBar = props => (
+  showAddress = () => {
+    this.setState({
+      showPopup: true,
+    });
+  }
+
+  closeTerms = () => {
+    this.setState({
+      showPopup: false,
+    });
+  }
+
+
+render() {
+  const { showPopup } = this.state;
+  return (
   <div id="footer-container" className={`${styles['footer-container']} ${styles['mt-25']}`}>
     <div className={`${styles['footer-container-inn']} ${styles['pt-40']} ${styles['pb-40']}`}>
-      <Grid>
+      <Grid className={styles['footer-usb-links']}>
         <div className={styles['flx-space-bw']}>
           {/* <Col md={3}> */}
 
           <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
-              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/quation" />
+              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/homegrown" />
             </span>
-            <a href={`/${lang}/help/faq`} target="_blank" className={styles.black}>
+            <div className={styles.black}>
               <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
                     <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.GOT_QUESTION}</span>
-                    <span className={styles['footer-suport-title']}>{`${FOOTER_PAGE.WE_CARE_TILA} | 900-66666`}</span>
+                    <span className={`${styles['footer-suport-title']} ${styles['fs-12']}`}>{FOOTER_PAGE.WE_CARE_TILA}</span>
                   </div>
-            </a>
+            </div>
           </div>
 
           {/* </Col>
           <Col md={3}> */}
           <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
-              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/guarantee" />
+              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/retun-exchange" />
             </span>
             <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
-              <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{`100% ${FOOTER_PAGE.ORIGINAL}`}</span>
-              <span className={styles['footer-suport-title']}>{FOOTER_PAGE.GURANTEE_PRODUCTS_AT_TILA}</span>
+              <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.ORIGINAL}</span>
+              <span className={`${styles['footer-suport-title']} ${styles['fs-12']}`}>{FOOTER_PAGE.GURANTEE_PRODUCTS_AT_TILA}</span>
             </div>
           </div>
           {/* </Col>
           <Col md={3}> */}
           <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
-              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/return" />
+              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/pay-secure" />
             </span>
             <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
-              <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{`${FOOTER_PAGE.RETURN_WITHIN} 15 ${FOOTER_PAGE.DAYS}`}</span>
-              <span className={styles['footer-suport-title']}>{FOOTER_PAGE.PLACING_ORDER}</span>
+              <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.RETURN_WITHIN}</span>
+              <span className={`${styles['footer-suport-title']} ${styles['fs-12']}`}>{FOOTER_PAGE.PLACING_ORDER}</span>
             </div>
           </div>
           {/* </Col>
           <Col md={3}> */}
           <div className={`${styles['flex-center']} ${styles['border-radius4']} ${styles['footer-suport-part']} ${styles['p-15']}`}>
             <span className={`${styles.flex} ${styles['quation-bar']}`}>
-              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/trust-secure" />
+              <SVGComponent clsName={`${styles['quation-bar-inn']}`} src="icons/common-icon/tila-care-logo" />
             </span>
             <div className={`${styles.flex} ${styles['flex-colum']} ${styles['pl-20']}`}>
               <span className={`${styles.fontW600} ${styles['text-uppercase']}`}>{FOOTER_PAGE.TRUST_PAY}</span>
-              <span className={styles['footer-suport-title']}>{`100% ${FOOTER_PAGE.SECURE_PAYMENTS_TILA}`}</span>
+              <span className={`${styles['footer-suport-title']} ${styles['fs-12']}`}>{FOOTER_PAGE.SECURE_PAYMENTS_TILA}</span>
             </div>
           </div>
           {/* </Col> */}
@@ -194,7 +276,7 @@ const FooterBar = props => (
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']} `}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-50']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/fashion" />
-              <span className={styles.pointer}>{FOOTER_PAGE.FASHION}</span>
+              <span className={styles.pointer}><a href={`/${lang}/fashion`}>{FOOTER_PAGE.FASHION}</a></span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {f.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
@@ -211,7 +293,7 @@ const FooterBar = props => (
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']}  ${styles['mr-35']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/common-icon/processor-icon" />
-              <span className={styles.pointer}>{FOOTER_PAGE.ELECTRONICS}</span>
+              <span className={styles.pointer}><a href={`/${lang}/electronics`}>{FOOTER_PAGE.ELECTRONICS}</a></span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {e.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
@@ -228,7 +310,7 @@ const FooterBar = props => (
           <div className={`${styles['ipad-pr-0']} ${styles['footer-menu-inn']}`}>
             <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['flex-center']} ${styles['mr-80']}`}>
               <SVGComponent clsName={`${styles['footer-list-icon']} ${styles['mr-15']}`} src="icons/footers-icons/life-style" />
-              <span className={styles.pointer}>{FOOTER_PAGE.LIFESTYLE}</span>
+              <span className={styles.pointer}><a href={`/${lang}/lifestyle`}>{FOOTER_PAGE.LIFESTYLE}</a></span>
             </h4>
             <ul className={`${styles['pl-30']} ${styles['lne-ht2']}`}>
               {l.map(i => <li key={i.title}><a href={i.url}><span className={styles.pointer}>{i.title}</span></a></li>)}
@@ -253,6 +335,27 @@ const FooterBar = props => (
           </div>
         </div>
       </Grid>
+    </div>
+    <div>
+      <Modal
+        show={showPopup}
+        onHide={this.closeTerms}
+        className={`${styles.modalClassName} ${styles['address-bdy']}`}
+      >
+        <Modal.Body>
+          <address className={styles['mb-0']}>
+            <div className={styles['flex']}>
+              <SVGComponent clsName={styles['logo-icon']} src={`icons/logos/default-logo-${lang}`} />
+            </div>
+            <div className={styles['pl-5']}><b>Tila</b><br/>
+            c/o Afdal Al Mazaya Co. Ltd<br/>
+            Office No.5,Second Floor,Al Saedan Tower<br/>
+            King Fahd Branch Rd,Al Muruj,<br/>
+            Riyadh 11322,PO Box: 240220 Kingdom of Saudi Arabia
+            </div>
+          </address>
+        </Modal.Body>
+      </Modal>
     </div>
     {/* social part start */}
     <div className={`${styles['footer-social-list-main']} ${styles['pt-40']} ${styles['pb-40']} ${styles['bg-white']}`}>
@@ -304,24 +407,24 @@ const FooterBar = props => (
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.TILA}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li>{FOOTER_PAGE.WHO_WE_ARE}</li>
-                <li>{FOOTER_PAGE.OUR_VALUES}</li>
-                <li>{FOOTER_PAGE.OUR_MISSION}</li>
-                <li>{FOOTER_PAGE.PRESS_REALESES}</li>
-                <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li>
-                <li>{FOOTER_PAGE.CORPARATE_ADDRESS}</li>
+                <li><a href={`/${lang}/policy/aboutus-policy`} target="_blank">{FOOTER_PAGE.WHO_WE_ARE}</a></li>
+                <li><a href={`/${lang}/policy/ourvalues-policy`} target="_blank">{FOOTER_PAGE.OUR_VALUES}</a></li>
+                <li><a href={`/${lang}/policy/aboutus-policy#mission-vision`}>{FOOTER_PAGE.OUR_MISSION}</a></li>
+                {/* <li>{FOOTER_PAGE.PRESS_REALESES}</li>
+                <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li> */}
+                <li onClick={this.showAddress}><a>{FOOTER_PAGE.CORPARATE_ADDRESS}</a></li>
               </ul>
             </div>
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICIES}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li><a href={`/${lang}/policy/user-terms`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
-                <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/return-and-exchange-policy#exchangePolicy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/return-and-refund-policy#returnPolicy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/warranty-policy#warrantyPolicy`} target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
-                {/* <li><a href="/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
-                <li><a href={`/${lang}/policy/privacy-policy`} target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/user-terms`}>{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+                <li><a href={`/${lang}/policy/cancellation-policy`}>{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-exchange-policy#exchangePolicy`}>{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-refund-policy#returnPolicy`}>{FOOTER_PAGE.REFUND_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/warranty-policy#warrantyPolicy`}>{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+                {/* <li><a href="/en/policy/sp">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
+                <li><a href={`/${lang}/policy/privacy-policy`}>{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
               </ul>
             </div>
             {/* <Col md={2} sm={2} className={styles['ipad-pr-0']}>
@@ -341,10 +444,9 @@ const FooterBar = props => (
               <div>
                 <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.HELP}</h4>
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                  <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
+                  {/* <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li> */}
                   <li><a href={`/${lang}/policy/customer-delivery`} target="_blank">{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</a></li>
-                  <li>{FOOTER_PAGE.FREQUENTLY_ASKED_QUESTIONS}</li>
-                  <li>{FOOTER_PAGE.CUSTOMER_CARE}</li>
+                  <li><a href={`https://www.tila.com/${lang}/help/faq`} target="_blank">{FOOTER_PAGE.CUSTOMER_CARE}</a></li>
                 </ul>
               </div>
             </div>
@@ -371,5 +473,7 @@ const FooterBar = props => (
     </div>
   </div>
 );
+}
+}
 
 export default FooterBar;

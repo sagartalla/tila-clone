@@ -59,11 +59,14 @@ class SearchResults extends Component {
 
   componentDidMount() {
     this.props.resetAddtoCart();
-    //console.log('searchlogin',this.props.isLoggedIn);
-    if(this.props.isLoggedIn) {
+    this.props.track({
+      event: 'INTERNAL_SEARCH_COUNT',
+      searchData: this.props,
+    });
+
+    if (this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-
   }
   onClose() {
     this.rowNumber = null;
@@ -244,7 +247,7 @@ class SearchResults extends Component {
           <div className={`${styles['no-results']} ${styles['fs-40']} ${styles.fontW600} ${styles['justify-center']}`}>
             {SEARCH_PAGE.SORRY_NO_RESULTS}<br />
             <div className={`${styles.flex} ${styles['flex-center']}  ${styles['flex-colum']}`}>
-              <span className={`${styles.fontW300} ${styles['fs-20']}`}>{SEARCH_PAGE.FOR}</span>
+              {lang === 'ar' ? '' : <span className={`${styles.fontW300} ${styles['fs-20']}`}>{SEARCH_PAGE.FOR}</span>}
               <div className={`${styles.ellipsis} ${styles.fontW300} ${styles['fs-20']}`} title={`"${finalQuery}"`}>"{finalQuery}"</div>
             </div>
           </div>
@@ -293,6 +296,7 @@ const mapDispatchToProps = dispatch =>
       resetAddtoCart: cartActionCreators.resetAddtoCart,
       getWishlist: wishlistActionCreators.getWishlist,
       notifyMe: wishlistActionCreators.notifyMe,
+      track: actionCreators.track,
     },
     dispatch,
   );

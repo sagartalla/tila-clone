@@ -10,7 +10,7 @@ const languageLabel = languageDefinations();
 const ContactTabs = [
   { type: 'email', icon: '', text: [languageLabel['HNS']['CONTACT_MAIL_TITLE'], languageLabel['HNS']['CONTACT_MAIL_SUBTITLE']], isClickable: true },
   { type: 'chat', icon: '', text: [languageLabel['HNS']['CONTACT_CHAT_TITLE'], languageLabel['HNS']['CONTACT_CHAT_SUBTITLE']], isClickable: true },
-  { type: 'call', icon: '', text: [languageLabel['HNS']['CONTACT_PHONE_TITLE'], `${languageLabel['HNS']['CONTACT_PHONE_SUBTITLE']} 1800 0000`], isClickable: false }
+  // { type: 'call', icon: '', text: [languageLabel['HNS']['CONTACT_PHONE_TITLE'], `${languageLabel['HNS']['CONTACT_PHONE_SUBTITLE']} 1800 0000`], isClickable: false }
 ]
 
 const helpComponents = (type) => {
@@ -47,4 +47,24 @@ const categoryImages = {
   10: 'help_payments',
   55: 'help_warranty'
 }
-export {ContactTabs, helpComponents, Issues, countryLanguageHelpCode, categoryImages}
+
+const categoryTranslations = {
+  "Orders & Shipping": {
+    en: "Orders & Shipping",
+    ar: "الطلبات والشحن"
+  },
+  "Returns/Exchanges/Refunds": {
+    en: "Returns/Exchanges/Refunds",
+    ar: "الاسترجاع / الاستبدال / الإرجاع"
+  },
+  "Payments": {
+    en: "Payments",
+    ar: "الدفع"
+  },
+  "Warranty": {
+    en: "Warranty",
+    ar: "الضمان"
+  }
+}
+
+export { ContactTabs, helpComponents, Issues, countryLanguageHelpCode, categoryImages, categoryTranslations }

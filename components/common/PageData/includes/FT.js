@@ -242,30 +242,49 @@ class FT extends React.Component {
 													styles["flex-center"]
 												} ${styles["flex-colum"]} ${styles["justify-center"]}`}
 											>
-												<button
-													className={`${styles["fp-btn"]} ${
-														styles["left-radius"]
-													} ${styles["fp-btn-primary"]} ${styles.ft_card_btn} ${
-														styles["mb-5"]
-													}`}
-													data-pId={listing.productId}
-													data-lId={listing.listingId}
-													data-added={listing.isAddedToCart}
-													onClick={this.buyNow}
+												<ViewportTrackerHOC
+													clickEvent={`HOME-BUY-NOW-CLICK`}
+													disableViewportTracking={true}
 												>
-													BUY NOW
-												</button>
-												<button
-													className={`${styles["fp-btn"]} ${
-														styles["left-radius"]
-													} ${styles["fp-btn-default"]} ${styles.ft_card_btn}`}
-													data-pId={listing.productId}
-													data-lId={listing.listingId}
-													data-added={listing.isAddedToCart}
-													onClick={this.addToCart}
+													<div data-listing-id={listing.listingId}>
+														<button
+															className={`${styles["fp-btn"]} ${
+																styles["left-radius"]
+															} ${styles["fp-btn-primary"]} ${
+																styles.ft_card_btn
+															} ${styles["mb-5"]}`}
+															data-pId={listing.productId}
+															data-lId={listing.listingId}
+															data-added={listing.isAddedToCart}
+															onClick={this.buyNow}
+														>
+															BUY NOW
+														</button>
+													</div>
+												</ViewportTrackerHOC>
+
+												<ViewportTrackerHOC
+													clickEvent={`HOME-ADD-TO-CART-CLICK`}
+													disableViewportTracking={true}
 												>
-													{!listing.isAddedToCart ? "ADD TO CART" : "In Cart"}
-												</button>
+													<div data-listing-id={listing.listingId}>
+														<button
+															className={`${styles["fp-btn"]} ${
+																styles["left-radius"]
+															} ${styles["fp-btn-default"]} ${
+																styles.ft_card_btn
+															}`}
+															data-pId={listing.productId}
+															data-lId={listing.listingId}
+															data-added={listing.isAddedToCart}
+															onClick={this.addToCart}
+														>
+															{!listing.isAddedToCart
+																? "ADD TO CART"
+																: "In Cart"}
+														</button>
+													</div>
+												</ViewportTrackerHOC>
 											</div>
 										</div>
 									</div>
