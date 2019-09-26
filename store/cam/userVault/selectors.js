@@ -46,6 +46,12 @@ const getTilaCredit = (store) => {
   }
   return {};
 };
+const getTotalAmount = (store) => {
+  if (store.vaultReducer.data && store.vaultReducer.data.totalAmount) {
+    return store.vaultReducer.data.totalAmount;
+  }
+  return {};
+};
 
 const getDefaultCard = (store) => {
   if ((store.vaultReducer.data && store.vaultReducer.data.savedCards) && store.vaultReducer.data.savedCards.length > 0) {
@@ -54,4 +60,4 @@ const getDefaultCard = (store) => {
   return [];
 };
 
-export { getCardResults, getDefaultCard, getTilaCredit, getTransactions, getCardDetails, getSavedCardDetails, getSelectedCard };
+export { getCardResults, getDefaultCard, getTilaCredit, getTransactions, getCardDetails, getSavedCardDetails, getSelectedCard, getTotalAmount };
