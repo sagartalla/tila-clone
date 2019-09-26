@@ -21,6 +21,7 @@ import { selectors as cartSelector } from '../../../store/cart';
 import { selectors as compareSelectors } from '../../../store/compare';
 import { ShowPriceFormat, StrickedPriceFormat } from '../../common/PriceFormat';
 import RenderVariants from './renderVariants';
+import ViewportTrackerHOC from "../../common/ViewPortTracker/ViewportTrackerHOC";
 
 import lang from '../../../utils/language';
 
@@ -101,7 +102,7 @@ class Product extends Component {
   }
 
   addToWishlist(e) {
-    e.stopPropagation();
+    // e.stopPropagation();
     e.preventDefault();
     const {
       productId: product_id, catalogId: catalog_id,
@@ -159,7 +160,7 @@ class Product extends Component {
 
   showVariants(btnType) {
     return (e) => {
-      e.stopPropagation();
+      // e.stopPropagation();
       e.preventDefault();
       const { selectedIndex } = this.state;
       const {
@@ -340,167 +341,351 @@ class Product extends Component {
       </span>
     );
     return (
-      <Fragment>
-        <div
-          className={`${styles['product-items-main']} ${styles.relative} ${styles['p-0']} ${selectedProduct ? styles['active-product'] : ''}`}
-          onClick={() => this.routeChange(productId, variantId, catalogId, itemtype, index, pageNum)}
-        >
-          <Link route={`/${language}/pdp/${encodeURI(displayName.replace(/\s+/g, '-').replace(/-+/g, '-').toLowerCase())}/${tuinId ? `${tuinId}/`: '' }${listing_id ? `${listing_id}`: 'oos'}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}>
-            <a target="_blank">
-              <div className={`${styles['product-items']}`} onMouseEnter={this.setImg} onMouseLeave={this.leaveImg}>
-                {showLoader ?
-                  <div className={styles['loader-div']}>
-                    <SVGCompoent clsName={`${styles['loader-styl']}`} src="icons/common-icon/circleLoader" />
-                  </div> : null
-                }
-                {variants.length === 0 &&
-                  <div className={styles['notify-me-part']}>
-                    <h4 className={`${styles['fs-10']} ${styles['m-5']} ${styles['pr-5']} ${styles['black-color']}`}>{PDP_PAGE.OUT_OF_STOCK}</h4>
-                    {/* <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['right-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
+			<Fragment>
+				<div
+					className={`${styles["product-items-main"]} ${styles.relative} ${
+						styles["p-0"]
+					} ${selectedProduct ? styles["active-product"] : ""}`}
+					onClick={() =>
+						this.routeChange(
+							productId,
+							variantId,
+							catalogId,
+							itemtype,
+							index,
+							pageNum
+						)
+					}
+				>
+					<Link
+						route={`/${language}/pdp/${encodeURI(
+							displayName
+								.replace(/\s+/g, "-")
+								.replace(/-+/g, "-")
+								.toLowerCase()
+						)}/${tuinId ? `${tuinId}/` : ""}${
+							listing_id ? `${listing_id}` : "oos"
+						}?pid=${product_id}&vid=${variant_id}&cid=${catalog_id}`}
+					>
+						<a target="_blank">
+							<div
+								className={`${styles["product-items"]}`}
+								onMouseEnter={this.setImg}
+								onMouseLeave={this.leaveImg}
+							>
+								{showLoader ? (
+									<div className={styles["loader-div"]}>
+										<SVGCompoent
+											clsName={`${styles["loader-styl"]}`}
+											src="icons/common-icon/circleLoader"
+										/>
+									</div>
+								) : null}
+								{variants.length === 0 && (
+									<div className={styles["notify-me-part"]}>
+										<h4
+											className={`${styles["fs-10"]} ${styles["m-5"]} ${
+												styles["pr-5"]
+											} ${styles["black-color"]}`}
+										>
+											{PDP_PAGE.OUT_OF_STOCK}
+										</h4>
+										{/* <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['right-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
                       <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
                     </a> */}
-                  </div>
-                }
-                <div className={`${styles['img-cont']} ${styles['border-radius4']} ${styles.relative}`}>
-                  <div className={`${styles['image-div']} srp-slider`}>
-                    {src ?
-                      <img src={src} alt="imageURL" />
-                      :
-                      <Slider
-                        className={`${styles['ht-100per']}`}
-                        autoplay
-                        arrows={false}
-                        dots
-                        autoplaySpeed={1000}
-                        pauseOnHover={false}
-                      >
-                        {media && media.slice(0, 5).map((image, index) => (
-                          <div key={index}>
-                            <img src={`${constants.mediaDomain}/${image}`} alt="imageURL" key={index} />
-                          </div>
-                        ))}
-                      </Slider>
-                    }
-                  </div>
-                  {/* <span className={`${styles['variants-main']}`}></span> */}
-                  {/* <span className={styles['full-and-globe-main']}>
+									</div>
+								)}
+								<div
+									className={`${styles["img-cont"]} ${
+										styles["border-radius4"]
+									} ${styles.relative}`}
+								>
+									<div className={`${styles["image-div"]} srp-slider`}>
+										{src ? (
+											<img src={src} alt="imageURL" />
+										) : (
+											<Slider
+												className={`${styles["ht-100per"]}`}
+												autoplay
+												arrows={false}
+												dots
+												autoplaySpeed={1000}
+												pauseOnHover={false}
+											>
+												{media &&
+													media.slice(0, 5).map((image, index) => (
+														<div key={index}>
+															<img
+																src={`${constants.mediaDomain}/${image}`}
+																alt="imageURL"
+																key={index}
+															/>
+														</div>
+													))}
+											</Slider>
+										)}
+									</div>
+									{/* <span className={`${styles['variants-main']}`}></span> */}
+									{/* <span className={styles['full-and-globe-main']}>
                     <span className={`${styles['fullfill-main']} ${styles['flex-center']}`}>
                       <span className={styles['fulfill-img']}></span>
                       <span className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pl-10']} ${styles['fullfilled-label']}`}>{PDP_PAGE.FULLFILLED_BY_TILA}</span>
                     </span>
                   </span> */}
-                  {discountValue >= 5 &&
-                    <span className={`${styles.absolute} ${styles['offer-tag']} ${styles[this.getOfferClassName(discountValue)]}`}>
-                      <span>{discountValue}% {PDP_PAGE.OFF}</span>
-                    </span>}
-                  {
-                    variants.length > 1 &&
-                    <RenderVariants
-                      variantData={variants}
-                      onSelectedVariant={this.selectedVariant}
-                      isvisible={selectedProduct}
-                      OncloseVariant={this.closeVariantTab}
-                    />
-                  }
-                  {showNotifyMeMsg && <div className={`${styles['notifyme-msg']} ${styles['flex-center']} ${styles['justify-center']}`}>{SEARCH_PAGE.WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK}</div>}
-                </div>
-                <div className={styles['desc-cont']}>
-                  <div className={`${styles['pb-20']} ${styles['pl-20']} ${styles['pr-20']} ${styles.flex} ${styles['flex-colum']}`}>
-                    <h5 className={`${styles['prdt-name']} ${styles['pt-15']} ${styles['pb-5']}  ${styles['m-0']}`}>
-                      <span className={`${styles.fontW600} ${styles['black-color']}`}>{brand}</span> <span className={`${styles['thick-gry-clr']} ${styles.fontW300}`}>{title}</span>
-                    </h5>
-                    <span>
-                      <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice && getPriceAndOffer()}</span>
-                    </span>
-                  </div>
-                </div>
-                <div className={`${selectedProduct ? `${styles['display-buttons']} ${styles['active-product']}` : ''} ${styles['hover-show-date']} ${styles['pb-10']} ${styles.relative}`}>
-                  {
-                      variants.length > 0 ?
-                      <div className={`${styles.flex} ${styles['justify-around']} ${styles['quick-view']} ${styles['border-radius4']}`}>
-                        <Button
-                          className={`${styles.flex} ${styles['add-to-crt']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
-                          onClick={this.showVariants('ADD_TO_CART')}
-                          disabled={btnLoading}
-                          btnText={buttonText ? PDP_PAGE.ADD_MORE : PDP_PAGE.ADD_TO_CART}
-                          showImage="icons/cart/blue-cart-icon"
-                          btnLoading={variants[selectedIndex].listingId && cartButtonLoaders[variants[selectedIndex].listingId[0]]}
-                        />
-                        <Button
-                          className={`${styles['flex-center']} ${styles['buy-now-btn']} ${styles.fontW600} ${styles['fs-10']} ${styles['text-uppercase']}`}
-                          onClick={this.showVariants('BUY_NOW')}
-                          btnText={PDP_PAGE.BUY_NOW}
-                          showImage="icons/cart/buy-icon"
-                          hoverClassName="hoverBlueBackground"
-                          btnLoading={false}
-                        />
-                      </div>
-                      :
-                      (!showNotifyMeMsg && isNotifyMe) && <a className={`${styles['flex-center']} ${styles['notify-part-inn']} ${styles['white-color']} ${styles['fp-btn']} ${styles['left-radius']} ${styles['fp-btn-primary']}`} onClick={this.notify}>
-                        <span className={styles['pl-5']}>{PDP_PAGE.NOTIFY_ME}</span>
-                      </a>
-                  }
-                  {
-                    variants.length > 1 &&
-                    <RenderVariants
-                      variantData={variants}
-                      onSelectedVariant={this.selectedVariant}
-                      isvisible={selectedProduct}
-                      OncloseVariant={this.closeVariantTab}
-                      showOnHover={true}
-                    />
-                  }
-                  <div className={`${styles['wish-list-part']} ${styles['flx-space-bw']}`}>
-                    <span className={styles.flex}>
-                      <a className={styles['flex-center']} onClick={this.addToWishlist}>
-                        <SVGCompoent clsName={`${styles['wish-list']}`} src={addedToWishlist ? 'icons/wish-list/wish-list-icon-red' : 'icons/wish-list/wish-list-icon'} />
-                        <span className={`${styles['pl-5']} ${styles['fs-12']}`} disabled={addedToWishlist}>{addedToWishlist ? `${PDP_PAGE.ADDED_TO_WISHLIST}` : `${PDP_PAGE.ADD_TO_WISHLIST}`}</span>
-                      </a>
-                    </span>
-                    {(flags && flags.comparable) &&
-                      <div
-                        className={`${styles['checkbox-material']} ${styles.flex} ${styles['add-to-compare']}`}
-                        onClick={this.preventDefaultClick}
-                      >
-                        <input
-                          id="add-to-compare-srp"
-                          type="checkbox"
-                          onChange={this.addToCompare}
-                          checked={cmpData.products &&
-                            _.findIndex(cmpData.products, o => o.productId === productId) > -1}
-                        />
-                        <label htmlFor="add-to-compare-srp" className={`${styles['fs-12']}`}> {PDP_PAGE.ADD_TO_COMPARE}</label>
-                      </div>
-                      }
-                  </div>
-                  <div className={`${styles['brand-price-details']} ${styles['black-color']}`}>
-                    <span className={`${styles['pr-5']}`}>{variants.length > 0 && variants[selectedIndex].sellingPrice &&
-                      getPriceAndOffer()}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </Link>
-          {isQuickView &&
-            <div className={`${styles.absolute} ${styles.indication}`} />
-          }
-        </div>
-        <Modal show={showNotify} onHide={this.closeNotify}>
-          <Modal.Header closeButton>
-            <Modal.Title>{PDP_PAGE.NOTIFY_ME}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <NotifyMe
-              pId={productId}
-              closeNotify={this.closeNotify}
-              variantId={variantId}
-              showNotifyMeMsg={this.showNotifyMeMsg}
-            />
-          </Modal.Body>
-        </Modal>
-      </Fragment>
-    );
+									{discountValue >= 5 && (
+										<span
+											className={`${styles.absolute} ${styles["offer-tag"]} ${
+												styles[this.getOfferClassName(discountValue)]
+											}`}
+										>
+											<span>
+												{discountValue}% {PDP_PAGE.OFF}
+											</span>
+										</span>
+									)}
+									{variants.length > 1 && (
+										<RenderVariants
+											variantData={variants}
+											onSelectedVariant={this.selectedVariant}
+											isvisible={selectedProduct}
+											OncloseVariant={this.closeVariantTab}
+										/>
+									)}
+									{showNotifyMeMsg && (
+										<div
+											className={`${styles["notifyme-msg"]} ${
+												styles["flex-center"]
+											} ${styles["justify-center"]}`}
+										>
+											{SEARCH_PAGE.WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK}
+										</div>
+									)}
+								</div>
+								<div className={styles["desc-cont"]}>
+									<div
+										className={`${styles["pb-20"]} ${styles["pl-20"]} ${
+											styles["pr-20"]
+										} ${styles.flex} ${styles["flex-colum"]}`}
+									>
+										<h5
+											className={`${styles["prdt-name"]} ${styles["pt-15"]} ${
+												styles["pb-5"]
+											}  ${styles["m-0"]}`}
+										>
+											<span
+												className={`${styles.fontW600} ${
+													styles["black-color"]
+												}`}
+											>
+												{brand}
+											</span>{" "}
+											<span
+												className={`${styles["thick-gry-clr"]} ${
+													styles.fontW300
+												}`}
+											>
+												{title}
+											</span>
+										</h5>
+										<span>
+											<span className={`${styles["pr-5"]}`}>
+												{variants.length > 0 &&
+													variants[selectedIndex].sellingPrice &&
+													getPriceAndOffer()}
+											</span>
+										</span>
+									</div>
+								</div>
+								<div
+									className={`${
+										selectedProduct
+											? `${styles["display-buttons"]} ${
+													styles["active-product"]
+											  }`
+											: ""
+									} ${styles["hover-show-date"]} ${styles["pb-10"]} ${
+										styles.relative
+									}`}
+								>
+									{variants.length > 0 ? (
+										<div
+											className={`${styles.flex} ${styles["justify-around"]} ${
+												styles["quick-view"]
+											} ${styles["border-radius4"]}`}
+										>
+											<ViewportTrackerHOC
+												clickEvent={`SRP-ADD-TO-CART-CLICK`}
+												disableViewportTracking={true}
+											>
+												<div data-listing-id={listing_id}>
+													<Button
+														className={`${styles.flex} ${
+															styles["add-to-crt"]
+														} ${styles.fontW600} ${styles["fs-10"]} ${
+															styles["text-uppercase"]
+														}`}
+														onClick={this.showVariants("ADD_TO_CART")}
+														disabled={btnLoading}
+														btnText={
+															buttonText
+																? PDP_PAGE.ADD_MORE
+																: PDP_PAGE.ADD_TO_CART
+														}
+														showImage="icons/cart/blue-cart-icon"
+														btnLoading={
+															variants[selectedIndex].listingId &&
+															cartButtonLoaders[
+																variants[selectedIndex].listingId[0]
+															]
+														}
+													/>
+												</div>
+											</ViewportTrackerHOC>
+
+											<ViewportTrackerHOC
+												clickEvent={`SRP-BUY-NOW-CLICK`}
+												disableViewportTracking={true}
+											>
+												<div data-listing-id={listing_id}>
+													<Button
+														className={`${styles["flex-center"]} ${
+															styles["buy-now-btn"]
+														} ${styles.fontW600} ${styles["fs-10"]} ${
+															styles["text-uppercase"]
+														}`}
+														onClick={this.showVariants("BUY_NOW")}
+														btnText={PDP_PAGE.BUY_NOW}
+														showImage="icons/cart/buy-icon"
+														hoverClassName="hoverBlueBackground"
+														btnLoading={false}
+													/>
+												</div>
+											</ViewportTrackerHOC>
+										</div>
+									) : (
+										!showNotifyMeMsg &&
+										isNotifyMe && (
+											<a
+												className={`${styles["flex-center"]} ${
+													styles["notify-part-inn"]
+												} ${styles["white-color"]} ${styles["fp-btn"]} ${
+													styles["left-radius"]
+												} ${styles["fp-btn-primary"]}`}
+												onClick={this.notify}
+											>
+												<span className={styles["pl-5"]}>
+													{PDP_PAGE.NOTIFY_ME}
+												</span>
+											</a>
+										)
+									)}
+									{variants.length > 1 && (
+										<RenderVariants
+											variantData={variants}
+											onSelectedVariant={this.selectedVariant}
+											isvisible={selectedProduct}
+											OncloseVariant={this.closeVariantTab}
+											showOnHover={true}
+										/>
+									)}
+									<div
+										className={`${styles["wish-list-part"]} ${
+											styles["flx-space-bw"]
+										}`}
+									>
+										<ViewportTrackerHOC
+											clickEvent={`SRP-ADD-TO-WISHLIST-CLICK`}
+											disableViewportTracking={true}
+										>
+											<div data-listing-id={listing_id}>
+												<span className={styles.flex}>
+													<a
+														className={styles["flex-center"]}
+														onClick={this.addToWishlist}
+													>
+														<SVGCompoent
+															clsName={`${styles["wish-list"]}`}
+															src={
+																addedToWishlist
+																	? "icons/wish-list/wish-list-icon-red"
+																	: "icons/wish-list/wish-list-icon"
+															}
+														/>
+														<span
+															className={`${styles["pl-5"]} ${styles["fs-12"]}`}
+															disabled={addedToWishlist}
+														>
+															{addedToWishlist
+																? `${PDP_PAGE.ADDED_TO_WISHLIST}`
+																: `${PDP_PAGE.ADD_TO_WISHLIST}`}
+														</span>
+													</a>
+												</span>
+											</div>
+										</ViewportTrackerHOC>
+										{flags && flags.comparable && (
+											<div
+												className={`${styles["checkbox-material"]} ${
+													styles.flex
+												} ${styles["add-to-compare"]}`}
+												onClick={this.preventDefaultClick}
+											>
+												<input
+													id="add-to-compare-srp"
+													type="checkbox"
+													onChange={this.addToCompare}
+													checked={
+														cmpData.products &&
+														_.findIndex(
+															cmpData.products,
+															o => o.productId === productId
+														) > -1
+													}
+												/>
+												<label
+													htmlFor="add-to-compare-srp"
+													className={`${styles["fs-12"]}`}
+												>
+													{" "}
+													{PDP_PAGE.ADD_TO_COMPARE}
+												</label>
+											</div>
+										)}
+									</div>
+									<div
+										className={`${styles["brand-price-details"]} ${
+											styles["black-color"]
+										}`}
+									>
+										<span className={`${styles["pr-5"]}`}>
+											{variants.length > 0 &&
+												variants[selectedIndex].sellingPrice &&
+												getPriceAndOffer()}
+										</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</Link>
+					{isQuickView && (
+						<div className={`${styles.absolute} ${styles.indication}`} />
+					)}
+				</div>
+				<Modal show={showNotify} onHide={this.closeNotify}>
+					<Modal.Header closeButton>
+						<Modal.Title>{PDP_PAGE.NOTIFY_ME}</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<NotifyMe
+							pId={productId}
+							closeNotify={this.closeNotify}
+							variantId={variantId}
+							showNotifyMeMsg={this.showNotifyMeMsg}
+						/>
+					</Modal.Body>
+				</Modal>
+			</Fragment>
+		);
   }
 }
 
