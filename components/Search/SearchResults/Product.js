@@ -40,315 +40,373 @@ const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 
 class Product extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showNotify: false,
-      src: `${constants.mediaDomain}/${props && props.media && props.media[0]}` || '',
-      selectedIndex: 0,
-      showLoader: false,
-      btnType: '',
-      showNotifyMeMsg: false,
-    };
-    this.setImg = this.setImg.bind(this);
-    this.addToWishlist = this.addToWishlist.bind(this);
-    // this.addToCart = this.addToCart.bind(this);
-    // this.buyNow = this.buyNow.bind(this);
-    this.addToCompare = this.addToCompare.bind(this);
-    this.notify = this.notify.bind(this);
-    this.closeNotify = this.closeNotify.bind(this);
-    this.selectedVariant = this.selectedVariant.bind(this);
-    this.closeVariantTab = this.closeVariantTab.bind(this);
-    this.showVariants = this.showVariants.bind(this);
-    this.preventDefaultClick = this.preventDefaultClick.bind(this);
-    this.renderQuickView = this.renderQuickView.bind(this);
-    this.getSelectedVariants = this.getSelectedVariants.bind(this);
-    this.leaveImg = this.leaveImg.bind(this);
-  }
-  componentWillReceiveProps() {
-    this.setState({ showLoader: false });
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			showNotify: false,
+			src:
+				`${constants.mediaDomain}/${props && props.media && props.media[0]}` ||
+				"",
+			selectedIndex: 0,
+			showLoader: false,
+			btnType: "",
+			showNotifyMeMsg: false
+		};
+		this.setImg = this.setImg.bind(this);
+		this.addToWishlist = this.addToWishlist.bind(this);
+		// this.addToCart = this.addToCart.bind(this);
+		// this.buyNow = this.buyNow.bind(this);
+		this.addToCompare = this.addToCompare.bind(this);
+		this.notify = this.notify.bind(this);
+		this.closeNotify = this.closeNotify.bind(this);
+		this.selectedVariant = this.selectedVariant.bind(this);
+		this.closeVariantTab = this.closeVariantTab.bind(this);
+		this.showVariants = this.showVariants.bind(this);
+		this.preventDefaultClick = this.preventDefaultClick.bind(this);
+		this.renderQuickView = this.renderQuickView.bind(this);
+		this.getSelectedVariants = this.getSelectedVariants.bind(this);
+		this.leaveImg = this.leaveImg.bind(this);
+	}
+	componentWillReceiveProps() {
+		this.setState({ showLoader: false });
+	}
 
-  getOfferClassName = (offer) => {
-    if (offer >= 5 && offer < 20) {
-      return 'green';
-    }
-    if (offer >= 20 && offer < 40) {
-      return 'yellow';
-    }
-    if (offer >= 40 && offer < 60) {
-      return 'orange';
-    }
-    if (offer >= 60) {
-      return 'red';
-    }
-    return '';
-  }
-  getSelectedVariants(variants) {
-    let filteredData = variants.filter((item) => (item.addedToCart && item.productAvailable))
-    return filteredData
-  }
-  setImg() {
-    this.setState({
-      src: '',
-    });
-  }
+	getOfferClassName = offer => {
+		if (offer >= 5 && offer < 20) {
+			return "green";
+		}
+		if (offer >= 20 && offer < 40) {
+			return "yellow";
+		}
+		if (offer >= 40 && offer < 60) {
+			return "orange";
+		}
+		if (offer >= 60) {
+			return "red";
+		}
+		return "";
+	};
+	getSelectedVariants(variants) {
+		let filteredData = variants.filter(
+			item => item.addedToCart && item.productAvailable
+		);
+		return filteredData;
+	}
+	setImg() {
+		this.setState({
+			src: ""
+		});
+	}
 
-  leaveImg() {
-    const { media = [] } = this.props;
-    this.setState({
-      src: `${constants.mediaDomain}/${media[0]}`,
-    });
-  }
+	leaveImg() {
+		const { media = [] } = this.props;
+		this.setState({
+			src: `${constants.mediaDomain}/${media[0]}`
+		});
+	}
 
-  addToWishlist(e) {
-    // e.stopPropagation();
-    e.preventDefault();
-    const {
-      productId: product_id, catalogId: catalog_id,
-      variants, currency, addToWishlistAndFetch, wishlistId, deleteWishlist, userDetails, firstVarintId
-    } = this.props;
-    const { selectedIndex } = this.state;
-    if (!userDetails.isLoggedIn) {
-      this.props.showLoginScreen();
-    } else if (wishlistId) {
-      deleteWishlist(wishlistId);
-    } else {
-      const data = {
-        catalog_id,
-        product_id,
-      }
-      if(variants && variants.length) {
-        data.variant_id = variants[selectedIndex].variantId;
-        if(variants[selectedIndex] && variants[selectedIndex].sellingPrice) {
-          data.wishlisted_price = variants[selectedIndex].sellingPrice[0]
-        }
-      } else {
-        data.variant_id = firstVarintId;
-      }
-      data.wishlisted_currency = currency;
-      addToWishlistAndFetch(data);
-    }
-  }
+	addToWishlist(e) {
+		// e.stopPropagation();
+		e.preventDefault();
+		const {
+			productId: product_id,
+			catalogId: catalog_id,
+			variants,
+			currency,
+			addToWishlistAndFetch,
+			wishlistId,
+			deleteWishlist,
+			userDetails,
+			firstVarintId
+		} = this.props;
+		const { selectedIndex } = this.state;
+		if (!userDetails.isLoggedIn) {
+			this.props.showLoginScreen();
+		} else if (wishlistId) {
+			deleteWishlist(wishlistId);
+		} else {
+			const data = {
+				catalog_id,
+				product_id
+			};
+			if (variants && variants.length) {
+				data.variant_id = variants[selectedIndex].variantId;
+				if (variants[selectedIndex] && variants[selectedIndex].sellingPrice) {
+					data.wishlisted_price = variants[selectedIndex].sellingPrice[0];
+				}
+			} else {
+				data.variant_id = firstVarintId;
+			}
+			data.wishlisted_currency = currency;
+			addToWishlistAndFetch(data);
+		}
+	}
 
-  notify(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    const {
- userDetails, productId, notifyMe, variantId
-} = this.props;
-    if (userDetails.isLoggedIn) {
-      notifyMe({
-        product_id: productId,
-        variant_id: variantId,
-        email: userDetails.userCreds && userDetails.userCreds.username,
-        hideNotifyMeToast: true,
-      });
-      this.showNotifyMeMsg();
-    } else {
-      this.setState({
-        showNotify: true,
-      });
-    }
-  }
+	notify(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		const { userDetails, productId, notifyMe, variantId } = this.props;
+		if (userDetails.isLoggedIn) {
+			notifyMe({
+				product_id: productId,
+				variant_id: variantId,
+				email: userDetails.userCreds && userDetails.userCreds.username,
+				hideNotifyMeToast: true
+			});
+			this.showNotifyMeMsg();
+		} else {
+			this.setState({
+				showNotify: true
+			});
+		}
+	}
 
-  closeNotify() {
-    this.setState({
-      showNotify: false,
-    });
-  }
+	closeNotify() {
+		this.setState({
+			showNotify: false
+		});
+	}
 
-  showVariants(btnType) {
-    return (e) => {
-      // e.stopPropagation();
-      e.preventDefault();
-      const { selectedIndex } = this.state;
-      const {
-        variants,
-        productId,
-        buyNow,
-        addToCart,
-        selectedProduct,
-      } = this.props;
+	showVariants(btnType) {
+		return e => {
+			// e.stopPropagation();
+			e.preventDefault();
+			const { selectedIndex } = this.state;
+			const {
+				variants,
+				productId,
+				buyNow,
+				addToCart,
+				selectedProduct
+			} = this.props;
 
-      if (variants.length <= 1) {
-        (btnType === 'BUY_NOW' ? buyNow : addToCart)(variants[selectedIndex].listingId[0], this.props.productId);
-      } else {
-        const id = [productId];
-        this.setState({ btnType }, () => {
-          selectedProduct(id);
-        });
-      }
-    };
-  }
+			if (variants.length <= 1) {
+				(btnType === "BUY_NOW" ? buyNow : addToCart)(
+					variants[selectedIndex].listingId[0],
+					this.props.productId
+				);
+			} else {
+				const id = [productId];
+				this.setState({ btnType }, () => {
+					selectedProduct(id);
+				});
+			}
+		};
+	}
 
-  closeVariantTab(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    this.props.selectedProduct([]);
-  }
+	closeVariantTab(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		this.props.selectedProduct([]);
+	}
 
-  selectedVariant(listingId, index) {
-    const { addToCart, buyNow } = this.props;
-    const { btnType } = this.state;
-    this.setState({
-      selectedIndex: index,
-      showLoader: true,
-    }, () => {
-      if (btnType === 'BUY_NOW') {
-        buyNow(listingId);
-      } else addToCart(listingId);
-    });
-  }
+	selectedVariant(listingId, index) {
+		const { addToCart, buyNow } = this.props;
+		const { btnType } = this.state;
+		this.setState(
+			{
+				selectedIndex: index,
+				showLoader: true
+			},
+			() => {
+				if (btnType === "BUY_NOW") {
+					buyNow(listingId);
+				} else addToCart(listingId);
+			}
+		);
+	}
 
-  itemNumberClick = (index, pageNum) => {
-    const productInfo = {
-      pageFragmentation: pageNum,
-      itemPosition: index,
-    };
-    digitalData.product.push(productInfo);
-    let event = new CustomEvent('event-pageItem-click');
-    document.dispatchEvent(event);
-  }
+	itemNumberClick = (index, pageNum) => {
+		const productInfo = {
+			pageFragmentation: pageNum,
+			itemPosition: index
+		};
+		digitalData.product.push(productInfo);
+		let event = new CustomEvent("event-pageItem-click");
+		document.dispatchEvent(event);
+	};
 
-  routeChange(productId, variantId, catalogId, itemtype, index, pageNum) {
-    this.itemNumberClick(index, pageNum);
-    // Router.pushRoute(`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variants.length > 0 && variants[selectedIndex].variantId ? `${variants[selectedIndex].variantId}` : ''}`)
-  }
+	routeChange(productId, variantId, catalogId, itemtype, index, pageNum) {
+		this.itemNumberClick(index, pageNum);
+		// Router.pushRoute(`/${language}/pdp/${displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/c/${catalogId}/p/${productId}/l/${listing_id}/v/${variants.length > 0 && variants[selectedIndex].variantId ? `${variants[selectedIndex].variantId}` : ''}`)
+	}
 
-  preventDefaultClick(e) {
-    if (e.target.nodeName === 'LABEL') {
-      e.preventDefault();
-      this.addToCompare(e.target.previousSibling.checked);
-    }
-  }
-  renderQuickView(e) {
-    e.preventDefault();
-    const { selectedIndex } = this.state;
-    const {
- row, itemNum, showQuickView, variants
-} = this.props;
-    const vId = (variants.length > 0 && variants[selectedIndex].variantId);
-    showQuickView(itemNum, row, vId);
-  }
-  addToCompare(checked) {
-    const {
-      productId, itemtype, media, displayName, categoryId, addToCompare, removeCompareData, catalogId: catalog_id, variants,
-    } = this.props;
-    const { selectedIndex } = this.state;
-    const src = `${constants.mediaDomain}/${media[0]}`;
-    if (!checked) {
-      addToCompare({
-        itemtype,
-        productId,
-        src,
-        displayName,
-        categoryId,
-        catalogObj: {
-          product_id: productId,
-          catalog_id,
-          tuin: variants[selectedIndex] && variants[selectedIndex].tuin[0],
-          variant_id: variants[selectedIndex] && variants[selectedIndex].variantId,
-        },
-      });
-    } else removeCompareData(productId);
-  }
+	preventDefaultClick(e) {
+		if (e.target.nodeName === "LABEL") {
+			e.preventDefault();
+			this.addToCompare(e.target.previousSibling.checked);
+		}
+	}
+	renderQuickView(e) {
+		e.preventDefault();
+		const { selectedIndex } = this.state;
+		const { row, itemNum, showQuickView, variants } = this.props;
+		const vId = variants.length > 0 && variants[selectedIndex].variantId;
+		showQuickView(itemNum, row, vId);
+	}
+	addToCompare(checked) {
+		const {
+			productId,
+			itemtype,
+			media,
+			displayName,
+			categoryId,
+			addToCompare,
+			removeCompareData,
+			catalogId: catalog_id,
+			variants
+		} = this.props;
+		const { selectedIndex } = this.state;
+		const src = `${constants.mediaDomain}/${media[0]}`;
+		if (!checked) {
+			addToCompare({
+				itemtype,
+				productId,
+				src,
+				displayName,
+				categoryId,
+				catalogObj: {
+					product_id: productId,
+					catalog_id,
+					tuin: variants[selectedIndex] && variants[selectedIndex].tuin[0],
+					variant_id:
+						variants[selectedIndex] && variants[selectedIndex].variantId
+				}
+			});
+		} else removeCompareData(productId);
+	}
+	stopEventPropagation = e => {
+		e.stopPropagation();
+	};
+	loaderClick = e => {
+		e.stopPropagation();
+		e.preventDefault();
+	};
 
-  loaderClick = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-  }
+	showNotifyMeMsg = () => {
+		this.setState(
+			{
+				showNotifyMeMsg: true
+			},
+			() =>
+				setTimeout(() => {
+					this.setState({ showNotifyMeMsg: false });
+				}, 5000)
+		);
+	};
 
-  showNotifyMeMsg = () => {
-    this.setState({
-      showNotifyMeMsg: true,
-    }, () => setTimeout(() => {
-      this.setState({ showNotifyMeMsg: false });
-    }, 5000));
-  }
-
-  render() {
-    const {
-      displayName,
-      variants,
-      productId,
-      variantId = '',
-      catalogId,
-      itemtype,
-      currency,
-      brand,
-      index,
-      pageNum,
-      selectedID,
-      flags,
-      addedToWishlist,
-      cartButtonLoaders,
-      btnLoading,
-      cmpData,
-      wishlistId,
-      row,
-      itemNum,
-      media,
-      isQuickView,
-      isNotifyMe,
-    } = this.props;
-    const { src, showNotifyMeMsg } = this.state;
-    const product_id = productId;
-    const variant_id = variantId || '';
-    const catalog_id = catalogId;
-    const { showNotify, selectedIndex, showLoader } = this.state;
-    const selectedProduct = selectedID.length > 0 && selectedID.includes(productId);
-    const discountValue = variants.length > 0 &&
-      variants[selectedIndex].discount && Math.floor(variants[selectedIndex].discount[0]);
-    const tuinId = variants && variants.length > 0 && variants[selectedIndex].tuin && variants[selectedIndex].tuin[0];
-    const buttonText = (variants.length > 1 && this.getSelectedVariants(variants).length > 0) ? true : false
-    const listing_id = variants && variants.length > 0 && variants[selectedIndex] && variants[selectedIndex].listingId && variants[selectedIndex].listingId[0];
-    const popover = (
-      <Popover id={productId}>
-        {variants.length > 0 && variants[selectedIndex].offersApplied &&
-          variants[selectedIndex].offersApplied.map((offer, index) => <div key={`${offer}${index}`}>{offer}</div>)}
-      </Popover>
-    );
-    let title = displayName.replace(brand, '');
-    if (title.length > 75) {
-      title = title.substring(0, title.substring(0, 75).lastIndexOf(' ')) + '...';
-    }
-    const getPriceAndOffer = () => (
-      <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
-        <span className={`${styles['fs-10']} ${styles['black-color']}`}>{currency}</span>&nbsp;
-        <span
-          className={`${styles['fs-16']} ${styles.fontW600} ${styles['black-color']}`}
-        >
-          <ShowPriceFormat
-            showPrice={variants[selectedIndex].sellingPrice[0].toString()}
-            strickedPrice={variants[selectedIndex].mrp[0].toString()}
-          />
-        </span>
-        {discountValue > 5 &&
-          <React.Fragment>
-            <span className={`${styles['ml-5']} ${styles['label-gry-clr']} ${styles['fs-12']}`}>
-              <s>
-                <StrickedPriceFormat
-                  showPrice={variants[selectedIndex].sellingPrice[0].toString()}
-                  strickedPrice={variants[selectedIndex].mrp[0].toString()}
-                />
-              </s>
-            </span>
-            {variants[selectedIndex].offersApplied &&
-              variants[selectedIndex].offersApplied.length > 0 &&
-              <OverlayTrigger
-                placement="bottom"
-                overlay={popover}
-              >
-                <span className={`${styles['success-green']} ${styles['ml-5']} ${styles.pointer}`}>
-                  {variants[selectedIndex].offersApplied.length} offers
-                </span>
-              </OverlayTrigger>
-            }
-          </React.Fragment>}
-      </span>
-    );
-    return (
+	render() {
+		const {
+			displayName,
+			variants,
+			productId,
+			variantId = "",
+			catalogId,
+			itemtype,
+			currency,
+			brand,
+			index,
+			pageNum,
+			selectedID,
+			flags,
+			addedToWishlist,
+			cartButtonLoaders,
+			btnLoading,
+			cmpData,
+			wishlistId,
+			row,
+			itemNum,
+			media,
+			isQuickView,
+			isNotifyMe
+		} = this.props;
+		const { src, showNotifyMeMsg } = this.state;
+		const product_id = productId;
+		const variant_id = variantId || "";
+		const catalog_id = catalogId;
+		const { showNotify, selectedIndex, showLoader } = this.state;
+		const selectedProduct =
+			selectedID.length > 0 && selectedID.includes(productId);
+		const discountValue =
+			variants.length > 0 &&
+			variants[selectedIndex].discount &&
+			Math.floor(variants[selectedIndex].discount[0]);
+		const tuinId =
+			variants &&
+			variants.length > 0 &&
+			variants[selectedIndex].tuin &&
+			variants[selectedIndex].tuin[0];
+		const buttonText =
+			variants.length > 1 && this.getSelectedVariants(variants).length > 0
+				? true
+				: false;
+		const listing_id =
+			variants &&
+			variants.length > 0 &&
+			variants[selectedIndex] &&
+			variants[selectedIndex].listingId &&
+			variants[selectedIndex].listingId[0];
+		const popover = (
+			<Popover id={productId}>
+				{variants.length > 0 &&
+					variants[selectedIndex].offersApplied &&
+					variants[selectedIndex].offersApplied.map((offer, index) => (
+						<div key={`${offer}${index}`}>{offer}</div>
+					))}
+			</Popover>
+		);
+		let title = displayName.replace(brand, "");
+		if (title.length > 75) {
+			title =
+				title.substring(0, title.substring(0, 75).lastIndexOf(" ")) + "...";
+		}
+		const getPriceAndOffer = () => (
+			<span className={`${lang === "ar" ? styles["arbic-direction-rev"] : ""}`}>
+				<span className={`${styles["fs-10"]} ${styles["black-color"]}`}>
+					{currency}
+				</span>
+				&nbsp;
+				<span
+					className={`${styles["fs-16"]} ${styles.fontW600} ${
+						styles["black-color"]
+					}`}
+				>
+					<ShowPriceFormat
+						showPrice={variants[selectedIndex].sellingPrice[0].toString()}
+						strickedPrice={variants[selectedIndex].mrp[0].toString()}
+					/>
+				</span>
+				{discountValue > 5 && (
+					<React.Fragment>
+						<span
+							className={`${styles["ml-5"]} ${styles["label-gry-clr"]} ${
+								styles["fs-12"]
+							}`}
+						>
+							<s>
+								<StrickedPriceFormat
+									showPrice={variants[selectedIndex].sellingPrice[0].toString()}
+									strickedPrice={variants[selectedIndex].mrp[0].toString()}
+								/>
+							</s>
+						</span>
+						{variants[selectedIndex].offersApplied &&
+							variants[selectedIndex].offersApplied.length > 0 && (
+								<OverlayTrigger placement="bottom" overlay={popover}>
+									<span
+										className={`${styles["success-green"]} ${styles["ml-5"]} ${
+											styles.pointer
+										}`}
+									>
+										{variants[selectedIndex].offersApplied.length} offers
+									</span>
+								</OverlayTrigger>
+							)}
+					</React.Fragment>
+				)}
+			</span>
+		);
+		return (
 			<Fragment>
 				<div
 					className={`${styles["product-items-main"]} ${styles.relative} ${
@@ -526,7 +584,8 @@ class Product extends Component {
 										>
 											<ViewportTrackerHOC
 												clickEvent={`SRP-ADD-TO-CART-CLICK`}
-												disableViewportTracking={true}
+                        disableViewportTracking={true}
+                        onClick={this.stopEventPropagation}
 											>
 												<div data-listing-id={listing_id}>
 													<Button
@@ -555,7 +614,8 @@ class Product extends Component {
 
 											<ViewportTrackerHOC
 												clickEvent={`SRP-BUY-NOW-CLICK`}
-												disableViewportTracking={true}
+                        disableViewportTracking={true}
+                        onClick={this.stopEventPropagation}
 											>
 												<div data-listing-id={listing_id}>
 													<Button
@@ -606,7 +666,8 @@ class Product extends Component {
 									>
 										<ViewportTrackerHOC
 											clickEvent={`SRP-ADD-TO-WISHLIST-CLICK`}
-											disableViewportTracking={true}
+                      disableViewportTracking={true}
+                      onClick={this.stopEventPropagation}
 										>
 											<div data-listing-id={listing_id}>
 												<span className={styles.flex}>
@@ -697,7 +758,7 @@ class Product extends Component {
 				</Modal>
 			</Fragment>
 		);
-  }
+	}
 }
 
 Product.propTypes = {
