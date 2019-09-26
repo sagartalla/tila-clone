@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid } from 'react-bootstrap';
 import _ from 'lodash';
-import Cookie from 'universal-cookie';
-import routes, { Link } from '../../../../routes';
-import publicUrls from '../../../../constants';
+// import Cookie from 'universal-cookie';
+import { Link } from '../../../../routes';
 import { selectors, actionCreators } from '../../../../store/megamenu';
-import SVGComponent from '../../../common/SVGComponet';
 import Menu from './Menu';
-import SubMenu from './SubMenu';
 
 import { languageDefinations } from '../../../../utils/lang';
 import lang from '../../../../utils/language';
@@ -21,10 +18,10 @@ import styles_ar from '../../header_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const cookies = new Cookie();
+// const cookies = new Cookie();
 
-const language = cookies.get('language') || 'ar';
-const country = cookies.get('country') || 'SAU';
+// const language = cookies.get('language') || 'ar';
+// const country = cookies.get('country') || 'SAU';
 
 const { HEADER_PAGE } = languageDefinations();
 // TODO make it SEO friendly
@@ -146,7 +143,7 @@ class MegaMenu extends Component {
                     >
                     <div>
                       {/* <Link route={`/category/${item.displayName}-${item.id}?categoryTree=true&isListed=true`}> */}
-                      <Link route={`/${language}/${this.getLandingPageLink(item.sid)}`}>
+                      <Link route={`/${lang}/${this.getLandingPageLink(item.sid)}`}>
                         <a>{item.displayName}</a>
                       </Link>
                     </div>
