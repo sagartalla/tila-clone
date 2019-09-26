@@ -59,11 +59,14 @@ class SearchResults extends Component {
 
   componentDidMount() {
     this.props.resetAddtoCart();
-    //console.log('searchlogin',this.props.isLoggedIn);
-    if(this.props.isLoggedIn) {
+    this.props.track({
+      event: 'INTERNAL_SEARCH_COUNT',
+      searchData: this.props,
+    });
+
+    if (this.props.isLoggedIn) {
       this.props.getWishlist();
     }
-
   }
   onClose() {
     this.rowNumber = null;
@@ -293,6 +296,7 @@ const mapDispatchToProps = dispatch =>
       resetAddtoCart: cartActionCreators.resetAddtoCart,
       getWishlist: wishlistActionCreators.getWishlist,
       notifyMe: wishlistActionCreators.notifyMe,
+      track: actionCreators.track,
     },
     dispatch,
   );
