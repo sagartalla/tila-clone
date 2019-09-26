@@ -55,7 +55,7 @@ const ProductPrice = ({
               </div>}
               <div className={`${styles['flex']} ${styles['align-baseline']} ${styles['relative']} ${styles['ml-10']}`}>
                 {offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_value !== offerPricing && offerPricing.strickedPrice && offerPricing.strickedPrice.display_value && Math.floor(offerPricing && offerPricing.discount) > 5 &&
-                <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${Math.floor(offerPricing && offerPricing.discount && offerPricing.discount)}% ${PDP_PAGE.OFF}`}</span>}
+                <span className={`${styles['fs-12']} ${styles['pr-5']} ${styles['offers-applied']} `}>{`${lang === 'ar' ? '%'+Math.floor(offerPricing && offerPricing.discount && offerPricing.discount) : Math.floor(offerPricing && offerPricing.discount && offerPricing.discount)+'%'} ${PDP_PAGE.OFF}`}</span>}
                 <span onMouseOver={() => toggleTooltip(true)} onMouseLeave={() => toggleTooltip(false)}  className={`${styles.relative} ${styles['checkout-quat']} ${styles['bottom-pos']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
                   <span
                     className={`${styles['fs-12']} ${styles['flex-center']} ${styles['justify-center']}`}>

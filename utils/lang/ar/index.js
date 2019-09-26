@@ -1,6 +1,6 @@
 export const AR_KEYWORDS = {
   CART_PAGE: {
-    CARD_HEADER: 'المنتجات في عربة التسوق',
+    CARD_HEADER: 'منتج في عربة التسوق',
     SECURE_CHECKOUT: 'إنهاء عملية الشراء بآمان',
     ORDER_SUMMARY: 'ملخص الطلب',
     PRICE: 'السعر',
@@ -9,7 +9,7 @@ export const AR_KEYWORDS = {
     DISCOUNT: 'التخفيض',
     TOTAL_AMOUNT: 'المجموع الكامل',
     REMOVE: 'إحذف',
-    ITEMS_IN_CART: 'منتجاتك في عربة التسوق',
+    ITEMS_IN_CART: 'منتج في عربة التسوق',
     ITEMS: 'منتج',
     TAXES: 'الضريبة',
     ONLY: 'فقط',
@@ -66,8 +66,9 @@ export const AR_KEYWORDS = {
     ADD_FROM_WISHLIST: 'أضيفها من القائمة المفضلة',
     YOUR_SHOPPING_CART_IS_EMPTY: 'عربة التسوق خالية​',
     PLEASE_WAIT_FETCHING_CART_ITEMS: 'دقائق، بنجيب لك المنتجات من عربتك ',
-    ITEM: 'المنتج',
+    ITEM: 'منتج',
     NO_WARRANTY: 'لا يوجد ضمان',
+    ITEM_IN_CART: 'منتج في عربة التسوق',    
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'إنهاء عملية الشراء بآمان',
@@ -198,6 +199,7 @@ export const AR_KEYWORDS = {
   },
   WISH_LIST_PAGE: {
     WISHLIST_HEADER: 'المنتجات في القائمة المفضلة',
+    WISHLIST_HEADER_ONE: 'المنتجات في القائمة المفضلة',
     ADD_TO_CART_BTN: 'ضيفها لعربة التسوَّق',
     NOTIFY_ME_BTN: 'نبّهني',
     FROM_YOUR_WISHLIST: 'من القائمة المفضلة',
@@ -210,7 +212,7 @@ export const AR_KEYWORDS = {
     PRICE_INCREASED_BY: 'ارتفع السعر بنسبة',
   },
   PDP_PAGE: {
-    ITEM_IN_CART: 'المنتج في عربة التسوَّق',
+    ITEM_IN_CART: 'منتج في عربة التسوق',
     LOADING_REVIEWS: 'تحميل الآراء',
     REVIEW_ALL_TAB: 'كل الآراء',
     REVIEW_EXPERT_TAB: 'آراء الخبراء',
@@ -307,6 +309,9 @@ export const AR_KEYWORDS = {
     TILA_CARE_EXTENDED_WARRANTY: 'الضمان الممدد من تيله للعناية ',
     ADD_IMAGES: 'أرفق الصور',
     MAX_FIVE: '(الحد الأقصى ٥)',
+    OVERVIEW: 'نظرة عامة',
+    DESCRIPTION: 'Description',
+    REVIEWS: 'الآراء',
   },
   VAULT_PAGE: {
     MANAGE_VAULT_HDR: 'إدارة البطاقات المحفوظة ورصيد تيله',

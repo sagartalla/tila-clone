@@ -43,7 +43,7 @@ const CartBody = ({
   const { items } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
-  const { CART_PAGE, WISH_LIST_PAGE} = languageDefinations();
+  const { CART_PAGE, WISH_LIST_PAGE } = languageDefinations();
   if(data.ui.loading) {
     return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>{CART_PAGE.PLEASE_WAIT_FETCHING_CART_ITEMS}</div>
   }
@@ -58,7 +58,7 @@ const CartBody = ({
         <Col md={12} sm={12} xs={12}>
           <h4 className={`${styles['mt-20']} ${styles['mb-20']} ${styles['fontW600']} ${styles['fs-20']} ${styles['light-gry-clr']}`}>
             {
-              cnt===1 ? <span>{`${cnt} ${CART_PAGE.ITEM}`}</span> : cnt===0 ? <span>{CART_PAGE.YOUR_SHOPPING_CART_IS_EMPTY}</span> :<span>{`${cnt} ${CART_PAGE.ITEMS_IN_CART}`}</span> }
+              cnt===1 ? <span>{`${cnt} ${CART_PAGE.ITEM_IN_CART}`}</span> : cnt===0 ? <span>{CART_PAGE.YOUR_SHOPPING_CART_IS_EMPTY}</span> :<span>{`${cnt} ${CART_PAGE.ITEMS_IN_CART}`}</span> }
           </h4>
           {
             cnt === 0 ?
