@@ -135,10 +135,10 @@ const brandImages = {
   },
 };
 
-const cookies = new Cookie();
+// const cookies = new Cookie();
 
-const language = cookies.get('language') || 'ar';
-const country = cookies.get('country') || 'SAU';
+// const language = cookies.get('language') || 'ar';
+// const country = cookies.get('country') || 'SAU';
 
 class Menu extends Component {
   constructor(props) {
@@ -169,7 +169,7 @@ class Menu extends Component {
             :
             null
           }
-          <Link route={`/${language}/${childItem.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/clp?categoryTree=true&isListed=true&sid=${this.props.parentID},${childItem.id}`}>
+          <Link route={`/${lang}/${childItem.displayName.replace(/\//g, '').split(' ').join('-').toLowerCase()}/clp?categoryTree=true&isListed=true&sid=${this.props.parentID},${childItem.id}`}>
             <a className={`${styles['level-1-item']} ${depth === 1 ? styles['fontW600'] : {}}`} style={{color: `${itemColor}`}}>{childItem.displayName}</a>
           </Link>
         </span>
@@ -210,7 +210,13 @@ class Menu extends Component {
           <ul className={`${styles['top-brands-wrap']} ${styles['megamenu-sub-drop-down']}`}>
             <li className={`${styles['megamenu-sub-list']}`}>
               <span className={`${styles.flex} ${styles['mb-10']}`}>
-                <a className={`${styles['level-1-item']} ${styles.fontW600}`}>{HEADER_PAGE.TRENDING}</a>
+                <a className={`${styles['level-1-item']} ${styles.fontW600}`}>
+                {selectedCategoryTree.sid === "JZG" ?
+                  HEADER_PAGE.COMING_SOON
+                  :
+                  HEADER_PAGE.TRENDING
+                }
+                </a>
               </span>
               <ul className={`${styles['megamenu-sub-child-list']}`}>
                 {brandImages.trending[itemColor] && brandImages.trending[itemColor].length > 0 &&
