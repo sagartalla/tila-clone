@@ -20,7 +20,7 @@ const language = cookies.get('language') || 'ar';
 const country = cookies.get('country') || 'SAU';
 class VaultBody extends Component {
 
-  makeCardDefault(token) {
+  makeCardDefault = (token) => () => {
     this.props.makeCardDefault(token);
   }
 
@@ -88,12 +88,12 @@ class VaultBody extends Component {
                         card.default ?
                           <div>
                             <label className={`${styles['fs-12']} ${styles['pr-5']}`}> {VAULT_PAGE.DEFAULT} </label>
-                            <input type="radio" className={styles['tickmark-radio']} name="make-default" defaultChecked="checked" />
+                            <input type="radio" className={styles['tickmark-radio']} name="make-default" checked/>
                           </div>
                           :
                           <span>
                             <label className={`${styles['fs-12']} ${styles['fontW600']} ${styles['pr-5']}`}> {VAULT_PAGE.MAKE_DEFAULT} </label>
-                            <input type="radio" className={styles['tickmark-radio']} name="make-default" onClick={this.makeCardDefault.bind(this, card_token)} />
+                            <input type="radio" className={styles['tickmark-radio']} name="make-default" onClick={this.makeCardDefault(card_token)}/>
                           </span>
                       }
                     </div>

@@ -342,8 +342,8 @@ export const EN_KEYWORDS = {
     NO_CARD_LABEL: 'Save your cards for faster checkouts.',
     NO_VOCHER_LABEL: 'Save your cards for faster checkouts.',
     CREDIT: 'Credit',
-    AMOUNT_CAN_BE_REDEEMED: 'This amount can be redeemed after the return timelines (15 days).',
-    THIS_IS_YOUR_REDEMABLE_BALANCE: 'This is your redeemable balance now.',
+    AMOUNT_CAN_BE_REDEEMED: 'Credits will be available after return timelines.',
+    THIS_IS_YOUR_REDEMABLE_BALANCE: 'Loyalty Credits are available for use.',
     DATE: 'Date',
     DESCRIPTION: 'Description',
     ADDED: 'Added',
@@ -355,7 +355,7 @@ export const EN_KEYWORDS = {
     DAYS: 'days',
     EXPIRING: 'Expiring',
     EXPIRING_TODAY: 'Today', 
-    REDEEM_YOUR_BALANCE_NOW: 'Redeem your available balance now. Enjoy shopping!',  
+    REDEEM_YOUR_BALANCE_NOW: 'Redeem your available balance now. Enjoy shopping!',
   },
   // new page
   THANK_YOU_PAGE: {

@@ -24,15 +24,23 @@ const TilaVoucher = (props) => {
         </Popover>
       );
 
-const successPopover = (
-        <Popover id="popover-positioned-right" className={`${styles['balancepopover']}`}>
-          <div className={`${styles['fs-12']}`}>{VAULT_PAGE.THIS_IS_YOUR_REDEMABLE_BALANCE}</div>
-        </Popover>
-      );
+//  const successPopover = (
+//         <Popover id="popover-positioned-right" className={`${styles['balancepopover']}`}>
+//           <div className={`${styles['fs-12']}`}>{VAULT_PAGE.THIS_IS_YOUR_REDEMABLE_BALANCE}</div>
+//         </Popover>
+//       );
 
-const redeemPopover = (
-        <Popover id="popover-positioned-right" className={`${styles['balancepopover']}`}>
+ const redeemPopover = (
+        <Popover id="popover-positioned-right">
             <div className={`${styles['fs-12']}`}>{VAULT_PAGE.REDEEM_YOUR_BALANCE_NOW}</div>
+        </Popover>
+        );
+
+ const expiryPopover = (no_of_days_to_expire) => (
+        <Popover id="popover-positioned-right">
+            <span className={`${styles['fs-12']}`}>
+                    <span>{no_of_days_to_expire === 0 ? VAULT_PAGE.EXPIRING : VAULT_PAGE.EXPIRING_IN} </span>
+                    <span>{`${no_of_days_to_expire === 0 ? VAULT_PAGE.EXPIRING_TODAY : no_of_days_to_expire === 1 ? `${no_of_days_to_expire} ${VAULT_PAGE.DAY}` : `${no_of_days_to_expire} ${VAULT_PAGE.DAYS}`}`}</span></span>
         </Popover>
         );
     return (
@@ -85,10 +93,10 @@ const redeemPopover = (
                     <Col md={2}>
                       {VAULT_PAGE.ADDED}
                     </Col>
-                    <Col md={1}>
+                    <Col md={2}>
                     {VAULT_PAGE.USED}
                     </Col>
-                    <Col md={3}>
+                    <Col md={2}>
                     {VAULT_PAGE.BALANCE}
                     </Col>
                 </Row>
@@ -100,21 +108,17 @@ const redeemPopover = (
                     return (
                         <div className={styles['bodyRow']} key={index}>
                             <Row className={`${styles['m-0']} ${styles['flex-center']}`}>
-                                <Col md={3} className={transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired ? `${styles['thick-red-clr']}` : ''}>
+                                <Col md={3} className={transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired && future_reedemable && no_of_days_to_expire < 6 ? `${styles['thick-red-clr']}` : ''}>
                                     {`${date}, ${time}`}
                                 </Col>
-                                <Col md={3} className={transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired ? `${styles['thick-red-clr']}` : ''}>
+                                <Col md={3} className={transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired && future_reedemable && no_of_days_to_expire < 6 ? `${styles['thick-red-clr']}` : ''}>
                                     {transaction_description}
                                 </Col>
-                                <Col md={2} className={transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired ? `${styles['thick-red-clr']}` : ''}>
-                                    {transaction_type === 'CREDIT' ? amount.display_value : ''}
-                                </Col>
-                                <Col md={1}>
-                                    {transaction_type === 'DEBIT' ? amount.display_value : ''}
-                                </Col>
-                                <Col md={3} className={`${styles['flex-center']}`}>
-                                    <div className={`${styles.width30}`}>{balance.display_value}</div>
-                                    {transaction_type === 'CREDIT' &&
+                                <Col md={2} className={`${styles['flex-center']} ${transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired && future_reedemable && no_of_days_to_expire < 6 ? `${styles['thick-red-clr']}` : ''}`}>
+                                    {transaction_type === 'CREDIT' ?
+                                    <div className={`${styles.width55}`}>{amount.display_value}</div>
+                                    : ''}
+                                    {transaction_type === 'CREDIT' ?
                                  (status === 'ACTIVE' || status === 'INACTIVE') && !future_reedemable && !expired &&
                                  <OverlayTrigger
                                     placement="top"
@@ -123,8 +127,8 @@ const redeemPopover = (
                                     <span className={`${styles['ml-10']}`}>
                                      {<SVGComponent clsName={`${styles['status-icon']}`} src={"icons/common-icon/warning"}/>}
                                      </span>
-                                </OverlayTrigger>}
-                                {transaction_type === 'CREDIT' &&
+                                </OverlayTrigger> : ''}
+                                {/* {transaction_type === 'CREDIT' ?
                                 status === 'ACTIVE' && future_reedemable &&
                                 <OverlayTrigger
                                     placement="top"
@@ -133,9 +137,23 @@ const redeemPopover = (
                                     <span className={`${styles['ml-10']}`}>
                                      {<SVGComponent clsName={`${styles['status-icon']}`} src={"icons/common-icon/bg-tick-mark" }/>}
                                      </span>
-                                 </OverlayTrigger>}
-                                 {transaction_type === 'CREDIT' && expired && <div className={`${styles.fontW600}`}>{(VAULT_PAGE.EXPIRED)}</div>}
-                                 {transaction_type === 'CREDIT' && status === 'ACTIVE' && !expired && <span className={`${styles['fs-12']} ${styles['thick-red-clr']} ${styles['ml-10']}`}><span>{no_of_days_to_expire === 0 ? VAULT_PAGE.EXPIRING : VAULT_PAGE.EXPIRING_IN}</span> <span className={`${styles.fontW600}`}>{`${no_of_days_to_expire === 0 ? VAULT_PAGE.EXPIRING_TODAY : no_of_days_to_expire === 1 ? `${no_of_days_to_expire} ${VAULT_PAGE.DAY}` : `${no_of_days_to_expire} ${VAULT_PAGE.DAYS}`}`}</span></span>}
+                                 </OverlayTrigger> : ''} */}
+                                 {transaction_type === 'CREDIT' && !expired && future_reedemable && no_of_days_to_expire < 6 ?
+                                  <OverlayTrigger
+                                  placement="top"
+                                  overlay={expiryPopover(no_of_days_to_expire)}
+                              >
+                                  <span className={`${styles['ml-10']}`}>
+                                   {<SVGComponent clsName={`${styles['status-icon']}`} src={"icons/common-icon/expiry" }/>}
+                                   </span>
+                               </OverlayTrigger> : ''}
+                                </Col>
+                                <Col md={2}>
+                                    {transaction_type === 'DEBIT' ? amount.display_value : ''}
+                                </Col>
+                                <Col md={2} className={`${styles['flex-center']}`}>
+                                    <div className={`${styles.width55}`}>{balance.display_value}</div>
+                                    {transaction_type === 'CREDIT' && expired ? <div className={`${styles.fontW600}`}>({VAULT_PAGE.EXPIRED})</div> : ''}                                    
                                 </Col>
                             </Row>
                         </div>
