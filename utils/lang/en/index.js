@@ -359,7 +359,7 @@ export const EN_KEYWORDS = {
     DAY: 'day',
     DAYS: 'days',
     EXPIRING: 'Expiring',
-    EXPIRING_TODAY: 'Today', 
+    EXPIRING_TODAY: 'Today',
     REDEEM_YOUR_BALANCE_NOW: 'Redeem your available balance now. Enjoy shopping!',
   },
   // new page
