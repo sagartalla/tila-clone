@@ -399,7 +399,7 @@ class Product extends Component {
                   </span> */}
                   {discountValue >= 5 &&
                     <span className={`${styles.absolute} ${styles['offer-tag']} ${styles[this.getOfferClassName(discountValue)]}`}>
-                      <span>{discountValue}% {PDP_PAGE.OFF}</span>
+                      <span>{lang === 'en' ? discountValue+'%' : '%'+discountValue} {PDP_PAGE.OFF}</span>
                     </span>}
                   {
                     variants.length > 1 &&
