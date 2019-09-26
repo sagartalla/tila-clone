@@ -44,7 +44,7 @@ const ProductPrice = ({
       ?
         <Fragment>
           <div className={`${styles['flex']} ${styles['align-baseline']}`}>
-            <div className={`${styles['flex']} ${styles['align-baseline']}`}>
+            <div className={`${styles['flex']} ${styles['align-baseline']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
             <span className={`${styles['fs-12']} ${styles['pr-5']}`}>{(offerPricing && offerPricing.showPrise && offerPricing.showPrise.display_currency_code) || (offerPricing && offerPricing.currency)}</span>
               {offerPricing && offerPricing.showPrise && <span className={`${styles['fs-24']} ${styles['fontW600']} ${styles['pr-5']}`}><ShowPriceFormat showPrice={offerPricing.showPrise.display_value} strickedPrice={offerPricing.strickedPrice.display_value}/></span>}
             </div>

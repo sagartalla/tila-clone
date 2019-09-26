@@ -21,12 +21,11 @@ const Brand = ({ pageData }) => {
   const { page_content, id_attribute } = pageData;
   return (
     <Fragment>
-      {page_content ?
-        <div className={`${styles['pt-20']} ${styles['land-page-mn-wdt']} container-fluid ${styles.relative}`}>
-          {page_content && page_content.map(content => <PageData key={content} content={content} />)}
-        </div>
-          :
-          null
+      {page_content && page_content.length > 0 &&
+          page_content && page_content.map(content => content.visible &&
+            <div className={`${styles['pt-20']} ${styles['land-page-mn-wdt']} container-fluid ${styles.relative}`}>
+             <PageData key={content} content={content} />
+          </div>)      
       }
     </Fragment>
   );
