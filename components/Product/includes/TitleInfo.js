@@ -221,7 +221,7 @@ class TitleInfo extends Component {
                   <div className={styles['modalFill']}>
                     {showCheckoutModal &&
                       <RightSideBar
-                        data={listingCartData}
+                        data={listingCartData && listingCartData}
                         hideUpSell
                         showInstant
                         showStepper // only for PDP

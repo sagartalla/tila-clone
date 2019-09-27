@@ -4,7 +4,7 @@ import axios from 'axios';
 import constants from '../helper/constants';
 
 const getListingCartDetailsApi = (params) => {
-  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, (params ? params : {})).then(({ data }) => {
+  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, (params ? {...params, "fetch_instant_checkout_options": true} : {})).then(({ data }) => {
     return { data };
   });
 };
