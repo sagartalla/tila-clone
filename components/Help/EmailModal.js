@@ -20,6 +20,13 @@ import main_ar from '../../layout/main/main_ar.styl';
 import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
 
+const languageLabel = languageDefinations();
+
+
+import constants from '../../constants';
+import { toast } from 'react-toastify';
+import ToastContent from '../common/ToastContent';
+import SVGComponent from '../common/SVGComponet';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { HNS } = languageDefinations();
@@ -28,7 +35,6 @@ const cookies = new Cookies();
 
 const language = clCode[cookies.get('language') || 'ar'];
 const country = clCode[cookies.get('country') || 'SAU'];
-const userCredentials = cookies.get('userCreds');
 const sort = (a, b) => a - b;
 
 const FileAttachment = (props) => {
@@ -115,7 +121,7 @@ class EmailModal extends Component {
       },
       {
         field: 'message',
-        method: this.emptyValue,
+        method: props.type === 'chat' ? () => false : this.emptyValue,
         validWhen: false,
         message: HNS.ENTER_MESSAGE,
       },
@@ -128,7 +134,7 @@ class EmailModal extends Component {
       orders: [],
       currentOrderPage: 0,
       totalOrderPages: 1,
-      email: props.isLoggedIn ? userCredentials.username : '',
+      email: props.isLoggedIn ? props && props.userInfo && props.userInfo.contactInfo && props.userInfo.contactInfo.email : '',
       firstname: '',
       lastname: '',
       incidentCreated: false,
@@ -190,12 +196,10 @@ class EmailModal extends Component {
     this.state.currentOrderPage < this.state.totalOrderPages && this.props.getOrderHistory(this.state.currentOrderPage);
   }
   openChat = () => {
-    const baseURL = lang === 'en' ? 'https://tila-en.custhelp.com/app/chat/chat_landing' : 'https://tila-ar.custhelp.com/app/chat/chat_landing';
-    if (!this.state.email || !this.state.selectedIssue) {
-      alert('Email and Issue is mandatory');
-      return;
-    }
-    const baseCustomObjectUrl = '/Incident.CustomFields.c';
+    const validation = this.validations.validate(this.state);
+    if (validation.isValid) {    
+    const baseURL = lang === 'en' ? `https://tila-en.custhelp.com/app/chat/chat_landing` : `https://tila-ar.custhelp.com/app/chat/chat_landing`;
+    const baseCustomObjectUrl = `/Incident.CustomFields.c`
     const firstName = this.state.firstname ? `/Contact.Name.First/${this.state.firstname}` : '';
     const lastName = this.state.lastname ? `/Contact.Name.Last/${this.state.lastname}` : '';
     const email = `/Contact.Email.0.Address/${this.state.email}`;
@@ -205,6 +209,8 @@ class EmailModal extends Component {
     const categoryCode = this.state.selectedIssue.catId ? `/Incident.Category/${Number(this.state.selectedIssue.catId)}` : '';
     const chatURL = `${baseURL}${firstName}${lastName}${email}${categoryCode}${order_number}${countryCode}${languageCode}`;
     window.open(chatURL, '_blank');
+    }
+    this.setState({ validation }); 
   }
   handleOrdersScroll = (e) => {
     clearTimeout(this.scrollTimeout);
@@ -375,7 +381,6 @@ class EmailModal extends Component {
     const allIssues = Object.keys(allIssueData).sort(sort);
     const allIssuesVal = Object.values(allIssueData);
     const searchIssues = this.state.issueSearchQuery ? allIssuesVal.filter(iss => iss[1].toLowerCase().includes(this.state.issueSearchQuery.toLowerCase()) || iss[1] === 'Others').map(iss => iss[0]) : allIssues;
-    console.log('validation', validation);
     return (
       <div className={styles.modalCont}>
         {!incidentCreated ?

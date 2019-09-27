@@ -191,12 +191,12 @@ const InstaCheckoutDetails = ({
         <Tabs
           value={value}
           onCallback={getCurrentTabValue}
-          tabsClass={`${styles.flex} ${styles['pt-5']} ${styles['pb-5']}`}
+          tabsClass={`${styles.flex} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex-wrp']}`}
         >
-          {filteredData.map(item => (
+          {filteredData.map((item,index) => (
             <Tab
               label={item.display_name}
-              tabClass={`${styles['fs-12']} ${styles['pr-30']}`}
+              tabClass={`${styles['fs-12']} ${(filteredData.length - 1 === index) ? '' : styles['pr-20']}`}
               value={item.type}
               name={item.type}
               btnStyle={styles['radio-btn']}

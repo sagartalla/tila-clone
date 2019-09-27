@@ -13,6 +13,7 @@ const vaultReducer = typeToReducer({
       data: {
         savedCards: _.sortBy(action.payload.data.saved_cards, o => !o.default),
         tilaCredit: action.payload.data.balance_amount,
+        totalAmount: action.payload.data.total_amount,
       },
       ui: { loading: false },
     }),
@@ -29,6 +30,7 @@ const vaultReducer = typeToReducer({
       data: {
         savedCards: _.sortBy(action.payload.data.saved_cards, o => !o.default),
         tilaCredit: action.payload.data.balance_amount,
+        totalAmount: action.payload.data.total_amount, 
       },
       ui: { loading: false },
     }),
@@ -40,6 +42,7 @@ const vaultReducer = typeToReducer({
       data: {
         savedCards: _.sortBy(action.payload.data.saved_cards, o => !o.default),
         tilaCredit: action.payload.data.balance_amount,
+        totalAmount: action.payload.data.total_amount,     
       },
       ui: { loading: false },
     }),
