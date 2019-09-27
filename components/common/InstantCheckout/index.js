@@ -149,7 +149,7 @@ const InstaCheckoutDetails = ({
                     id="pay-delivery"
                     type="checkbox"
                     onChange={props.handleChange}
-                    checked={props.checked}
+                    checked={props.checked} 
                   />
                   <label htmlFor="pay-delivery" className={`${styles['fs-12']} ${styles.fw300} ${styles['pl-10']} ${styles['pr-10']}`}>{INSTANT_CHECKOUT.AGREE_CASH_ON_DELIVERY}</label>
                 </div>
@@ -318,7 +318,11 @@ class InstantCheckout extends Component {
   handleChange() {
     this.setState(prevstate => ({
       checked: !prevstate.checked,
-    }));
+    }),() => {
+      if(this.state.checked){
+        this.props.includeCOD()
+      }
+    });
     this.getNewFilteredResult();
   }
   toggleMiniAddress() {
@@ -574,6 +578,7 @@ const mapDispatchToProps = dispatch =>
       makeCardDefault: vaultActionCreators.makeCardDefault,
       getUserProfileInfo: camActionCreators.getUserProfileInfo,
       changeState: addressActionCreators.changeState,
+      includeCOD: actionCreators.includeCOD,
     },
     dispatch,
   );
