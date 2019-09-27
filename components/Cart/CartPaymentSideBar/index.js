@@ -44,7 +44,7 @@ class CartAndPaymentSideBar extends Component {
     if (nextProps.getInstantCheckoutdata && nextProps.getInstantCheckoutdata.iframe_url) {
       this.setState({ iframe_url: nextProps.getInstantCheckoutdata.iframe_url })
     }
-    if (nextProps.getCODStatus && nextProps.getCODStatus !== this.props.getCODStatus) {
+    if (nextProps.getCODStatus!==undefined && nextProps.getCODStatus !== this.props.getCODStatus) {
       this.setState({
         codStatus: nextProps.getCODStatus,
       })
@@ -61,7 +61,6 @@ class CartAndPaymentSideBar extends Component {
       items, total_price, total_offer_price, total_gift_charges, total_vat,
       total_discount, payment_options_response, total_shipping, item_cnt, currency, total_tila_care_charges,
     } = data;
-    console.log(data);
     const { iframe_url, codStatus } = this.state;
     const voucher = payment_options_response && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'VOUCHER')[0];
     const saved_card = payment_options_response && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'SAVED_CARD')[0];
@@ -237,7 +236,7 @@ class CartAndPaymentSideBar extends Component {
                 <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}>
                   <span className={styles.fontW600}>
                     <span className={`${styles['fs-12']}`}>{cash_on_delivery.amount_to_pay.currency_code || currency}</span>&nbsp;
-                <span>{cash_on_delivery.amount_to_pay.display_value}</span>
+                <span>{codStatus ? cash_on_delivery.amount_to_pay.display_value : saved_card.amount_to_pay.display_value}</span>
                   </span>
                 </span>
               </li>

@@ -27,7 +27,10 @@ const instantCheckoutReducer = typeToReducer({
   },
   [actions.INCLUDE_COD]: (state) => {
     return {...state, selectedCOD: true}
-  }
+  },
+  [actions.EXCLUDE_COD]: (state) => {
+    return {...state, selectedCOD: false}
+  },
 }, initialState);
 
 export default instantCheckoutReducer;

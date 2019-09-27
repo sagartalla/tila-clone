@@ -4,6 +4,7 @@ const actions = {
   INSTANT_CHECKOUT: 'INSTANT_CHECKOUT',
   CLEAR_INSTANT_CHECKOUT: 'CLEAR_INSTANT_CHECKOUT',
   INCLUDE_COD: 'INCLUDE_COD',
+  EXCLUDE_COD: 'EXCLUDE_COD',
 };
 
 const actionCreators = {
@@ -21,6 +22,11 @@ const actionCreators = {
   includeCOD: () => {
     return {
       type: actions.INCLUDE_COD
+    }
+  },
+  excludeCOD: () => {
+    return {
+      type: actions.EXCLUDE_COD
     }
   }
 
