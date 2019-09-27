@@ -96,42 +96,40 @@ const WishlistBody = props => {
                       <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType, name, tuin_id)}>{name}</h5>
                       <div className={`${styles['mt-30']} ${styles['m-t-0']} ${styles['m-fs-12']}`}>
                         {inventory_count > 0 ?
+													<ViewportTrackerHOC
+                          clickEvent={`WL-MOVE-TO-CART-CLICK`}
+                          disableViewportTracking={true}
+                        >
+                          <div
+                            data-listing-id={listing_id}
+                            data-wishlist-id={wishlist_id}
+                            data-button-value={buttonValue}
+                          >
+                            <button
+                              id={listing_id}
+                              data-cart-res
+                              data-wish-id={wishlist_id}
+                              className={`${styles["fp-btn"]} ${
+                                styles["fp-btn-primary"]
+                              } ${styles["left-radius"]} ${
+                                styles["add-to-btn"]
+                              }`}
+                              onClick={buttonValue ? addToCart : () => {}}
+                            >
+                              {buttonValue
+                                ? WISH_LIST_PAGE.ADD_TO_CART_BTN
+                                : PDP_PAGE.IN_CART}
+                            </button>
+                          </div>
+                        </ViewportTrackerHOC>
+                        :
                           <button
-                            id={listing_id}
-                            data-cart-res
                             data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
-                            onClick={buttonValue ? addToCart : () => {}}
+                            onClick={notifyMe}
                           >
-                            {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.IN_CART}
+                            {WISH_LIST_PAGE.NOTIFY_ME_BTN}
                           </button>
-                          :
-													<ViewportTrackerHOC
-														clickEvent={`WL-MOVE-TO-CART-CLICK`}
-														disableViewportTracking={true}
-													>
-														<div
-															data-listing-id={listing_id}
-															data-wishlist-id={wishlist_id}
-															data-button-value={buttonValue}
-														>
-															<button
-																id={listing_id}
-																data-cart-res
-																data-wish-id={wishlist_id}
-																className={`${styles["fp-btn"]} ${
-																	styles["fp-btn-primary"]
-																} ${styles["left-radius"]} ${
-																	styles["add-to-btn"]
-																}`}
-																onClick={buttonValue ? addToCart : () => {}}
-															>
-																{buttonValue
-																	? WISH_LIST_PAGE.ADD_TO_CART_BTN
-																	: PDP_PAGE.IN_CART}
-															</button>
-														</div>
-													</ViewportTrackerHOC>
                         }
                       </div>
                     </Col>
