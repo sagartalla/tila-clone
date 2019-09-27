@@ -66,9 +66,9 @@ const TilaVoucher = (props) => {
                         placement="top"
                         overlay={redeemPopover}
                     >
-                        <span className={`${styles['ml-50']}`}>
-                            {<SVGComponent clsName={`${styles['status-icon']}`} src={"icons/common-icon/question-mark" }/>}
-                            </span>
+                        <span className={`${styles.relative} ${styles.margin} ${styles['checkout-quat']} ${styles['fs-12']} ${styles['flex-center']} ${styles['justify-around']}`}>
+                      <span className={`${lang === 'en' ? '' : styles['flip-questionmark']}`}>?</span>
+                      </span>
                         </OverlayTrigger>
                 </div>
             </Col>

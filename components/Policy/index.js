@@ -18,7 +18,7 @@ const Policy = ({ query, pageData }) => {
       <HeaderBar />
       <div className={styles["policy-wrapper"]}>
       {
-        parser.parse(pageData[lang].HTMLString)
+        parser.parse(pageData && pageData[lang].HTMLString)
       }
       </div>
       <FooterBar />

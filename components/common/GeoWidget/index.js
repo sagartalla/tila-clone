@@ -279,7 +279,7 @@ class GeoWidget extends Component {
               />
             </Dropdown.Toggle>
             <Dropdown.Menu className={`${styles['p-0']} ${styles['m-0']} ${styles['auto-suggestions-list']}`}>
-            {showLocationBlockMsg ? <div className={`${styles['block-location-msg']} ${styles['thick-red-clr']} ${styles['p-10']}`}>You have blocked TiLa from tracking your Location. To use this, change your location settings in browser</div> : ''}
+            {showLocationBlockMsg ? <div className={`${styles['block-location-msg']} ${styles['thick-red-clr']} ${styles['p-10']}`}>{SEARCH_PAGE.YOU_HAVE_BLOCKED}</div> : ''}
             {!localStorage.getItem('allowedLocation') && !showLocationBlockMsg && showCitiesData && this.state.displayCity === '' &&
             <div className={`${styles['detect-location']} ${styles['margin-5']}`}>
             <span className={`${styles.flex}`}>

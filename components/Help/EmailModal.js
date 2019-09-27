@@ -21,12 +21,6 @@ import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
 
 const languageLabel = languageDefinations();
-
-
-import constants from '../../constants';
-import { toast } from 'react-toastify';
-import ToastContent from '../common/ToastContent';
-import SVGComponent from '../common/SVGComponet';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { HNS } = languageDefinations();
