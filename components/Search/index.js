@@ -225,9 +225,13 @@ class Search extends Component {
                   <span className={`${styles['fs-10']} ${styles.textColor}`}>({ SEARCH_PAGE.AUTO_CORRECTED }):</span>
                 </a>
                 :
-                <div className={`${styles['no-h1']} ${styles['fs-14']} ${styles['search-ellipsis']}`} title={finalQuery}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}<span className={styles.fontW300}>:</span></div>
+                <React.Fragment>
+                <div className={`${styles['no-h1']} ${styles['fs-14']} ${styles['search-ellipsis']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`} title={finalQuery}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}
+                <span className={`${styles.fontW600} ${styles['pr-5']}`}>:</span>
+                </div>
+                </React.Fragment>
               }
-              <span className={`${styles['pl-5']} ${styles['fs-14']}`}>{ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS }</span>
+              <span className={`${styles['fs-14']}`}>{ results.totalCount.toLocaleString('en') } { SEARCH_PAGE.SEARCH_ITEMS }</span>
             </h4>
             {spellCheckResp &&
               <h4 className={`${styles['pl-10']} ${styles['fs-14']} ${styles['sple-check-prt']}`}>

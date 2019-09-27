@@ -69,13 +69,14 @@ const HeaderBar = props => (
           <div className={styles['header-meganenu-sub']}>
             <Row className={styles['m-0']}>
               <Col md={12}>
-                <MegaMenu query={props.query} />
+                <NoSSR>
+                  <MegaMenu query={props.query} />
+                </NoSSR>
               </Col>
             </Row>
           </div>
         </div>
     }
-
   </div>
 );
 

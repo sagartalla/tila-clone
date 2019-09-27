@@ -150,7 +150,7 @@ const Order = ({ order, getInvoice }) => {
           <div className={`${styles.flex}`}>
             <span className={`${styles['text-capitalize']}`}>{order.shippingTo.name}</span>
             <OverlayTrigger placement="bottom" overlay={popover}>
-              <span className={styles['ml-10']}>
+              <span className={`${styles['ml-10']} ${styles['flex']}`}>
                 <SVGComponent clsName={`${styles['down-arrow']}`} src="icons/down-arrow/down-arrow" />
               </span>
             </OverlayTrigger>

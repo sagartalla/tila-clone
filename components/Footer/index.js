@@ -186,8 +186,8 @@ const t = [
   },
 
   {
-    url: `/${lang}/brand/fossil`,
-    title: '/static/img/bg-img/Fossil.png',
+    url: `/${lang}/brand/michael-kors`,
+    title: '/static/img/bg-img/michael-kors.png', 
   },
 ];
 
@@ -409,22 +409,22 @@ render() {
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
                 <li><a href={`/${lang}/policy/aboutus-policy`} target="_blank">{FOOTER_PAGE.WHO_WE_ARE}</a></li>
                 <li><a href={`/${lang}/policy/ourvalues-policy`} target="_blank">{FOOTER_PAGE.OUR_VALUES}</a></li>
-                <li>{FOOTER_PAGE.OUR_MISSION}</li>
-                <li>{FOOTER_PAGE.PRESS_REALESES}</li>
-                <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li>
+                <li><a href={`/${lang}/policy/aboutus-policy#mission-vision`}>{FOOTER_PAGE.OUR_MISSION}</a></li>
+                {/* <li>{FOOTER_PAGE.PRESS_REALESES}</li>
+                <li>{FOOTER_PAGE.JOIN_OUR_TEAM}</li> */}
                 <li onClick={this.showAddress}><a>{FOOTER_PAGE.CORPARATE_ADDRESS}</a></li>
               </ul>
             </div>
             <div className={styles['ipad-pr-0']}>
               <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.POLICIES}</h4>
               <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                <li><a href={`/${lang}/policy/user-terms`} target="_blank">{FOOTER_PAGE.TERMS_CONDITION}</a></li>
-                <li><a href={`/${lang}/policy/cancellation-policy`} target="_blank">{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/return-and-exchange-policy#exchangePolicy`} target="_blank">{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/return-and-refund-policy#returnPolicy`} target="_blank">{FOOTER_PAGE.REFUND_POLICY}</a></li>
-                <li><a href={`/${lang}/policy/warranty-policy#warrantyPolicy`} target="_blank">{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
-                {/* <li><a href="/en/policy/sp" target="_blank">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
-                <li><a href={`/${lang}/policy/privacy-policy`} target="_blank">{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/user-terms`}>{FOOTER_PAGE.TERMS_CONDITION}</a></li>
+                <li><a href={`/${lang}/policy/cancellation-policy`}>{FOOTER_PAGE.CANCELLATION_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-exchange-policy#exchangePolicy`}>{FOOTER_PAGE.EXCHANGE_REPLACEMENT_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/return-and-refund-policy#returnPolicy`}>{FOOTER_PAGE.REFUND_POLICY}</a></li>
+                <li><a href={`/${lang}/policy/warranty-policy#warrantyPolicy`}>{FOOTER_PAGE.WARRENTY_POLICY}</a></li>
+                {/* <li><a href="/en/policy/sp">{FOOTER_PAGE.SHIPPING_POLICY}</a></li> */}
+                <li><a href={`/${lang}/policy/privacy-policy`}>{FOOTER_PAGE.PRIVACY_POLICY}</a></li>
               </ul>
             </div>
             {/* <Col md={2} sm={2} className={styles['ipad-pr-0']}>
@@ -444,7 +444,7 @@ render() {
               <div>
                 <h4 className={`${styles.fontW600} ${styles['fs-16']} ${styles['black-color']}`}>{FOOTER_PAGE.HELP}</h4>
                 <ul className={`${styles['pl-0']} ${styles['lne-ht2']}`}>
-                  <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li>
+                  {/* <li>{FOOTER_PAGE.CONSUMER_RIGHT}</li> */}
                   <li><a href={`/${lang}/policy/customer-delivery`} target="_blank">{FOOTER_PAGE.SHIPPING_AND_DELIVERY}</a></li>
                   <li><a href={`https://www.tila.com/${lang}/help/faq`} target="_blank">{FOOTER_PAGE.CUSTOMER_CARE}</a></li>
                 </ul>

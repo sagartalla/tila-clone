@@ -21,14 +21,18 @@ class PolicyPage extends Base {
     return { isServer };
   }
 
+  componentDidMount() {
+    document.querySelectorAll('script[id*=eval-script]').forEach((ele) => {
+      window.eval(ele.innerHTML);
+    })
+  }
+
   render() {
     const { url } = this.props;
     return (
       <div>
         <Layout>
-          <NoSSR>
-            <Policy query={url.query} key={url.query.name}/>
-          </NoSSR>
+          <Policy query={url.query} key={url.query.name}/>
         </Layout>
       </div>
     )
