@@ -7,6 +7,7 @@ const initialState = {
   },
   data: {},
   error: {},
+  selectedCOD: false,
 };
 
 const instantCheckoutReducer = typeToReducer({
@@ -23,6 +24,9 @@ const instantCheckoutReducer = typeToReducer({
   },
   [actions.CLEAR_INSTANT_CHECKOUT] : (state,action) => {
     return {...state,data:{}}
+  },
+  [actions.INCLUDE_COD]: (state) => {
+    return {...state, selectedCOD: true}
   }
 }, initialState);
 
