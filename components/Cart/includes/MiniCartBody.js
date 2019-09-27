@@ -124,9 +124,9 @@ const MiniCartBody = (props) => {
               <span>{total_offer_price.display_value }</span>
               </span>
             </div>
-            <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
+            <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['fp-btn-large']} ${styles['fs-14']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
               <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
-              <span className={styles['pl-5']}>{CART_PAGE.SECURE_CHECKOUT}</span>
+              <span className={`${styles['pl-5']} ${styles['text-uppercase']}`}>{CART_PAGE.SECURE_CHECKOUT}</span>
             </button>
           </div>
           : null

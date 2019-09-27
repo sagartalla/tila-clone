@@ -116,7 +116,7 @@ class OrderHeader extends Component {
                   <div>
                     <div className={`${styles['mt-0']} ${styles['flex-center']} ${styles['light-gry-clr']}  ${styles['mb-15']}`}>
                       <Col md={6} sm={6} className={`${styles['text-uppercase']} ${styles['fs-14']}`}>{ORDER_PAGE.ORDER_DETAILS_SUMMERY}</Col>
-                      <Col md={6} sm={6} className={`${styles['fs-14']}`}>{ORDER_PAGE.ORDER} # {orderId}</Col>
+                      <Col md={6} sm={6} className={`${styles['fs-14']}`}>{ORDER_PAGE.ORDER} {orderId}</Col>
                     </div>
                   </div>
                   <div className={styles['lne-ht2']}>
