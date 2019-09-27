@@ -97,7 +97,6 @@ class OrderHeader extends Component {
     } = price;
     let voucherPayment = payments && payments.filter((payment) => payment.payment_mode === "VOUCHER");
     let codPayment = payments && payments.filter((payment) => payment.payment_mode === "CASH_ON_DELIVERY");
-    console.log(price);
     return (
       <div className={`${styles.box} ${styles['addres-dtls']}`}>
         <Row className={styles['m-0']}>

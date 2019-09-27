@@ -64,7 +64,15 @@ const InstaCheckoutDetails = ({
     setValue(e.target.checked ? (details.payment_options_available.length === 1 && details.payment_options_available[0].type === 'VOUCHER' ? 'VOUCHER' : 'SAVED_CARD') : 'SAVED_CARD');
     return setCheckValue(e.target.checked);
   };
-  const getCurrentTabValue = (e, value) => setValue(value);
+  const getCurrentTabValue = (e, value) => {
+    setValue(value);
+    if (value === 'CASH_ON_DELIVERY') {
+      props.codChargesDisplay()
+    }else{
+      debugger;
+      props.excludeCOD()
+    }
+  }
   const getTabPanelData = (data) => {
     let filteredData = data.payment_options_available;
     let savedCards = data.payment_options_available.filter(item => item.type === 'SAVED_CARD')[0] || {};
@@ -193,7 +201,7 @@ const InstaCheckoutDetails = ({
           onCallback={getCurrentTabValue}
           tabsClass={`${styles.flex} ${styles['pt-5']} ${styles['pb-5']} ${styles['flex-wrp']}`}
         >
-          {filteredData.map((item,index) => (
+          {filteredData.map((item, index) => (
             <Tab
               label={item.display_name}
               tabClass={`${styles['fs-12']} ${(filteredData.length - 1 === index) ? '' : styles['pr-20']}`}
@@ -318,11 +326,7 @@ class InstantCheckout extends Component {
   handleChange() {
     this.setState(prevstate => ({
       checked: !prevstate.checked,
-    }),() => {
-      if(this.state.checked){
-        this.props.includeCOD()
-      }
-    });
+    }));
     this.getNewFilteredResult();
   }
   toggleMiniAddress() {
@@ -428,6 +432,8 @@ class InstantCheckout extends Component {
       getCardDetails,
       getSelectedCard,
       details,
+      includeCOD,
+      excludeCOD
     } = this.props;
     const {
       showMiniAddress,
@@ -450,43 +456,45 @@ class InstantCheckout extends Component {
             {
               true: <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} className="h-200 desktop:h-376 w-full" />,
               false:
-              <Modal
-                show={this.state.isIframeLoaded}
-                onHide={this.hideIframe}
-                dialogClassName="custom-modal"
-              >
-                <Modal.Body>
-                  <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} className="h-200 desktop:h-376 w-full" />
-                </Modal.Body>
-              </Modal>,
+                <Modal
+                  show={this.state.isIframeLoaded}
+                  onHide={this.hideIframe}
+                  dialogClassName="custom-modal"
+                >
+                  <Modal.Body>
+                    <iframe sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" src={iframe_url} style={{ height: '426px', width: '500px', border: '0' }} className="h-200 desktop:h-376 w-full" />
+                  </Modal.Body>
+                </Modal>,
             }[isPdp]
-          :
+            :
             <div className={`${styles['pr-10']} ${styles['pl-10']}`}>
               {
-               showBlocker ?
-                 <div className={styles.blocker} />
-                 : ''
-             }
+                showBlocker ?
+                  <div className={styles.blocker} />
+                  : ''
+              }
               {
-               Object.keys(getCardDetails).length > 0 ?
-                 <InstaCheckoutDetails
-                   details={getCardDetails}
-                   selectedAddr={selectedAddr}
-                   toggleMiniAddress={this.toggleMiniAddress}
-                   showMiniAddress={showMiniAddress}
-                   isPdp={isPdp}
-                   updateCVV={this.updateCVV}
-                   vaultResults={vaultResults}
-                   toggleMiniVault={this.toggleMiniVault}
-                   showMiniVault={showMiniVault}
-                   doInstantCheckout={this.doInstantCheckout}
-                   addressResults={addressResults}
-                   checked={checked}
-                   handleChange={this.handleChange}
-                   selectedTilaCredit={this.selectedTilaCredit}
-                   getSelectedCard={getSelectedCard}
-                 /> : null
-             }
+                Object.keys(getCardDetails).length > 0 ?
+                  <InstaCheckoutDetails
+                    codChargesDisplay={includeCOD}
+                    excludeCOD={excludeCOD}
+                    details={getCardDetails}
+                    selectedAddr={selectedAddr}
+                    toggleMiniAddress={this.toggleMiniAddress}
+                    showMiniAddress={showMiniAddress}
+                    isPdp={isPdp}
+                    updateCVV={this.updateCVV}
+                    vaultResults={vaultResults}
+                    toggleMiniVault={this.toggleMiniVault}
+                    showMiniVault={showMiniVault}
+                    doInstantCheckout={this.doInstantCheckout}
+                    addressResults={addressResults}
+                    checked={checked}
+                    handleChange={this.handleChange}
+                    selectedTilaCredit={this.selectedTilaCredit}
+                    getSelectedCard={getSelectedCard}
+                  /> : null
+              }
             </div>
         }
         <div>
@@ -504,27 +512,27 @@ class InstantCheckout extends Component {
             </Modal.Header>
             <Modal.Body>
               {checked
-                  ?
-                  {
-                    captcha: <Captcha
-                      onCaptchaSuccess={this.onCaptchaSuccess}
-                      txnId={getCardDetails.transaction_id}
-                      render={([items, state, handleClick, handleDrop]) =>
-                        (<CaptchaContent
-                          items={items}
-                          state={state}
-                          handleClick={handleClick}
-                          handleDrop={handleDrop}
-                        />)
-                      }
-                    />,
-                    mobileVerification:
+                ?
+                {
+                  captcha: <Captcha
+                    onCaptchaSuccess={this.onCaptchaSuccess}
+                    txnId={getCardDetails.transaction_id}
+                    render={([items, state, handleClick, handleDrop]) =>
+                      (<CaptchaContent
+                        items={items}
+                        state={state}
+                        handleClick={handleClick}
+                        handleDrop={handleDrop}
+                      />)
+                    }
+                  />,
+                  mobileVerification:
                     <EditPhone
                       afterSuccessOtpVerification={this.afterSuccessOtpVerification}
                       mobileVerified={profileInfo.contactInfo.mobile_verified === 'V'}
                       userData={profileInfo.contactInfo}
                     />,
-                    checkoutBtn:
+                  checkoutBtn:
                     <div>
                       <div className={`${styles['success-green']} ${styles['mb-25']}`}>{CONTACT_INFO_MODAL.PLEASE_CONFIRM_YOUR_ORDER}</div>
                       <div>
@@ -537,9 +545,9 @@ class InstantCheckout extends Component {
                         />
                       </div>
                     </div>,
-                  }[this.state.nextStep]
-                  :
-                  null
+                }[this.state.nextStep]
+                :
+                null
               }
             </Modal.Body>
           </Modal>
@@ -579,6 +587,7 @@ const mapDispatchToProps = dispatch =>
       getUserProfileInfo: camActionCreators.getUserProfileInfo,
       changeState: addressActionCreators.changeState,
       includeCOD: actionCreators.includeCOD,
+      excludeCOD: actionCreators.excludeCOD
     },
     dispatch,
   );
