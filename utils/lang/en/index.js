@@ -497,6 +497,7 @@ export const EN_KEYWORDS = {
     OKAY: 'OKAY',
     WE_WILL_EMAIL_YOU_ONCE_THIS_IS_IN_STOCK: 'We will email you once this is in stock.',
     WE_ARE_SERVING_WITHIN_SAUDI: 'We are only serving locations within Saudi',
+    YOU_HAVE_BLOCKED: 'You have blocked TiLa from tracking your Location. To use this, change your location settings in browser',
   },
   // adding new page content
   FOOTER_PAGE: {
