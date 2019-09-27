@@ -211,10 +211,10 @@ class Menu extends Component {
             <li className={`${styles['megamenu-sub-list']}`}>
               <span className={`${styles.flex} ${styles['mb-10']}`}>
                 <a className={`${styles['level-1-item']} ${styles.fontW600}`}>
-                {selectedCategoryTree.sid === "JZG" ?
-                  HEADER_PAGE.COMING_SOON
-                  :
+                {selectedCategoryTree.sid === "CWZ" ?
                   HEADER_PAGE.TRENDING
+                  :
+                  HEADER_PAGE.COMING_SOON
                 }
                 </a>
               </span>
