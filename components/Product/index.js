@@ -253,6 +253,7 @@ const getProductComponent = (isPreview, taskCode) => {
                     <Col xs={12} md={8} sm={12} className={`${styles['pl-0']} ${styles['pdp-img-prt']} ${styles['p-0']}`}>
                       <NoSSR>
                         <Display
+                          offerInfo={offerInfo}
                           product_id={product_id}
                           offerPricing={offerPricing}
                           catalogObj={catalogObj}
