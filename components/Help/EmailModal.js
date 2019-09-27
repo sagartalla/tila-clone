@@ -1,7 +1,6 @@
 import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
-import { toast } from 'react-toastify';
 
 import { actionCreators as helpActions } from '../../store/helpsupport';
 import { selectors as orderSelectors, actionCreators as orderActions } from '../../store/cam/orders';
@@ -24,8 +23,6 @@ const languageLabel = languageDefinations();
 
 
 import { toast } from 'react-toastify';
-import ToastContent from '../common/ToastContent';
-import SVGComponent from '../common/SVGComponet';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { HNS } = languageDefinations();
