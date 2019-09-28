@@ -96,7 +96,7 @@ const getZonedItems = (store) => {
 const getIsListingLoading = store => store.landingReducer.ui.isListingLoading;
 
 const getPolicy = store => {
-  return store.landingReducer.data.page_content[0].data;
+  return store.landingReducer && store.landingReducer.data && store.landingReducer.data.page_content && store.landingReducer.data.page_content[0].data;
 }
 
 export {

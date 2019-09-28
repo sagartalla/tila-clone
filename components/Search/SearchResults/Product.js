@@ -587,7 +587,7 @@ class Product extends Component {
                         disableViewportTracking={true}
                         onClick={this.stopEventPropagation}
 											>
-												<div data-listing-id={listing_id}>
+												<div style={{width: "50%"}} data-listing-id={listing_id}>
 													<Button
 														className={`${styles.flex} ${
 															styles["add-to-crt"]
@@ -617,7 +617,7 @@ class Product extends Component {
                         disableViewportTracking={true}
                         onClick={this.stopEventPropagation}
 											>
-												<div data-listing-id={listing_id}>
+												<div style={{width: "50%"}} data-listing-id={listing_id}>
 													<Button
 														className={`${styles["flex-center"]} ${
 															styles["buy-now-btn"]

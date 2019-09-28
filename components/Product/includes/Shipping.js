@@ -64,7 +64,10 @@ const Shipping = (props) => {
               {
               acceptsReturns
                 ?
-                  <span>{maxDaysToReturn} {PDP_PAGE.DAYS} {PDP_PAGE.EASY_RETURN}</span>
+                <React.Fragment>
+                  <span>{lang === 'en' && (maxDaysToReturn === 15 ? maxDaysToReturn + '' + PDP_PAGE.EASY_RETURN : maxDaysToReturn === 30 ? maxDaysToReturn + '' +  PDP_PAGE.EASY_RETURN : maxDaysToReturn === 10 ? maxDaysToReturn + '' +  PDP_PAGE.EASY_RETURN : '')}</span>
+                  <span>{lang === 'ar' && (maxDaysToReturn === 15 ? PDP_PAGE.FIFTEEN_EASY_RETURN : maxDaysToReturn === 30 ? PDP_PAGE.THIRTY_EASY_RETURN : maxDaysToReturn === 10 ? maxDaysToReturn + '' +  PDP_PAGE.TEN_EASY_RETURN : '')}</span>
+                  </React.Fragment>                  
                 :
                 `${PDP_PAGE.NON_RETURNABLE}`
             }

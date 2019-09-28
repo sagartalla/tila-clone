@@ -14,6 +14,9 @@ const getCartResults = (store) => {
       newData.total_discount = data.total_discount || {};
       newData.total_shipping = data.total_shipping || {};
       newData.total_gift_charges = data.total_gift_charges || {};
+      newData.total_vat = data.total_vat || {};
+      newData.total_mrp = data.total_mrp || {};
+      newData.payment_options_response = data.payment_options_response || {};
       newData.tax = 0;
       newData.item_cnt = data.items.length;
       newData.currency = data.total_price.currency_code;
@@ -57,7 +60,7 @@ const getCartResults = (store) => {
           total_discount: listingInfo.pricing && listingInfo.pricing.total_discount_mrp.display_value,
           variantAttributes: listingInfo.variant_id && item.product_details && item.product_details.product_details_vo.cached_variant[listingInfo.variant_id].attribute_map ?
             Object.values(item.product_details.product_details_vo.cached_variant[listingInfo.variant_id].attribute_map)
-            .filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
+              .filter(attr => attr.attribute_group_name === 'IDENTITY' && attr.visible) : [],
           tila_care_policy: listingInfo.tila_care_policy,
           policies_applied: item.policies_applied || [],
           tila_care_charges: item.tila_care_charges || null,
@@ -86,7 +89,7 @@ const getErrorMessege = (store) => {
 
 const isAddedToCart = (store) => {
   try {
-    const selectedCartItem = _.find(store.cartReducer.data.items, ({listing_id}) => {
+    const selectedCartItem = _.find(store.cartReducer.data.items, ({ listing_id }) => {
       return store.productReducer.data[0].variant_preferred_listings[store.productReducer.variantsData.selectedVariantId][0].listing_id === listing_id;
     });
     return !!selectedCartItem;
@@ -104,5 +107,5 @@ const getBtnLoaders = store => store.cartReducer.ui.btnLoading;
 
 export {
   getCartResults, getLoadingStatus, getErrorMessege,
-  isAddedToCart, getBtnLoaders, isLastAddedToCartSuccess,getEditDetails
+  isAddedToCart, getBtnLoaders, isLastAddedToCartSuccess, getEditDetails
 };

@@ -1,34 +1,34 @@
-import React from 'react';
-import { Row, Col } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import Cookies from 'universal-cookie';
+import React from "react";
+import { Row, Col } from "react-bootstrap";
+import PropTypes from "prop-types";
+import Cookies from "universal-cookie";
 
-import SVGComponent from '../../../common/SVGComponet';
-import { languageDefinations } from '../../../../utils/lang/';
-import { Router } from '../../../../routes';
-import constants from '../../../../constants';
+import SVGComponent from "../../../common/SVGComponet";
+import { languageDefinations } from "../../../../utils/lang/";
+import { Router } from "../../../../routes";
+import constants from "../../../../constants";
+import ViewportTrackerHOC from "../../../common/ViewPortTracker/ViewportTrackerHOC";
 
-import lang from '../../../../utils/language';
+import lang from "../../../../utils/language";
 
-import main_en from '../../../../layout/main/main_en.styl';
-import main_ar from '../../../../layout/main/main_ar.styl';
-import styles_en from '../wishlist_en.styl';
-import styles_ar from '../wishlist_ar.styl';
+import main_en from "../../../../layout/main/main_en.styl";
+import main_ar from "../../../../layout/main/main_ar.styl";
+import styles_en from "../wishlist_en.styl";
+import styles_ar from "../wishlist_ar.styl";
 
-const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
+const styles =
+	lang === "en" ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const cookies = new Cookies();
 
-const language = cookies.get('language') || 'ar';
-const country = cookies.get('country') || 'SAU';
+const language = cookies.get("language") || "ar";
+const country = cookies.get("country") || "SAU";
 
 const percentage = (a, b) => Math.floor(((b - a) / b) * 100);
 
-const WishlistBody = (props) => {
-  const {
-    data, deleteItem, addToCart, notifyMe, pageDetails,
-  } = props;
-  const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
+const WishlistBody = props => {
+	const { data, deleteItem, addToCart, notifyMe, pageDetails } = props;
+	const { WISH_LIST_PAGE, PDP_PAGE } = languageDefinations();
 
   const getPriceAlert = (status, wishlisted_price, changed_price, cur) => {
     let str = '';
@@ -67,8 +67,12 @@ const WishlistBody = (props) => {
     <div className={`${styles['pl-5']}`}>
       <div className={`${styles.flex}`}>
         <Col md={12} sm={12} xs={12} className={`${styles['pl-0']}`}>
-          <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles.fontW300}}`}>
-            <span>{`Showing ${(pageDetails.number * pageDetails.size) + 1}-${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size} of ${pageDetails.total_elements} ${pageDetails.total_elements === 1 ? WISH_LIST_PAGE.WISHLIST_HEADER_ONE : WISH_LIST_PAGE.WISHLIST_HEADER}`}</span>
+          <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles.fontW300}`}>
+            <span>{`${lang === 'en' ? 'Showing' : ''}
+            ${lang === 'en' ? `${(pageDetails.number * pageDetails.size) + 1}`+ '-' +`${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size}` :
+            `${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size}`+ '-' + `${(pageDetails.number * pageDetails.size) + 1}`}
+            ${WISH_LIST_PAGE.OF} ${pageDetails.total_elements} ${pageDetails.total_elements === 1 ? WISH_LIST_PAGE.WISHLIST_HEADER_ONE : WISH_LIST_PAGE.WISHLIST_HEADER}`}
+            </span>
           </h4>
         </Col>
       </div>
@@ -96,16 +100,33 @@ const WishlistBody = (props) => {
                       <h5 className={`${styles['lgt-gry-clr']} ${styles.pointer} ${styles['light-gry-clr']}`} onClick={() => routeChange(variant_id, product_id, catalog_id, itemType, name, tuin_id)}>{name}</h5>
                       <div className={`${styles['mt-30']} ${styles['m-t-0']} ${styles['m-fs-12']}`}>
                         {inventory_count > 0 ?
-                          <button
-                            id={listing_id}
-                            data-cart-res
-                            data-wish-id={wishlist_id}
-                            className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
-                            onClick={buttonValue ? addToCart : () => {}}
+													<ViewportTrackerHOC
+                          clickEvent={`WL-MOVE-TO-CART-CLICK`}
+                          disableViewportTracking={true}
+                        >
+                          <div
+                            data-listing-id={listing_id}
+                            data-wishlist-id={wishlist_id}
+                            data-button-value={buttonValue}
                           >
-                            {buttonValue ? WISH_LIST_PAGE.ADD_TO_CART_BTN : PDP_PAGE.IN_CART}
-                          </button>
-                          :
+                            <button
+                              id={listing_id}
+                              data-cart-res
+                              data-wish-id={wishlist_id}
+                              className={`${styles["fp-btn"]} ${
+                                styles["fp-btn-primary"]
+                              } ${styles["left-radius"]} ${
+                                styles["add-to-btn"]
+                              }`}
+                              onClick={buttonValue ? addToCart : () => {}}
+                            >
+                              {buttonValue
+                                ? WISH_LIST_PAGE.ADD_TO_CART_BTN
+                                : PDP_PAGE.IN_CART}
+                            </button>
+                          </div>
+                        </ViewportTrackerHOC>
+                        :
                           <button
                             data-wish-id={wishlist_id}
                             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['left-radius']} ${styles['add-to-btn']}`}
@@ -150,14 +171,14 @@ const WishlistBody = (props) => {
 };
 
 WishlistBody.propTypes = {
-  data: PropTypes.array,
-  deleteItem: PropTypes.func.isRequired,
-  addToCart: PropTypes.func.isRequired,
-  notifyMe: PropTypes.func.isRequired,
+	data: PropTypes.array,
+	deleteItem: PropTypes.func.isRequired,
+	addToCart: PropTypes.func.isRequired,
+	notifyMe: PropTypes.func.isRequired
 };
 
 WishlistBody.defaultProps = {
-  cartData: [],
+	cartData: []
 };
 
 export default WishlistBody;

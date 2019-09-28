@@ -8,7 +8,7 @@ import { languageDefinations } from '../../utils/lang/';
 const { API_TEXT, CART_PAGE } = languageDefinations();
 
 const getCartDetailsApi = (params = {}) => {
-  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, params).then(({ data }) => {
+  return axios.put(`${constants.CART_API_URL}/api/v1/cart/view`, {...params, "fetch_instant_checkout_options": true}).then(({ data }) => {
     if (data) {
       data.applyCouponRequestCount = params.applyCouponRequestCount;
     }

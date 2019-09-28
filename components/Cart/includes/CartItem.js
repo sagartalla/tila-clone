@@ -456,7 +456,9 @@ class CartItem extends React.Component {
             <span className={styles.width21}>
               {
                 inventory <= 10 && inventory != 0 ?
-                  inventory <= 0 || !active ? null : <span className={`${styles.fontW600} ${styles['thick-red']} ${styles['pr-20']}`}>{CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
+                  inventory <= 0 || !active ? null :
+                  <span className={`${styles.fontW600} ${styles['thick-red']} ${styles['pr-20']}`}>
+                  {lang === 'en' ? CART_PAGE.ONLY + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT : CART_PAGE.LEFT + ' ' + inventory + ' ' + CART_PAGE.UNITS_LEFT} </span>
                   : ''
               }
               {

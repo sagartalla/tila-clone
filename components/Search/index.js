@@ -227,7 +227,7 @@ class Search extends Component {
                 :
                 <React.Fragment>
                 <div className={`${styles['no-h1']} ${styles['fs-14']} ${styles['search-ellipsis']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`} title={finalQuery}>{finalQuery && this.capitalize(finalQuery.split('-').join(' '))}
-                <span className={`${styles.fontW600} ${styles['pr-5']}`}>:</span>
+                <span className={`${styles.fontW600} ${styles['pr-5']}`}>{lang === 'en' ? ':' : ''}</span>
                 </div>
                 </React.Fragment>
               }

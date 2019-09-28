@@ -28,7 +28,8 @@ class CartAndPaymentSideBar extends Component {
     super(props);
 
     this.state = {
-      iframe_url: ''
+      iframe_url: '',
+      codStatus: props.getCODStatus || false,
     };
   }
   removeCoupon = () => {
@@ -43,20 +44,27 @@ class CartAndPaymentSideBar extends Component {
     if (nextProps.getInstantCheckoutdata && nextProps.getInstantCheckoutdata.iframe_url) {
       this.setState({ iframe_url: nextProps.getInstantCheckoutdata.iframe_url })
     }
+    if (nextProps.getCODStatus!==undefined && nextProps.getCODStatus !== this.props.getCODStatus) {
+      this.setState({
+        codStatus: nextProps.getCODStatus,
+      })
+    }
   }
+
+
   render() {
     const {
-      checkoutBtnHandler, showCheckoutBtn, showInstant,
-      hideUpSell, showStepper, increaseItemCnt, decreaseItemCnt,
-      insnt_item_listing_id, isPdp, couponData, getCartResults, data, hideCouponCode,
+      checkoutBtnHandler, showCheckoutBtn, showInstant, showStepper, increaseItemCnt, decreaseItemCnt,
+      insnt_item_listing_id, isPdp, data, hideCouponCode,
     } = this.props;
-
     const {
-      items, total_price, total_offer_price, total_gift_charges,
-      total_discount, total_shipping, tax, item_cnt, currency, total_tila_care_charges,
+      items, total_price, total_offer_price, total_gift_charges, total_vat,
+      total_discount, payment_options_response, total_shipping, item_cnt, currency, total_tila_care_charges,
     } = data;
-    
-    const { iframe_url } = this.state;
+    const { iframe_url, codStatus } = this.state;
+    const voucher = payment_options_response && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'VOUCHER')[0];
+    const saved_card = payment_options_response && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'SAVED_CARD')[0];
+    const cash_on_delivery = payment_options_response && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'CASH_ON_DELIVERY')[0];
     return (
       <div className={`${styles['right-bar']}`}>
         <div className={`${styles['coupon-code-main']}`}>
@@ -79,8 +87,8 @@ class CartAndPaymentSideBar extends Component {
               :
               <span className={`${styles['flex-center']} ${styles['justify-center']} ${styles['pt-5']} ${styles['pb-5']} ${styles['pr-10']} ${styles['pl-10']} ${styles.flex} ${styles['m-10']} ${styles['apply-coupon']} ${styles.pointer}`} onClick={this.props.openSlider}>
                 {lang === 'en' ?
-                  <img src="/static/img/icons/common-icon/coupon-layout-en.png" className={styles['coupon-code-blank']}/>
-                   : <SVGComponent clsName={`${styles['coupon-code-blank']}`} src="icons/common-icon/coupon-code-border-ar" />}
+                  <img src="/static/img/icons/common-icon/coupon-layout-en.png" className={styles['coupon-code-blank']} />
+                  : <SVGComponent clsName={`${styles['coupon-code-blank']}`} src="icons/common-icon/coupon-code-border-ar" />}
                 <div className={`${styles.noCoupon} ${styles['ml-5']}`}>
                   <span className={`${styles['text-uppercase']} ${styles['pl-5']}`}>
                     <div className={`${styles['fs-14']}`}>{COUPON_OFFERS.APPLY_COUPON}</div>
@@ -109,9 +117,9 @@ class CartAndPaymentSideBar extends Component {
         {
           showCheckoutBtn ?
             <div className={`${styles['pt-10']} ${styles['pb-10']} ${styles['pr-20']} ${styles['pl-20']}`}>
-              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['fp-btn-large']} ${styles['fs-18']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
+              <button className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['right-radius']} ${styles['fp-btn-large']} ${styles['fs-14']} ${styles['flex-center']} ${styles['justify-center']}`} onClick={checkoutBtnHandler}>
                 <SVGComponent clsName={`${styles['secure-checkout']}`} src="icons/common-icon/secure-checkout" />
-                <span className={styles['pl-5']}>{CART_PAGE.SECURE_CHECKOUT}</span>
+                <span className={`${styles['pl-5']} ${styles['text-uppercase']}`}>{CART_PAGE.SECURE_CHECKOUT}</span>
               </button>
             </div>
             : null
@@ -158,22 +166,23 @@ class CartAndPaymentSideBar extends Component {
                   <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} /></span>
                 }
               </li>
-              {total_gift_charges.display_value &&
+              {(total_gift_charges && total_gift_charges.display_value) ?
                 <li>
                   <span className={styles['thick-gry-clr']}>{CART_PAGE.GIFT_CHARGES}</span>
                   <span>
                     <span className={`${styles['fs-10']}`}>{total_gift_charges.currency_code || currency}</span>&nbsp;
-              <span className={`${styles['fs-12']}`}>{total_gift_charges.display_value}</span>
+                    <span className={`${styles['fs-12']}`}>{total_gift_charges && total_gift_charges.display_value}</span>
                   </span>
-                </li>}
+                </li> : null}
               {
-                tax !== 0 ?
+                total_vat.display_value !== 0 ?
                   <li>
-                    <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
-                    {total_shipping.money_value > 0 ?
-                      <span>{total_shipping.currency_code || currency} {total_shipping.display_value || 0}</span> :
-                      <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} /></span>
-                    }
+                    <span className={styles['thick-gry-clr']}>{CART_PAGE.ESTIMATED_VAT}</span>
+                    {/* <span>{total_vat.currency_code || currency} {total_vat.display_value}</span>  */}
+                    <span>
+                      <span className={`${styles['fs-10']}`}>{total_vat.currency_code || currency}</span>&nbsp;
+                        <span className={`${styles['fs-12']}`}>{total_vat.display_value}</span>
+                    </span>
                   </li> : null}
               {total_tila_care_charges !== null &&
                 <li>
@@ -188,12 +197,46 @@ class CartAndPaymentSideBar extends Component {
                   </span>
                 </li>
               }
+              <hr />
+              <li>
+                <b>{CART_PAGE.CART_VALUE}</b>
+                <span>
+                  <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}>
+                    <span className={styles.fontW600}>
+                      <span className={`${styles['fs-10']}`}>{total_price.currency_code || currency}</span>&nbsp;
+                <span>{total_price.display_value}</span>
+                    </span>
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span className={styles['thick-gry-clr']}>{CART_PAGE.TILA_GIFT}</span>
+                <span>
+                  {voucher && voucher.amount_to_pay &&
+                    <span>
+                      <span className={`${styles['fs-12']}`}>{voucher.amount_to_pay.display_value}</span>
+                    </span>
+                  }
+                </span>
+              </li>
+              {codStatus &&
+                <li>
+                  <span className={styles['thick-gry-clr']}>{CART_PAGE.COD_CHARGES}</span>
+                  <span>
+                    <span>
+                      <span className={`${styles['fs-10']}`}>{cash_on_delivery.cod_charges.currency_code}</span>&nbsp;
+                  <span className={`${styles['fs-12']}`}>{cash_on_delivery.cod_charges.display_value}</span>
+                    </span>
+                  </span>
+                </li>
+              }
+              <hr />
               <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}>
-                <b>{CART_PAGE.TOTAL_AMOUNT}</b>
+                <b>{CART_PAGE.AMOUNT_PAYABLE}</b>
                 <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}>
                   <span className={styles.fontW600}>
-                    <span className={`${styles['fs-12']}`}>{total_price.currency_code || currency}</span>&nbsp;
-                <span>{total_price.display_value}</span>
+                    <span className={`${styles['fs-12']}`}>{cash_on_delivery.amount_to_pay.currency_code || currency}</span>&nbsp;
+                <span>{codStatus ? cash_on_delivery.amount_to_pay.display_value : saved_card.amount_to_pay.display_value}</span>
                   </span>
                 </span>
               </li>
@@ -232,6 +275,7 @@ CartAndPaymentSideBar.defaultProps = {
 const mapStateToProps = (store) => {
   return {
     getInstantCheckoutdata: instantCheckoutSelectors.getInstantCheckoutResData(store),
+    getCODStatus: instantCheckoutSelectors.getCODStatus(store),
   }
 }
 const mapDispatchToProps = dispatch =>
