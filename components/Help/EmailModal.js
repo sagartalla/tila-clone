@@ -1,7 +1,6 @@
 import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
-import { toast } from 'react-toastify';
 
 import { actionCreators as helpActions } from '../../store/helpsupport';
 import { selectors as orderSelectors, actionCreators as orderActions } from '../../store/cam/orders';
@@ -21,6 +20,9 @@ import styles_en from './help_en.styl';
 import styles_ar from './help_ar.styl';
 
 const languageLabel = languageDefinations();
+
+
+import { toast } from 'react-toastify';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 const { HNS } = languageDefinations();
@@ -191,7 +193,7 @@ class EmailModal extends Component {
   }
   openChat = () => {
     const validation = this.validations.validate(this.state);
-    if (validation.isValid) {    
+    if (validation.isValid) {
     const baseURL = lang === 'en' ? `https://tila-en.custhelp.com/app/chat/chat_landing` : `https://tila-ar.custhelp.com/app/chat/chat_landing`;
     const baseCustomObjectUrl = `/Incident.CustomFields.c`
     const firstName = this.state.firstname ? `/Contact.Name.First/${this.state.firstname}` : '';
@@ -204,7 +206,7 @@ class EmailModal extends Component {
     const chatURL = `${baseURL}${firstName}${lastName}${email}${categoryCode}${order_number}${countryCode}${languageCode}`;
     window.open(chatURL, '_blank');
     }
-    this.setState({ validation }); 
+    this.setState({ validation });
   }
   handleOrdersScroll = (e) => {
     clearTimeout(this.scrollTimeout);
@@ -270,7 +272,7 @@ class EmailModal extends Component {
         });
       }
     }
-    
+
   }
 
   createIncident = () => {
@@ -413,11 +415,11 @@ class EmailModal extends Component {
                     className={styles.dropDownInput}
                   >
                     <input type="text"
-                      dir="auto" 
+                      dir="auto"
                       name="issue"
-                      className={styles.searchInputIssue} 
-                      placeholder={selectedIssue ? selectedIssue.q.trim() : ''} 
-                      value={this.state.issueSearchQuery} 
+                      className={styles.searchInputIssue}
+                      placeholder={selectedIssue ? selectedIssue.q.trim() : ''}
+                      value={this.state.issueSearchQuery}
                       onChange={this.handleIssueSearch}
                       onFocus={this.focusIssueSearch}
                       // onBlur={this.handleIssueSelectSearch(searchIssues)}
