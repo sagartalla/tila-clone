@@ -507,7 +507,7 @@ class Product extends Component {
 											<span>
 												{lang === "en"
 													? SEARCH_PAGE.LAUNCH_OFFER + ' ' + discountValue + "%"
-													: "%" + discountValue + ' ' + SEARCH_PAGE.LAUNCH_OFFER}{" "}
+													: SEARCH_PAGE.LAUNCH_OFFER + ' ' + discountValue + "%"} {" "}
 												{PDP_PAGE.OFF}
 											</span>
 										</span>

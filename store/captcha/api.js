@@ -1,6 +1,10 @@
 import axios from 'axios';
 import constants from '../helper/constants';
 import { toast } from 'react-toastify';
+import { languageDefinations } from '../../utils/lang/';
+
+const { API_TEXT } = languageDefinations();
+
 const captchaDisplay = ({txnId}) => {
   let headers = {
     headers: {
@@ -19,7 +23,7 @@ const captchaVerify = (options) => {
   return axios.post(`${constants.CAPTCHA_URL}/verify`, options).then(({data}) => {
     return data;
   }).catch(() => {
-    toast("Maximum attempts reached, Please refresh the page");
+    toast(API_TEXT.MAXIMUM_ATTEMPSTS_REACHED);
   })
 }
 
