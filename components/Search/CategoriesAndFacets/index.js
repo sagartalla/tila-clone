@@ -99,7 +99,7 @@ class CategoriesAndFacets extends Component {
             : null;
           })
         }
-        <ExcludeOOS />
+        {/* <ExcludeOOS /> */}
       </PanelGroup>
     );
   }
