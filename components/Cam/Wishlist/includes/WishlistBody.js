@@ -67,8 +67,12 @@ const WishlistBody = props => {
     <div className={`${styles['pl-5']}`}>
       <div className={`${styles.flex}`}>
         <Col md={12} sm={12} xs={12} className={`${styles['pl-0']}`}>
-          <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles.fontW300}}`}>
-            <span>{`Showing ${(pageDetails.number * pageDetails.size) + 1}-${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size} of ${pageDetails.total_elements} ${pageDetails.total_elements === 1 ? WISH_LIST_PAGE.WISHLIST_HEADER_ONE : WISH_LIST_PAGE.WISHLIST_HEADER}`}</span>
+          <h4 className={`${styles['mt-0']} ${styles['mb-20']} ${styles.fontW300}`}>
+            <span>{`${lang === 'en' ? 'Showing' : ''}
+            ${lang === 'en' ? `${(pageDetails.number * pageDetails.size) + 1}`+ '-' +`${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size}` :
+            `${(pageDetails.number + 1) * pageDetails.size > pageDetails.total_elements ? pageDetails.total_elements : (pageDetails.number + 1) * pageDetails.size}`+ '-' + `${(pageDetails.number * pageDetails.size) + 1}`}
+            ${WISH_LIST_PAGE.OF} ${pageDetails.total_elements} ${pageDetails.total_elements === 1 ? WISH_LIST_PAGE.WISHLIST_HEADER_ONE : WISH_LIST_PAGE.WISHLIST_HEADER}`}
+            </span>
           </h4>
         </Col>
       </div>
