@@ -2,7 +2,9 @@ import apis from './api';
 
 const actions = {
   INSTANT_CHECKOUT: 'INSTANT_CHECKOUT',
-  CLEAR_INSTANT_CHECKOUT: 'CLEAR_INSTANT_CHECKOUT'
+  CLEAR_INSTANT_CHECKOUT: 'CLEAR_INSTANT_CHECKOUT',
+  INCLUDE_COD: 'INCLUDE_COD',
+  EXCLUDE_COD: 'EXCLUDE_COD',
 };
 
 const actionCreators = {
@@ -17,6 +19,16 @@ const actionCreators = {
       type:actions.CLEAR_INSTANT_CHECKOUT    
     }
   },
+  includeCOD: () => {
+    return {
+      type: actions.INCLUDE_COD
+    }
+  },
+  excludeCOD: () => {
+    return {
+      type: actions.EXCLUDE_COD
+    }
+  }
 
 };
 

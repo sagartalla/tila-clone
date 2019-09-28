@@ -10,6 +10,9 @@ const getListingCartResults = (store) => {
 
     if (data.items) {
       newData.total_price = data.total_price || {};
+      newData.total_vat = data.total_vat || {};
+      newData.total_tila_care_charges = data.total_tila_care_charges || {};
+      newData.payment_options_response = data.payment_options_response || {};
       newData.total_offer_price = data.total_offer_price || {};
       newData.total_discount = data.total_discount || {};
       newData.total_shipping = data.total_shipping || {};
