@@ -500,14 +500,14 @@ class Product extends Component {
                   </span> */}
 									{discountValue >= 5 && (
 										<span
-											className={`${styles.absolute} ${styles["offer-tag"]} ${styles['flex-center']} ${styles['justify-center']} ${styles.width100} ${
+											className={`${styles.absolute} ${styles["offer-tag"]} ${
 												styles[this.getOfferClassName(discountValue)]
 											}`}
 										>
 											<span>
 												{lang === "en"
-													? SEARCH_PAGE.LAUNCH_OFFER + ' ' + discountValue + "%"
-													: SEARCH_PAGE.LAUNCH_OFFER + ' ' + discountValue + "%"} {" "}
+													? discountValue + "%"
+													: "%" + discountValue}{" "}
 												{PDP_PAGE.OFF}
 											</span>
 										</span>
