@@ -15,6 +15,9 @@ import main_en from '../../../../layout/main/main_en.styl';
 import main_ar from '../../../../layout/main/main_ar.styl';
 import styles_en from './orderIssue_en.styl';
 import styles_ar from './orderIssue_ar.styl';
+import { languageDefinations } from '../../../../utils/lang/';
+
+const { ORDERS } = languageDefinations();
 
 const styles = lang === 'en' ? {...main_en, ...styles_en} : {...main_ar, ...styles_ar};
 
@@ -31,10 +34,10 @@ const OrderIssueWidget = ({orderIssue, resetOrderIssue}) => {
           return 'Choose a reason';
         }
         case STEPS.CANCEL_COMPLETE: {
-          return 'Cancellation Status';
+          return ORDERS.CANCELLATION_STATUS;
         }
         case STEPS.CHOOSE_RETURN_EXCHANGE: {
-          return 'Chose Return or Exchange';
+          return ORDERS.CHOOSE_RETURN_OR_EXCHANGE;
         }
       }
     }

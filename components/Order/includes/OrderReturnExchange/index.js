@@ -170,7 +170,7 @@ class OrderReturnExchange extends Component {
                         </Col>
                         {
                           orderIssue.refundInitiated &&
-                          <div>Refund initiated </div>
+                          <div>{ORDER_PAGE.REFUND_INITIATED} </div>
                         }
                       </div>
                     </Col>
