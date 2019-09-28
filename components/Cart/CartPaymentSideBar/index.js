@@ -62,9 +62,9 @@ class CartAndPaymentSideBar extends Component {
       total_discount, payment_options_response, total_shipping, item_cnt, currency, total_tila_care_charges,
     } = data;
     const { iframe_url, codStatus } = this.state;
-    const voucher = payment_options_response && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'VOUCHER')[0];
-    const saved_card = payment_options_response && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'SAVED_CARD')[0];
-    const cash_on_delivery = payment_options_response && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'CASH_ON_DELIVERY')[0];
+    const voucher = payment_options_response && payment_options_response.payment_options_available && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'VOUCHER')[0];
+    const saved_card = payment_options_response && payment_options_response.payment_options_available && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'SAVED_CARD')[0];
+    const cash_on_delivery = payment_options_response && payment_options_response.payment_options_available && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'CASH_ON_DELIVERY')[0];
     return (
       <div className={`${styles['right-bar']}`}>
         <div className={`${styles['coupon-code-main']}`}>
@@ -235,8 +235,8 @@ class CartAndPaymentSideBar extends Component {
                 <b>{CART_PAGE.AMOUNT_PAYABLE}</b>
                 <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}>
                   <span className={styles.fontW600}>
-                    <span className={`${styles['fs-12']}`}>{cash_on_delivery.amount_to_pay.currency_code || currency}</span>&nbsp;
-                <span>{codStatus ? cash_on_delivery.amount_to_pay.display_value : saved_card.amount_to_pay.display_value}</span>
+                    <span className={`${styles['fs-12']}`}>{cash_on_delivery && cash_on_delivery && cash_on_delivery.amount_to_pay && cash_on_delivery.amount_to_pay.currency_code || currency}</span>&nbsp;
+                <span>{codStatus ? (cash_on_delivery && cash_on_delivery && cash_on_delivery.amount_to_pay && cash_on_delivery.amount_to_pay.display_value) : (saved_card && saved_card.amount_to_pay.display_value)}</span>
                   </span>
                 </span>
               </li>
