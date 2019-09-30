@@ -451,6 +451,7 @@ export const EN_KEYWORDS = {
     YOUR_PERSONAL: 'Your personal information has been updated.',
     LAST_UPDATED: 'Last updated',
     NOT_AVAILABLE: 'Not available',
+    FILL_IN_THE_FIELDS: 'Fill in all the blanks',    
   },
   NOTITICATION_INFO: {
     HEADING: 'New Notifications',

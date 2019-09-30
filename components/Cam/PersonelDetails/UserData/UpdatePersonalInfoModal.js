@@ -115,7 +115,7 @@ class UpdatePersonalInfoModal extends React.Component {
     } else {
       toast(
         <ToastContent
-          msg="Fill in all the fields"
+          msg={`${PERSONAL_INFO_MODAL.FILL_IN_THE_FIELDS}`}
           msgType="error"
         />,
       );

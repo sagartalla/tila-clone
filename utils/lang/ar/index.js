@@ -449,6 +449,7 @@ export const AR_KEYWORDS = {
     YOUR_PERSONAL: 'حدثّنا معلوماتك الشخصية',
     LAST_UPDATED: 'آخرتحديث قبل',
     NOT_AVAILABLE: 'غير متوفر',
+    FILL_IN_THE_FIELDS: 'Fill in all the blanks',
   },
   NOTITICATION_INFO: {
     HEADING: 'التنبّهات الجديدة',

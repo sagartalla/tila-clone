@@ -138,7 +138,7 @@ const TilaVoucher = (props) => {
                                      {<SVGComponent clsName={`${styles['status-icon']}`} src={"icons/common-icon/bg-tick-mark" }/>}
                                      </span>
                                  </OverlayTrigger> : ''} */}
-                                 {transaction_type === 'CREDIT' && !expired && future_reedemable && no_of_days_to_expire < 6 ?
+                                 {transaction_type === 'CREDIT' && !expired && status === 'ACTIVE' && no_of_days_to_expire < 6 ?
                                   <OverlayTrigger
                                   placement="top"
                                   overlay={expiryPopover(no_of_days_to_expire)}

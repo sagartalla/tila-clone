@@ -61,6 +61,7 @@ class CartAndPaymentSideBar extends Component {
       items, total_price, total_offer_price, total_gift_charges, total_vat,
       total_discount, payment_options_response, total_shipping, item_cnt, currency, total_tila_care_charges,
     } = data;
+    console.log('total_offer_price', data);
     const { iframe_url, codStatus } = this.state;
     const voucher = payment_options_response && payment_options_response.payment_options_available && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'VOUCHER')[0];
     const saved_card = payment_options_response && payment_options_response.payment_options_available && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'SAVED_CARD')[0];
@@ -139,8 +140,8 @@ class CartAndPaymentSideBar extends Component {
                 </h5>
               </li>
               <li><span className={styles['thick-gry-clr']}>{CART_PAGE.PRICE} ({`${item_cnt} ${item_cnt === 1 ? CART_PAGE.ITEM : CART_PAGE.ITEMS}`})</span>
-                <span>
-                  <span className={`${styles['fs-10']}`}>{total_offer_price.currency_code || currency}</span>&nbsp;
+                <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                  <span className={`${styles['fs-10']}`}>{total_offer_price.display_currency_code || currency}</span>&nbsp;
                <span className={`${styles['fs-12']}`}>{total_offer_price.display_value}</span>
                 </span>
               </li>
@@ -159,8 +160,8 @@ class CartAndPaymentSideBar extends Component {
               <li>
                 <span className={styles['thick-gry-clr']}>{CART_PAGE.DELIVERY_CHARGES}</span>
                 {total_shipping.money_value > 0 ?
-                  <span>
-                    <span className={`${styles['fs-10']}`}>{total_shipping.currency_code || currency}</span>&nbsp;
+                  <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                    <span className={`${styles['fs-10']}`}>{total_shipping.display_currency_code || currency}</span>&nbsp;
                 <span className={`${styles['fs-12']}`}>{total_shipping.display_value || 0}</span>
                   </span> :
                   <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} /></span>
@@ -169,8 +170,8 @@ class CartAndPaymentSideBar extends Component {
               {(total_gift_charges && total_gift_charges.display_value) ?
                 <li>
                   <span className={styles['thick-gry-clr']}>{CART_PAGE.GIFT_CHARGES}</span>
-                  <span>
-                    <span className={`${styles['fs-10']}`}>{total_gift_charges.currency_code || currency}</span>&nbsp;
+                  <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                    <span className={`${styles['fs-10']}`}>{total_gift_charges.display_currency_code || currency}</span>&nbsp;
                     <span className={`${styles['fs-12']}`}>{total_gift_charges && total_gift_charges.display_value}</span>
                   </span>
                 </li> : null}
@@ -179,7 +180,7 @@ class CartAndPaymentSideBar extends Component {
                   <li>
                     <span className={styles['thick-gry-clr']}>{CART_PAGE.ESTIMATED_VAT}</span>
                     {/* <span>{total_vat.currency_code || currency} {total_vat.display_value}</span>  */}
-                    <span>
+                    <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
                       <span className={`${styles['fs-10']}`}>{total_vat.currency_code || currency}</span>&nbsp;
                         <span className={`${styles['fs-12']}`}>{total_vat.display_value}</span>
                     </span>
@@ -189,8 +190,8 @@ class CartAndPaymentSideBar extends Component {
                   <span className={styles['thick-gry-clr']}>{CART_PAGE.TILA_CARE_PROTECTION}</span>
                   <span>
                     {total_tila_care_charges &&
-                      <span>
-                        <span className={`${styles['fs-10']}`}>{total_tila_care_charges.currency_code}</span>&nbsp;
+                      <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                        <span className={`${styles['fs-10']}`}>{total_tila_care_charges.display_currency_code}</span>&nbsp;
                     <span className={`${styles['fs-12']}`}>{total_tila_care_charges.display_value}</span>
                       </span>
                     }
@@ -202,8 +203,8 @@ class CartAndPaymentSideBar extends Component {
                 <b>{CART_PAGE.CART_VALUE}</b>
                 <span>
                   <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}>
-                    <span className={styles.fontW600}>
-                      <span className={`${styles['fs-10']}`}>{total_price.currency_code || currency}</span>&nbsp;
+                    <span className={`${styles.fontW600} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                      <span className={`${styles['fs-10']}`}>{total_price.display_currency_code || currency}</span>&nbsp;
                 <span>{total_price.display_value}</span>
                     </span>
                   </span>
@@ -223,9 +224,9 @@ class CartAndPaymentSideBar extends Component {
                 <li>
                   <span className={styles['thick-gry-clr']}>{CART_PAGE.COD_CHARGES}</span>
                   <span>
-                    <span>
-                      <span className={`${styles['fs-10']}`}>{cash_on_delivery.cod_charges.currency_code}</span>&nbsp;
-                  <span className={`${styles['fs-12']}`}>{cash_on_delivery.cod_charges.display_value}</span>
+                    <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                      <span className={`${styles['fs-10']}`}>{cash_on_delivery && cash_on_delivery.cod_charges && cash_on_delivery.cod_charges.currency_code}</span>&nbsp;
+                  <span className={`${styles['fs-12']}`}>{cash_on_delivery && cash_on_delivery.cod_charges && cash_on_delivery.cod_charges.display_value}</span>
                     </span>
                   </span>
                 </li>
@@ -234,15 +235,15 @@ class CartAndPaymentSideBar extends Component {
               <li className={`${styles['mt-20']} ${styles['fs-16']} ${styles['light-gry-clr']}`}>
                 <b>{CART_PAGE.AMOUNT_PAYABLE}</b>
                 <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}>
-                  <span className={styles.fontW600}>
+                  <span className={`${styles.fontW600} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
                     <span className={`${styles['fs-12']}`}>{cash_on_delivery && cash_on_delivery && cash_on_delivery.amount_to_pay && cash_on_delivery.amount_to_pay.currency_code || currency}</span>&nbsp;
                 <span>{codStatus ? (cash_on_delivery && cash_on_delivery && cash_on_delivery.amount_to_pay && cash_on_delivery.amount_to_pay.display_value) : (saved_card && saved_card.amount_to_pay.display_value)}</span>
                   </span>
                 </span>
               </li>
               {total_discount.money_value > 0 ?
-                <span className={`${styles['fs-12']} ${styles['display-block']} ${styles['thick-red-clr']} ${styles['t-rt']}`}>{CART_PAGE.YOU_SAVED}&nbsp;
-                  <span className={`${styles['fs-12']}`}>{total_discount.currency_code || currency}</span>&nbsp;
+                <span className={`${styles['fs-12']} ${styles['display-block']} ${styles['thick-red-clr']} ${styles['t-rt']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>{CART_PAGE.YOU_SAVED}&nbsp;
+                  <span className={`${styles['fs-12']}`}>{total_discount.display_currency_code || currency}</span>&nbsp;
                   <span>{total_discount.display_value}</span></span>
                 : null
               }
