@@ -83,7 +83,7 @@ class Brand extends Base {
               }}
             />
             <h1 className={`${styles.display_none}`}>{this.props.url.query.brandName}</h1>
-            <h2 className={`${styles.display_none}`}>{SEO_CONTENT.BRAND_H2} {this.props.url.query.brandName}</h2>
+            <h2 className={`${styles.display_none}`}>{this.props.url.query.brandName}{SEO_CONTENT.BRAND_TITLE_TITLE1} {SEO_CONTENT. BRAND_TITLE_TITLE2} </h2>
             <Search query={this.props.url.query} loaderProps={this.props.loaderProps} isBrandPage />
           </Layout>
         </SearchContext.Provider>
