@@ -890,7 +890,7 @@ export const EN_KEYWORDS = {
     EMPTY_COUPON_BOX: 'Your coupon box is empty! ',
     EXPIRED_CONTENT: 'You no longer have any active coupons.',
     START_SHOPPING: 'Start shopping now to grab more coupons and enjoy great discounts!',
-    NO_COUPONS_AVAILABLE: 'Currently, no coupons are available.', // doubt
+    NO_COUPONS_AVAILABLE: 'No coupons are available currently.',
     CHECK_BACK_LATER: 'Please check back later.',
     PLEASE_ENTER_COUPON_CODE: 'Please enter coupon code',
     COPIED: 'COPIED',
@@ -928,7 +928,7 @@ export const EN_KEYWORDS = {
     ORDER_TOTAL: 'Order Total',
     NEED_HELP: 'Need Help',
     ORDER: 'ORDER #',
-    NO_WISHLIST_LABEL: 'Our products come with amazing warranty benefits.',
+    NO_WISHLIST_LABEL: 'It looks like you have no orders yet.',
     START_SHOPPING_TO_MAKE_KITTEN_HAPPY: 'Still empty? Fill it up and watch #AmazingDelivered!',
     WARRANTY_BENEFITS: 'Our products come with amazing warranty benefits.',
     ENJOY_THE_PERKS: 'Shop now to enjoy the perks of TiLa CARE.',
@@ -1017,7 +1017,7 @@ export const EN_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_HEADING: 'Sale events or campaign updates',
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'Sign up to receive information about our flash sales, new launches and latest campaigns',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'Feedback surveys and product reviews',
-    FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'Sign up to receive personalized discounts and coupons',
+    FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'Ratings and reviews for your recent purchases.',
     NOTE: 'Note :',
     YOU_WILL_BE_UNSUBSCRIBED: 'You will be unsubscribed from the above notifications if you uncheck the boxes.',
     SAVE: 'Save',
@@ -1121,5 +1121,9 @@ export const EN_KEYWORDS = {
     OOPS: 'Oops! This page is not available. Please choose any of the categories above',
     OR: 'or',
     GO_TO_HOMEPAGE: 'GO TO HOMEPAGE',
+  },
+  SOMETHING_WENT_WRONG: {
+    SOMETHING_WENT_WRONG: 'SOMETHING WENT WRONG',
+    SOMETHING_WRONG: 'Something went wrong',    
   },
 };

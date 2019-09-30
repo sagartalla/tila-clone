@@ -650,7 +650,7 @@ export const AR_KEYWORDS = {
     VIEW_ALL: 'عرض الكل',
     VIEW_LESS: 'عرض أقل',
     TOP_BRANDS: 'أفضل الماركات التجارية',
-    TRENDING: 'علية إقبال الآن',
+    TRENDING: 'عليه إقبال الآن',
     TILA_CUSTOMER: 'زبائن تيله',
     MATCHING_ITEM: 'مطابقة منتجاتك',
     MATCHING_PRODUCTS: 'مطابقة المنتجات',
@@ -1013,7 +1013,7 @@ export const AR_KEYWORDS = {
     SALE_EVENT_AND_CAMPAIGN_UPDATE_HEADING: 'التخفيضات أو تحديثات الحملات',
     SALE_EVENT_AND_CAMPAIGN_UPDATE_SUB: 'أنشئ حسابك لِتصلكْ تخفيضاتنا الحصرية وجميع إطلاقاتنا وحملاتنا الجديدة',
     FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_HEADING: 'آراء المستخدمين والاستبيانات و آراء المنتج',
-    FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'أنشئ حسابك لتصلك التخفيضات والكوبونات المخصصة لك',
+    FEEDBACK_SURVEY_AND_PRODUCT_REVIEW_SUB: 'التقييمات والاَراء لاَخر مشترياتك',
     NOTE: 'ملاحظة :',
     YOU_WILL_BE_UNSUBSCRIBED: ' في حال لم تحددْ المربعات لن تصلك أي تنبيهات',
     SAVE: 'احفظ',
@@ -1117,5 +1117,9 @@ export const AR_KEYWORDS = {
     OOPS: 'للأسف! هذه الصفحة غير موجودة. من فضلك اختار أي من الفئات بالأعلى',
     OR: 'أو',
     GO_TO_HOMEPAGE: 'اذهب  للصفحة الرئيسية',
+  },
+  SOMETHING_WENT_WRONG: {
+    SOMETHING_WENT_WRONG: 'SOMETHING WENT WRONG',
+    SOMETHING_WRONG: 'Something went wrong',
   },
 };

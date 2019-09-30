@@ -58,24 +58,24 @@ class Warranty extends React.Component {
             <div ><Modal.Title>{PDP_PAGE.WARRANTY}</Modal.Title></div>
               <div className={`${styles['fs-18']} ${styles.pointer}`} onClick={this.closeSlider}>X</div>
             </div>
-      <div className={`${styles['warranty-modal']}`}>
+      <div className={`${styles['warranty-modal']} ${styles['mt-25']} ${styles['ml-20']}`}>
             {warranty.summary &&
             <div className={`${styles['fs-16']}`}>{PDP_PAGE.WARRANTY_SUMMARY}
-              <ul className={`${styles['mt-5']}`}>
+              <ul className={`${styles['mt-5']} ${styles['ml-25']}`}>
                 <li>{warranty.summary}</li>
               </ul>
             </div>}
             <hr />
             {warranty.covered &&
             <div className={`${styles['fs-16']}`}>{PDP_PAGE.COVERED_IN_WARRANTY}
-              <ul className={`${styles['mt-5']}`}>
+              <ul className={`${styles['mt-5']} ${styles['ml-25']}`}>
                 <li>{warranty.covered}</li>
               </ul>
             </div>}
             <hr />
             {warranty.not_covered &&
             <div className={`${styles['fs-16']}`}>{PDP_PAGE.NOT_COVERED_IN_WARRANTY}
-              <ul className={`${styles['mt-5']}`}>
+              <ul className={`${styles['mt-5']} ${styles['ml-25']}`}>
                 <li>{warranty.not_covered}</li>
               </ul>
             </div>}
