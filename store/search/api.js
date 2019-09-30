@@ -53,6 +53,7 @@ const getSearchResultsApi = ({
     data.searchDetails = {
       query,
       facetFilters,
+      categoryTree,
       facetFiltersCopyWithNames,
       categoryFilter,
       shippingDetails,
