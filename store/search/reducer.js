@@ -8,7 +8,7 @@ const initialState = {
   },
   data: {
     searchDetails: {
-      facetFilters: {},
+      facetFilters: {}      
     },
     paginationDetails: {},
     productResponse: {
