@@ -105,7 +105,7 @@ class CartAndPaymentSideBar extends Component {
                 insnt_item_listing_id={insnt_item_listing_id}
                 isPdp={isPdp}
                 // isFromCart={isFromCart}
-                totalPrice={total_price.display_value}
+                totalPrice={cash_on_delivery && cash_on_delivery && cash_on_delivery.amount_to_pay && cash_on_delivery.amount_to_pay.display_value} 
                 moneyValue={total_price.money_value}
                 currency={currency}
                 isMounted={false}
