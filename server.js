@@ -18,7 +18,7 @@ const uuidv4 = require('uuid/v4');
 const myapp = express();
 const server = require('http').Server(myapp);
 
-const port = parseInt(process.env.PORT, 10) || 3020;
+const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 
 
