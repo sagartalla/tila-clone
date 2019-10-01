@@ -15,7 +15,7 @@ import SVGComponent from '../../../common/SVGComponet';
 
 import { languageDefinations } from '../../../../utils/lang';
 
-const { ORDER_PAGE } = languageDefinations();
+const { ORDER_PAGE, CART_PAGE } = languageDefinations();
 
 import lang from '../../../../utils/language';
 
@@ -234,9 +234,9 @@ class OrderHeader extends Component {
                                 {total_discount &&
                                   <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_DISCOUNT} : </span><span>{'(-)'} {total_discount.currency_code} {total_discount.display_value}</span></li>}
                                 {total_shipping &&
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.currency_code} ${total_shipping.display_value}` : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} />}</span></li>}
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.currency_code} ${total_shipping.display_value}` : CART_PAGE.FREE}</span></li>}
                                 {total_gift_charges && total_gift_charges.money_value > 0 &&
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span><span>{total_gift_charges.display_value ? `(+) ${total_gift_charges.currency_code} ${total_gift_charges.display_value}` : 'FREE'}</span></li>}
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span><span>{total_gift_charges.display_value ? `(+) ${total_gift_charges.currency_code} ${total_gift_charges.display_value}` : CART_PAGE.FREE}</span></li>}
                                 <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.ESTIMATED_VAT} : </span><span> {total_vat.currency_code} {total_vat.display_value}</span></li>
                                 <hr/>
                                 {total_offer_price &&

@@ -75,7 +75,7 @@ class WarrantyPolicy extends React.Component {
                                 <div className={`${styles.fontW600} ${styles['warranty-values']}`}>{warrantyKeys[newVal]}</div>
                                 <div className={`${styles['text-blue']} ${styles['fs-12']}`}><a href="/en/policy/warranty-policy" target="_blank">{CART_PAGE.VIEW_T_AND_C}</a></div>
                               </div>
-                              {warrantyName !== newVal && policies_applied[newVal] && policies_applied[newVal].policy_type.toLowerCase() === newVal && <div className={`${styles.fontW600} ${styles['flex-center']}`}><div className={`${styles['fs-12']}`}>{policies_applied[newVal].cost && policies_applied[newVal].cost.currency_code}</div>
+                              {warrantyName !== newVal && policies_applied[newVal] && policies_applied[newVal].policy_type.toLowerCase() === newVal && <div className={`${styles.fontW600} ${styles['flex-center']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><div className={`${styles['fs-12']}`}>{policies_applied[newVal].cost && policies_applied[newVal].cost.display_currency_code}</div>&nbsp;
                               <div className={`${styles['fs-14']} ${styles['ml-5']}`}>
                               {policies_applied[newVal].cost && policies_applied[newVal].cost.display_value}
                               </div>
@@ -114,7 +114,7 @@ class WarrantyPolicy extends React.Component {
                                   <div style={{ width: '150px' }}>
                                     <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles['mb-0']} ${styles['pr-10']}`}>{policyVal.policy_name}</label>
                                     <span className={`${styles['warranty-radio-button']}`} />
-                                    <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles.fontW600} ${styles['mb-0']}`}>{policyVal.cost.currency_code} {policyVal.cost.display_value}</label>
+                                    <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles.fontW600} ${styles['mb-0']}`}>{lang === 'en' ? policyVal.cost.display_currency_code : policyVal.cost.display_value} {lang === 'en' ? policyVal.cost.display_value : policyVal.cost.display_currency_code}</label>
                                   </div>
                                   <div className={`${styles['ml-20']}`}>
                                   {((selectedPolicy !== '' && warrantyName === newVal && warrantyIndex === index) || (warrantyName !== newVal && Object.keys(policies_applied).length > 0 && policies_applied[newVal] && policies_applied[newVal].policy_id === policyVal.policy_id)) ?

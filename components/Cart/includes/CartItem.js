@@ -297,8 +297,8 @@ class CartItem extends React.Component {
                           <p className={`${styles['mb-0']}`}>
                             <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{CART_PAGE.SHIPPING} :</span>
                             <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping && shipping.shipping_fees && shipping.shipping_fees.display_value && shipping.shipping_fees.display_value ?
-                              <span>({<span><span>{`${shipping.shipping_fees.display_currency_code}`}&nbsp;</span>
-                            <span>{`${shipping.shipping_fees.display_value}`}</span></span>})</span> : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().tz('Asia/Riyadh').add(shipping.shipping_days, 'days').format('LL')}</span>
+                              <span>({<span><span>{`${lang === 'en' ? shipping.shipping_fees.display_currency_code : shipping.shipping_fees.display_value}`}&nbsp;</span>
+                            <span>{`${lang === 'en' ? shipping.shipping_fees.display_value : shipping.shipping_fees.display_currency_code}`}</span></span>})</span> : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().tz('Asia/Riyadh').add(shipping.shipping_days, 'days').format('LL')}</span>
                             </span>
                           </p>
                         ))
@@ -403,7 +403,7 @@ class CartItem extends React.Component {
                                   <span>{`${shipping.shipping_fees.display_currency_code}`}</span>&nbsp;
                                   <span>{`${shipping.shipping_fees.display_value}`}</span> 
                                   </span>
-                                    : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} />}
+                                    : CART_PAGE.FREE}
                                 </div>
                               </div>
                               :
@@ -436,9 +436,9 @@ class CartItem extends React.Component {
                         </div>
                         <div className={`${styles['p-5']} ${styles['mt-10']} ${styles['fs-12']} ${styles['overall-amount']}`}>
                         {CART_PAGE.OVERALL_YOU_SAVE}&nbsp;
-                        <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
-                        <span>{cur}</span>&nbsp;
-                        <span>{total_discount}</span>&nbsp;
+                        <span>
+                        <span>{lang === 'en' ? cur : total_discount}</span>&nbsp;
+                        <span>{lang === 'en' ? total_discount : cur}</span>&nbsp;
                         </span>
                         {CART_PAGE.ON_THIS_PRODUCT}</div>
                       </div>

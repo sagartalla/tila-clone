@@ -43,7 +43,7 @@ const CartBody = ({
   const { items } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
-  const { CART_PAGE, WISH_LIST_PAGE } = languageDefinations();
+  const { CART_PAGE, WISH_LIST_PAGE, PAYMENT_PAGE } = languageDefinations();
   if(data.ui.loading) {
     return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>{CART_PAGE.PLEASE_WAIT_FETCHING_CART_ITEMS}</div>
   }
@@ -74,7 +74,7 @@ const CartBody = ({
                 {wishListCount > 0 &&
                 <React.Fragment>
                 <div className={`${styles['or-value']} ${styles['flex-center']} ${styles['justify-center']}`}>
-                  OR
+                {PAYMENT_PAGE.OR}
                 </div>
                 <div>
                   <a href={`/${language}/customer/wishlist`} className={`${styles['fp-btn']} ${styles['add-from-wishlist']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} `}>{CART_PAGE.ADD_FROM_WISHLIST}</a>

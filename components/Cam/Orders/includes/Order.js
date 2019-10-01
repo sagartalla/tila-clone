@@ -16,7 +16,7 @@ import styles_ar from '../orders_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const { ORDERS, ORDER_PAGE } = languageDefinations();
+const { ORDERS, ORDER_PAGE, CART_PAGE } = languageDefinations();
 const cookies = new Cookies();
 
 const language = cookies.get('language') || 'ar';
@@ -76,7 +76,7 @@ const Order = ({ order, getInvoice }) => {
             <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.SHIPPING} : </span>
             <span className={`${styles.fontW600} ${styles['fs-12']}`}>
               {totalOrderPrice.total_shipping.display_value ? `(+) ${totalOrderPrice.total_shipping.currency_code} ${totalOrderPrice.total_shipping.display_value}` :
-                <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}
+                CART_PAGE.FREE}
             </span>
           </li>
           <li className={`${styles['flx-space-bw']}`}>

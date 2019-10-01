@@ -73,6 +73,7 @@ export const EN_KEYWORDS = {
     ITEM: 'item',
     NO_WARRANTY: 'No Warranty',
     ITEM_IN_CART: 'item in cart',
+    FREE: 'Free',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'Secure Checkout',

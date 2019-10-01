@@ -73,7 +73,8 @@ export const AR_KEYWORDS = {
     PLEASE_WAIT_FETCHING_CART_ITEMS: 'دقائق، بنجيب لك المنتجات من عربتك ',
     ITEM: 'منتج',
     NO_WARRANTY: 'لا يوجد ضمان',
-    ITEM_IN_CART: 'منتج في عربة التسوق',    
+    ITEM_IN_CART: 'منتج في عربة التسوق',  
+    FREE: 'مجاناً',      
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'إنهاء الشراء بآمان',

@@ -373,7 +373,7 @@ class OrderItem extends Component {
                                         <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{gift_charge.display_value ? `(+) ${gift_charge.currency_code} ${gift_charge.display_value}` : 'FREE'}</span></li>}
                                       <li className={styles['flx-space-bw']}>
                                         <span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.fontW600}> {shipping_fees.display_value ? `(+) ${shipping_fees.currency_code} ${shipping_fees.display_value}` :
-                                        <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}</span>
+                                        CART_PAGE.FREE}</span>
                                       </li>
                                       {final_price &&
                                       <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}> {final_price.currency_code} {final_price.display_value}</span></li>}

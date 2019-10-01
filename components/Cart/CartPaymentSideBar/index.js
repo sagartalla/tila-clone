@@ -61,7 +61,6 @@ class CartAndPaymentSideBar extends Component {
       items, total_price, total_offer_price, total_gift_charges, total_vat,
       total_discount, payment_options_response, total_shipping, item_cnt, currency, total_tila_care_charges,
     } = data;
-    console.log('total_offer_price', data);
     const { iframe_url, codStatus } = this.state;
     const voucher = payment_options_response && payment_options_response.payment_options_available && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'VOUCHER')[0];
     const saved_card = payment_options_response && payment_options_response.payment_options_available && payment_options_response.payment_options_available.filter((paymentMode) => paymentMode.type === 'SAVED_CARD')[0];
@@ -164,7 +163,7 @@ class CartAndPaymentSideBar extends Component {
                     <span className={`${styles['fs-10']}`}>{total_shipping.display_currency_code || currency}</span>&nbsp;
                 <span className={`${styles['fs-12']}`}>{total_shipping.display_value || 0}</span>
                   </span> :
-                  <span className={`${styles.flex}`}><SVGComponent clsName={styles['ship-icon']} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} /></span>
+                  <span className={`${styles.flex}`}>{CART_PAGE.FREE}</span>
                 }
               </li>
               {(total_gift_charges && total_gift_charges.display_value) ?
@@ -181,7 +180,7 @@ class CartAndPaymentSideBar extends Component {
                     <span className={styles['thick-gry-clr']}>{CART_PAGE.ESTIMATED_VAT}</span>
                     {/* <span>{total_vat.currency_code || currency} {total_vat.display_value}</span>  */}
                     <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
-                      <span className={`${styles['fs-10']}`}>{total_vat.currency_code || currency}</span>&nbsp;
+                      <span className={`${styles['fs-10']}`}>{total_vat.display_currency_code || currency}</span>&nbsp;
                         <span className={`${styles['fs-12']}`}>{total_vat.display_value}</span>
                     </span>
                   </li> : null}
@@ -215,6 +214,7 @@ class CartAndPaymentSideBar extends Component {
                 <span>
                   {voucher && voucher.amount_to_pay &&
                     <span>
+                      <span className={`${styles['fs-12']}`}>{voucher.amount_to_pay.display_currency_code}</span>                      
                       <span className={`${styles['fs-12']}`}>{voucher.amount_to_pay.display_value}</span>
                     </span>
                   }
@@ -225,7 +225,7 @@ class CartAndPaymentSideBar extends Component {
                   <span className={styles['thick-gry-clr']}>{CART_PAGE.COD_CHARGES}</span>
                   <span>
                     <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
-                      <span className={`${styles['fs-10']}`}>{cash_on_delivery && cash_on_delivery.cod_charges && cash_on_delivery.cod_charges.currency_code}</span>&nbsp;
+                      <span className={`${styles['fs-10']}`}>{cash_on_delivery && cash_on_delivery.cod_charges && cash_on_delivery.cod_charges.display_currency_code}</span>&nbsp;
                   <span className={`${styles['fs-12']}`}>{cash_on_delivery && cash_on_delivery.cod_charges && cash_on_delivery.cod_charges.display_value}</span>
                     </span>
                   </span>
@@ -236,7 +236,7 @@ class CartAndPaymentSideBar extends Component {
                 <b>{CART_PAGE.AMOUNT_PAYABLE}</b>
                 <span className={`${styles.flex} ${styles['flex-colum']} ${styles['t-rt']}`}>
                   <span className={`${styles.fontW600} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
-                    <span className={`${styles['fs-12']}`}>{cash_on_delivery && cash_on_delivery && cash_on_delivery.amount_to_pay && cash_on_delivery.amount_to_pay.currency_code || currency}</span>&nbsp;
+                    <span className={`${styles['fs-12']}`}>{cash_on_delivery && cash_on_delivery && cash_on_delivery.amount_to_pay && cash_on_delivery.amount_to_pay.display_currency_code || currency}</span>&nbsp;
                 <span>{codStatus ? (cash_on_delivery && cash_on_delivery && cash_on_delivery.amount_to_pay && cash_on_delivery.amount_to_pay.display_value) : (saved_card && saved_card.amount_to_pay.display_value)}</span>
                   </span>
                 </span>

@@ -142,20 +142,23 @@ const WishlistBody = props => {
                         <span id={wishlist_id} className={`${styles.absolute} ${styles['delete-icon-part']}`} onClick={deleteItem}>
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
-                        <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}><span className={`${styles['fs-20']} ${styles['m-fs-18']}`}>
+                        <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}>
+                        <span className={`${styles['fs-20']} ${styles['m-fs-18']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
                         <span className={`${styles['fs-14']}`}>{cur}</span>&nbsp;
                         <span>{price}</span>
                         </span></h4>
                         {variant_id && percentage(price, mrp) > 5 ?
                           <span className={`${styles.flex} ${styles['flex-center']}`}>
                             <span className={`${styles['success-green']} ${styles.flex}`}>{lang === 'ar' ? '%'+percentage(price, mrp) : percentage(price, mrp)+'%'}</span>&nbsp;&nbsp;&nbsp;
-                            <strike className={`${styles['label-gry-clr']} ${styles['fs-12']}`}>{cur} {mrp}</strike>
+                            <strike className={`${styles['label-gry-clr']} ${styles['fs-12']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                            <span>{cur}</span>&nbsp;
+                            <span>{mrp}</span></strike>
                           </span> : ''
                         }
                         {getPriceAlert(changed_status, wishlisted_price, changed_price, cur)}
                         {price && cur && wishlisted_price && wishlisted_price > 0 && wishlisted_price.toString() !== price ?
                         <span className={`${styles['thick-gry-clr']}`}>
-                          {WISH_LIST_PAGE.ITEM_WAS} {cur} {wishlisted_price} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
+                          {WISH_LIST_PAGE.ITEM_WAS} {lang === 'en' ? cur : wishlisted_price} {lang === 'en' ? wishlisted_price : cur} {WISH_LIST_PAGE.WHEN_ADDED_TO_WISHLIST}
                         </span> : ''}
                       </div>
                     </Col>
