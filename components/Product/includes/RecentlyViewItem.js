@@ -39,7 +39,7 @@ const RecentlyViewItem = ({
 
   return (
     <div className={`${styles['pl-0']} ${styles['pr-0']}  ${styles.relative}`} key={item.id}>
-      <a href={`/${lang}/pdp/${item.nm.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${item.tuinId ? `${item.tuinId}/` : ''}${item.id ? `${item.id}/` : ''}?pid=${item.pid}&vid=${item.vid}&cid=${item.cid}`}>
+      <a href={`/${lang}/pdp/${item && item.nm && item.nm.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${item.tuinId ? `${item.tuinId}/` : ''}${item.id ? `${item.id}/` : ''}?pid=${item.pid}&vid=${item.vid}&cid=${item.cid}`}>
         <div className={`${styles['recentview-main-inn']} ${styles['border-r']}  ${styles['p-10-20']} ${styles.flex} ${styles['flex-colum']}`}>
           <div className={styles['recentview-main-inn-img']}>
             <img src={`${constants.mediaDomain}/${item.im}`} alt="" className="img-responsive" />

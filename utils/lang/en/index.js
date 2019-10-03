@@ -73,6 +73,7 @@ export const EN_KEYWORDS = {
     ITEM: 'item',
     NO_WARRANTY: 'No Warranty',
     ITEM_IN_CART: 'item in cart',
+    FREE: 'Free',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'Secure Checkout',
@@ -451,6 +452,7 @@ export const EN_KEYWORDS = {
     YOUR_PERSONAL: 'Your personal information has been updated.',
     LAST_UPDATED: 'Last updated',
     NOT_AVAILABLE: 'Not available',
+    FILL_IN_THE_FIELDS: 'Fill in all the blanks',    
   },
   NOTITICATION_INFO: {
     HEADING: 'New Notifications',

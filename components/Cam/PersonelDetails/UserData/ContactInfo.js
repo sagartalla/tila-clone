@@ -142,7 +142,7 @@ class ContactInfo extends React.Component {
           </Col>
           <Col xs={6} md={1} className={styles['pr-0']}>
             <span onClick={this.handleShow(true, password_exists ? 'password' : 'setPassword')} className={`${styles['float-r']} ${styles.flex} ${styles['p-0']} ${styles['ml-5']}`}>
-              <SVGComponent clsName={`${styles['edit-icon']}`} src="icons/common-icon/edit/edit-penc" />
+              <SVGComponent clsName={`${styles['edit-icon']} ${styles.pointer}`} src="icons/common-icon/edit/edit-penc" />
             </span>
           </Col>
         </div>

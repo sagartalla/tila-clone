@@ -18,7 +18,7 @@ import styles_en from './login_en.styl';
 import styles_ar from './login_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
-const { LOGIN_PAGE, ORDER_PAGE } = languageDefinations();
+const { LOGIN_PAGE, ORDER_PAGE, PAYMENT_PAGE } = languageDefinations();
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -113,7 +113,7 @@ class LoginPage extends React.Component {
                   </NoSSR>
                 )}
               </SocialLogin>
-              <span className={`${styles.absolute} ${styles['bg-white']} ${styles.right0} ${styles['p-5']} ${styles['fs-10']} ${styles['border-lg']} ${styles['or-tag']}`} >OR</span>
+              <span className={`${styles.absolute} ${styles['bg-white']} ${styles.right0} ${styles['p-5']} ${styles['fs-10']} ${styles['border-lg']} ${styles['or-tag']} ${styles['t-c']}`} >{PAYMENT_PAGE.OR}</span>
             </Col>
             <Col md={7} xs={6} sm={6} className={`${styles['pl-30']}`}>
               <form onSubmit={this.submit}>

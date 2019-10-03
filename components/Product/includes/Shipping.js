@@ -44,9 +44,9 @@ const Shipping = (props) => {
         {
           shippingInfo && shippingInfo.shipping_days
             ?
-              <span className={`${styles['t-c']} ${styles['pt-10']}`}>
+              <span className={`${lang === 'en' ? '' : styles['flex']} ${styles['t-c']} ${styles['pt-10']}`}>
                 <span className={`${styles['fs-12']} ${styles['pt-5']} ${styles['pr-5']}`}>{shippingInfo.shipping_fees && shippingInfo.shipping_fees.money_value ? PDP_PAGE.DELIVERY_BY : PDP_PAGE.FREE_DELIVERY_BY} <span className={styles.fontW600}>{moment().add(shippingInfo.shipping_days, 'days').format('DD MMM, dddd')}</span> </span>
-                {shippingInfo.shipping_fees && <span className={`${styles['pl-10']} ${styles['thick-border-left']}`}><span>{shippingInfo.shipping_fees.currency_code}</span><span className={styles['pl-10']}>{parseFloat(shippingInfo.shipping_fees.display_value).toFixed(shippingInfo.shipping_fees.display_value.split('.')[1] === '00' ? 0 : 2)}</span></span>}
+                {shippingInfo.shipping_fees && <span className={`${styles['pl-10']} ${styles['thick-border-left']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span>{shippingInfo.shipping_fees.display_currency_code}</span>&nbsp;<span className={styles['pl-10']}>{parseFloat(shippingInfo.shipping_fees.display_value).toFixed(shippingInfo.shipping_fees.display_value.split('.')[1] === '00' ? 0 : 2)}</span></span>}
               </span>
             :
             null

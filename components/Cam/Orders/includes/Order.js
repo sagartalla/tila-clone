@@ -16,7 +16,7 @@ import styles_ar from '../orders_ar.styl';
 
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
-const { ORDERS, ORDER_PAGE } = languageDefinations();
+const { ORDERS, ORDER_PAGE, CART_PAGE } = languageDefinations();
 const cookies = new Cookies();
 
 const language = cookies.get('language') || 'ar';
@@ -45,45 +45,52 @@ const Order = ({ order, getInvoice }) => {
         <ul>
           <li className={`${styles['flx-space-bw']}`}>
             <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.MRP} : </span>
-            <span className={`${styles.fontW600} ${styles['fs-12']}`}> {totalOrderPrice.total_mrp.currency_code} {totalOrderPrice.total_mrp.display_value}</span>
+            <span className={`${styles.fontW600} ${styles['fs-12']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}> <span>{totalOrderPrice.total_mrp.display_currency_code}</span>&nbsp;<span>{totalOrderPrice.total_mrp.display_value}</span></span>
           </li>
           <li className={`${styles['flx-space-bw']}`}>
             <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.PRICE} : </span>
-            <span className={`${styles.fontW600} ${styles['fs-12']}`}> {totalOrderPrice.total_offer_price.currency_code} {totalOrderPrice.total_offer_price.display_value}</span>
+            <span className={`${styles.fontW600} ${styles['fs-12']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}> <span>{totalOrderPrice.total_offer_price.display_currency_code}</span>&nbsp;<span>{totalOrderPrice.total_offer_price.display_value}</span></span>
           </li>
           {
             totalOrderPrice && totalOrderPrice.total_discount && totalOrderPrice.total_discount.money_value && totalOrderPrice.total_discount.money_value > 0 ?
               <li className={`${styles['flx-space-bw']}`}>
                 <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.DISCOUNT} : </span>
-                <span className={`${styles.fontW600} ${styles['fs-12']}`}> {totalOrderPrice.total_discount.currency_code} {totalOrderPrice.total_discount.display_value}</span>
+                <span className={`${styles.fontW600} ${styles['fs-12']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}> <span>{totalOrderPrice.total_discount.display_currency_code}</span>&nbsp;<span>{totalOrderPrice.total_discount.display_value}</span></span>
               </li> : ''
           }
           {
             totalOrderPrice && totalOrderPrice.total_gift_charges && totalOrderPrice.total_gift_charges.money_value && totalOrderPrice.total_gift_charges.money_value > 0 ?
               <li className={`${styles['flx-space-bw']}`}>
                 <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.GIFT_CHARGES} : </span>
-                <span className={`${styles.fontW600} ${styles['fs-12']}`}> {totalOrderPrice.total_gift_charges.currency_code} {totalOrderPrice.total_gift_charges.display_value}</span>
+                <span className={`${styles.fontW600} ${styles['fs-12']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}> <span>{totalOrderPrice.total_gift_charges.display_currency_code}</span>&nbsp;<span>{totalOrderPrice.total_gift_charges.display_value}</span></span>
               </li> : ''
           }
           {
             (totalOrderPrice.total_tila_care_charges && totalOrderPrice.total_tila_care_charges.money_value > 0) ?
               <li className={`${styles['flx-space-bw']}`}>
                 <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.TILA_CARE_SERVICE_FEE} </span>
-                <span className={`${styles.fontW600} ${styles['fs-12']}`}> {totalOrderPrice.total_tila_care_charges.currency_code} {totalOrderPrice.total_tila_care_charges.display_value}</span>
+                <span className={`${styles.fontW600} ${styles['fs-12']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}> <span>{totalOrderPrice.total_tila_care_charges.display_currency_code}</span>&nbsp;<span>{totalOrderPrice.total_tila_care_charges.display_value}</span></span>
               </li> : ''
           }
           <li className={`${styles['flx-space-bw']}`}>
             <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.SHIPPING} : </span>
             <span className={`${styles.fontW600} ${styles['fs-12']}`}>
-              {totalOrderPrice.total_shipping.display_value ? `(+) ${totalOrderPrice.total_shipping.currency_code} ${totalOrderPrice.total_shipping.display_value}` :
-                <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}
+              {totalOrderPrice.total_shipping.display_value ?
+              <span className={styles.flex}>
+                <span>(+)</span>&nbsp;
+                <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                  <span>{totalOrderPrice.total_shipping.display_currency_code}</span>&nbsp;<span>{totalOrderPrice.total_shipping.display_value}</span>
+                </span>
+              </span> :
+                CART_PAGE.FREE}
             </span>
           </li>
           <li className={`${styles['flx-space-bw']}`}>
             <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.ESTIMATED_VAT} : </span>
             <span className={`${styles.fontW600} ${styles['fs-12']}`}>
-              {(totalOrderPrice.total_vat && totalOrderPrice.total_vat.display_value) ? `${totalOrderPrice.total_vat.currency_code} ${totalOrderPrice.total_vat.display_value}` :
-                `${'SAR'} ${'0.00'}`}
+              {(totalOrderPrice.total_vat && totalOrderPrice.total_vat.display_value) ? <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span>{`${totalOrderPrice.total_vat.display_currency_code}`}</span>&nbsp;<span>{`${totalOrderPrice.total_vat.display_value}`}</span></span> :
+                <span className={`${styles.fontW600} ${styles['fs-12']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                {<span>{lang === 'en' ? 'SAR' : 'ر.س'}</span>}&nbsp;<span>0.00</span></span>}
             </span>
           </li>
           <hr />
@@ -91,17 +98,16 @@ const Order = ({ order, getInvoice }) => {
             <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.CART_VALUE} : </span>
             <span>
               {/* {totalOrderPrice.total_shipping.display_value && */}
-              <span>
-                <span className={`${styles['fs-12']} ${styles.fontW600}`}>{order.orderCurrency}&nbsp;{order.orderAmount}</span>
-              </span>
+                <span className={`${styles['fs-12']} ${styles.fontW600} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                <span>{order.orderCurrency}</span>&nbsp;<span>{order.orderAmount}</span></span>
               {/* } */}
             </span>
           </li>
           <li className={`${styles['flx-space-bw']}`}>
             <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.TILA_GIFT} : </span>
             <span>
-              <span>
-                <span className={`${styles['fs-12']}`}>{voucherPayment.length > 0 ? voucherPayment[0].amount.display_value : '0.00'}</span>
+              <span >
+                <span className={`${styles['fs-12']}`}>{voucherPayment.length > 0 ? <span className={`${styles['fs-12']} ${styles.fontW600} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span>{voucherPayment[0].amount.display_currency_code}</span>&nbsp;<span>{voucherPayment[0].amount.display_value}</span></span> : <span className={`${styles.fontW600} ${styles['fs-12']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>{<span>{lang === 'en' ? 'SAR' : 'ر.س'}</span>}&nbsp;<span>0.00</span></span>}</span>
               </span>
             </span>
           </li>
@@ -109,9 +115,9 @@ const Order = ({ order, getInvoice }) => {
             <li className={`${styles['flx-space-bw']}`}>
               <span>
                 <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}>{ORDER_PAGE.COD_CHARGES} : </span>
-                <span>
-                  <span className={`${styles['fs-10']}`}>{totalOrderPrice.total_cod_charges.currency_code}</span>&nbsp;
-                  <span className={`${styles['fs-12']}`}>{totalOrderPrice.total_cod_charges.display_value}</span>
+                <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                  <span className={`${styles['fs-10']}`}>{totalOrderPrice && totalOrderPrice.total_cod_charges && totalOrderPrice.total_cod_charges.display_currency_code}</span>&nbsp;
+                  <span className={`${styles['fs-12']}`}>{totalOrderPrice && totalOrderPrice.total_cod_charges && totalOrderPrice.total_cod_charges.display_value}</span>
                 </span>
               </span>
             </li>
@@ -123,7 +129,7 @@ const Order = ({ order, getInvoice }) => {
               ${styles['pt-5']}
               ${styles['pb-5']} ${styles['mt-5']} ${styles['mb-5']}`}>
             <span className={`${styles.fontW600} ${styles['fs-12']}`}>{ORDER_PAGE.AMOUNT_PAID} : </span>
-            <span className={`${styles.fontW600} ${styles['fs-12']}`}> {totalOrderPrice.total_price.currency_code} {totalOrderPrice.total_price.display_value}</span>
+            <span className={`${styles.fontW600} ${styles['fs-12']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}> <span>{totalOrderPrice.total_price.display_currency_code}</span>&nbsp;<span>{totalOrderPrice.total_price.display_value}</span></span>
           </li>
           <li className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}> {ORDER_PAGE.INCLUSIVE_OF_ALL_TAXES}</li>
         </ul>
@@ -219,7 +225,7 @@ const Order = ({ order, getInvoice }) => {
             </span>
             <span className={`${styles['ml-10']} ${styles['fs-16']} ${styles.flex}`}>
               <span className={`${styles['thick-gry-clr']}`}>{ORDERS.ORDER_TOTAL} :</span>
-              <span className={`${styles.flex} ${styles['align-baseline']}`}>
+              <span className={`${styles.flex} ${styles['align-baseline']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
                 <span className={`${styles['fs-14']} ${styles['thick-gry-clr']}`}>{order.orderCurrency}</span>&nbsp;
                 <span className={`${styles.fontW600}`}>{order.orderAmount}</span>
                 <OverlayTrigger

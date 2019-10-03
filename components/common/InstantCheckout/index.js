@@ -69,7 +69,6 @@ const InstaCheckoutDetails = ({
     if (value === 'CASH_ON_DELIVERY') {
       props.codChargesDisplay()
     }else{
-      debugger;
       props.excludeCOD()
     }
   }
@@ -186,7 +185,7 @@ const InstaCheckoutDetails = ({
             onChange={checkTilaCreditValue}
           />&nbsp;
           <label>
-            {`${filteredData[0].display_name} (${filteredData[0].balance.currency_code} ${filteredData[0].balance.display_value})`}
+            {`${filteredData[0].display_name} (${lang === 'en' ? filteredData[0].balance.display_currency_code : filteredData[0].balance.display_value} ${lang === 'en' ? filteredData[0].balance.display_value : filteredData[0].balance.display_currency_code})`}
           </label>
         </div>
       );

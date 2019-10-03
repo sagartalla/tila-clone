@@ -126,7 +126,7 @@ class VariantsAndSimilarProducts extends Component {
         {
           _.map(similarProductsAttrOrder, (variantAttKey) => {
               const variantAttVal = similarProductsDisplay[variantAttKey];
-              return variantAttVal.values.length ?
+              return variantAttVal && variantAttVal.values && variantAttVal.values.length ?
                 (<SimilarProducts
                   onSelectProduct={this.onSelectProduct}
                   key={variantAttVal.displayName}
