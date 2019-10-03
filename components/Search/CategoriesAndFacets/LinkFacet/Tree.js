@@ -39,6 +39,7 @@ const Tree = ({
 
             return (
               <Branch
+                key={category.id}
                 first={first}
                 category={category}
                 queryString={queryString}
