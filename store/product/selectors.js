@@ -302,12 +302,14 @@ const getVariantsAndSimilarProducts = variantId => (store) => {
         [attKey]: [...map[key][attKey], ...(attVal.attribute_values.map(i => `${i.value}${i.qualifier_unit ? ` ${i.qualifier_unit}` : ''}`))],
       };
     });
+    acc.order = acc.order.filter(v => v);
     return {
       ...acc,
       display,
       map,
     };
   }, { display: {}, map: [], order: [] }) : { display: {}, map: [], order: [] };
+
   if (similar_products.length && similarProducts.order[0]) {
     const primaryValues = attribute_map[similarProducts.order[0]].attribute_values.map(av => av.value);
     const shortList = _.reduce(similarProducts.map, (acc, attrs, pid) => {

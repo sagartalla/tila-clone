@@ -48,34 +48,32 @@ class CheckboxFacet extends Component {
     });
   }
 
-  onChangeItem(value) {
-    return (e) => {
-      const newSelectedItem = [...this.state.selectedItems];
-      if (e.target.checked) {
-        newSelectedItem.push(value.name);
-        window.appEventData.push({
-          event: 'LEFTNAV_FILTERS',
-          filters: {
-            attributes: {
-              attributeName: this.props.attributeName,
-            },
-            search: {
-              keyword: this.props.search.category != null ? this.props.search.category : this.props.search.q,
-            },
-            item: newSelectedItem.join(),
+  onChangeItem = value => (e) => {
+    const newSelectedItem = [...this.state.selectedItems];
+    if (e.target.checked) {
+      newSelectedItem.push(value.name);
+      window.appEventData.push({
+        event: 'LEFTNAV_FILTERS',
+        filters: {
+          attributes: {
+            attributeName: this.props.attributeName,
           },
-        });
-      } else {
-        newSelectedItem.splice(newSelectedItem.indexOf(value.name), 1);
-      }
-      this.setState({
-        selectedItems: newSelectedItem,
-      }, () => {
-        this.props.selectedCheckbox(this.state.selectedItems)();
+          search: {
+            keyword: this.props.search,
+          },
+          item: newSelectedItem.join(),
+        },
       });
-      this.props.onChangeHandle(value, e);
-    };
-  }
+    } else {
+      newSelectedItem.splice(newSelectedItem.indexOf(value.name), 1);
+    }
+    this.setState({
+      selectedItems: newSelectedItem,
+    }, () => {
+      this.props.selectedCheckbox(this.state.selectedItems)();
+    });
+    this.props.onChangeHandle(value, e);
+  };
 
   onFilterData(value) {
     const { filter } = this.props;
