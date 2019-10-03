@@ -79,11 +79,11 @@ class Category extends Base {
             <meta property="og:locale:alternate" content="ar_SA" />
             <meta property="og:type" content="website" />
             <meta property="og:image" content=" logo image url" />
-            <meta name="description" content={`${SEO_CONTENT.BRAND_META_CONTENT} ${url.query.category} ${SEO_CONTENT.BRAND_META_CONTENT2}`} />
-            <title>{url.query.category} {SEO_CONTENT.LANDING_H2_CONTENT} {url.query.category} {SEO_CONTENT.BRAND_H2_TITLE}</title>
+            <meta name="description" content={`${SEO_CONTENT.LANDING_META_CONTENT_ONE} ${url.query.category} ${SEO_CONTENT.LANDING_META_CONTENT_TWO}`} />
+            <title>{SEO_CONTENT.LANDING_TITTLE_ONE} {url.query.category} {SEO_CONTENT.LANDING_TITTLE_TWO}</title>
           </Head>
           <h1 className={`${styles.display_none}`}>{url.query.category}</h1>
-          <h2 className={`${styles.display_none}`}>{SEO_CONTENT.BRAND_H2} {url.query.category}</h2>
+          <h2 className={`${styles.display_none}`}>{SEO_CONTENT.LANDING_H2_CONTENT_NEW} {url.query.category} {SEO_CONTENT.LANDING_H2_CONTENT_NEW1}</h2>
           <Layout>
             <Search query={url.query.category} loaderProps={loaderProps} isBrandPage />
           </Layout>

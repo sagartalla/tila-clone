@@ -105,7 +105,7 @@ class CartAndPaymentSideBar extends Component {
                 insnt_item_listing_id={insnt_item_listing_id}
                 isPdp={isPdp}
                 // isFromCart={isFromCart}
-                totalPrice={total_price.display_value}
+                totalPrice={cash_on_delivery && cash_on_delivery && cash_on_delivery.amount_to_pay && cash_on_delivery.amount_to_pay.display_value} 
                 moneyValue={total_price.money_value}
                 currency={currency}
                 isMounted={false}
@@ -175,7 +175,7 @@ class CartAndPaymentSideBar extends Component {
                   </span>
                 </li> : null}
               {
-                total_vat.display_value !== 0 ?
+                total_vat && total_vat.display_value !== 0 ?
                   <li>
                     <span className={styles['thick-gry-clr']}>{CART_PAGE.ESTIMATED_VAT}</span>
                     {/* <span>{total_vat.currency_code || currency} {total_vat.display_value}</span>  */}
