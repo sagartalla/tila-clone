@@ -43,7 +43,7 @@ const CartBody = ({
   const { items } = data;
   const flag = data && items && items.length;
   const cnt = flag > 0 ? items.length : 0;
-  const { CART_PAGE, WISH_LIST_PAGE } = languageDefinations();
+  const { CART_PAGE, WISH_LIST_PAGE, PAYMENT_PAGE } = languageDefinations();
   if(data.ui.loading) {
     return <div className={`${styles['p-15']} ${styles['fontW600']} ${styles['thick-gry-clr']} ${styles['mb-0']}`}>{CART_PAGE.PLEASE_WAIT_FETCHING_CART_ITEMS}</div>
   }
@@ -66,7 +66,7 @@ const CartBody = ({
               <div className={`${styles['flex-center']} ${styles['flex-colum']} ${styles['p-40']}`}>
                 <span className={`${styles['flex']} ${styles['no-cart-icon-svg']}`}><SVGComponent clsName={`${styles['no-cart-img']}`} src="icons/cart/no-cart-icon" /></span>
                 <h4 className={`${styles['mb-5']} ${styles['fs-26']}`}>{CART_PAGE.MY_CART_EMPTY}</h4>
-                <span className={styles['text-gry']}>{CART_PAGE.DONT_WAIT}</span>
+                <span className={`${styles['text-gry']} ${styles['mt-20']}`}>{CART_PAGE.DONT_WAIT}</span>
                 <div className={`${styles['flex-center']} ${styles['mt-20']}`}>
                 <div>
                   <a href={`/${language}`} className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600}`}>{WISH_LIST_PAGE.START_SHOPPING}</a>
@@ -74,7 +74,7 @@ const CartBody = ({
                 {wishListCount > 0 &&
                 <React.Fragment>
                 <div className={`${styles['or-value']} ${styles['flex-center']} ${styles['justify-center']}`}>
-                  OR
+                {PAYMENT_PAGE.OR}
                 </div>
                 <div>
                   <a href={`/${language}/customer/wishlist`} className={`${styles['fp-btn']} ${styles['add-from-wishlist']} ${styles['fp-btn-x-large']} ${styles['right-radius']} ${styles['text-uppercase']} ${styles.fontW600} `}>{CART_PAGE.ADD_FROM_WISHLIST}</a>

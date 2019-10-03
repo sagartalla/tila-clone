@@ -15,7 +15,7 @@ import SVGComponent from '../../../common/SVGComponet';
 
 import { languageDefinations } from '../../../../utils/lang';
 
-const { ORDER_PAGE } = languageDefinations();
+const { ORDER_PAGE, CART_PAGE } = languageDefinations();
 
 import lang from '../../../../utils/language';
 
@@ -129,7 +129,7 @@ class OrderHeader extends Component {
                     </div>
                     <div className={`${styles['flex-center']} ${styles['fs-14']}`}>
                       <Col md={6} sm={6} className={styles['thick-gry-clr']}>{ORDER_PAGE.ITEM_TOTAL}</Col>
-                      {price && <Col md={6} sm={6}><span className={`${styles['fs-12']}`}>{total_offer_price.currency_code}</span> <span>{total_offer_price.display_value}</span></Col>}
+                      {price && <Col md={6} sm={6}><span className={`${lang === 'ar' ? `${styles['arbic-direction-rev']} ${styles['justify-flex-end']}` : ''}`}><span className={`${styles['fs-12']}`}>{total_offer_price.display_currency_code}</span>&nbsp;<span>{total_offer_price.display_value}</span></span></Col>}
                     </div>
                     {/* <p className={`${styles['flex-center']}`}>
                       <Col md={6} sm={6}>{ORDER_PAGE.SHIPPING}</Col>
@@ -165,7 +165,7 @@ class OrderHeader extends Component {
                       <Fragment key={index}>
                         <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
                           <Col className={`${styles['thick-gry-clr']} ${styles['text-capitalize']}`} md={6}>{p.payment_mode_display_name.replace('_', ' ')}</Col>
-                          <Col md={6}><span className={`${styles['fs-12']}`}>{p.currency_code}</span>&nbsp;<span>{p.amount.display_value}</span></Col>
+                          <Col md={6}><span className={`${lang === 'ar' ? `${styles['arbic-direction-rev']} ${styles['justify-flex-end']}` : ''}`}><span className={`${styles['fs-12']}`}>{p.amount.display_currency_code}</span>&nbsp;<span>{p.amount.display_value}</span></span></Col>
                         </div>
                         {p.card_type &&
                           <div className={`${styles['lne-ht2']} ${styles['fs-14']}`}>
@@ -218,7 +218,7 @@ class OrderHeader extends Component {
                 {price &&
                   <Col md={6} sm={6} className={styles['tool-tip-style']}>
                     <span className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['fs-14']}`}>
-                      <span className={styles['align-baseline']}><span className={`${styles['fs-12']}`}>{total_price.currency_code}</span>&nbsp;<span>{total_price.display_value}</span></span>
+                      <span className={`${styles['align-baseline']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span className={`${styles['fs-12']}`}>{total_price.display_currency_code}</span>&nbsp;<span>{total_price.display_value}</span></span>
                       {/* (<a onMouseOver={this.showToolTip} onMouseLeave={this.hideToolTip}>i</a>) */}
                       <span
                         onMouseOver={this.showToolTip}
@@ -230,23 +230,32 @@ class OrderHeader extends Component {
                             <div className={styles['tool-tip']}>
                               <ul>
                                 {total_mrp &&
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_MRP} : </span><span> {total_mrp.currency_code} {total_mrp.display_value}</span></li>}
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_MRP} : </span>
+                                <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                                  <span>{total_mrp.display_currency_code}</span>&nbsp;<span>{total_mrp.display_value}</span></span></li>}
                                 {total_discount &&
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_DISCOUNT} : </span><span>{'(-)'} {total_discount.currency_code} {total_discount.display_value}</span></li>}
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_DISCOUNT} : </span>
+                                  <span className={styles.flex}>{'(-)'}&nbsp;<span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span>{total_discount.display_currency_code}</span>&nbsp;<span>{total_discount.display_value}</span></span></span></li>}
                                 {total_shipping &&
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span><span className={styles.flex}>{total_shipping.money_value ? `(+) ${total_shipping.currency_code} ${total_shipping.display_value}` : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} />}</span></li>}
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_SHIPPING} : </span>
+                                  <span className={styles.flex}>{total_shipping.money_value ? <span className={styles.flex}><span>(+)&nbsp;</span> <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span>{total_shipping.display_currency_code}</span>&nbsp;<span>{total_shipping.display_value}</span></span></span> : CART_PAGE.FREE}</span></li>}
                                 {total_gift_charges && total_gift_charges.money_value > 0 &&
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span><span>{total_gift_charges.display_value ? `(+) ${total_gift_charges.currency_code} ${total_gift_charges.display_value}` : 'FREE'}</span></li>}
-                                <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.ESTIMATED_VAT} : </span><span> {total_vat.currency_code} {total_vat.display_value}</span></li>
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.T_GIFT_CHARGES} : </span>
+                                  <span>{total_gift_charges.display_value ? <span><span>(+)</span> <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span>{total_gift_charges.display_currency_code}</span>&nbsp;<span>{total_gift_charges.display_value}</span></span></span> : CART_PAGE.FREE}</span></li>}
+                                <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.ESTIMATED_VAT} : </span>
+                                  <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}> <span>{total_vat && total_vat.display_currency_code}</span>&nbsp;<span>{total_vat && total_vat.display_value}</span></span></li>
                                 <hr/>
                                 {total_offer_price &&
-                                  <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.CART_VALUE} : </span><span> {total_offer_price.currency_code} {total_offer_price.display_value}</span></li>}  
-                                  <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TILA_GIFT} : </span><span> {voucherPayment.length > 0 ? voucherPayment[0].amount.display_value : '0.00'}</span></li>
+                                  <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.CART_VALUE} : </span>
+                                  <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span>{total_offer_price.display_currency_code}</span>&nbsp;<span>{total_offer_price.display_value}</span></span></li>}  
+                                  <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TILA_GIFT} : </span>
+                                  <span> {voucherPayment.length > 0 ? <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span>{voucherPayment[0].amount.display_currency_code}</span>&nbsp;<span>{voucherPayment[0].amount.display_value}</span></span> : <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span>{lang === 'en' ? 'SAR' : 'ر.س'}</span>&nbsp;<span>0.00</span></span>}</span></li>
                                 {codPayment.length>0 && codPayment[0].payment_mode === "CASH_ON_DELIVERY" &&
-                                  <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.COD_CHARGES} : </span><span> {total_cod_charges.currency_code} {total_cod_charges.display_value}</span></li>}
+                                  <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.COD_CHARGES} : </span>
+                                  <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}> <span>{total_cod_charges && total_cod_charges.display_currency_code}</span>&nbsp;<span>{total_cod_charges && total_cod_charges.display_value}</span></span></li>}
                                 <hr/>
                             {total_price &&
-                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.AMOUNT_PAID} : </span><span className={styles.fontW600}>{total_price.currency_code} {total_price.display_value}</span></li>}
+                                  <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.AMOUNT_PAID} : </span><span className={`${styles.fontW600} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}><span>{total_price.display_currency_code}</span>&nbsp;<span>{total_price.display_value}</span></span></li>}
                                 <li className={`${styles['flx-space-bw']} ${styles['light-gry-clr']}`}> {ORDER_PAGE.INCLUSIVE_OF_ALL_TAXES}</li>
                               </ul>
                             </div>

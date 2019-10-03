@@ -39,7 +39,7 @@ const RecentlyViewItem = ({
 
   return (
     <div className={`${styles['pl-0']} ${styles['pr-0']}  ${styles.relative}`} key={item.id}>
-      <a href={`/${lang}/pdp/${item.nm.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${item.tuinId ? `${item.tuinId}/` : ''}${item.id ? `${item.id}/` : ''}?pid=${item.pid}&vid=${item.vid}&cid=${item.cid}`}>
+      <a href={`/${lang}/pdp/${item && item.nm && item.nm.replace(/\//g, '').split(' ').join('-').toLowerCase()}/${item.tuinId ? `${item.tuinId}/` : ''}${item.id ? `${item.id}/` : ''}?pid=${item.pid}&vid=${item.vid}&cid=${item.cid}`}>
         <div className={`${styles['recentview-main-inn']} ${styles['border-r']}  ${styles['p-10-20']} ${styles.flex} ${styles['flex-colum']}`}>
           <div className={styles['recentview-main-inn-img']}>
             <img src={`${constants.mediaDomain}/${item.im}`} alt="" className="img-responsive" />
@@ -53,8 +53,10 @@ const RecentlyViewItem = ({
               <span>&nbsp;</span>
             </div>
             <h6 className={`${styles['fs-12']} ${styles['mb-5']} ${styles['black-color']} ${styles.elipsis}`}><span className={styles.fontW600}>{item.br}</span> - {item.nm}</h6>
-            <span className={`${styles['fs-12']} ${styles['black-color']}`}><span>{item.cd}</span><span className={`${styles.fontW600} ${styles['fs-14']} ${styles['pl-5']}`}>{item.pr} </span></span>
+            <span className={`${lang === 'ar' ? styles.flex : ''}`}>
+            <span className={`${styles['fs-12']} ${styles['black-color']} ${lang === 'ar' ? styles.flex : ''}`}><span>{item.display_cur}</span><span className={`${styles.fontW600} ${styles['fs-14']} ${styles['pl-5']}`}>{item.pr} </span></span>
             <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}><s><span className={`${styles.fontW600} ${styles['pl-5']}`}>{item.mrp}</span></s></span>
+            </span>
           </div>
         </div>
       </a>

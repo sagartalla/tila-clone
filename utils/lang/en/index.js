@@ -73,6 +73,7 @@ export const EN_KEYWORDS = {
     ITEM: 'item',
     NO_WARRANTY: 'No Warranty',
     ITEM_IN_CART: 'item in cart',
+    FREE: 'Free',
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'Secure Checkout',
@@ -147,6 +148,8 @@ export const EN_KEYWORDS = {
     CHANGE: 'Change',
     SIGN_IN_AS_DIFF_USER: 'Logout & sign in as a different user',
     CONTINUE_TO_CHECKOUT: 'Continue to checkout',
+    LOGOUT_WARNING: 'Please note that once you logout, your cart items will not be carried over to the other account.',
+    REDIRECT_HOME: 'You will be redirected to the Homepage.',
     DEFAULT_CARD: 'Default Card',
     CREDIT_CARD: 'Credit Card',
     DEBIT_CARD: 'Debit Card',
@@ -451,6 +454,7 @@ export const EN_KEYWORDS = {
     YOUR_PERSONAL: 'Your personal information has been updated.',
     LAST_UPDATED: 'Last updated',
     NOT_AVAILABLE: 'Not available',
+    FILL_IN_THE_FIELDS: 'Fill in all the blanks',    
   },
   NOTITICATION_INFO: {
     HEADING: 'New Notifications',

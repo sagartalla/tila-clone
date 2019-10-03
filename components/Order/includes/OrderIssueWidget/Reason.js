@@ -83,11 +83,11 @@ class Reason extends Component {
   }
   getSelectedMode(mode) {
     return {
-      RETURN:'Refund',
-      CANCEL:'Cancel',
-      EXCHANGE:'Exchange',
-      CLAIMWARRANTY:'Claim Warranty',
-      DAMAGEWARRANTY:'Claim Warranty'
+      RETURN: ORDER_PAGE.REFUND,
+      CANCEL: ORDER_PAGE.CANCEL,
+      EXCHANGE: ORDER_PAGE.EXCHANGE,
+      CLAIMWARRANTY: ORDER_PAGE.CLAIM_WARRANTY,
+      DAMAGEWARRANTY: ORDER_PAGE.CLAIM_WARRANTY,
     }[mode]
   }
   onOptionChange = (e) => {
@@ -108,7 +108,7 @@ class Reason extends Component {
             className={styles['radio-btn']}
             type="radio"
             value={ORDER_PAGE.REPLACE}
-            checked={this.state.selectedMode === 'Replace'}
+            checked={this.state.selectedMode === ORDER_PAGE.REPLACE}
             onChange={this.onOptionChange}
           />
           <label className={styles['pl-10']}> {ORDER_PAGE.REPLACE}</label>
@@ -203,7 +203,7 @@ class Reason extends Component {
   }
   productNotAvailable(value) {
     this.setState({
-      selectedMode: value ? 'Exchange' : 'Refund',
+      selectedMode: value ? ORDER_PAGE.EXCHANGE : ORDER_PAGE.REFUND,
       selectedVariant: [],
       variantId: '',
       displaySizeError: false,
@@ -369,10 +369,10 @@ class Reason extends Component {
                       <input
                         className={styles['radio-btn']}
                         type="radio"
-                        value="Refund"
+                        value={ORDER_PAGE.REFUND}
                         onChange={this.onOptionChange}
                         checked={
-                          selectedMode === 'Refund'
+                          selectedMode === ORDER_PAGE.REFUND
                         }
                       />
                       <label className={styles['pl-10']}>{ORDER_PAGE.REFUND}</label>

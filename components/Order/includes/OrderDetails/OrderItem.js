@@ -82,7 +82,7 @@ class OrderItem extends Component {
 
   getCurrencyValue(finalPrice) {
     const {isDamageProtectionAvailable,isWarrantyAvailable } = this.props
-    return <span><span className={`${styles['fs-12']}`}>&nbsp;{finalPrice.currency_code}</span>&nbsp;<span>{finalPrice.display_value}</span></span>
+    return <span className={`${lang === 'ar' ? styles['flex'] : ''}`}><span className={`${styles['fs-12']}`}>&nbsp;{finalPrice.display_currency_code}</span>&nbsp;<span>{finalPrice.display_value}</span></span>
   }
   getWarrantyDuration = (product) => {
 
@@ -107,7 +107,7 @@ class OrderItem extends Component {
       tilaPolicy,
     } = product;
     if (tilaPolicy.length === 0) return null;
-    const preferredPolicy = product.returnPolicy.preferred_policy; 
+    const preferredPolicy = product && product.returnPolicy && product.returnPolicy.preferred_policy; 
     tilaPolicy.length > 0 && tilaPolicy.forEach((item) => {
         if (item.policy_type === 'EXTENDED' && item.valid_upto !== null) {
           warrantyData = moment(item.valid_upto).tz('Asia/Riyadh').format("MMM Do 'YY");
@@ -151,13 +151,13 @@ class OrderItem extends Component {
           data.push(
             <div className={`${styles['warranty-block']}   ${styles['m-10']}`}>
               <div className={`${styles['flex']} ${styles['align-end']}`}>
-                <div className={`${styles['warranty-sub-block']}`}>{`${item.policy_type == 'EXTENDED' ? 'Extended Warranty' : 'Damage Protection' }` }</div>
+                <div className={`${styles['warranty-sub-block']}`}>{`${item.policy_type == 'EXTENDED' ? CART_PAGE.EXTENDED_WARRANTY : CART_PAGE.DAMAGE_PROTECTION }` }</div>
                 <div className={`${styles['width22']} ${styles['font-weight600']}`}>
-                <span className={`${styles['fs-12']}`}>{item.cost.currency_code}</span>&nbsp;
+                <span className={`${styles['fs-12']}`}>{item.cost.display_currency_code}</span>&nbsp;
                 {item.cost.display_value}
                 </div>
               </div>
-              <div className={`${styles['fs-12']} ${styles['ml-10']} ${styles['lgt-black']}`}>{`Duration: ${item.duration}`}</div>
+              <div className={`${styles['fs-12']} ${styles['ml-10']} ${styles['lgt-black']}`}>{`${CART_PAGE.DURATION}: ${item.duration}`}</div>
             </div>);
         }
       });
@@ -168,7 +168,7 @@ class OrderItem extends Component {
             <div className={`${styles['warranty-block']} ${styles['m-10']} ${styles['inline-flex']} ${styles['p-3']}`}>
               <span className={`${styles['fs-12']} ${styles['font-weight600']}`}>{item.duration} ,</span>
               <span className={`${styles['fs-12']} ${styles['lgt-black']} ${styles['pl-4']}`}>
-                {`${item.policy_type == 'EXTENDED' ? 'Extended Warranty' : 'Damage Protection' }` }
+                {`${item.policy_type == 'EXTENDED' ? CART_PAGE.EXTENDED_WARRANTY : CART_PAGE.DAMAGE_PROTECTION }` }
               </span>
             </div>
           )
@@ -301,7 +301,7 @@ class OrderItem extends Component {
             const {
               final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {}, discount = {},
             } = product.price;
-            const preferredPolicy = product.returnPolicy.preferred_policy;
+            const preferredPolicy = product && product.returnPolicy && product.returnPolicy.preferred_policy;
             return (
               <React.Fragment key={product.id}>
                 <div className={`${styles.relative} ${styles['ht-100P']} ${styles['products-wrap']} ${styles.flex} ${styles['p-15']}`}>
@@ -361,22 +361,27 @@ class OrderItem extends Component {
                                   {showToolTip &&
                                   <div className={styles['tool-tip']}>
                                     <ul>
-                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.MRP} : </span><span> {product.currency_code} {mrp.display_value}</span></li>
+                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.MRP} : </span>
+                                      <span className={`${lang === 'ar' ? `${styles['flex']}` : ''}`}> <span>{mrp.display_currency_code}</span>&nbsp;<span>{mrp.display_value}</span></span></li>
                                       {product && product.offers && product.offers.length > 0 ?
-                                        product.offers.map(offer => <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{offer.coupon_code ? offer.coupon_code : offer.description} : </span><span>{'(-)'} {offer.discount.display_value} {offer.discount.currency_code}</span></li>)
+                                        product.offers.map(offer => <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{offer.coupon_code ? offer.coupon_code : offer.description} : </span>
+                                        <span className={`${styles.flex}`}>{'(-)'} <span className={`${lang === 'ar' ? `${styles['flex']}` : ''}`}><span>{offer.discount.display_value}</span>&nbsp;<span>{offer.discount.display_currency_code}</span></span></span></li>)
                                         :
-                                        <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span><span>{'(-)'} {discount.currency_code} {discount.display_value}</span></li>
+                                        <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.DISCOUNT} :</span>
+                                        <span className={`${styles.flex}`}>{'(-)'}&nbsp;<span className={`${lang === 'ar' ? styles['flex'] : ''}`}><span>{discount.display_currency_code}</span>&nbsp;<span>{discount.display_value}</span></span></span></li>
                                       }
                                       {offer_price &&
-                                      <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span><span> {offer_price.currency_code} {offer_price.display_value}</span></li>}
+                                      <li className={`${styles['flx-space-bw']}`}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.PRICE} :</span>
+                                      <span className={`${lang === 'ar' ? styles['flex'] : ''}`}><span>{offer_price.display_currency_code}</span>&nbsp;<span>{offer_price.display_value}</span></span></li>}
                                       {product.gift_info && gift_charge &&
-                                        <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{gift_charge.display_value ? `(+) ${gift_charge.currency_code} ${gift_charge.display_value}` : 'FREE'}</span></li>}
+                                        <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.GIFT_CHARGES} : </span><span>{gift_charge.display_value ? <span className={`${styles.flex}`}><span>(+)</span>&nbsp;<span className={`${lang === 'ar' ? styles['flex'] : ''}`}>{gift_charge.display_currency_code}</span>&nbsp;<span>{gift_charge.display_value}</span></span> : CART_PAGE.FREE}</span></li>}
                                       <li className={styles['flx-space-bw']}>
-                                        <span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.fontW600}> {shipping_fees.display_value ? `(+) ${shipping_fees.currency_code} ${shipping_fees.display_value}` :
-                                        <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}</span>
+                                        <span className={styles['thick-gry-clr']}>{ORDER_PAGE.SHIPPING} : </span><span className={styles.fontW600}> {shipping_fees.display_value ? <span className={`${styles.flex}`}><span>(+)</span>&nbsp;<span className={`${lang === 'ar' ? styles['flex'] : ''}`}><span>{shipping_fees.display_currency_code}</span>&nbsp;<span>{shipping_fees.display_value}</span></span></span> :
+                                        CART_PAGE.FREE}</span>
                                       </li>
                                       {final_price &&
-                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}> {final_price.currency_code} {final_price.display_value}</span></li>}
+                                      <li className={styles['flx-space-bw']}><span className={styles['thick-gry-clr']}>{ORDER_PAGE.TOTAL} : </span><span className={styles.fontW600}>
+                                       <span className={`${lang === 'ar' ? styles['flex'] : ''}`}><span>{final_price.display_currency_code}</span>&nbsp;<span>{final_price.display_value}</span></span></span></li>}
 
                                     </ul>
                                   </div>}
@@ -438,7 +443,7 @@ class OrderItem extends Component {
                         </span>
                         </span>
                         {refundStatus(refund)}
-                        <span>{refund.amount.display_value} {refund.amount.currency_code}</span>
+                        <span>{refund.amount.display_value} {refund.amount.display_currency_code}</span>
                       </div>
                     ))}
                   </div>}
@@ -618,7 +623,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);
 //       >
 //         <div className={`${styles.width78} ${styles['font-weight600']}`}>{ORDER_PAGE.SHIPPING}</div>
 //         <div className={`${styles.width22} ${styles['font-weight600']}`}>
-//           {shipping_fees.display_value ? `(+) ${shipping_fees.currency_code} ${shipping_fees.display_value}` :
+//           {shipping_fees.display_value ? `(+) ${shipping_fees.display_currency_code} ${shipping_fees.display_value}` :
 //           <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? 'icons/free-shipping' : 'icons/Arabic-Freeshipping'} />}
 //         </div>
 //       </div>
@@ -643,7 +648,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);
 //       >
 //         <div className={`${styles.width78} ${styles['font-weight600']}`}>Total:</div>
 //         <div className={`${styles['width22']} ${styles['font-weight600']}`}>
-//            <span>{final_price.currency_code}</span>&nbsp;
+//            <span>{final_price.display_currency_code}</span>&nbsp;
 //            <span>{final_price.display_value}</span>
 //         </div>
 //       </div>

@@ -73,7 +73,8 @@ export const AR_KEYWORDS = {
     PLEASE_WAIT_FETCHING_CART_ITEMS: 'دقائق، بنجيب لك المنتجات من عربتك ',
     ITEM: 'منتج',
     NO_WARRANTY: 'لا يوجد ضمان',
-    ITEM_IN_CART: 'منتج في عربة التسوق',    
+    ITEM_IN_CART: 'منتج في عربة التسوق',  
+    FREE: 'مجاناً',      
   },
   PAYMENT_PAGE: {
     SECURE_CHECKOUT: 'إنهاء الشراء بآمان',
@@ -147,6 +148,8 @@ export const AR_KEYWORDS = {
     CHANGE: 'تعديل',
     SIGN_IN_AS_DIFF_USER: 'سجّل خروجك وأنشئ حسابك بمستخدم جديد ',
     CONTINUE_TO_CHECKOUT: 'أكمل لإنهاء الشراء',
+    LOGOUT_WARNING: 'Please note that once you logout, your cart items will not be carried over to the other account.',
+    REDIRECT_HOME: 'You will be redirected to the Homepage.',
     DEFAULT_CARD: 'البطاقة الأساسية',
     CREDIT_CARD: 'البطاقة الإئتمانية',
     DEBIT_CARD: 'بطاقة الحساب الجاري',
@@ -449,6 +452,7 @@ export const AR_KEYWORDS = {
     YOUR_PERSONAL: 'حدثّنا معلوماتك الشخصية',
     LAST_UPDATED: 'آخرتحديث قبل',
     NOT_AVAILABLE: 'غير متوفر',
+    FILL_IN_THE_FIELDS: 'Fill in all the blanks',
   },
   NOTITICATION_INFO: {
     HEADING: 'التنبّهات الجديدة',

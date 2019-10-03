@@ -91,7 +91,7 @@ class ChoosePaymentMode extends Component {
     const { orderDetails, orderIssue, goToNextStep } = this.props;
     const { paymentType } = this.state;
     if (!(orderIssue &&  Object.keys(orderIssue.refundOptions).length > 0)) {
-      return <div>Loading...</div>
+      return <div>{ORDER_PAGE.LOADING}</div>
     }
     if (!(orderIssue && orderIssue.refundOptions.refund_eligible) || (orderIssue && orderIssue.refundOptions && orderIssue.refundOptions.refund_modes && orderIssue.refundOptions.refund_modes[0] === 'NIL')) {
         goToNextStep();
@@ -108,7 +108,7 @@ class ChoosePaymentMode extends Component {
             onClick={this.saveAndGoNext}
             className={`${styles['fp-btn']} ${styles['fp-btn-primary']} ${styles['retun-btn-part']} ${styles['text-uppercase']}`}
           >
-            {`${paymentType} Transfer`}
+            {`${paymentType} ${ORDER_PAGE.TRANSFER}`}
           </button>
         </div>
       </div>

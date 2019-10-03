@@ -223,6 +223,7 @@ class CartItem extends React.Component {
       brand_name, gift_info, shipping, warranty_duration, total_amount, total_discount, listing_id='',
       product_id, variant_id='', itemType, catalogId: catalog_id, discount, mrp, variantAttributes, selling_price, policies_applied, tila_care_policy, tila_care_charges,
     } = item;
+    console.log('shipping', shipping);
     return (
       <div key={item_id} className={`${styles['mb-20']} ${styles['box']}`} id="cart-container">
         {
@@ -295,7 +296,9 @@ class CartItem extends React.Component {
                         shipping !== null && (shipping.shippable && (
                           <p className={`${styles['mb-0']}`}>
                             <span className={`${styles['thick-gry-clr']} ${styles['fs-12']}`}>{CART_PAGE.SHIPPING} :</span>
-                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping && shipping.shipping_fees && shipping.shipping_fees.display_value && shipping.shipping_fees.display_value ? `(${shipping.shipping_fees.currency_code} ${shipping.shipping_fees.display_value})` : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().tz('Asia/Riyadh').add(shipping.shipping_days, 'days').format('LL')}</span>
+                            <span className={`${styles['pl-10']} ${styles['pr-10']} ${styles['fs-14']}`}>{CART_PAGE.REGULAR_SHIPPING} {shipping && shipping.shipping_fees && shipping.shipping_fees.display_value && shipping.shipping_fees.display_value ?
+                              <span>({<span><span>{`${lang === 'en' ? shipping.shipping_fees.display_currency_code : shipping.shipping_fees.display_value}`}&nbsp;</span>
+                            <span>{`${lang === 'en' ? shipping.shipping_fees.display_value : shipping.shipping_fees.display_currency_code}`}</span></span>})</span> : ''} - <span className={`${styles['fs-12']} ${styles['base-font']}`}>{CART_PAGE.ETA_DELIVERY_BY} {moment().tz('Asia/Riyadh').add(shipping.shipping_days, 'days').format('LL')}</span>
                             </span>
                           </p>
                         ))
@@ -319,18 +322,20 @@ class CartItem extends React.Component {
                 </Col>
                 <Col md={4} sm={4} className={`${styles['pr-5']} ${styles['landscape-cart-price']}`}>
                   {Math.floor(discount) > 5 &&
-                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex} ${styles['justify-end']}`}>
+                    <p className={`${styles['mb-0']} ${styles['fs-12']} ${styles.flex} ${styles['justify-flex-end']}`}>
                       <span className={styles['success-green']}>{`${lang === 'ar' ? '%'+Math.floor(discount) : Math.floor(discount)+'%'}`} {PDP_PAGE.OFF}</span>
                       <span className={`${styles['cross-strike']} ${styles.relative} ${styles['ml-5']}`}>
-                        <span className={styles['label-light-grey']}>
-                          <span className={`${styles['fs-12']}`}>{cur}&nbsp;</span>
+                        <span className={`${styles['label-light-grey']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                          <span className={`${styles['fs-12']}`}>{cur}</span>&nbsp;
                           <span>{mrp}</span>
                         </span>
                       </span>
                     </p>}
                   <h4 className={`${styles.fontW600} ${styles['justify-flex-end']} ${styles['cart-price-label']} ${styles['fs-16']} ${styles['light-gry-clr']} ${styles['flex-center']} ${styles['mt-10']} ${styles['t-rt']} ${styles['align-baseline']}`}>
-                       <span className={`${styles['fs-12']}`}>{cur}&nbsp;</span>
+                     <span className={lang === 'ar' ? styles['arbic-direction-rev'] : ''}>
+                       <span className={`${styles['fs-12']}`}>{cur}</span>&nbsp;
                         <span>{offer_price}</span>
+                        </span>
                     {/* <OverlayTrigger trigger="click" placement="bottom" overlay={popover(item)}> */}
                     {/* <span className={`${styles['fs-12']} ${styles['pr-5']}`}>
                         <SVGComponent clsName={`${styles['secure-icon']} ${styles['mr-10']} ${styles['pointer']}`} src="icons/common-icon/trust-secure" />
@@ -357,16 +362,18 @@ class CartItem extends React.Component {
                               <div className={styles['thick-gry-clr']}>{CART_PAGE.MAXIMUM_RETAIL_PRICE}</div>
                               <div className={`${styles['fs-10']} ${styles['label-light-grey']}`}>({CART_PAGE.INCL_OF_ALL_TAXES})</div>
                             </div>
-                            <div className={`${styles['t-rt']}`}>
-                              {`${cur} ${mrp}`}
+                            <div className={`${styles['t-rt']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                              <span>{`${cur}`}</span>&nbsp;
+                              <span>{`${mrp}`}</span>
                             </div>
                           </div>
                           <div className={`${styles['flx-space-bw']} ${styles['fs-12']}`}>
                             <div className={`${styles['pb-10']}`}>
                               <div className={styles['thick-gry-clr']}>{CART_PAGE.SELLING_PRICE}</div>
                             </div>
-                            <div className={`${styles['t-rt']}`}>
-                              {`${cur} ${selling_price}`}
+                            <div className={`${styles['t-rt']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                               <span>{`${cur}`}</span>&nbsp;
+                               <span>{`${selling_price}`}</span>                          
                             </div>
                           </div>
                           {offerDiscounts.length > 0 &&
@@ -376,8 +383,9 @@ class CartItem extends React.Component {
                                   <div className={`${styles['pb-10']}`}>
                                     <div className={styles['thick-gry-clr']}>{od.description}</div>
                                   </div>
-                                  <div className={`${styles['t-rt']}`}>
-                                    {`${cur} ${od.discount.display_value}`}
+                                  <div className={`${styles['t-rt']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                                    <span>{`${cur}`}</span>&nbsp;
+                                    <span>{`${od.discount.display_value}`}</span>                                    
                                   </div>
                                 </div>
                               );
@@ -391,8 +399,11 @@ class CartItem extends React.Component {
                                 </div>
                                 <div className={`${styles['t-rt']} ${styles.flex}`}>
                                   {shipping.shipping_fees ?
-                                    `${shipping.shipping_fees.currency_code} ${shipping.shipping_fees.display_value}`
-                                    : <SVGComponent clsName={`${styles['ship-icon']}`} src={lang === 'en' ? "icons/free-shipping" : "icons/Arabic-Freeshipping"} />}
+                                  <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                                  <span>{`${shipping.shipping_fees.display_currency_code}`}</span>&nbsp;
+                                  <span>{`${shipping.shipping_fees.display_value}`}</span> 
+                                  </span>
+                                    : CART_PAGE.FREE}
                                 </div>
                               </div>
                               :
@@ -405,8 +416,10 @@ class CartItem extends React.Component {
                                   <div className={styles['thick-gry-clr']}>{CART_PAGE.TILA_CARE_PROTECTION}</div>
                                 </div>
                                 <div className={`${styles['t-rt']} ${styles['flex']}`}>
-                                  {tila_care_charges &&
-                                    `${tila_care_charges.currency_code} ${tila_care_charges.display_value}`}
+                                {tila_care_charges &&
+                                  <span className={`${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                                  <span>{`${tila_care_charges.display_currency_code}`}</span>&nbsp;
+                                  <span>{`${tila_care_charges.display_value}`}</span></span>}
                                 </div>
                               </div>
                           }
@@ -414,14 +427,20 @@ class CartItem extends React.Component {
                           <div className={` ${styles['flx-space-bw']} ${styles['total-amount']} ${styles['fs-12']}`}>
                             <div>{ORDER_PAGE.TOTAL}</div>
                             <div className={`${styles['t-rt']}`}>
-                            <span className={`${styles['flex']} ${styles['align-baseline']}`}>
+                            <span className={`${styles['flex']} ${styles['align-baseline']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
                             <span>{cur}</span>&nbsp;
                             <span>{total_amount}</span>
                             </span>
                             </div>
                           </div>
                         </div>
-                        <div className={`${styles['p-5']} ${styles['mt-10']} ${styles['fs-12']} ${styles['overall-amount']}`}>{CART_PAGE.OVERALL_YOU_SAVE} {cur} {total_discount} {CART_PAGE.ON_THIS_PRODUCT}</div>
+                        <div className={`${styles['p-5']} ${styles['mt-10']} ${styles['fs-12']} ${styles['overall-amount']}`}>
+                        {CART_PAGE.OVERALL_YOU_SAVE}&nbsp;
+                        <span>
+                        <span>{lang === 'en' ? cur : total_discount}</span>&nbsp;
+                        <span>{lang === 'en' ? total_discount : cur}</span>&nbsp;
+                        </span>
+                        {CART_PAGE.ON_THIS_PRODUCT}</div>
                       </div>
                     </div>
 
@@ -476,8 +495,9 @@ class CartItem extends React.Component {
               <span className={styles['pl-10']}>{CART_PAGE.REMOVE}</span>
             </span>
           </Col>
-          <Col md={4} sm={4} xs={4} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']}`}>
-            <span>{ORDER_PAGE.TOTAL} : </span><span className={`${styles['fs-16']} ${styles.fontW600}`}>
+          <Col md={4} sm={4} xs={4} className={`${styles['t-rt']} ${styles['pr-0']} ${styles['m-pad-5']} ${lang === 'ar' ? `${styles.flex} ${styles['align-baseline']} ${styles['justify-flex-end']}` : ''}`}>
+            <span>{ORDER_PAGE.TOTAL} : </span>
+            <span className={`${styles['fs-16']} ${styles.fontW600} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
             <span className={`${styles['fs-12']}`}>{cur}</span>&nbsp;
             <span>{total_amount}</span>
             {/* {total_amount + ' ' + cur} */}

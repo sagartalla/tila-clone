@@ -63,7 +63,7 @@ const MiniWishlist = (props) => {
                       </h6>
                     </div>
                     <div>
-                      <div className={`${styles.fontW600} ${styles['pt-10']} ${styles['fs-14']}`}>
+                      <div className={`${styles.fontW600} ${styles['pt-10']} ${styles['fs-14']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
                       <span className={`${styles['fs-12']}`}>{cur}</span>&nbsp;
                       <span>{price}</span>
                       </div>
