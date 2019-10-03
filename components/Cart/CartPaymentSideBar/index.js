@@ -175,7 +175,7 @@ class CartAndPaymentSideBar extends Component {
                   </span>
                 </li> : null}
               {
-                total_vat.display_value !== 0 ?
+                total_vat && total_vat.display_value !== 0 ?
                   <li>
                     <span className={styles['thick-gry-clr']}>{CART_PAGE.ESTIMATED_VAT}</span>
                     {/* <span>{total_vat.currency_code || currency} {total_vat.display_value}</span>  */}
@@ -240,7 +240,7 @@ class CartAndPaymentSideBar extends Component {
                   </span>
                 </span>
               </li>
-              {total_discount.money_value > 0 ?
+              {total_discount && total_discount.money_value > 0 ?
                 <span className={`${styles['fs-12']} ${styles['display-block']} ${styles['thick-red-clr']} ${styles['t-rt']}`}>{CART_PAGE.YOU_SAVED}&nbsp;
                   <span className={`${styles['fs-12']}`}>{total_discount.currency_code || currency}</span>&nbsp;
                   <span>{total_discount.display_value}</span></span>
