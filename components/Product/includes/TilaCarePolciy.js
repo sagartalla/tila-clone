@@ -53,7 +53,7 @@ export default function TilaCarePolicy({
                     checked={state[key] === item.policy_id}
                   />
                   <label className={`${styles['pl-10']} ${styles.fontW300} ${styles['fs-12']} ${styles['thick-gry-clr']}`}>
-                    {item.policy_name} | {item.cost.display_currency_code} {item.cost.display_value}
+                    {item.policy_name} | <span><span>{lang === 'en' ? item.cost.display_currency_code : item.cost.display_value}</span> <span>{lang === 'en' ? item.cost.display_value : item.cost.display_currency_code}</span></span>
                   </label>
                 </div>
                 <span

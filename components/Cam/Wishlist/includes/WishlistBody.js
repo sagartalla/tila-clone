@@ -143,7 +143,7 @@ const WishlistBody = props => {
                           <SVGComponent clsName={`${styles['delete-icon']}`} src="icons/delete-icon/delete-icon" />
                         </span>
                         <h4 className={`${styles.fontW600} ${styles['light-gry-clr']} ${styles['mt-25']} ${styles['ff-b']}`}>
-                        <span className={`${styles['fs-20']} ${styles['m-fs-18']} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
+                        <span className={`${styles['fs-20']} ${styles['m-fs-18']} ${lang === 'ar' ? `${styles['arbic-direction-rev']} ${styles['justify-flex-end']}` : ''}`}>
                         <span className={`${styles['fs-14']}`}>{cur}</span>&nbsp;
                         <span>{price}</span>
                         </span></h4>

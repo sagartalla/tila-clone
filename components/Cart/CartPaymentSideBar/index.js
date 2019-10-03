@@ -213,7 +213,7 @@ class CartAndPaymentSideBar extends Component {
                 <span className={styles['thick-gry-clr']}>{CART_PAGE.TILA_GIFT}</span>
                 <span>
                   {voucher && voucher.amount_to_pay &&
-                    <span>
+                    <span className={`${styles.fontW600} ${lang === 'ar' ? styles['arbic-direction-rev'] : ''}`}>
                       <span className={`${styles['fs-12']}`}>{voucher.amount_to_pay.display_currency_code}</span>                      
                       <span className={`${styles['fs-12']}`}>{voucher.amount_to_pay.display_value}</span>
                     </span>

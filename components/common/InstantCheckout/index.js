@@ -69,7 +69,6 @@ const InstaCheckoutDetails = ({
     if (value === 'CASH_ON_DELIVERY') {
       props.codChargesDisplay()
     }else{
-      debugger;
       props.excludeCOD()
     }
   }
