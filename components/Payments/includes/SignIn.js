@@ -102,8 +102,8 @@ class SignIn extends Component {
                   onClick={props.continueCheckout}
                   btnText={PAYMENT_PAGE.CONTINUE_TO_CHECKOUT}
                 />
-                <div>{PAYMENT_PAGE.LOGOUT_WARNING}</div>
-                <div>{PAYMENT_PAGE.REDIRECT_HOME}</div>
+                <div className={`${styles['fs-13']}`}>{PAYMENT_PAGE.LOGOUT_WARNING}</div>
+                <div className={`${styles['fs-13']}`}>{PAYMENT_PAGE.REDIRECT_HOME}</div>
               </div>
             </div>}
             {(props.showCheckoutLogin || !props.isLoggedIn) &&
