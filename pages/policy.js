@@ -4,7 +4,7 @@ import NoSSR from 'react-no-ssr';
 import { bindActionCreators } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../store';
-import Layout from '../layout/main'
+import Layout from '../layout/main';
 import Policy from '../components/Policy';
 import Base, { baseActions } from './base';
 import { actionCreators as landingactionCreators } from '../store/landing';
@@ -24,7 +24,7 @@ class PolicyPage extends Base {
   componentDidMount() {
     document.querySelectorAll('script[id*=eval-script]').forEach((ele) => {
       window.eval(ele.innerHTML);
-    })
+    });
   }
 
   render() {
@@ -35,7 +35,7 @@ class PolicyPage extends Base {
           <Policy query={url.query} key={url.query.name}/>
         </Layout>
       </div>
-    )
+    );
   }
 };
 
@@ -43,8 +43,8 @@ class PolicyPage extends Base {
 const mapStatetoProps = (state) => {
   return {
     allState: state,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -52,6 +52,6 @@ const mapDispatchToProps = dispatch =>
       ...baseActions,
     },
     dispatch,
-  )
+  );
 
 export default withRedux(makeStore, mapStatetoProps, mapDispatchToProps)(PolicyPage);
