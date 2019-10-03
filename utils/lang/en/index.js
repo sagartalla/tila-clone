@@ -147,6 +147,8 @@ export const EN_KEYWORDS = {
     CHANGE: 'Change',
     SIGN_IN_AS_DIFF_USER: 'Logout & sign in as a different user',
     CONTINUE_TO_CHECKOUT: 'Continue to checkout',
+    LOGOUT_WARNING: 'Please note that once you logout, your cart items will not be carried over to the other account.',
+    REDIRECT_HOME: 'You will be redirected to the Homepage.',
     DEFAULT_CARD: 'Default Card',
     CREDIT_CARD: 'Credit Card',
     DEBIT_CARD: 'Debit Card',

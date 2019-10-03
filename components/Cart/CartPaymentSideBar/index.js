@@ -219,7 +219,7 @@ class CartAndPaymentSideBar extends Component {
                   }
                 </span>
               </li>
-              {codStatus &&
+              {codStatus && cash_on_delivery &&
                 <li>
                   <span className={styles['thick-gry-clr']}>{CART_PAGE.COD_CHARGES}</span>
                   <span>

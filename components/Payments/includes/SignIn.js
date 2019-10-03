@@ -68,7 +68,6 @@ class SignIn extends Component {
 
   render() {
     const { props } = this;
-    const { showTerms, showPrivacy, showFP } = this.state;
     return (
       <div className={`${styles.box} ${styles['mb-20']} ${styles.relative} ${styles['payment-signup']}`}>
         <SVGComponent clsName={`${styles.profile} ${props.configJson.done ? 'done' : ''} ${props.configJson.progress ? 'payment-active' : ''}`} src="icons/profile/profile" />
@@ -97,12 +96,14 @@ class SignIn extends Component {
                 <div className={`${styles.fontW600} ${styles['mt-5']}`}>{props.userInfoData && props.userInfoData.email}</div>
               </div>
               <div>
-              <Button
-                className={`${styles['flex-center']} ${styles.width50} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
-                onClick={props.continueCheckout}
-                btnText={PAYMENT_PAGE.CONTINUE_TO_CHECKOUT}
-              />
-              <div className={`${styles['text-blue']} ${styles['m-20']} ${styles.pointer}`} onClick={props.logoutClicked}>{PAYMENT_PAGE.SIGN_IN_AS_DIFF_USER}</div>
+                <div className={`${styles['text-blue']} ${styles['mt-20']} ${styles['mb-20']} ${styles.pointer}`} onClick={props.logoutClicked}>{PAYMENT_PAGE.SIGN_IN_AS_DIFF_USER}</div>
+                <Button
+                  className={`${styles['flex-center']} ${styles.width50} ${styles['mb-20']} ${styles['fs-14']} ${styles['text-uppercase']} ${styles['button-radius']}`}
+                  onClick={props.continueCheckout}
+                  btnText={PAYMENT_PAGE.CONTINUE_TO_CHECKOUT}
+                />
+                <div>{PAYMENT_PAGE.LOGOUT_WARNING}</div>
+                <div>{PAYMENT_PAGE.REDIRECT_HOME}</div>
               </div>
             </div>}
             {(props.showCheckoutLogin || !props.isLoggedIn) &&
