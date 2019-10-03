@@ -231,7 +231,7 @@ class MyGMap extends React.Component {
           markerLatlng={this.markerLatlng}
           locateMe={this.locateMe}
           isMarkerShown
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVNKZshUspEprFsNnQD-sos6tvgFdijg&v=3.exp&libraries=geometry,drawing,places"
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqv3XDuutfbdkbTq9vwOxs6WgKq6YDHKA&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: '100%' }} />}
           containerElement={<div className={`${styles[clsName]}`} />}
           mapElement={<div style={{ height: '100%' }} />}
