@@ -14,11 +14,12 @@ const cookiesMiddleware = require('universal-cookie-express');
 const routes = require('./routes');
 const apiRoutes = require('./apiRoutes');
 const uuidv4 = require('uuid/v4');
+const useragent = require('express-useragent');
 //require('./utils/error-handle');
 const myapp = express();
 const server = require('http').Server(myapp);
 
-const port = parseInt(process.env.PORT, 10) || 3000;
+const port = parseInt(process.env.PORT, 10) || 3010;
 const dev = process.env.NODE_ENV !== 'production';
 
 
@@ -95,9 +96,19 @@ const sourcemapsForSentryOnly = token => (req, res, next) => {
 };
 
 const app = next({ dev: process.env.NODE_ENV !== 'production' });
+myapp.use(useragent.express());
 
 const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
-  app.render(req, res, route.page, query);
+  if((req.get('User-Agent').match('Mobi')) && route.page != '/mobilePage') {
+    console.log("Inside the mobile route Handler >>>>>>>>>>>>>>>", route);
+    //app.render(req, res, '/mobile', query);
+    res.redirect('/mobile');
+  } 
+  else {
+    console.log('request hadler else part >>>>>>>>>',route);
+    app.render(req, res, route.page, query);
+  }
+  
 });
 
 app.prepare().then(() => {
