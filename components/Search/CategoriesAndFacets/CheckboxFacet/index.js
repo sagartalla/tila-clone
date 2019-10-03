@@ -58,9 +58,9 @@ class CheckboxFacet extends Component {
           attributes: {
             attributeName: this.props.attributeName,
           },
-          // search: {
-          //   keyword: this.props.search.category != null ? this.props.search.category : this.props.search.q,
-          // },
+          search: {
+            keyword: this.props.search,
+          },
           item: newSelectedItem.join(),
         },
       });
