@@ -448,7 +448,6 @@ class InstantCheckout extends Component {
       newFilteredData,
       walletSelected,
     } = this.state;
-
     return (
       <div className={`${styles['instant-checkout']} ${styles['p-10']}`}>
         {

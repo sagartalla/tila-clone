@@ -27,7 +27,7 @@ const RenderVariants = ({
         key={`productSize_${index}`}
         onClick={data.productAvailable ? selectProductSize(data.listingId[0], index) : null}
         className={`${styles['product-sizebutton']} ${styles.pointer} ${styles['fs-12']} ${getActiveClass(data.addedToCart,data.productAvailable)}`}
-      >{data.productSize[0]}
+      >{data.productSize[0] || data.productSize}
       </div>
       ))
   }
