@@ -97,6 +97,7 @@ const recentlyViewed = store => store.wishlistReducer.recentlyViewed.map((rv) =>
     br: rv.product_details.catalog_details.attribute_map.brand.attribute_values[0].value,
     im: cached_product_details && cached_product_details.media && cached_product_details.media.gallery_media && cached_product_details.media.gallery_media[0] && cached_product_details.media.gallery_media[0].url,
     pr: variantDetails.pricing.offer_price.display_value,
+    display_cur: variantDetails.pricing.offer_price.display_currency_code,
     cd: variantDetails.pricing.offer_price.currency_code,
     mrp: variantDetails.pricing.mrp.display_value,
     tuin: variantAttributes.tuin.attribute_values[0].value,

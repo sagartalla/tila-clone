@@ -107,7 +107,7 @@ class OrderItem extends Component {
       tilaPolicy,
     } = product;
     if (tilaPolicy.length === 0) return null;
-    const preferredPolicy = product.returnPolicy.preferred_policy; 
+    const preferredPolicy = product && product.returnPolicy && product.returnPolicy.preferred_policy; 
     tilaPolicy.length > 0 && tilaPolicy.forEach((item) => {
         if (item.policy_type === 'EXTENDED' && item.valid_upto !== null) {
           warrantyData = moment(item.valid_upto).tz('Asia/Riyadh').format("MMM Do 'YY");
@@ -301,7 +301,7 @@ class OrderItem extends Component {
             const {
               final_price = {}, gift_charge = {}, mrp = {}, offer_price = {}, shipping_fees = {}, discount = {},
             } = product.price;
-            const preferredPolicy = product.returnPolicy.preferred_policy;
+            const preferredPolicy = product && product.returnPolicy && product.returnPolicy.preferred_policy;
             return (
               <React.Fragment key={product.id}>
                 <div className={`${styles.relative} ${styles['ht-100P']} ${styles['products-wrap']} ${styles.flex} ${styles['p-15']}`}>
