@@ -53,8 +53,10 @@ const RecentlyViewItem = ({
               <span>&nbsp;</span>
             </div>
             <h6 className={`${styles['fs-12']} ${styles['mb-5']} ${styles['black-color']} ${styles.elipsis}`}><span className={styles.fontW600}>{item.br}</span> - {item.nm}</h6>
-            <span className={`${styles['fs-12']} ${styles['black-color']}`}><span>{item.cd}</span><span className={`${styles.fontW600} ${styles['fs-14']} ${styles['pl-5']}`}>{item.pr} </span></span>
+            <span className={`${lang === 'ar' ? styles.flex : ''}`}>
+            <span className={`${styles['fs-12']} ${styles['black-color']} ${lang === 'ar' ? styles.flex : ''}`}><span>{item.display_cur}</span><span className={`${styles.fontW600} ${styles['fs-14']} ${styles['pl-5']}`}>{item.pr} </span></span>
             <span className={`${styles['fs-12']} ${styles['thick-gry-clr']}`}><s><span className={`${styles.fontW600} ${styles['pl-5']}`}>{item.mrp}</span></s></span>
+            </span>
           </div>
         </div>
       </a>
