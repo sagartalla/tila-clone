@@ -100,12 +100,10 @@ myapp.use(useragent.express());
 
 const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
   if((req.get('User-Agent').match('Mobi')) && route.page != '/mobilePage') {
-    console.log("Inside the mobile route Handler >>>>>>>>>>>>>>>", route);
     //app.render(req, res, '/mobile', query);
     res.redirect('/mobile');
   } 
   else {
-    console.log('request hadler else part >>>>>>>>>',route);
     app.render(req, res, route.page, query);
   }
   
