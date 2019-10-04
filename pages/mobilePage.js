@@ -10,19 +10,17 @@ import { route } from 'next-server/dist/server/router';
 const styles = lang === 'en' ? { ...main_en, ...styles_en } : { ...main_ar, ...styles_ar };
 
 
-
 class mobilePage extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
 
-    }
+    };
   }
 
   mobileApp = () => {
-    window.location.href = "https://apps.apple.com/uy/app/tila-online-shopping-app/id1477171024";
+    window.location.href = 'https://apps.apple.com/uy/app/tila-online-shopping-app/id1477171024';
   }
 
   googlePlay = () => {
@@ -31,39 +29,53 @@ class mobilePage extends Component {
 
   render() {
     return (
-      <div className={`${styles['backgroundImgMobilePage']} ${styles['displayItems']} ${styles['height']} "col-lg-4 col-md-4 col-sm-8"`}>
-        <div className={`${styles['normalwidth']} ${styles['margin']}`}>
-          <span>
-            <img
-            className={`${styles['imagewidth']} col-lg-12 col-md-8 col-sm-4`}
-            src="/static/img/bg-img/TilaLogo.png" />
-          </span>
+      <div className={`${styles.overflow}`}>
+        <div className={`${styles.backgroundImgMobilePage} ${styles.displayItems} ${styles.height} "col-lg-4 col-md-4 col-sm-8"`}>
+          <div className={`${styles.normalwidth} ${styles.margin}`}>
+            <span>
+              <img
+                className={`${styles.imagewidth} col-lg-12 col-md-8 col-sm-4`}
+                src="/static/img/bg-img/TilaLogo.png"
+              />
+            </span>
+          </div>
+          <div className={`${styles.normalwidth}`}>
+            <span>
+              <img
+                className={`${styles.imagewidth} ${styles.margin} col-lg-12 col-md-8 col-sm-4`}
+                src="/static/img/bg-img/For-amazing.png"
+              />
+            </span>
+          </div>
+          <div className={`${styles.normalwidth}`}>
+            <span>
+              <img
+                className={`${styles.imagewidth} ${styles.margin} col-lg-12 col-md-8 col-sm-4`}
+                onClick={this.mobileApp}
+                src="/static/img/bg-img/app-strore.jpg"
+              />
+            </span>
+          </div>
+          <div className={`${styles.normalwidth}`}>
+            <span>
+              <img
+                className={`${styles.imagewidth} ${styles.margin} col-lg-12 col-md-8 col-sm-4`}
+                onClick={this.googlePlay}
+                src="/static/img/bg-img/google.jpg"
+              />
+            </span>
+          </div>
         </div>
-        <div className={`${styles['normalwidth']}`}>
+        <div className={`${styles.positionrt}`}>
           <span>
             <img
-            className={`${styles['imagewidth']} ${styles['margin']} col-lg-12 col-md-8 col-sm-4`}
-            src="/static/img/bg-img/For-amazing.png" />
-          </span>
-        </div>
-        <div className={`${styles['normalwidth']}`}>
-          <span>
-            <img
-            className={`${styles['imagewidth']} ${styles['margin']} col-lg-12 col-md-8 col-sm-4`}
-            onClick={this.mobileApp}
-            src="/static/img/bg-img/app-strore.jpg" />
-          </span>
-        </div>
-        <div className={`${styles['normalwidth']}`}>
-          <span>
-            <img
-            className={`${styles['imagewidth']} ${styles['margin']} col-lg-12 col-md-8 col-sm-4`}
-            onClick={this.googlePlay}
-            src="/static/img/bg-img/google.jpg" />
+              className={`${styles.imagewidth} ${styles.borderCss} col-lg-12 col-md-8 col-sm-4`}
+              src="/static/img/bg-img/border.png"
+            />
           </span>
         </div>
       </div>
-    )
+    );
   }
 }
 
