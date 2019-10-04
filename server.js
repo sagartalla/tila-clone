@@ -19,7 +19,7 @@ const useragent = require('express-useragent');
 const myapp = express();
 const server = require('http').Server(myapp);
 
-const port = parseInt(process.env.PORT, 10) || 3010;
+const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 
 
