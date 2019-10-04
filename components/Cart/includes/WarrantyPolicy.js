@@ -111,7 +111,7 @@ class WarrantyPolicy extends React.Component {
                                     checked={
                                       (selectedPolicy !== '' && warrantyName === newVal && warrantyIndex === index) || (warrantyName !== newVal && policies_applied[newVal] && policies_applied[newVal].policy_id === policyVal.policy_id)}
                                   />
-                                  <div style={{ width: '150px' }}>
+                                  <div style={{ width: '300px' }}>
                                     <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles['mb-0']} ${styles['pr-10']}`}>{policyVal.policy_name}</label>
                                     <span className={`${styles['warranty-radio-button']}`} />
                                     <label className={`${styles['fs-12']} ${styles['pl-10']} ${styles.fontW600} ${styles['mb-0']}`}>{lang === 'en' ? policyVal.cost.display_currency_code : policyVal.cost.display_value} {lang === 'en' ? policyVal.cost.display_value : policyVal.cost.display_currency_code}</label>
