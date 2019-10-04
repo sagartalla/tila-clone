@@ -23,6 +23,7 @@ routes
   .add({ name: 'ftb', pattern: '/:language(en|ar)/new-user', page: 'ftb' })
   .add({ name: 'redirect', pattern: '/:country/:language(en|ar)', page: 'homeRedirect' })
   .add({ name: 'categoryLanding', pattern: '/:language(en|ar)/:category(electronics|fashion|lifestyle)', page: 'home' })
+  .add({ name: 'offerZone', pattern: '/:language(en|ar)/offer-zone/:offerName', page: 'offer' })
   .add({ name: 'category', pattern: '/:language(en|ar)/:category/clp', page: 'category' })
   .add({ name: 'items-zone', pattern: '/:language(en|ar)/items-zone/:zone', page: 'itemsZone' })
   .add({ name: 'verifyemail', pattern: '/:language(en|ar)/email/verify', page: 'verifyEmail' })
