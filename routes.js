@@ -1,6 +1,7 @@
 const routes = require('next-routes')();
 
 routes
+  .add({ name: 'mobile', pattern: '/mobile', page: 'mobilePage' })
   .add({ name: 'login', pattern: '/login', page: 'login' })
   .add({ name: 'CAM', pattern: '/:language(en|ar)/customer', page: 'cam' })
   .add({ name: 'ORDER ISSUE', pattern: '/:language(en|ar)/customer/orders/:orderId/issue/:returnExchangeType/item/:orderItemId/:variantId/:listingId', page: 'order' })

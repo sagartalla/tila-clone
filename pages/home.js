@@ -15,6 +15,7 @@ import LoaderBarContext from '../components/helpers/context/loaderBarContext';
 import { actionCreators as MegamenuActionsCreators } from '../store/megamenu';
 import { actionCreators as PersonalActionCreator } from '../store/cam/personalDetails';
 
+
 const { SEO_CONTENT } = languageDefinations();
 
 
