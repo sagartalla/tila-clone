@@ -26,7 +26,7 @@
 		"history": "^4.7.2",
 		"html-to-react": "^1.4.2",
 		"lodash": "^4.17.10",
-		"moment": "^2.22.2",
+		"moment": "^2.29.4",
 		"moment-timezone": "^0.5.26",
 		"net": "^1.0.2",
 		"newrelic": "^5.11.0",
