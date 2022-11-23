@@ -63,7 +63,7 @@
 		"sha.js": "^2.4.11",
 		"shortid": "^2.2.12",
 		"slick-carousel": "^1.8.1",
-		"socket.io": "^2.2.0",
+		"socket.io": "^2.5.0",
 		"socket.io-client": "^2.2.0",
 		"stylus": "^0.54.5",
 		"type-to-reducer": "^1.1.0",
